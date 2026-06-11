@@ -23,7 +23,7 @@ UR3MotionInterface::UR3MotionInterface(
   move_group_.setMaxAccelerationScalingFactor(max_acceleration_scaling);
 
   // Set Planning Pipeline and Planner ID
-  move_group_.setPlanningPipelineId("ompl");
+  // move_group_.setPlanningPipelineId("ompl");
   move_group_.setPlannerId("RRTConnectkConfigDefault");
 
   // Set Goal Tolerances

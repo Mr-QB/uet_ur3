@@ -3,6 +3,7 @@ planning_plugins:
 
 request_adapters:
   - default_planning_request_adapters/AddTimeOptimalParameterization
+  - default_planning_request_adapters/ResolveConstraintFrames
   - default_planning_request_adapters/FixWorkspaceBounds
   - default_planning_request_adapters/FixStartBoundsAsValid
   - default_planning_request_adapters/FixStartStateCollision
@@ -13,6 +14,7 @@ ur_manipulator:
     - RRTConnectkConfigDefault
     - RRTstarkConfigDefault
     - PRMkConfigDefault
+    - KPIECEkConfigDefault
   
   RRTConnectkConfigDefault:
     type: geometric::RRTConnect
@@ -27,3 +29,8 @@ ur_manipulator:
   PRMkConfigDefault:
     type: geometric::PRM
     max_nearest_neighbors: 10
+    
+  KPIECEkConfigDefault:
+    type: geometric::KPIECE
+    range: 0.05
+    goal_bias: 0.05
