@@ -11,8 +11,25 @@ UR3MotionInterface::UR3MotionInterface(
 {
   move_group_.setPlanningTime(5.0);
   move_group_.setNumPlanningAttempts(10);
-  move_group_.setMaxVelocityScalingFactor(0.2);
-  move_group_.setMaxAccelerationScalingFactor(0.2);
+
+
+  double max_velocity_scaling = node_->get_parameter("max_velocity_scaling_factor").as_double();
+  double max_acceleration_scaling = node_->get_parameter("max_acceleration_scaling_factor").as_double();
+  double goal_pos_tol = node_->get_parameter("goal_position_tolerance").as_double();
+  double goal_ori_tol = node_->get_parameter("goal_orientation_tolerance").as_double();
+  double goal_joint_tol = node_->get_parameter("goal_joint_tolerance").as_double();
+
+  move_group_.setMaxVelocityScalingFactor(max_velocity_scaling);
+  move_group_.setMaxAccelerationScalingFactor(max_acceleration_scaling);
+
+  // Set Planning Pipeline and Planner ID
+  move_group_.setPlanningPipelineId("ompl");
+  move_group_.setPlannerId("RRTConnectkConfigDefault");
+
+  // Set Goal Tolerances
+  move_group_.setGoalPositionTolerance(goal_pos_tol);
+  move_group_.setGoalOrientationTolerance(goal_ori_tol);
+  move_group_.setGoalJointTolerance(goal_joint_tol);
 
   RCLCPP_INFO(
     node_->get_logger(),
@@ -28,6 +45,16 @@ UR3MotionInterface::UR3MotionInterface(
     node_->get_logger(),
     "End-effector link: %s",
     move_group_.getEndEffectorLink().c_str());
+
+  RCLCPP_INFO(
+    node_->get_logger(),
+    "Max velocity scaling factor: %.2f",
+    max_velocity_scaling);
+
+  RCLCPP_INFO(
+    node_->get_logger(),
+    "Max acceleration scaling factor: %.2f",
+    max_acceleration_scaling);
 }
 
 bool UR3MotionInterface::moveToJointGoal(
