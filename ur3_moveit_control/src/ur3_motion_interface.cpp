@@ -15,6 +15,7 @@ UR3MotionInterface::UR3MotionInterface(
 
   double max_velocity_scaling = node_->get_parameter("max_velocity_scaling_factor").as_double();
   double max_acceleration_scaling = node_->get_parameter("max_acceleration_scaling_factor").as_double();
+  std::string planner_id = node_->get_parameter("planner_id").as_string();
   double goal_pos_tol = node_->get_parameter("goal_position_tolerance").as_double();
   double goal_ori_tol = node_->get_parameter("goal_orientation_tolerance").as_double();
   double goal_joint_tol = node_->get_parameter("goal_joint_tolerance").as_double();
@@ -24,12 +25,17 @@ UR3MotionInterface::UR3MotionInterface(
 
   // Set Planning Pipeline and Planner ID
   // move_group_.setPlanningPipelineId("ompl");
-  move_group_.setPlannerId("RRTConnectkConfigDefault");
+  move_group_.setPlannerId(planner_id);
 
   // Set Goal Tolerances
   move_group_.setGoalPositionTolerance(goal_pos_tol);
   move_group_.setGoalOrientationTolerance(goal_ori_tol);
   move_group_.setGoalJointTolerance(goal_joint_tol);
+
+  RCLCPP_INFO(
+    node_->get_logger(),
+    "Planner ID: %s",
+    planner_id.c_str());
 
   RCLCPP_INFO(
     node_->get_logger(),
