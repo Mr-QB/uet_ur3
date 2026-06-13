@@ -1,6 +1,8 @@
 import os
 from launch import LaunchDescription
-from launch.actions import OpaqueFunction, DeclareLaunchArgument
+from launch.actions import OpaqueFunction, DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
+from launch.conditions import IfCondition
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, FindExecutable
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -19,6 +21,9 @@ def load_yaml(package_name, file_path):
 
 def launch_setup(context, *args, **kwargs):
     ur_type = LaunchConfiguration("ur_type")
+    use_sim_time = LaunchConfiguration("use_sim_time")
+    launch_rviz = LaunchConfiguration("launch_rviz")
+    launch_moveit = LaunchConfiguration("launch_moveit")
     
     # 1. Load Robot Model (URDF/Xacro)
     robot_description_content = Command([
@@ -55,7 +60,20 @@ def launch_setup(context, *args, **kwargs):
     # 6. Load planning scene monitor configurations
     planning_scene_monitor_yaml = load_yaml("ur3_moveit_control", "config/planning_scene_monitor.yaml")
 
-    # 7. Launch our custom demo C++ node
+    # 7. Include MoveIt planning server
+    moveit_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([FindPackageShare("ur_moveit_config"), "launch", "ur_moveit.launch.py"])
+        ]),
+        launch_arguments={
+            "ur_type": ur_type,
+            "use_sim_time": use_sim_time,
+            "launch_rviz": launch_rviz,
+        }.items(),
+        condition=IfCondition(launch_moveit)
+    )
+
+    # 8. Launch our custom demo C++ node
     ur3_demo_node = Node(
         package="ur3_moveit_control",
         executable="ur3_demo_node",
@@ -69,14 +87,23 @@ def launch_setup(context, *args, **kwargs):
             controllers_yaml,
             planning_scene_monitor_yaml,
             custom_config_yaml,
-            {"use_sim_time": True}
+            {"use_sim_time": use_sim_time}
         ],
     )
 
-    return [ur3_demo_node]
+    # Delay the C++ node launch slightly to ensure MoveIt server has started
+    ur3_demo_node_delayed = TimerAction(
+        period=5.0,
+        actions=[ur3_demo_node]
+    )
+
+    return [moveit_launch, ur3_demo_node_delayed]
 
 def generate_launch_description():
     declared_arguments = [
-        DeclareLaunchArgument("ur_type", default_value="ur3e", description="Type of UR robot")
+        DeclareLaunchArgument("ur_type", default_value="ur3e", description="Type of UR robot"),
+        DeclareLaunchArgument("use_sim_time", default_value="true", description="Use simulation time (true) or real time (false)"),
+        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?"),
+        DeclareLaunchArgument("launch_moveit", default_value="true", description="Launch MoveIt server?"),
     ]
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])

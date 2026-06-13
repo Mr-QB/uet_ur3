@@ -10,14 +10,13 @@
 
   <xacro:ur_srdf name="$(arg name)" prefix="$(arg prefix)"/>
 
-  <!-- Disable collisions for SusGrip 2F Gripper -->
+  <!-- Disable collisions for SusGrip 2F Gripper (Temporarily commented out)
   <disable_collisions link1="sus2f_base_link" link2="wrist_3_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_base_link" link2="tool0" reason="Adjacent"/>
   <disable_collisions link1="sus2f_base_link" link2="flange" reason="Adjacent"/>
   <disable_collisions link1="sus2f_base_link" link2="wrist_2_link" reason="Never"/>
   <disable_collisions link1="sus2f_base_link" link2="wrist_1_link" reason="Never"/>
 
-  <!-- Left finger chain self-collisions -->
   <disable_collisions link1="sus2f_base_link" link2="sus2f_slider_l_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_slider_l_link" link2="sus2f_outer_l_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_outer_l_link" link2="sus2f_finger_l_link" reason="Adjacent"/>
@@ -25,7 +24,6 @@
   <disable_collisions link1="sus2f_inner_l_link" link2="sus2f_pad_l_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_inner_l_link" link2="sus2f_passive_pad_l_link" reason="Adjacent"/>
   
-  <!-- Other overlapping pairs on Left finger chain -->
   <disable_collisions link1="sus2f_base_link" link2="sus2f_outer_l_link" reason="Never"/>
   <disable_collisions link1="sus2f_slider_l_link" link2="sus2f_finger_l_link" reason="Never"/>
   <disable_collisions link1="sus2f_slider_l_link" link2="sus2f_inner_l_link" reason="Never"/>
@@ -36,7 +34,6 @@
   <disable_collisions link1="sus2f_finger_l_link" link2="sus2f_passive_pad_l_link" reason="Never"/>
   <disable_collisions link1="sus2f_pad_l_link" link2="sus2f_passive_pad_l_link" reason="Never"/>
 
-  <!-- Right finger chain self-collisions -->
   <disable_collisions link1="sus2f_base_link" link2="sus2f_slider_r_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_slider_r_link" link2="sus2f_outer_r_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_outer_r_link" link2="sus2f_finger_r_link" reason="Adjacent"/>
@@ -44,7 +41,6 @@
   <disable_collisions link1="sus2f_inner_r_link" link2="sus2f_pad_r_link" reason="Adjacent"/>
   <disable_collisions link1="sus2f_inner_r_link" link2="sus2f_passive_pad_r_link" reason="Adjacent"/>
 
-  <!-- Other overlapping pairs on Right finger chain -->
   <disable_collisions link1="sus2f_base_link" link2="sus2f_outer_r_link" reason="Never"/>
   <disable_collisions link1="sus2f_slider_r_link" link2="sus2f_finger_r_link" reason="Never"/>
   <disable_collisions link1="sus2f_slider_r_link" link2="sus2f_inner_r_link" reason="Never"/>
@@ -55,7 +51,6 @@
   <disable_collisions link1="sus2f_finger_r_link" link2="sus2f_passive_pad_r_link" reason="Never"/>
   <disable_collisions link1="sus2f_pad_r_link" link2="sus2f_passive_pad_r_link" reason="Never"/>
 
-  <!-- Cross chain or extra base connections -->
   <disable_collisions link1="sus2f_base_link" link2="sus2f_finger_l_link" reason="Never"/>
   <disable_collisions link1="sus2f_base_link" link2="sus2f_finger_r_link" reason="Never"/>
   <disable_collisions link1="sus2f_base_link" link2="sus2f_inner_l_link" reason="Never"/>
@@ -65,7 +60,6 @@
   <disable_collisions link1="sus2f_base_link" link2="sus2f_passive_pad_l_link" reason="Never"/>
   <disable_collisions link1="sus2f_base_link" link2="sus2f_passive_pad_r_link" reason="Never"/>
 
-  <!-- Robot wrist to gripper slider and outer links -->
   <disable_collisions link1="wrist_3_link" link2="sus2f_slider_l_link" reason="Never"/>
   <disable_collisions link1="wrist_3_link" link2="sus2f_slider_r_link" reason="Never"/>
   <disable_collisions link1="wrist_3_link" link2="sus2f_outer_l_link" reason="Never"/>
@@ -74,5 +68,6 @@
   <disable_collisions link1="tool0" link2="sus2f_slider_r_link" reason="Never"/>
   <disable_collisions link1="tool0" link2="sus2f_outer_l_link" reason="Never"/>
   <disable_collisions link1="tool0" link2="sus2f_outer_r_link" reason="Never"/>
+  -->
 
 </robot>
