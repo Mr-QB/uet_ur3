@@ -74,9 +74,9 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # 8. Launch our custom demo C++ node
-    ur3_demo_node = Node(
+    ur3_control_node = Node(
         package="ur3_moveit_control",
-        executable="ur3_demo_node",
+        executable="ur3_control_node",
         output="screen",
         parameters=[
             robot_description,
@@ -92,12 +92,12 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # Delay the C++ node launch slightly to ensure MoveIt server has started
-    ur3_demo_node_delayed = TimerAction(
+    ur3_control_node_delayed = TimerAction(
         period=5.0,
-        actions=[ur3_demo_node]
+        actions=[ur3_control_node]
     )
 
-    return [moveit_launch, ur3_demo_node_delayed]
+    return [moveit_launch, ur3_control_node_delayed]
 
 def generate_launch_description():
     declared_arguments = [

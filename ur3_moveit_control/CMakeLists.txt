@@ -7,8 +7,17 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_action REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(action_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "action/UR3Control.action"
+  DEPENDENCIES geometry_msgs sensor_msgs action_msgs
+)
 
 include_directories(include)
 
@@ -22,24 +31,29 @@ ament_target_dependencies(ur3_motion_interface
   geometry_msgs
 )
 
-add_executable(ur3_demo_node
-  src/ur3_demo_node.cpp
+add_executable(ur3_control_node
+  src/ur3_control_node.cpp
 )
 
-target_link_libraries(ur3_demo_node
+target_link_libraries(ur3_control_node
   ur3_motion_interface
 )
 
-ament_target_dependencies(ur3_demo_node
+rosidl_target_interfaces(ur3_control_node
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
+ament_target_dependencies(ur3_control_node
   rclcpp
+  rclcpp_action
   moveit_ros_planning_interface
   geometry_msgs
+  sensor_msgs
 )
 
 install(
   TARGETS
     ur3_motion_interface
-    ur3_demo_node
+    ur3_control_node
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

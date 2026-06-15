@@ -148,4 +148,9 @@ bool UR3MotionInterface::moveHome()
   return moveToJointGoal(home_joint_goal);
 }
 
+void UR3MotionInterface::stop()
+{
+  move_group_.stop();
+}
+
 }  // namespace ur3_moveit_control

@@ -27,6 +27,8 @@ public:
 
   bool moveHome();
 
+  void stop();
+
 private:
   rclcpp::Node::SharedPtr node_;
   moveit::planning_interface::MoveGroupInterface move_group_;
