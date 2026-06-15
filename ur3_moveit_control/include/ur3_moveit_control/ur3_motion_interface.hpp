@@ -8,6 +8,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/pose.hpp>
 #include <moveit/move_group_interface/move_group_interface.h>
+#include <moveit/planning_scene_interface/planning_scene_interface.h>
 
 namespace ur3_moveit_control
 {
@@ -29,9 +30,12 @@ public:
 
   void stop();
 
+  void addTableObstacle();
+
 private:
   rclcpp::Node::SharedPtr node_;
   moveit::planning_interface::MoveGroupInterface move_group_;
+  moveit::planning_interface::PlanningSceneInterface planning_scene_interface_;
 };
 
 }  // namespace ur3_moveit_control

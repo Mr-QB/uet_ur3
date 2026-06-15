@@ -65,7 +65,6 @@ def main(args=None):
     rclpy.init(args=args)
     action_client = UR3ActionClient()
 
-    # Bỏ comment 1 trong 3 lệnh dưới đây để sử dụng:
     action_client.send_home_goal()
     # action_client.send_joint_goal(-1.57, -1.57, 1.57, -1.57, -1.57, 0.0)
     # action_client.send_pose_goal(0.3, 0.1, 0.35, 0.0, 0.0, 0.0, 1.0)

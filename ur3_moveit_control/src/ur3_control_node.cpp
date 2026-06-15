@@ -32,6 +32,8 @@ public:
       std::bind(&UR3ControlNode::handle_cancel, this, std::placeholders::_1),
       std::bind(&UR3ControlNode::handle_accepted, this, std::placeholders::_1));
 
+    ur3_motion_->addTableObstacle();
+
     RCLCPP_INFO(this->get_logger(), "UR3 Action Server initialized.");
   }
 
