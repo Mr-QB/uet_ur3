@@ -278,7 +278,7 @@ class SusGrip2FHardwareInterface(Node):
             if data is not None and len(data) >= 2:
                 result.position = float(data[1])
         else:
-            result.position = target_mm
+            result.position = float(target_mm)
         result.stalled = False
         return result
 

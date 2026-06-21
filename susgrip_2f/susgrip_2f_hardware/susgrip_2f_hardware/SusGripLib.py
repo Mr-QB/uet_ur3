@@ -35,51 +35,56 @@ class SusGrip2F:
         return self.gripper_rtu.connect()
 
     def set_rtu_mode(self):
-        self.gripper_rtu.write_registers(0, [3], slave=self.id)
+        self.gripper_rtu.write_register(0, 3, device_id=self.id)
 
     # pos = [0,130] mm, vel = [1--100]%, torque = [1--100]%
     def rtu_set_pos_pvt(self, pos, vel, tor):
         pos = self.constrain(pos, 0, 130)
         vel = self.constrain(vel, 1, 100)
         tor = self.constrain(tor, 1, 100)
-        self.gripper_rtu.write_registers(1, [int(pos), int(vel), int(tor)], slave=self.id)
+        self.gripper_rtu.write_register(1, int(pos), device_id=self.id)
+        self.gripper_rtu.write_register(2, int(vel), device_id=self.id)
+        self.gripper_rtu.write_register(3, int(tor), device_id=self.id)
     # pos = [0,130] mm
     def rtu_write_pos(self, pos):
         pos = self.constrain(pos, 0, 130)
-        self.gripper_rtu.write_registers(1, [int(pos)], slave=self.id)
+        self.gripper_rtu.write_register(1, int(pos), device_id=self.id)
     # pos = [0,130] mm
     def rtu_write_pos2(self, pos):
         pos = self.constrain(pos, 0, 130)
-        self.gripper_rtu.write_registers(1, [int(pos)], slave=self.id) 
+        self.gripper_rtu.write_register(1, int(pos), device_id=self.id) 
         
 # The susgrip set parameters
 # The susgrip set parameters
     def rtu_set_pos(self, pos):
         pos = self.constrain(pos, 0, 130)
-        self.gripper_rtu.write_registers(1, [int(pos)], slave=self.id)
+        self.gripper_rtu.write_register(1, int(pos), device_id=self.id)
         
     def rtu_set_vel(self, vel):
         vel = self.constrain(vel, 1, 100)
-        self.gripper_rtu.write_registers(2, [int(vel)], slave=self.id)
+        self.gripper_rtu.write_register(2, int(vel), device_id=self.id)
         
     def rtu_set_tor(self, tor):
         tor = self.constrain(tor, 1, 100)
-        self.gripper_rtu.write_registers(3, [int(tor)], slave=self.id)
+        self.gripper_rtu.write_register(3, int(tor), device_id=self.id)
   
     def set_gpio_mode(self):
-        self.gripper_rtu.write_registers(0, [7], slave=self.id)
+        self.gripper_rtu.write_register(0, 7, device_id=self.id)
 
     def gpio_set_pvt(self, high, low, vel, tor):
         high = self.constrain(high, 0, 130)
         low = self.constrain(low, 0, 130)
         vel = self.constrain(vel, 1, 100)
         tor = self.constrain(tor, 1, 100)
-        self.gripper_rtu.write_registers(2, [int(high), int(low), int(vel), int(tor)], slave=self.id)
+        self.gripper_rtu.write_register(2, int(high), device_id=self.id)
+        self.gripper_rtu.write_register(3, int(low), device_id=self.id)
+        self.gripper_rtu.write_register(4, int(vel), device_id=self.id)
+        self.gripper_rtu.write_register(5, int(tor), device_id=self.id)
 
 # The susgrip read data
     def reload_data(self):
         if self.gripper_rtu.is_socket_open():
-            registers  = self.gripper_rtu.read_input_registers(0, count=6, slave=self.id)
+            registers  = self.gripper_rtu.read_input_registers(0, count=6, device_id=self.id)
             if registers is not None and not registers.isError():
                 return registers.registers
         return None
@@ -161,7 +166,7 @@ class SusGrip2F:
     
     def read_status(self):
         if self.gripper_rtu.is_socket_open():
-            registers  = self.gripper_rtu.read_input_registers(0, count=1, slave=self.id)
+            registers  = self.gripper_rtu.read_input_registers(0, count=1, device_id=self.id)
             if registers is not None and not registers.isError():
                 status = registers.registers[0]
                 return self.extrac_status(status)
@@ -169,7 +174,7 @@ class SusGrip2F:
     
     def check_movedone(self):
         if self.gripper_rtu.is_socket_open():
-            registers  = self.gripper_rtu.read_input_registers(0, count=1, slave=self.id)
+            registers  = self.gripper_rtu.read_input_registers(0, count=1, device_id=self.id)
             if registers is not None and not registers.isError():
                 status = registers.registers[0]
                 if (status>>7)&0x01:
@@ -180,7 +185,7 @@ class SusGrip2F:
     
     def check_object(self):
         if self.gripper_rtu.is_socket_open():
-            registers  = self.gripper_rtu.read_input_registers(0, count=1, slave=self.id)
+            registers  = self.gripper_rtu.read_input_registers(0, count=1, device_id=self.id)
             if registers is not None and not registers.isError():
                 status = registers.registers[0]
                 if (status>>4)&0x03 == 0x00:
@@ -194,10 +199,10 @@ class SusGrip2F:
         return "NONE"     
         
     def deactive(self):
-        self.gripper_rtu.write_registers(0, [0], slave=self.id)
+        self.gripper_rtu.write_register(0, 0, device_id=self.id)
       
     def active(self):
-        self.gripper_rtu.write_registers(0, [1], slave=self.id)
+        self.gripper_rtu.write_register(0, 1, device_id=self.id)
 
     def disconnect(self):
         self.gripper_rtu.close()      
