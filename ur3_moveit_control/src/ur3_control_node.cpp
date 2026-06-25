@@ -6,6 +6,7 @@
 #include <rclcpp_action/rclcpp_action.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
+#include <sensor_msgs/msg/image.hpp>
 
 #include "ur3_moveit_control/action/ur3_control.hpp"
 #include "ur3_moveit_control/ur3_motion_interface.hpp"
@@ -34,15 +35,50 @@ public:
 
     ur3_motion_->addTableObstacle();
 
-    RCLCPP_INFO(this->get_logger(), "UR3 Action Server initialized.");
+    depth_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
+      "/camera/camera/depth/image_rect_raw",
+      rclcpp::SensorDataQoS(),
+      std::bind(&UR3ControlNode::depth_callback, this, std::placeholders::_1));
+
+    RCLCPP_INFO(this->get_logger(), "UR3 Action Server initialized with Camera Calibration.");
   }
 
 private:
   std::shared_ptr<ur3_moveit_control::UR3MotionInterface> ur3_motion_;
   rclcpp_action::Server<UR3Control>::SharedPtr action_server_;
+  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr depth_sub_;
+  double camera_z_mount_offset_ = 0.05; // Offset Z từ tay gắp tới camera (m)
+  
   std::shared_ptr<GoalHandleUR3Control> active_goal_;
   std::mutex mutex_;
   std::thread execution_thread_;
+
+  void depth_callback(const sensor_msgs::msg::Image::SharedPtr msg)
+  {
+    if (msg->encoding != "16UC1") {
+      RCLCPP_WARN_ONCE(this->get_logger(), "Camera encoding không phải 16UC1. Không thể đọc!");
+      return;
+    }
+
+    int center_x = msg->width / 2;
+    int center_y = msg->height / 2;
+    int index = (center_y * msg->step) + (center_x * 2);
+
+    if (static_cast<size_t>(index + 1) >= msg->data.size()) {
+      return;
+    }
+
+    uint16_t depth_mm = msg->data[index] | (msg->data[index + 1] << 8);
+    double depth_m = static_cast<double>(depth_mm) / 1000.0;
+
+    if (depth_m > 0.0) {
+      try {
+        ur3_motion_->calibObjectHeightEyeInHand(depth_m, camera_z_mount_offset_);
+      } catch (const std::exception &e) {
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 2000, "Đang đợi TF tay máy để tính toán chiều cao...");
+      }
+    }
+  }
 
   rclcpp_action::GoalResponse handle_goal(
     const rclcpp_action::GoalUUID & uuid,
