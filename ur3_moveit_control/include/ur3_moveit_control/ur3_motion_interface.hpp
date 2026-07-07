@@ -32,6 +32,8 @@ public:
 
   void addTableObstacle();
 
+  void calibObjectHeightEyeInHand(double depth_m, double camera_z_mount_offset);
+
 private:
   rclcpp::Node::SharedPtr node_;
   moveit::planning_interface::MoveGroupInterface move_group_;

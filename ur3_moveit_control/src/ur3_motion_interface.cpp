@@ -283,4 +283,12 @@ namespace ur3_moveit_control
     planning_scene_interface_.applyCollisionObjects(collision_objects);
   }
 
+  void UR3MotionInterface::calibObjectHeightEyeInHand(double depth_m, double camera_z_mount_offset)
+  {
+    // TODO: Implement camera calibration logic here
+    (void)depth_m;
+    (void)camera_z_mount_offset;
+    RCLCPP_INFO_ONCE(node_->get_logger(), "calibObjectHeightEyeInHand is called but not implemented.");
+  }
+
 } // namespace ur3_moveit_control

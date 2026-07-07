@@ -39,8 +39,8 @@ target_link_libraries(ur3_control_node
   ur3_motion_interface
 )
 
-rosidl_target_interfaces(ur3_control_node
-  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(ur3_control_node "${cpp_typesupport_target}")
 
 ament_target_dependencies(ur3_control_node
   rclcpp
