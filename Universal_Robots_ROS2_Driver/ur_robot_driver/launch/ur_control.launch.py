@@ -113,7 +113,7 @@ def launch_setup(context, *args, **kwargs):
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare(description_package), "urdf", description_file]),
+            PathJoinSubstitution([FindPackageShare("ur3_moveit_control"), "urdf", description_file]),
             " ",
             "robot_ip:=",
             robot_ip,
@@ -505,7 +505,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
-            default_value="ur.urdf.xacro",
+            default_value="ur3_with_susgrip.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
         )
     )

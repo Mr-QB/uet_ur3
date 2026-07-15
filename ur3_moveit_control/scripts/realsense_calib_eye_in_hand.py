@@ -25,21 +25,21 @@ class HandEyeCalibrator(Node):
         self.get_logger().info('=============================================')
         self.get_logger().info('  HAND-EYE CALIBRATION SCRIPT (MULTI-METHOD) ')
         self.get_logger().info('=============================================')
-        self.get_logger().info('HƯỚNG DẪN SỬ DỤNG:')
-        self.get_logger().info('1. Di chuyển tay máy tới một góc nhìn thấy rõ Marker.')
-        self.get_logger().info('2. Gõ [Enter] để lấy mẫu (Cần ít nhất 5 mẫu ở các góc khác nhau).')
-        self.get_logger().info('3. Gõ chữ "c" rồi [Enter] để tự động tính toán Offset.')
-        self.get_logger().info('4. Gõ chữ "q" rồi [Enter] để thoát.')
+        self.get_logger().info('USAGE GUIDE:')
+        self.get_logger().info('1. Move the robot arm to a pose where the marker is clearly visible.')
+        self.get_logger().info('2. Press [Enter] to take a sample (at least 5 samples at different poses are recommended).')
+        self.get_logger().info('3. Type "c" and press [Enter] to calculate the calibration offset.')
+        self.get_logger().info('4. Type "q" and press [Enter] to quit.')
         self.get_logger().info('=============================================')
         
-        # Chạy luồng đọc phím ngầm
+        # Start background thread for key readings
         self.input_thread = threading.Thread(target=self.input_loop)
         self.input_thread.daemon = True
         self.input_thread.start()
 
     def get_transform_matrix(self, parent_frame, child_frame):
         try:
-            # Chờ tối đa 1.0s để lấy TF mới nhất
+            # Wait up to 1.0s to get the latest TF
             trans = self.tf_buffer.lookup_transform(
                 parent_frame, 
                 child_frame, 
@@ -60,20 +60,20 @@ class HandEyeCalibrator(Node):
             
             return rot, t
         except Exception as e:
-            self.get_logger().error(f"Lỗi: Không tìm thấy TF từ {parent_frame} đến {child_frame}: {e}")
+            self.get_logger().error(f"Error: Failed to find TF from {parent_frame} to {child_frame}: {e}")
             return None, None
 
     def take_sample(self):
-        self.get_logger().info('Đang lấy mẫu toạ độ...')
+        self.get_logger().info('Taking coordinate sample...')
         
         R_g2b, t_g2b = self.get_transform_matrix('base_link', 'tool0')
         if R_g2b is None:
-            self.get_logger().warn('Lấy mẫu thất bại! Hãy kiểm tra lại tay máy.')
+            self.get_logger().warn('Sampling failed! Please check the robot state.')
             return
             
         R_t2c, t_t2c = self.get_transform_matrix('camera_link', 'aruco_marker_frame')
         if R_t2c is None:
-            self.get_logger().warn('Lấy mẫu thất bại! Hãy chắc chắn camera đang nhìn thấy tấm Marker.')
+            self.get_logger().warn('Sampling failed! Make sure the camera can see the ArUco marker.')
             return
             
         self.R_gripper2base_list.append(R_g2b)
@@ -82,19 +82,19 @@ class HandEyeCalibrator(Node):
         self.t_target2cam_list.append(t_t2c)
         
         n = len(self.R_gripper2base_list)
-        self.get_logger().info(f'👉 Đã lưu thành công mẫu thứ {n}!')
+        self.get_logger().info(f'Successfully saved sample {n}!')
         self.get_logger().info(f'   Tool0 pos: [{t_g2b[0][0]:.4f}, {t_g2b[1][0]:.4f}, {t_g2b[2][0]:.4f}]')
         self.get_logger().info(f'   Marker pos: [{t_t2c[0][0]:.4f}, {t_t2c[1][0]:.4f}, {t_t2c[2][0]:.4f}]')
 
     def build_homogeneous_matrix(self, R_mat, t_vec):
-        """Xây dựng ma trận chuyển vị thuần nhất 4×4 từ R (3×3) và t (3×1)."""
+        """Construct a 4x4 homogeneous transformation matrix from R (3x3) and t (3x1)."""
         T = np.eye(4)
         T[:3, :3] = R_mat
         T[:3, 3] = t_vec.flatten()
         return T
 
     def print_matrix_4x4(self, T, label=''):
-        """In đẹp ma trận 4×4."""
+        """Pretty-print a 4x4 matrix."""
         self.get_logger().info(f'--- {label} ---')
         for i in range(4):
             row = '  '.join([f'{T[i, j]:+.6f}' for j in range(4)])
@@ -103,16 +103,16 @@ class HandEyeCalibrator(Node):
     def compute_calibration(self):
         n = len(self.R_gripper2base_list)
         if n < 3:
-            self.get_logger().error(f'Cần ít nhất 3 mẫu để tính toán! Bạn mới có {n} mẫu.')
+            self.get_logger().error(f'At least 3 samples are required to calibrate! You only have {n} samples.')
             return
         
         self.get_logger().info('')
-        self.get_logger().info('═' * 60)
-        self.get_logger().info('  ĐANG TÍNH TOÁN HAND-EYE CALIBRATION...')
-        self.get_logger().info(f'  Số lượng mẫu: {n}')
-        self.get_logger().info('═' * 60)
+        self.get_logger().info('=' * 60)
+        self.get_logger().info('  CALCULATING HAND-EYE CALIBRATION...')
+        self.get_logger().info(f'  Number of samples: {n}')
+        self.get_logger().info('=' * 60)
         
-        # ── Danh sách 5 thuật toán OpenCV ──
+        # OpenCV Hand-Eye Calibration methods
         methods = {
             'TSAI':       cv2.CALIB_HAND_EYE_TSAI,
             'PARK':       cv2.CALIB_HAND_EYE_PARK,
@@ -135,8 +135,8 @@ class HandEyeCalibrator(Node):
                 
                 T_cam2gripper = self.build_homogeneous_matrix(R_cam2gripper, t_cam2gripper)
                 rot = R.from_matrix(R_cam2gripper)
-                rpy = rot.as_euler('xyz', degrees=False)
-                rpy_deg = rot.as_euler('xyz', degrees=True)
+                rpy = rot.as_euler('XYZ', degrees=False)
+                rpy_deg = rot.as_euler('XYZ', degrees=True)
                 quat = rot.as_quat()  # x, y, z, w
                 
                 results[name] = {
@@ -149,17 +149,17 @@ class HandEyeCalibrator(Node):
                 }
                 
             except Exception as e:
-                self.get_logger().error(f'  Thuật toán {name} lỗi: {e}')
+                self.get_logger().error(f'  Algorithm {name} failed: {e}')
         
         if not results:
-            self.get_logger().error('Tất cả thuật toán đều lỗi! Kiểm tra lại dữ liệu mẫu.')
+            self.get_logger().error('All algorithms failed! Please check sample data.')
             return
         
-        # ── In kết quả từng thuật toán ──
+        # Print results of each algorithm
         self.get_logger().info('')
-        self.get_logger().info('═' * 60)
-        self.get_logger().info('  SO SÁNH KẾT QUẢ 5 THUẬT TOÁN')
-        self.get_logger().info('═' * 60)
+        self.get_logger().info('=' * 60)
+        self.get_logger().info('  ALGORITHM COMPARISON')
+        self.get_logger().info('=' * 60)
         
         self.get_logger().info('')
         self.get_logger().info(f'  {"Method":<12} {"X(m)":>10} {"Y(m)":>10} {"Z(m)":>10} │ {"Roll°":>8} {"Pitch°":>8} {"Yaw°":>8}')
@@ -173,11 +173,11 @@ class HandEyeCalibrator(Node):
                 f'{rpy_d[0]:>+8.3f} {rpy_d[1]:>+8.3f} {rpy_d[2]:>+8.3f}'
             )
         
-        # ── Tính trung vị (median) để chọn kết quả robust nhất ──
+        # Compute median translation to find the most robust result
         all_t = np.array([res['t'].flatten() for res in results.values()])
         median_t = np.median(all_t, axis=0)
         
-        # Chọn thuật toán có translation gần median nhất
+        # Select method with translation closest to the median
         best_name = None
         best_dist = float('inf')
         for name, res in results.items():
@@ -188,12 +188,12 @@ class HandEyeCalibrator(Node):
         
         best = results[best_name]
         
-        # ── In kết quả chính (Best Method) ──
+        # Print best method results
         self.get_logger().info('')
-        self.get_logger().info('═' * 60)
-        self.get_logger().info(f'  🏆 KẾT QUẢ TỐT NHẤT: {best_name}')
-        self.get_logger().info(f'     (Gần trung vị nhất, distance = {best_dist:.6f}m)')
-        self.get_logger().info('═' * 60)
+        self.get_logger().info('=' * 60)
+        self.get_logger().info(f'  BEST METHOD RESULT: {best_name}')
+        self.get_logger().info(f'     (Closest to median, distance = {best_dist:.6f}m)')
+        self.get_logger().info('=' * 60)
         
         t = best['t']
         rpy = best['rpy']
@@ -201,17 +201,17 @@ class HandEyeCalibrator(Node):
         quat = best['quat']
         T = best['T']
         
-        # In ma trận chuyển vị 4×4
+        # Print 4x4 homogeneous transformation matrix
         self.get_logger().info('')
-        self.print_matrix_4x4(T, 'MA TRẬN CHUYỂN VỊ 4×4 (tool0 → camera_link)')
+        self.print_matrix_4x4(T, 'HOMOGENEOUS TRANSFORMATION MATRIX 4x4 (tool0 -> camera_link)')
         
         self.get_logger().info('')
-        self.get_logger().info(f'  Tịnh tiến (X, Y, Z):')
+        self.get_logger().info(f'  Translation (X, Y, Z):')
         self.get_logger().info(f'    X = {t[0][0]:+.6f} m')
         self.get_logger().info(f'    Y = {t[1][0]:+.6f} m')
         self.get_logger().info(f'    Z = {t[2][0]:+.6f} m')
         
-        self.get_logger().info(f'  Góc xoay RPY (radian):')
+        self.get_logger().info(f'  RPY Euler Angles (radians & degrees):')
         self.get_logger().info(f'    Roll  = {rpy[0]:+.6f} rad  ({rpy_deg[0]:+.3f}°)')
         self.get_logger().info(f'    Pitch = {rpy[1]:+.6f} rad  ({rpy_deg[1]:+.3f}°)')
         self.get_logger().info(f'    Yaw   = {rpy[2]:+.6f} rad  ({rpy_deg[2]:+.3f}°)')
@@ -219,15 +219,13 @@ class HandEyeCalibrator(Node):
         self.get_logger().info(f'  Quaternion (x, y, z, w):')
         self.get_logger().info(f'    [{quat[0]:+.6f}, {quat[1]:+.6f}, {quat[2]:+.6f}, {quat[3]:+.6f}]')
         
-        # ── Lệnh static_transform_publisher ──
+        # static_transform_publisher command
         self.get_logger().info('')
-        self.get_logger().info('═' * 60)
-        self.get_logger().info('  LỆNH PUBLISH TF (copy để dùng)')
-        self.get_logger().info('═' * 60)
+        self.get_logger().info('=' * 60)
+        self.get_logger().info('  TF PUBLISH COMMANDS')
+        self.get_logger().info('=' * 60)
         
-        # Format mới (quaternion - chính xác hơn)
-        self.get_logger().info('')
-        self.get_logger().info('  📌 Dùng Quaternion (khuyên dùng):')
+        self.get_logger().info('  Using Quaternion (Recommended):')
         self.get_logger().info(
             f'  ros2 run tf2_ros static_transform_publisher '
             f'--x {t[0][0]:.6f} --y {t[1][0]:.6f} --z {t[2][0]:.6f} '
@@ -235,9 +233,9 @@ class HandEyeCalibrator(Node):
             f'--frame-id tool0 --child-frame-id camera_link'
         )
         
-        # Format cũ (euler)
+        # Older format (euler)
         self.get_logger().info('')
-        self.get_logger().info('  📌 Dùng Euler RPY (tương thích cũ):')
+        self.get_logger().info('  Using Euler RPY (Legacy compatibility):')
         self.get_logger().info(
             f'  ros2 run tf2_ros static_transform_publisher '
             f'{t[0][0]:.6f} {t[1][0]:.6f} {t[2][0]:.6f} '
@@ -245,16 +243,16 @@ class HandEyeCalibrator(Node):
             f'tool0 camera_link'
         )
         
-        # ── Lưu kết quả ra file .npz ──
+        # Save results to file
         self.save_results(results, best_name)
         
         self.get_logger().info('')
-        self.get_logger().info('═' * 60)
-        self.get_logger().info('  ✅ CALIBRATION HOÀN TẤT!')
-        self.get_logger().info('═' * 60)
+        self.get_logger().info('=' * 60)
+        self.get_logger().info('  CALIBRATION COMPLETE!')
+        self.get_logger().info('=' * 60)
 
     def save_results(self, results, best_name):
-        """Lưu kết quả calibration ra file .npz và file văn bản .txt dễ đọc"""
+        """Save calibration results to .npz file and a human-readable .txt file"""
         try:
             save_dir = os.path.expanduser('~/ros_ws/calib_results')
             os.makedirs(save_dir, exist_ok=True)
@@ -268,7 +266,7 @@ class HandEyeCalibrator(Node):
                 'n_samples': len(self.R_gripper2base_list),
             }
             
-            # Lưu dữ liệu npz
+            # Save npz data
             for name, res in results.items():
                 save_data[f'{name}_T'] = res['T']
                 save_data[f'{name}_R'] = res['R']
@@ -283,34 +281,34 @@ class HandEyeCalibrator(Node):
             
             np.savez(npz_filepath, **save_data)
             
-            # Lưu dữ liệu txt
+            # Save txt report
             best = results[best_name]
             with open(txt_filepath, 'w', encoding='utf-8') as f:
                 f.write("=============================================\n")
-                f.write("      KẾT QUẢ HAND-EYE CALIBRATION\n")
+                f.write("      HAND-EYE CALIBRATION RESULTS\n")
                 f.write("=============================================\n")
-                f.write(f"Thời gian lấy mẫu: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-                f.write(f"Số lượng mẫu: {len(self.R_gripper2base_list)}\n")
-                f.write(f"Thuật toán tốt nhất (gần trung vị nhất): {best_name}\n\n")
+                f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"Number of samples: {len(self.R_gripper2base_list)}\n")
+                f.write(f"Best method (closest to median): {best_name}\n\n")
                 
-                f.write("--- MA TRẬN CHUYỂN VỊ 4x4 (tool0 -> camera_link) ---\n")
+                f.write("--- 4x4 HOMOGENEOUS TRANSFORMATION MATRIX (tool0 -> camera_link) ---\n")
                 T = best['T']
                 for i in range(4):
                     row = '  '.join([f'{T[i, j]:+.6f}' for j in range(4)])
                     f.write(f"  [ {row} ]\n")
                 
-                f.write("\n--- THÔNG SỐ CHI TIẾT ---\n")
+                f.write("\n--- DETAILED PARAMETERS ---\n")
                 t = best['t']
                 rpy = best['rpy']
                 rpy_deg = best['rpy_deg']
                 quat = best['quat']
                 
-                f.write("1. Tịnh tiến (X, Y, Z - mét):\n")
+                f.write("1. Translation (X, Y, Z - meters):\n")
                 f.write(f"   X = {t[0][0]:+.6f}\n")
                 f.write(f"   Y = {t[1][0]:+.6f}\n")
                 f.write(f"   Z = {t[2][0]:+.6f}\n\n")
                 
-                f.write("2. Góc xoay Euler RPY (radian & độ):\n")
+                f.write("2. Euler Angles RPY (radians & degrees):\n")
                 f.write(f"   Roll  = {rpy[0]:+.6f} rad  ({rpy_deg[0]:+.3f}°)\n")
                 f.write(f"   Pitch = {rpy[1]:+.6f} rad  ({rpy_deg[1]:+.3f}°)\n")
                 f.write(f"   Yaw   = {rpy[2]:+.6f} rad  ({rpy_deg[2]:+.3f}°)\n\n")
@@ -318,18 +316,18 @@ class HandEyeCalibrator(Node):
                 f.write("3. Quaternion (x, y, z, w):\n")
                 f.write(f"   [ {quat[0]:+.6f}, {quat[1]:+.6f}, {quat[2]:+.6f}, {quat[3]:+.6f} ]\n\n")
                 
-                f.write("--- LỆNH ROS2 PUBLISH TF (Sử dụng Quaternion) ---\n")
+                f.write("--- ROS2 STATIC TF PUBLISH COMMAND (Using Quaternion) ---\n")
                 f.write(f"ros2 run tf2_ros static_transform_publisher \\\n"
                         f"  --x {t[0][0]:.6f} --y {t[1][0]:.6f} --z {t[2][0]:.6f} \\\n"
                         f"  --qx {quat[0]:.6f} --qy {quat[1]:.6f} --qz {quat[2]:.6f} --qw {quat[3]:.6f} \\\n"
                         f"  --frame-id tool0 --child-frame-id camera_link\n")
             
             self.get_logger().info('')
-            self.get_logger().info(f'  💾 Đã lưu dữ liệu gốc vào: {npz_filepath}')
-            self.get_logger().info(f'  📄 Đã lưu file đọc dễ nhìn vào: {txt_filepath}')
+            self.get_logger().info(f'  Saved raw data to: {npz_filepath}')
+            self.get_logger().info(f'  Saved text report to: {txt_filepath}')
             
         except Exception as e:
-            self.get_logger().error(f'Không thể lưu file: {e}')
+            self.get_logger().error(f'Failed to save files: {e}')
 
     def input_loop(self):
         while True:
@@ -338,7 +336,7 @@ class HandEyeCalibrator(Node):
                 if cmd.lower() == 'c':
                     self.compute_calibration()
                 elif cmd.lower() == 'q':
-                    self.get_logger().info('Đang thoát...')
+                    self.get_logger().info('Exiting...')
                     rclpy.shutdown()
                     break
                 else:

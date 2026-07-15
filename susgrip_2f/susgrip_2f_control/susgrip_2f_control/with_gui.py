@@ -43,7 +43,8 @@ class SusGrip2FControl(Node):
         self.get_logger().info(f'Published: {force} to /susgrip_2f/force')
 
         goal_msg = GripperCommand.Goal()
-        goal_msg.command.position = float(pos)
+        # ROS 2 Action Server expects meters (0.0 to 0.130), but GUI pos is in mm
+        goal_msg.command.position = float(pos) / 1000.0
         self._action_client.wait_for_server()
         self._send_goal_future = self._action_client.send_goal_async(goal_msg)
         self._send_goal_future.add_done_callback(self.goal_response_callback)
@@ -155,7 +156,7 @@ class SusGrip2FControlGUI(QWidget):
         self.unit_label_vel.setText("{:3d} %".format(value))
 
     def slider_force_changed(self, value):
-        self.unit_label_force.setText("{:3d} mm".format(value))
+        self.unit_label_force.setText("{:3d} %".format(value))
 
     def start_ros2(self):
         """Initialize ROS 2 node and spin."""

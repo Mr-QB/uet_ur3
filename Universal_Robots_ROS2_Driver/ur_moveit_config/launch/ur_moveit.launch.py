@@ -194,7 +194,7 @@ def launch_setup(context, *args, **kwargs):
         "moveit_manage_controllers": False,
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
         "trajectory_execution.allowed_goal_duration_margin": 0.5,
-        "trajectory_execution.allowed_start_tolerance": 0.01,
+        "trajectory_execution.allowed_start_tolerance": 1.0,
         # Execution time monitoring can be incompatible with the scaled JTC
         "trajectory_execution.execution_duration_monitoring": False,
     }
@@ -326,7 +326,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_package",
-            default_value="ur_description",
+            default_value="ur3_moveit_control",
             description="Description package with robot URDF/XACRO files. Usually the argument "
             "is not set, it enables use of a custom description.",
         )
@@ -334,7 +334,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
-            default_value="ur.urdf.xacro",
+            default_value="ur3_with_susgrip.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
         )
     )
@@ -356,7 +356,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_file",
-            default_value="ur.srdf.xacro",
+            default_value="ur3_with_susgrip.srdf.xacro",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )

@@ -200,9 +200,9 @@ namespace ur3_moveit_control
     shape_msgs::msg::SolidPrimitive primitive;
     primitive.type = primitive.BOX;
     primitive.dimensions.resize(3);
-    primitive.dimensions[0] = table_length;    // kích thước theo trục X
-    primitive.dimensions[1] = table_width;     // kích thước theo trục Y
-    primitive.dimensions[2] = table_thickness; // độ dày theo trục Z
+    primitive.dimensions[0] = table_length;    // dimension along X axis
+    primitive.dimensions[1] = table_width;     // dimension along Y axis
+    primitive.dimensions[2] = table_thickness; // thickness along Z axis
 
     geometry_msgs::msg::Pose box_pose;
     box_pose.orientation.w = 1.0;
@@ -217,18 +217,18 @@ namespace ur3_moveit_control
     shape_msgs::msg::SolidPrimitive back_wall_primitive;
     back_wall_primitive.type = back_wall_primitive.BOX;
     back_wall_primitive.dimensions.resize(3);
-    back_wall_primitive.dimensions[0] = wall_thickness;      // độ dày theo trục X
-    back_wall_primitive.dimensions[1] = side_wall_y * 2.0;   // hai bên cách gốc 0.5m
-    back_wall_primitive.dimensions[2] = wall_height;         // chiều cao theo trục Z
+    back_wall_primitive.dimensions[0] = wall_thickness;      // thickness along X axis
+    back_wall_primitive.dimensions[1] = side_wall_y * 2.0;   // 0.5m offset on both sides
+    back_wall_primitive.dimensions[2] = wall_height;         // height along Z axis
 
     shape_msgs::msg::SolidPrimitive side_wall_primitive;
     side_wall_primitive.type = side_wall_primitive.BOX;
     side_wall_primitive.dimensions.resize(3);
-    side_wall_primitive.dimensions[0] = side_wall_length; // từ tường sau đến mép trước bàn
-    side_wall_primitive.dimensions[1] = wall_thickness;   // độ dày theo trục Y
-    side_wall_primitive.dimensions[2] = wall_height;      // chiều cao theo trục Z
+    side_wall_primitive.dimensions[0] = side_wall_length; // from back wall to table's front edge
+    side_wall_primitive.dimensions[1] = wall_thickness;   // thickness along Y axis
+    side_wall_primitive.dimensions[2] = wall_height;      // height along Z axis
 
-    // Thêm tường phía sau robot
+    // Add back wall behind the robot
     moveit_msgs::msg::CollisionObject back_wall;
     back_wall.header.frame_id = move_group_.getPlanningFrame();
     back_wall.id = "back_wall";
@@ -285,10 +285,10 @@ namespace ur3_moveit_control
 
   void UR3MotionInterface::calibObjectHeightEyeInHand(double depth_m, double camera_z_mount_offset)
   {
-    // TODO: Implement camera calibration logic here
-    (void)depth_m;
-    (void)camera_z_mount_offset;
-    RCLCPP_INFO_ONCE(node_->get_logger(), "calibObjectHeightEyeInHand is called but not implemented.");
+    geometry_msgs::msg::PoseStamped current_pose = move_group_.getCurrentPose();
+    double ee_z = current_pose.pose.position.z;
+    double object_height = ee_z - camera_z_mount_offset - depth_m;
+    RCLCPP_INFO_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000, "Current EE Z: %.3f, Depth: %.3f, Object Height: %.3f", ee_z, depth_m, object_height);
   }
 
 } // namespace ur3_moveit_control

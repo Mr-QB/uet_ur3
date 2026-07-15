@@ -65,7 +65,7 @@ install(
 )
 
 install(
-  DIRECTORY config launch urdf
+  DIRECTORY config launch urdf srdf rviz
   DESTINATION share/${PROJECT_NAME}
 )
 

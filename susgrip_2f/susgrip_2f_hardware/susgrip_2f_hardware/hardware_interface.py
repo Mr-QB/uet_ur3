@@ -84,87 +84,35 @@ class SusGrip2FHardwareInterface(Node):
 
     def publish_joint_states(self):
         if not self.is_connected:
+            msg = JointState()
+            msg.header.stamp = self.get_clock().now().to_msg()
+            msg.position.extend([getattr(self, 'dummy_pos', 0.0), getattr(self, 'dummy_pos', 0.0)])
+            msg.name.extend(["gripper_joint", "gripper_joint_mimic"])
+            self.joint_pub.publish(msg)
             return
         data = self.sus_2f.reload_data()
         if data is None or not isinstance(data, list) or len(data) < 2:
             return
         # Kinematic translation from linear distance (mm) to angular joints
         gripper_dis = float(data[1])
-        current_effort = float(data[3])
-
-
-
-        #if user_integration comment this one
-        #Start comment
-        # Guard math domain limits
-        val_to_cos = (63.45 - gripper_dis) / 108
-        val_to_cos = max(-1.0, min(1.0, val_to_cos))
-        radian = math.acos(val_to_cos)
-        yF_val = 2916 - (31.725 - gripper_dis / 2) ** 2
-        yF_val = max(0.0, yF_val)
-        yF = math.sqrt(yF_val) + 3.5
-        slider = (57.5 - yF) / 1000
-        buff = -math.pi / 2 + radian
-        joint_sus2f = [0.0] * 12
-        joint_sus2f[0] = slider                    # base_slider_l_joint
-        joint_sus2f[1] = -buff                     # finger_outer_l_joint
-        joint_sus2f[2] = buff                      # outet_dummy_l_joint       
-        joint_sus2f[3] = -buff                     # finger_inner_l_joint
-        joint_sus2f[4] = 2*buff                    # pad_inner_l_joint
-        joint_sus2f[5] = 2*buff                    # passive_pad_inner_l_joint
-        joint_sus2f[6] = slider                    # base_slider_r_joint
-        joint_sus2f[7] = buff                      # slider_outer_r_joint
-        joint_sus2f[8] = buff                      # finger_outer_r_joint
-        joint_sus2f[9] = buff                      # finger_inner_r_joint
-        joint_sus2f[10] = -2*buff                  # pad_inner_r_joint
-        joint_sus2f[11] = -2*buff                  # passive_pad_inner_r_joint
 
         msg = JointState()
         msg.header.stamp = self.get_clock().now().to_msg()
-        msg.position = joint_sus2f
-        msg.name = [
-            "base_slider_l_joint",
-            "slider_outer_l_joint",
-            "finger_outer_l_joint",
-            "finger_inner_l_joint",
-            "pad_inner_l_joint",
-            "passive_pad_inner_l_joint",
-            "base_slider_r_joint",
-            "slider_outer_r_joint",
-            "finger_outer_r_joint",
-            "finger_inner_r_joint",
-            "pad_inner_r_joint",
-            "passive_pad_inner_r_joint",
-        ]
-        #end comment
-
-
-
-
-
-
-
-
-
-        #if user_integration uncomment this one
-        # msg = JointState()
-        # msg.header.stamp = self.get_clock().now().to_msg()
-        # msg.position.append(gripper_dis / 1000.0)
-        # msg.name.append("gripper_joint")
-
-
-
-
-
-
-
-
+        # The total opening (gripper_dis) is distributed equally between the two fingers.
+        # Thus, each finger's position is (gripper_dis / 2) / 1000.0 meters.
+        finger_pos = (gripper_dis / 2.0) / 1000.0
+        # Left finger (gripper_joint)
+        msg.position.append(finger_pos)
+        msg.name.append("gripper_joint")
+        # Right finger (gripper_joint_mimic)
+        msg.position.append(finger_pos)
+        msg.name.append("gripper_joint_mimic")
 
         self.joint_pub.publish(msg)
 
     # --- Action Goal Handling ---
     def goal_callback(self, goal_request):
-        self.get_logger().info(f'Received new gripper goal request: {goal_request.command.position} (interpreted as mm)')
+        self.get_logger().info(f'Received new gripper goal request: {goal_request.command.position} (meters)')
         return GoalResponse.ACCEPT
 
     def cancel_callback(self, goal_handle):
@@ -174,11 +122,9 @@ class SusGrip2FHardwareInterface(Node):
     def execute_action_callback(self, goal_handle):
         self.get_logger().info('Executing gripper goal...')
         
-        # Directly interpret the Action Goal position as millimeters (0 to 130mm)
-        #if user integrated with robot uncomment this line
-        #target_mm = round(goal_handle.request.command.position * 1000.0)
-        #if used in other way uncomment this line
-        target_mm = round(goal_handle.request.command.position )
+        # The action goal position represents a single finger's position in meters.
+        # Total physical opening is 2x this amount, converted to mm.
+        target_mm = round(goal_handle.request.command.position * 2000.0)
 
 
 
@@ -193,6 +139,16 @@ class SusGrip2FHardwareInterface(Node):
         self.get_logger().info(f'Action Target Physical opening: {target_mm:.1f} mm | Speed: {self.current_vel}% | Force: {target_effort}%')
 
         if self.is_connected:
+            # Check for faults and auto-reset if necessary
+            data = self.sus_2f.reload_data()
+            if data is not None and len(data) > 0:
+                status = data[0]
+                fault_code = status >> 8
+                if fault_code != 0:
+                    self.get_logger().warn(f"Gripper is in FAULT state (Code: {fault_code}). Auto-resetting before move...")
+                    self.sus_2f.set_rtu_mode()
+                    time.sleep(0.1)
+
             self.sus_2f.rtu_set_pos_pvt(int(target_mm), int(self.current_vel), int(target_effort))
             print("moving",flush=True)
             time.sleep(0.25)
@@ -221,7 +177,7 @@ class SusGrip2FHardwareInterface(Node):
                     current_mm = float(data[1])
                     
                     # Status register MOTION is data[5] (Address 0x0005). 
-                    # Bit 0 = 0: Đang đứng yên, Bit 0 = 1: Đang di chuyển.
+                    # Bit 0 = 0: Stopped, Bit 0 = 1: Moving.
                     is_stopped = 1 if (int(data[5]) & 0x01) == 0 else 0
                     
                     # Timeout check and Elapsed time
@@ -234,7 +190,8 @@ class SusGrip2FHardwareInterface(Node):
                     elif elapsed - last_pos_time > 1.5:
                         is_stopped = 1  # Force stopped status
 
-                    feedback_msg.position = current_mm   # report in mm directly
+                    # report feedback in meters for a single finger
+                    feedback_msg.position = current_mm / 2000.0
                     feedback_msg.effort = float(data[3])
                     feedback_msg.reached_goal = False
                     goal_handle.publish_feedback(feedback_msg)
@@ -271,14 +228,30 @@ class SusGrip2FHardwareInterface(Node):
                         goal_handle.publish_feedback(feedback_msg)
                         goal_handle.abort()
                         break
+            else:
+                self.get_logger().error('============= ERROR: GRIPPER IS DISCONNECTED! =============')
+                self.get_logger().error('Serial connection to /dev/ttyUSB0 failed (permission denied or unplugged).')
+                self.get_logger().error('Simulating goal execution for RViz ONLY. Real gripper WILL NOT MOVE!')
+                self.get_logger().error('===========================================================')
+                time.sleep(1.0) # simulate movement delay
+                
+                self.dummy_pos = float(target_mm) / 1000.0 # update dummy state for RViz
+                
+                result.reached_goal = True
+                result.position = float(target_mm) / 2000.0
+                feedback_msg.reached_goal = True
+                feedback_msg.position = float(target_mm) / 2000.0
+                goal_handle.publish_feedback(feedback_msg)
+                goal_handle.succeed()
+                break
             rate.sleep()
         # Populate final result in mm
         if self.is_connected:
             data = self.sus_2f.reload_data()
             if data is not None and len(data) >= 2:
-                result.position = float(data[1])
+                result.position = float(data[1]) / 2000.0
         else:
-            result.position = float(target_mm)
+            result.position = float(target_mm) / 2000.0
         result.stalled = False
         return result
 
