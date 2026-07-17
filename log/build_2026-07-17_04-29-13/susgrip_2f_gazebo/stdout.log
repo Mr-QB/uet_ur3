@@ -1,0 +1,45 @@
+running egg_info
+creating ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info
+writing ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/PKG-INFO
+writing dependency_links to ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/dependency_links.txt
+writing entry points to ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/entry_points.txt
+writing top-level names to ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/top_level.txt
+writing manifest file '../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/SOURCES.txt'
+reading manifest file '../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/SOURCES.txt'
+writing manifest file '../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/com9/uet_ws/build/susgrip_2f_gazebo/build
+creating /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib
+creating /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+copying susgrip_2f_gazebo/__init__.py -> /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+copying susgrip_2f_gazebo/gazebo_joint_publisher.py -> /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+copying susgrip_2f_gazebo/integrated_gazebo_joint_publisher.py -> /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+running install
+running install_lib
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+copying /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo/__init__.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+copying /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo/gazebo_joint_publisher.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+copying /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo/integrated_gazebo_joint_publisher.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+byte-compiling /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo/gazebo_joint_publisher.py to gazebo_joint_publisher.cpython-310.pyc
+byte-compiling /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo/integrated_gazebo_joint_publisher.py to integrated_gazebo_joint_publisher.cpython-310.pyc
+running install_data
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index/resource_index
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index/resource_index/packages
+copying resource/susgrip_2f_gazebo -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index/resource_index/packages
+copying package.xml -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/launch
+copying launch/susgrip_2f_gazebo.launch.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/launch
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/config
+copying config/susgrip_2f.yaml -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/config
+creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/urdf
+copying urdf/susgrip_2f_gazebo.urdf -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/urdf
+copying urdf/susgrip_2f_gazebo.urdf.xacro -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/urdf
+running install_egg_info
+Copying ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info to /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo-0.0.0-py3.10.egg-info
+running install_scripts
+Installing gazebo_joint_publisher script to /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/susgrip_2f_gazebo
+Installing integrated_gazebo_joint_publisher script to /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/susgrip_2f_gazebo
+writing list of installed files to '/home/com9/uet_ws/build/susgrip_2f_gazebo/install.log'

@@ -1,0 +1,20 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from ur_dashboard_msgs/srv/GetUserRole.srv
+// generated code does not contain a copyright notice
+
+#include "ur_dashboard_msgs/msg/UserRole.idl"
+
+module ur_dashboard_msgs {
+  module srv {
+    struct GetUserRole_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct GetUserRole_Response {
+      ur_dashboard_msgs::msg::UserRole user_role;
+
+      string answer;
+
+      boolean success;
+    };
+  };
+};

@@ -1,0 +1,276 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-32029f869ed9b0318e1c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						20
+					]
+				},
+				{
+					"build" : "ur3_moveit_control__py",
+					"jsonFile" : "directory-ur3_moveit_control__py-83a0a04cc90e577ab6b1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/com9/uet_ws/build/ur3_moveit_control/ur3_moveit_control__py",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "ur3_moveit_control__rs",
+					"jsonFile" : "directory-ur3_moveit_control__rs-5353412b80cf0dccd1c4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/com9/uet_ws/build/ur3_moveit_control/ur3_moveit_control__rs",
+					"targetIndexes" : 
+					[
+						19
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "ur3_moveit_control",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_ur3_moveit_control_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_ur3_moveit_control_egg-f8b44eabbb0430c0ccb1.json",
+					"name" : "ament_cmake_python_build_ur3_moveit_control_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_ur3_moveit_control::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_ur3_moveit_control-0360617e9ad7863d1ab9.json",
+					"name" : "ament_cmake_python_copy_ur3_moveit_control",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-babf164251f7a4e10dd3.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_control_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_control_node-068f0380520e12fa3ca3.json",
+					"name" : "ur3_control_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_motion_interface::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_motion_interface-e930a4650db5efc956b1.json",
+					"name" : "ur3_motion_interface",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control-2b56276f4175188541aa.json",
+					"name" : "ur3_moveit_control",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__cpp-905457a4706e52cdd0ce.json",
+					"name" : "ur3_moveit_control__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ur3_moveit_control__py::@7b64032b49ca0cf5de99",
+					"jsonFile" : "target-ur3_moveit_control__py-b10ab5cf4378c9d51b67.json",
+					"name" : "ur3_moveit_control__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_generator_c-b07e3d1999558d92eb24.json",
+					"name" : "ur3_moveit_control__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_generator_py-e1c59d6e8c4325348208.json",
+					"name" : "ur3_moveit_control__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_c-d5f2e71a3960cd485c8a.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_c__pyext-98757ae161f95f1fc96c.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_cpp-16059619599ec6d8435f.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_fastrtps_c-b1c2f557b34eec770937.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext-abf044e10cce3ba9d430.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_fastrtps_cpp-20ae56b129bdc3234eae.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_introspection_c-568fb00d6731d21f8d7f.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_introspection_c__pyext-36efcb79149da1f31ac5.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control__rosidl_typesupport_introspection_cpp-d8d3957ac12dc3ca22a2.json",
+					"name" : "ur3_moveit_control__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ur3_moveit_control__rs::@03f3f5cd20c10d10f1c2",
+					"jsonFile" : "target-ur3_moveit_control__rs-9fcc62422760870a3c36.json",
+					"name" : "ur3_moveit_control__rs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ur3_moveit_control_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ur3_moveit_control_uninstall-bdb59d60ebfd0d4ccfd6.json",
+					"name" : "ur3_moveit_control_uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/com9/uet_ws/build/ur3_moveit_control",
+		"source" : "/home/com9/uet_ws/src/ur3_moveit_control"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

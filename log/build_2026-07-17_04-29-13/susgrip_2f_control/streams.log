@@ -1,0 +1,44 @@
+[0.399s] Invoking command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_control build --build-base /home/com9/uet_ws/build/susgrip_2f_control/build install --record /home/com9/uet_ws/build/susgrip_2f_control/install.log --install-scripts $base/lib/susgrip_2f_control --single-version-externally-managed install_data
+[0.523s] running egg_info
+[0.523s] creating ../../../build/susgrip_2f_control/susgrip_2f_control.egg-info
+[0.523s] writing ../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/PKG-INFO
+[0.524s] writing dependency_links to ../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/dependency_links.txt
+[0.524s] writing entry points to ../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/entry_points.txt
+[0.524s] writing top-level names to ../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/top_level.txt
+[0.524s] writing manifest file '../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/SOURCES.txt'
+[0.525s] reading manifest file '../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/SOURCES.txt'
+[0.525s] writing manifest file '../../../build/susgrip_2f_control/susgrip_2f_control.egg-info/SOURCES.txt'
+[0.525s] running build
+[0.525s] running build_py
+[0.525s] creating /home/com9/uet_ws/build/susgrip_2f_control/build
+[0.525s] creating /home/com9/uet_ws/build/susgrip_2f_control/build/lib
+[0.525s] creating /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control
+[0.525s] copying susgrip_2f_control/with_cmd.py -> /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control
+[0.525s] copying susgrip_2f_control/with_gui.py -> /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control
+[0.525s] copying susgrip_2f_control/__init__.py -> /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control
+[0.525s] running install
+[0.526s] running install_lib
+[0.526s] creating /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control
+[0.526s] copying /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control/with_cmd.py -> /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control
+[0.526s] copying /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control/with_gui.py -> /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control
+[0.526s] copying /home/com9/uet_ws/build/susgrip_2f_control/build/lib/susgrip_2f_control/__init__.py -> /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control
+[0.526s] byte-compiling /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control/with_cmd.py to with_cmd.cpython-310.pyc
+[0.527s] byte-compiling /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control/with_gui.py to with_gui.cpython-310.pyc
+[0.528s] byte-compiling /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control/__init__.py to __init__.cpython-310.pyc
+[0.528s] running install_data
+[0.528s] creating /home/com9/uet_ws/install/susgrip_2f_control/share/ament_index
+[0.528s] creating /home/com9/uet_ws/install/susgrip_2f_control/share/ament_index/resource_index
+[0.528s] creating /home/com9/uet_ws/install/susgrip_2f_control/share/ament_index/resource_index/packages
+[0.528s] copying resource/susgrip_2f_control -> /home/com9/uet_ws/install/susgrip_2f_control/share/ament_index/resource_index/packages
+[0.528s] copying package.xml -> /home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control
+[0.528s] creating /home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/launch
+[0.528s] copying launch/susgrip_control.launch.py -> /home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/launch
+[0.528s] creating /home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/config
+[0.528s] copying config/controllers.yaml -> /home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/config
+[0.528s] running install_egg_info
+[0.530s] Copying ../../../build/susgrip_2f_control/susgrip_2f_control.egg-info to /home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages/susgrip_2f_control-0.1.0-py3.10.egg-info
+[0.530s] running install_scripts
+[0.543s] Installing with_cmd script to /home/com9/uet_ws/install/susgrip_2f_control/lib/susgrip_2f_control
+[0.543s] Installing with_gui script to /home/com9/uet_ws/install/susgrip_2f_control/lib/susgrip_2f_control
+[0.543s] writing list of installed files to '/home/com9/uet_ws/build/susgrip_2f_control/install.log'
+[0.557s] Invoked command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control' returned '0': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_control build --build-base /home/com9/uet_ws/build/susgrip_2f_control/build install --record /home/com9/uet_ws/build/susgrip_2f_control/install.log --install-scripts $base/lib/susgrip_2f_control --single-version-externally-managed install_data

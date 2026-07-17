@@ -1,0 +1,6 @@
+{
+  "package_name": "ur3_moveit_control",
+  "non_idl_tuples": [
+    "/home/com9/uet_ws/src/ur3_moveit_control:action/UR3Control.action"
+  ]
+}

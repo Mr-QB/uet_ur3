@@ -1,0 +1,4 @@
+[console_scripts]
+gazebo_joint_publisher = susgrip_2f_gazebo.gazebo_joint_publisher:main
+integrated_gazebo_joint_publisher = susgrip_2f_gazebo.integrated_gazebo_joint_publisher:main
+

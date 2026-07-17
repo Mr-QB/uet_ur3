@@ -1,0 +1,4 @@
+[console_scripts]
+with_cmd = susgrip_2f_control.with_cmd:main
+with_gui = susgrip_2f_control.with_gui:main
+

@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "ur3_moveit_control__rs",
+		"source" : "/home/com9/uet_ws/build/ur3_moveit_control/ur3_moveit_control__rs"
+	}
+}

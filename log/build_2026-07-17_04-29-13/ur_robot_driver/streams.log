@@ -1,0 +1,217 @@
+[0.006s] Invoking command in '/home/com9/uet_ws/build/ur_robot_driver': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_robot_driver -DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur_robot_driver
+[0.042s] -- The C compiler identification is GNU 11.4.0
+[0.077s] -- The CXX compiler identification is GNU 11.4.0
+[0.082s] -- Detecting C compiler ABI info
+[0.130s] -- Detecting C compiler ABI info - done
+[0.135s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.135s] -- Detecting C compile features
+[0.135s] -- Detecting C compile features - done
+[0.137s] -- Detecting CXX compiler ABI info
+[0.190s] -- Detecting CXX compiler ABI info - done
+[0.194s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.194s] -- Detecting CXX compile features
+[0.195s] -- Detecting CXX compile features - done
+[0.195s] [0mur_robot_driver: You did not request a specific build type: selecting 'RelWithDebInfo'.[0m
+[0.196s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.296s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.355s] -- Found controller_manager: 2.54.0 (/opt/ros/humble/share/controller_manager/cmake)
+[0.381s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.384s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.389s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.396s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.406s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.526s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.527s] -- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.543s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.578s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.581s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.591s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.593s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.599s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.606s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.611s] -- Looking for pthread.h
+[0.675s] -- Looking for pthread.h - found
+[0.675s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.740s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.741s] -- Found Threads: TRUE  
+[0.790s] -- Found rclpy: 3.3.21 (/opt/ros/humble/share/rclpy/cmake)
+[0.791s] -- Found std_srvs: 4.9.1 (/opt/ros/humble/share/std_srvs/cmake)
+[0.797s] -- Found tf2_geometry_msgs: 0.25.20 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[0.805s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.807s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[0.807s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.845s] -- Found ur_dashboard_msgs: 2.13.1 (/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/cmake)
+[0.854s] -- Found ur_msgs: 2.5.0 (/opt/ros/humble/share/ur_msgs/cmake)
+[0.991s] -- Found ur_controllers: 2.13.1 (/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/cmake)
+[1.058s] -- Found ur_description: 2.11.0 (/opt/ros/humble/share/ur_description/cmake)
+[1.059s] -- Found launch_testing_ament_cmake: 1.0.14 (/opt/ros/humble/share/launch_testing_ament_cmake/cmake)
+[1.060s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.076s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[1.079s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[1.079s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.079s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.079s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.095s] -- Found PythonExtra: .so  
+[1.096s] -- Configuring done
+[1.125s] -- Generating done
+[1.138s] -- Build files have been written to: /home/com9/uet_ws/build/ur_robot_driver
+[1.147s] Invoked command in '/home/com9/uet_ws/build/ur_robot_driver' returned '0': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_robot_driver -DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur_robot_driver
+[1.148s] Invoking command in '/home/com9/uet_ws/build/ur_robot_driver': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/com9/uet_ws/build/ur_robot_driver
+[1.181s] [  4%] [32mBuilding CXX object CMakeFiles/ur_robot_driver_plugin.dir/src/dashboard_client_ros.cpp.o[0m
+[26.161s] [  9%] [32mBuilding CXX object CMakeFiles/ur_robot_driver_plugin.dir/src/hardware_interface.cpp.o[0m
+[34.623s] [ 13%] [32mBuilding CXX object CMakeFiles/ur_robot_driver_plugin.dir/src/urcl_log_handler.cpp.o[0m
+[35.049s] [ 18%] [32mBuilding CXX object CMakeFiles/ur_robot_driver_plugin.dir/src/robot_state_helper.cpp.o[0m
+[51.362s] [ 22%] [32m[1mLinking CXX shared library libur_robot_driver_plugin.so[0m
+[52.054s] [ 22%] Built target ur_robot_driver_plugin
+[52.071s] [ 27%] [32mBuilding CXX object CMakeFiles/dashboard_client.dir/src/dashboard_client_ros.cpp.o[0m
+[76.750s] [ 31%] [32mBuilding CXX object CMakeFiles/dashboard_client.dir/src/dashboard_client_node.cpp.o[0m
+[80.109s] [ 36%] [32mBuilding CXX object CMakeFiles/dashboard_client.dir/src/urcl_log_handler.cpp.o[0m
+[80.544s] [ 40%] [32m[1mLinking CXX executable dashboard_client[0m
+[80.950s] [ 40%] Built target dashboard_client
+[80.965s] [ 45%] [32mBuilding CXX object CMakeFiles/ur_ros2_control_node.dir/src/ur_ros2_control_node.cpp.o[0m
+[83.815s] [ 50%] [32m[1mLinking CXX executable ur_ros2_control_node[0m
+[83.907s] [ 50%] Built target ur_ros2_control_node
+[83.921s] [ 54%] [32mBuilding CXX object CMakeFiles/controller_stopper_node.dir/src/controller_stopper.cpp.o[0m
+[94.047s] [ 59%] [32mBuilding CXX object CMakeFiles/controller_stopper_node.dir/src/controller_stopper_node.cpp.o[0m
+[96.355s] [ 63%] [32m[1mLinking CXX executable controller_stopper_node[0m
+[96.552s] [ 63%] Built target controller_stopper_node
+[96.567s] [ 68%] [32mBuilding CXX object CMakeFiles/robot_state_helper.dir/src/robot_state_helper.cpp.o[0m
+[113.015s] [ 72%] [32mBuilding CXX object CMakeFiles/robot_state_helper.dir/src/robot_state_helper_node.cpp.o[0m
+[115.668s] [ 77%] [32mBuilding CXX object CMakeFiles/robot_state_helper.dir/src/urcl_log_handler.cpp.o[0m
+[116.085s] [ 81%] [32m[1mLinking CXX executable robot_state_helper[0m
+[116.421s] [ 81%] Built target robot_state_helper
+[116.434s] [ 86%] [32mBuilding CXX object CMakeFiles/urscript_interface.dir/src/urscript_interface.cpp.o[0m
+[124.904s] [ 90%] [32m[1mLinking CXX executable urscript_interface[0m
+[125.104s] [ 90%] Built target urscript_interface
+[125.118s] [ 95%] [32mBuilding CXX object CMakeFiles/trajectory_until_node.dir/src/trajectory_until_node.cpp.o[0m
+[132.090s] [100%] [32m[1mLinking CXX executable trajectory_until_node[0m
+[132.222s] [100%] Built target trajectory_until_node
+[132.241s] [100%] Built target ament_cmake_python_copy_ur_robot_driver
+[132.525s] running egg_info
+[132.526s] creating ur_robot_driver.egg-info
+[132.526s] writing ur_robot_driver.egg-info/PKG-INFO
+[132.526s] writing dependency_links to ur_robot_driver.egg-info/dependency_links.txt
+[132.526s] writing top-level names to ur_robot_driver.egg-info/top_level.txt
+[132.526s] writing manifest file 'ur_robot_driver.egg-info/SOURCES.txt'
+[132.527s] reading manifest file 'ur_robot_driver.egg-info/SOURCES.txt'
+[132.527s] writing manifest file 'ur_robot_driver.egg-info/SOURCES.txt'
+[132.545s] [100%] Built target ament_cmake_python_build_ur_robot_driver_egg
+[132.552s] Invoked command in '/home/com9/uet_ws/build/ur_robot_driver' returned '0': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/com9/uet_ws/build/ur_robot_driver
+[132.554s] Invoking command in '/home/com9/uet_ws/build/ur_robot_driver': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/com9/uet_ws/build/ur_robot_driver
+[132.558s] -- Install configuration: "RelWithDebInfo"
+[132.558s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hardware_interface_plugin.xml
+[132.558s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/controller_stopper_node
+[132.565s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/controller_stopper_node" to ""
+[132.566s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/dashboard_client
+[132.581s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/dashboard_client" to ""
+[132.581s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/robot_state_helper
+[132.594s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/robot_state_helper" to ""
+[132.594s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/trajectory_until_node
+[132.597s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/trajectory_until_node" to ""
+[132.597s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/ur_ros2_control_node
+[132.597s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/ur_ros2_control_node" to ""
+[132.597s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/urscript_interface
+[132.602s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/urscript_interface" to ""
+[132.603s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/libur_robot_driver_plugin.so
+[132.633s] -- Set runtime path of "/home/com9/uet_ws/install/ur_robot_driver/lib/libur_robot_driver_plugin.so" to ""
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/controller_stopper.hpp
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/trajectory_until_node.hpp
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/urcl_log_handler.hpp
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/hardware_interface.hpp
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/dashboard_client_ros.hpp
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/robot_state_helper.hpp
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/library_path.sh
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/library_path.dsv
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/resources
+[132.633s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/resources/rs485-1.0.urcap
+[132.634s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/resources/rtde_input_recipe.txt
+[132.634s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/resources/externalcontrol-1.0.5.urcap
+[132.634s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/resources/ros_control.urscript
+[132.634s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/resources/rtde_output_recipe.txt
+[132.634s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include
+[132.634s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver
+[132.634s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/controller_stopper.hpp
+[132.634s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/trajectory_until_node.hpp
+[132.634s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/urcl_log_handler.hpp
+[132.634s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/hardware_interface.hpp
+[132.635s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/dashboard_client_ros.hpp
+[132.635s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/include/ur_robot_driver/robot_state_helper.hpp
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/pythonpath.sh
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/pythonpath.dsv
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver-2.13.1-py3.10.egg-info
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver-2.13.1-py3.10.egg-info/dependency_links.txt
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver-2.13.1-py3.10.egg-info/top_level.txt
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver-2.13.1-py3.10.egg-info/SOURCES.txt
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver-2.13.1-py3.10.egg-info/PKG-INFO
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver
+[132.635s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver/__init__.py
+[132.656s] Listing '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver'...
+[132.656s] Compiling '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages/ur_robot_driver/__init__.py'...
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/tool_communication.py
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/example_move.py
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/start_ursim.sh
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/examples.py
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/force_mode.py
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/move_until_example.py
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/bin/wait_dashboard_server.sh
+[132.659s] -- Up-to-date: /home/com9/uet_ws/install/ur_robot_driver/lib/ur_robot_driver/start_ursim.sh
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config
+[132.659s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur7e_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur12e_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/test_goal_publishers_config.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur30_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur18_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur15_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur20_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur10e_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur10_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur16e_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur3e_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur8long_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/test_velocity_goal_publishers_config.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur5_update_rate.yaml
+[132.660s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur3_update_rate.yaml
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur_controllers.yaml
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/config/ur5e_update_rate.yaml
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur8long.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/test_forward_velocity_controller.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur5.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur15.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur10.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur7e.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur16e.launch.py
+[132.661s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/test_scaled_joint_trajectory_controller.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur_dashboard_client.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur12e.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur5e.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur3e.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur3.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur30.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur20.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/test_joint_trajectory_controller.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur10e.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur_control.launch.py
+[132.662s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/launch/ur18.launch.py
+[132.663s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ament_index/resource_index/package_run_dependencies/ur_robot_driver
+[132.663s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ament_index/resource_index/parent_prefix_path/ur_robot_driver
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/ament_prefix_path.sh
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/ament_prefix_path.dsv
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/path.sh
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/environment/path.dsv
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/local_setup.bash
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/local_setup.sh
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/local_setup.zsh
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/local_setup.dsv
+[132.664s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.dsv
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ament_index/resource_index/packages/ur_robot_driver
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/ur_robot_driver
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/cmake/ament_cmake_export_include_directories-extras.cmake
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/cmake/ament_cmake_export_libraries-extras.cmake
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/cmake/ament_cmake_export_dependencies-extras.cmake
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/cmake/ur_robot_driverConfig.cmake
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/cmake/ur_robot_driverConfig-version.cmake
+[132.665s] -- Installing: /home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.xml
+[132.667s] Invoked command in '/home/com9/uet_ws/build/ur_robot_driver' returned '0': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/com9/uet_ws/build/ur_robot_driver

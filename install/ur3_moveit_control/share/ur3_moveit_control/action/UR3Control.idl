@@ -1,0 +1,37 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from ur3_moveit_control/action/UR3Control.action
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/PoseStamped.idl"
+#include "sensor_msgs/msg/JointState.idl"
+
+module ur3_moveit_control {
+  module action {
+    module UR3Control_Goal_Constants {
+      const uint8 MOVE_HOME = 0;
+      const uint8 MOVE_JOINT = 1;
+      const uint8 MOVE_POSE = 2;
+    };
+    @verbatim (language="comment", text=
+      "Request")
+    struct UR3Control_Goal {
+      uint8 command_type;
+
+      sensor_msgs::msg::JointState joint_goal;
+
+      geometry_msgs::msg::PoseStamped pose_goal;
+    };
+    @verbatim (language="comment", text=
+      "Result")
+    struct UR3Control_Result {
+      boolean success;
+
+      string message;
+    };
+    @verbatim (language="comment", text=
+      "Feedback")
+    struct UR3Control_Feedback {
+      string state;
+    };
+  };
+};

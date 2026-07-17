@@ -1,0 +1,1 @@
+#pragma message("#include \"friction_model_controller_parameters.hpp\" is deprecated. Use #include <ur_controllers/friction_model_controller_parameters.hpp> instead.")
