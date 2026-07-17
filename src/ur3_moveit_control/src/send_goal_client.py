@@ -320,43 +320,19 @@ def main(args=None):
     # action_client.send_home_goal()
 
     # Send a Cartesian pose goal
-    # action_client.send_pose_goal(
-    #     0.30,
-    #     0.10,
-    #     0.35,
-    #     0.0,
-    #     0.0,
-    #     0.0,
-    #     1.0
-    # )
+    # action_client.send_pose_goal(0.30,0.10,0.35,0.0,0.0,0.0,1.0)
 
     # Send a joint position goal
-    # action_client.send_joint_goal(
-    #     -1.57,
-    #     -1.57,
-    #     1.57,
-    #     -1.57,
-    #     -1.57,
-    #     0.0
-    # )
+    action_client.send_joint_goal(-1.57,-1.57,1.57,-1.57,-1.57,0.0)
 
     # Open the gripper
-    action_client.open_gripper(
-        0.03,
-        10.0
-    )
+    # action_client.open_gripper(0.03,30.0)
 
     # Close the gripper
-    # action_client.close_gripper(
-    #     0.0,
-    #     3.0
-    # )
+    # action_client.close_gripper(0.0,3.0)
 
     # Send a custom gripper command
-    # action_client.send_gripper_goal(
-    #     0.02,
-    #     5.0
-    # )
+    # action_client.send_gripper_goal(0.02,5.0)
 
     try:
         rclpy.spin(action_client)

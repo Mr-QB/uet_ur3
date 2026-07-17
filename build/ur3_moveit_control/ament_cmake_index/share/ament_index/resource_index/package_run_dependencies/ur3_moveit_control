@@ -1,1 +1,1 @@
-rclcpp;rclcpp_action;moveit_ros_planning_interface;geometry_msgs;sensor_msgs;action_msgs;rosidl_default_runtime;ament_lint_auto;ament_lint_common
+rclcpp;rclcpp_action;moveit_ros_planning_interface;geometry_msgs;sensor_msgs;action_msgs;rclpy;control_msgs;rosidl_default_runtime;ament_lint_auto;ament_lint_common

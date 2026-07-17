@@ -142,6 +142,18 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(launch_rviz),
     )
 
+    gripper_controller_spawner = Node(
+    package="controller_manager",
+    executable="spawner",
+    arguments=[
+        "gripper_controller",
+        "--controller-manager",
+        "/controller_manager",
+        "--controller-manager-timeout",
+        "60",
+    ],
+    output="screen",
+    )
     # There may be other controllers of the joints, but this is the initially-started one
     initial_joint_controller_spawner_started = Node(
         package="controller_manager",
@@ -221,6 +233,7 @@ def launch_setup(context, *args, **kwargs):
         gz_launch_description_with_gui,
         gz_launch_description_without_gui,
         gz_sim_bridge,
+        gripper_controller_spawner,
     ]
 
     return nodes_to_start

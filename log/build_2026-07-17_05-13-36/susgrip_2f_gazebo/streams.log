@@ -1,0 +1,47 @@
+[0.320s] Invoking command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/susgrip_2f_description:${AMENT_PREFIX_PATH} PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_gazebo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_gazebo build --build-base /home/com9/uet_ws/build/susgrip_2f_gazebo/build install --record /home/com9/uet_ws/build/susgrip_2f_gazebo/install.log --install-scripts $base/lib/susgrip_2f_gazebo --single-version-externally-managed install_data
+[0.443s] running egg_info
+[0.443s] creating ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info
+[0.443s] writing ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/PKG-INFO
+[0.443s] writing dependency_links to ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/dependency_links.txt
+[0.443s] writing entry points to ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/entry_points.txt
+[0.443s] writing top-level names to ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/top_level.txt
+[0.443s] writing manifest file '../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/SOURCES.txt'
+[0.444s] reading manifest file '../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/SOURCES.txt'
+[0.444s] writing manifest file '../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info/SOURCES.txt'
+[0.444s] running build
+[0.445s] running build_py
+[0.445s] creating /home/com9/uet_ws/build/susgrip_2f_gazebo/build
+[0.445s] creating /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib
+[0.445s] creating /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+[0.445s] copying susgrip_2f_gazebo/__init__.py -> /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+[0.445s] copying susgrip_2f_gazebo/gazebo_joint_publisher.py -> /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+[0.445s] copying susgrip_2f_gazebo/integrated_gazebo_joint_publisher.py -> /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo
+[0.445s] running install
+[0.445s] running install_lib
+[0.446s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+[0.446s] copying /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo/__init__.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+[0.446s] copying /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo/gazebo_joint_publisher.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+[0.446s] copying /home/com9/uet_ws/build/susgrip_2f_gazebo/build/lib/susgrip_2f_gazebo/integrated_gazebo_joint_publisher.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo
+[0.446s] byte-compiling /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo/__init__.py to __init__.cpython-310.pyc
+[0.446s] byte-compiling /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo/gazebo_joint_publisher.py to gazebo_joint_publisher.cpython-310.pyc
+[0.447s] byte-compiling /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo/integrated_gazebo_joint_publisher.py to integrated_gazebo_joint_publisher.cpython-310.pyc
+[0.447s] running install_data
+[0.447s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index
+[0.447s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index/resource_index
+[0.447s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index/resource_index/packages
+[0.447s] copying resource/susgrip_2f_gazebo -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/ament_index/resource_index/packages
+[0.447s] copying package.xml -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo
+[0.447s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/launch
+[0.447s] copying launch/susgrip_2f_gazebo.launch.py -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/launch
+[0.447s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/config
+[0.447s] copying config/susgrip_2f.yaml -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/config
+[0.448s] creating /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/urdf
+[0.448s] copying urdf/susgrip_2f_gazebo.urdf -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/urdf
+[0.448s] copying urdf/susgrip_2f_gazebo.urdf.xacro -> /home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/urdf
+[0.448s] running install_egg_info
+[0.449s] Copying ../../../build/susgrip_2f_gazebo/susgrip_2f_gazebo.egg-info to /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages/susgrip_2f_gazebo-0.0.0-py3.10.egg-info
+[0.450s] running install_scripts
+[0.462s] Installing gazebo_joint_publisher script to /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/susgrip_2f_gazebo
+[0.462s] Installing integrated_gazebo_joint_publisher script to /home/com9/uet_ws/install/susgrip_2f_gazebo/lib/susgrip_2f_gazebo
+[0.462s] writing list of installed files to '/home/com9/uet_ws/build/susgrip_2f_gazebo/install.log'
+[0.478s] Invoked command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo' returned '0': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/susgrip_2f_description:${AMENT_PREFIX_PATH} PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_gazebo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_gazebo build --build-base /home/com9/uet_ws/build/susgrip_2f_gazebo/build install --record /home/com9/uet_ws/build/susgrip_2f_gazebo/install.log --install-scripts $base/lib/susgrip_2f_gazebo --single-version-externally-managed install_data
