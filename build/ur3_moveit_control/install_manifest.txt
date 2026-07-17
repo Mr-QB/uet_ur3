@@ -76,6 +76,8 @@
 /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf/ur3_with_susgrip_gazebo.urdf.xacro
 /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf/ur3_with_susgrip.urdf.xacro
 /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rviz/view_robot.rviz
+/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models/box.sdf
+/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models/table.sdf
 /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/package_run_dependencies/ur3_moveit_control
 /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/parent_prefix_path/ur3_moveit_control
 /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/ament_prefix_path.sh

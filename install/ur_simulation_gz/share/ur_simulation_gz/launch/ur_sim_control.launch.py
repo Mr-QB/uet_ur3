@@ -107,6 +107,21 @@ def launch_setup(context, *args, **kwargs):
             initial_joint_controllers,
         ]
     )
+    table_file = PathJoinSubstitution(
+    [
+        FindPackageShare("ur3_moveit_control"),
+        "models",
+        "table.sdf",
+    ]
+)
+
+    box_file = PathJoinSubstitution(
+    [
+        FindPackageShare("ur3_moveit_control"),
+        "models",
+        "box.sdf",
+    ]
+)
     robot_description = {
         "robot_description": ParameterValue(robot_description_content, value_type=str)
     }
@@ -183,18 +198,35 @@ def launch_setup(context, *args, **kwargs):
 
     # GZ nodes
     gz_spawn_entity = Node(
-        package="ros_gz_sim",
-        executable="create",
-        output="screen",
-        arguments=[
-            "-string",
-            robot_description_content,
-            "-name",
-            "ur",
-            "-allow_renaming",
-            "true",
-        ],
-    )
+    package="ros_gz_sim",
+    executable="create",
+    output="screen",
+    arguments=[
+        "-string", robot_description_content,
+        "-name", "ur",
+        "-allow_renaming", "true",
+        "-x", "0.3",
+        "-y", "0.0",
+        "-z", "0.775",
+    ],
+)
+    gz_spawn_table = Node(
+    package="ros_gz_sim",
+    executable="create",
+    output="screen",
+    arguments=[
+        "-file",
+        table_file,
+        "-name",
+        "table",
+        "-x",
+        "0.6",
+        "-y",
+        "0.0",
+        "-z",
+        "0.0",
+    ],
+)
     gz_launch_description_with_gui = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
@@ -210,6 +242,24 @@ def launch_setup(context, *args, **kwargs):
         launch_arguments={"gz_args": [" -s -r -v 4 ", world_file]}.items(),
         condition=UnlessCondition(gazebo_gui),
     )
+
+    gz_spawn_box = Node(
+    package="ros_gz_sim",
+    executable="create",
+    output="screen",
+    arguments=[
+        "-file",
+        box_file,
+        "-name",
+        "pick_box",
+        "-x",
+        "0.6",
+        "-y",
+        "0.0",
+        "-z",
+        "0.83",
+    ],
+)
 
     # Make the /clock topic available in ROS
     gz_sim_bridge = Node(
@@ -234,6 +284,8 @@ def launch_setup(context, *args, **kwargs):
         gz_launch_description_without_gui,
         gz_sim_bridge,
         gripper_controller_spawner,
+        gz_spawn_table,
+        gz_spawn_box,
     ]
 
     return nodes_to_start

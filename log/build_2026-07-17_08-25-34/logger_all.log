@@ -1,0 +1,995 @@
+[0.195s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--executor', 'sequential', '--event-handlers', 'console_direct+']
+[0.195s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='sequential', parallel_workers=16, event_handlers=['console_direct+'], ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7f72d783f7c0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f72d783f0a0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f72d783f0a0>>, mixin_verb=('build',))
+[0.363s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.363s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.363s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.363s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.363s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.363s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.363s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/com9/uet_ws'
+[0.363s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.372s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extensions ['ignore', 'ignore_ament_install']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'ignore'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'ignore_ament_install'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extensions ['colcon_pkg']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'colcon_pkg'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extensions ['colcon_meta']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'colcon_meta'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extensions ['ros']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'ros'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extensions ['cmake', 'python']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'cmake'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'python'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extensions ['python_setup_py']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver) by extension 'python_setup_py'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extensions ['ignore', 'ignore_ament_install']
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extension 'ignore'
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extension 'ignore_ament_install'
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extensions ['colcon_pkg']
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extension 'colcon_pkg'
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extensions ['colcon_meta']
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extension 'colcon_meta'
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extensions ['ros']
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur) by extension 'ros'
+[0.375s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur' with type 'ros.ament_cmake' and name 'ur'
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extension 'ignore'
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extension 'ignore_ament_install'
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extensions ['colcon_pkg']
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extension 'colcon_pkg'
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extensions ['colcon_meta']
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extension 'colcon_meta'
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extensions ['ros']
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_bringup) by extension 'ros'
+[0.377s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur_bringup' with type 'ros.ament_cmake' and name 'ur_bringup'
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extensions ['ignore', 'ignore_ament_install']
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extension 'ignore'
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extension 'ignore_ament_install'
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extensions ['colcon_pkg']
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extension 'colcon_pkg'
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extensions ['colcon_meta']
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extension 'colcon_meta'
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extensions ['ros']
+[0.377s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_calibration) by extension 'ros'
+[0.378s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur_calibration' with type 'ros.ament_cmake' and name 'ur_calibration'
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extensions ['ignore', 'ignore_ament_install']
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extension 'ignore'
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extension 'ignore_ament_install'
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extensions ['colcon_pkg']
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extension 'colcon_pkg'
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extensions ['colcon_meta']
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extension 'colcon_meta'
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extensions ['ros']
+[0.378s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_controllers) by extension 'ros'
+[0.380s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur_controllers' with type 'ros.ament_cmake' and name 'ur_controllers'
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extension 'ignore'
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extension 'ignore_ament_install'
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extensions ['colcon_pkg']
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extension 'colcon_pkg'
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extensions ['colcon_meta']
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extension 'colcon_meta'
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extensions ['ros']
+[0.380s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs) by extension 'ros'
+[0.380s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs' with type 'ros.ament_cmake' and name 'ur_dashboard_msgs'
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extensions ['ignore', 'ignore_ament_install']
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extension 'ignore'
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extension 'ignore_ament_install'
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extensions ['colcon_pkg']
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extension 'colcon_pkg'
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extensions ['colcon_meta']
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extension 'colcon_meta'
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extensions ['ros']
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_moveit_config) by extension 'ros'
+[0.381s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur_moveit_config' with type 'ros.ament_cmake' and name 'ur_moveit_config'
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extensions ['ignore', 'ignore_ament_install']
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extension 'ignore'
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extension 'ignore_ament_install'
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extensions ['colcon_pkg']
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extension 'colcon_pkg'
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extensions ['colcon_meta']
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extension 'colcon_meta'
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extensions ['ros']
+[0.382s] Level 1:colcon.colcon_core.package_identification:_identify(src/Universal_Robots_ROS2_Driver/ur_robot_driver) by extension 'ros'
+[0.388s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Universal_Robots_ROS2_Driver/ur_robot_driver' with type 'ros.ament_cmake' and name 'ur_robot_driver'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extensions ['ignore', 'ignore_ament_install']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'ignore'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'ignore_ament_install'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extensions ['colcon_pkg']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'colcon_pkg'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extensions ['colcon_meta']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'colcon_meta'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extensions ['ros']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'ros'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extensions ['cmake', 'python']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'cmake'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'python'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extensions ['python_setup_py']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f) by extension 'python_setup_py'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extensions ['ignore', 'ignore_ament_install']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extension 'ignore'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extension 'ignore_ament_install'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extensions ['colcon_pkg']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extension 'colcon_pkg'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extensions ['colcon_meta']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extension 'colcon_meta'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extensions ['ros']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_control) by extension 'ros'
+[0.389s] DEBUG:colcon.colcon_core.package_identification:Package 'src/susgrip_2f/susgrip_2f_control' with type 'ros.ament_python' and name 'susgrip_2f_control'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extensions ['ignore', 'ignore_ament_install']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extension 'ignore'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extension 'ignore_ament_install'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extensions ['colcon_pkg']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extension 'colcon_pkg'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extensions ['colcon_meta']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extension 'colcon_meta'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extensions ['ros']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_description) by extension 'ros'
+[0.390s] DEBUG:colcon.colcon_core.package_identification:Package 'src/susgrip_2f/susgrip_2f_description' with type 'ros.ament_python' and name 'susgrip_2f_description'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extension 'ignore'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extension 'ignore_ament_install'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extensions ['colcon_pkg']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extension 'colcon_pkg'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extensions ['colcon_meta']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extension 'colcon_meta'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extensions ['ros']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_gazebo) by extension 'ros'
+[0.392s] DEBUG:colcon.colcon_core.package_identification:Package 'src/susgrip_2f/susgrip_2f_gazebo' with type 'ros.ament_python' and name 'susgrip_2f_gazebo'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extensions ['ignore', 'ignore_ament_install']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extension 'ignore'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extension 'ignore_ament_install'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extensions ['colcon_pkg']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extension 'colcon_pkg'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extensions ['colcon_meta']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extension 'colcon_meta'
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extensions ['ros']
+[0.392s] Level 1:colcon.colcon_core.package_identification:_identify(src/susgrip_2f/susgrip_2f_hardware) by extension 'ros'
+[0.393s] DEBUG:colcon.colcon_core.package_identification:Package 'src/susgrip_2f/susgrip_2f_hardware' with type 'ros.ament_python' and name 'susgrip_2f_hardware'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extensions ['ignore', 'ignore_ament_install']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extension 'ignore'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extension 'ignore_ament_install'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extensions ['colcon_pkg']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extension 'colcon_pkg'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extensions ['colcon_meta']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extension 'colcon_meta'
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extensions ['ros']
+[0.393s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur3_moveit_control) by extension 'ros'
+[0.394s] DEBUG:colcon.colcon_core.package_identification:Package 'src/ur3_moveit_control' with type 'ros.ament_cmake' and name 'ur3_moveit_control'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extensions ['ignore', 'ignore_ament_install']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extension 'ignore'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extension 'ignore_ament_install'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extensions ['colcon_pkg']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extension 'colcon_pkg'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extensions ['colcon_meta']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extension 'colcon_meta'
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extensions ['ros']
+[0.394s] Level 1:colcon.colcon_core.package_identification:_identify(src/ur_simulation_gz) by extension 'ros'
+[0.394s] DEBUG:colcon.colcon_core.package_identification:Package 'src/ur_simulation_gz' with type 'ros.ament_cmake' and name 'ur_simulation_gz'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extensions ['ignore', 'ignore_ament_install']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'ignore'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'ignore_ament_install'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extensions ['colcon_pkg']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'colcon_pkg'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extensions ['colcon_meta']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'colcon_meta'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extensions ['ros']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'ros'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extensions ['cmake', 'python']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'cmake'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'python'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extensions ['python_setup_py']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f) by extension 'python_setup_py'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extensions ['ignore', 'ignore_ament_install']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'ignore'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'ignore_ament_install'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extensions ['colcon_pkg']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'colcon_pkg'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extensions ['colcon_meta']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'colcon_meta'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extensions ['ros']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'ros'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extensions ['cmake', 'python']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'cmake'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'python'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extensions ['python_setup_py']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware) by extension 'python_setup_py'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extensions ['ignore', 'ignore_ament_install']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'ignore'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'ignore_ament_install'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extensions ['colcon_pkg']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'colcon_pkg'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extensions ['colcon_meta']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'colcon_meta'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extensions ['ros']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'ros'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extensions ['cmake', 'python']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'cmake'
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'python'
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extensions ['python_setup_py']
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(susgrip_2f/susgrip_2f_hardware/susgrip_2f_hardware) by extension 'python_setup_py'
+[0.396s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.396s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.396s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.396s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.396s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.417s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.417s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.424s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 13 installed packages in /home/com9/uet_ws/install
+[0.425s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 383 installed packages in /opt/ros/humble
+[0.427s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'cmake_args' from command line to 'None'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'cmake_target' from command line to 'None'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.498s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.498s] DEBUG:colcon.colcon_core.verb:Building package 'susgrip_2f_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/susgrip_2f_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/susgrip_2f_control', 'merge_install': False, 'path': '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control', 'symlink_install': False, 'test_result_base': None}
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'cmake_target' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.499s] DEBUG:colcon.colcon_core.verb:Building package 'susgrip_2f_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/susgrip_2f_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/susgrip_2f_description', 'merge_install': False, 'path': '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_description', 'symlink_install': False, 'test_result_base': None}
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'cmake_target' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'cmake_clean_cache' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'cmake_clean_first' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'cmake_force_configure' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'ament_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'catkin_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_hardware' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.499s] DEBUG:colcon.colcon_core.verb:Building package 'susgrip_2f_hardware' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/susgrip_2f_hardware', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/susgrip_2f_hardware', 'merge_install': False, 'path': '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_hardware', 'symlink_install': False, 'test_result_base': None}
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'cmake_target' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur3_moveit_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.499s] DEBUG:colcon.colcon_core.verb:Building package 'ur3_moveit_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur3_moveit_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur3_moveit_control', 'merge_install': False, 'path': '/home/com9/uet_ws/src/ur3_moveit_control', 'symlink_install': False, 'test_result_base': None}
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'cmake_target' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.499s] Level 5:colcon.colcon_core.verb:set package 'ur_dashboard_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.499s] DEBUG:colcon.colcon_core.verb:Building package 'ur_dashboard_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_dashboard_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_dashboard_msgs', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'cmake_target' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'cmake_clean_cache' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'cmake_clean_first' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'cmake_force_configure' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'ament_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'catkin_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_moveit_config' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.500s] DEBUG:colcon.colcon_core.verb:Building package 'ur_moveit_config' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_moveit_config', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_moveit_config', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_moveit_config', 'symlink_install': False, 'test_result_base': None}
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'cmake_target' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'cmake_clean_first' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'cmake_force_configure' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'ament_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'susgrip_2f_gazebo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.500s] DEBUG:colcon.colcon_core.verb:Building package 'susgrip_2f_gazebo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/susgrip_2f_gazebo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/susgrip_2f_gazebo', 'merge_install': False, 'path': '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo', 'symlink_install': False, 'test_result_base': None}
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'cmake_target' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'cmake_clean_cache' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'cmake_clean_first' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'cmake_force_configure' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'ament_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'catkin_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_controllers' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.500s] DEBUG:colcon.colcon_core.verb:Building package 'ur_controllers' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_controllers', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_controllers', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_controllers', 'symlink_install': False, 'test_result_base': None}
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'cmake_target' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.500s] Level 5:colcon.colcon_core.verb:set package 'ur_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.500s] DEBUG:colcon.colcon_core.verb:Building package 'ur_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_bringup', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_bringup', 'symlink_install': False, 'test_result_base': None}
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'cmake_target' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'cmake_clean_cache' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'cmake_clean_first' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'cmake_force_configure' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'ament_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'catkin_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_robot_driver' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.501s] DEBUG:colcon.colcon_core.verb:Building package 'ur_robot_driver' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_robot_driver', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_robot_driver', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_robot_driver', 'symlink_install': False, 'test_result_base': None}
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'cmake_target' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'cmake_clean_cache' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'cmake_clean_first' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'cmake_force_configure' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'ament_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'catkin_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_simulation_gz' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.501s] DEBUG:colcon.colcon_core.verb:Building package 'ur_simulation_gz' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_simulation_gz', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_simulation_gz', 'merge_install': False, 'path': '/home/com9/uet_ws/src/ur_simulation_gz', 'symlink_install': False, 'test_result_base': None}
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'cmake_target' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'cmake_clean_cache' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'cmake_clean_first' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'cmake_force_configure' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'ament_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'catkin_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur_calibration' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.501s] DEBUG:colcon.colcon_core.verb:Building package 'ur_calibration' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur_calibration', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur_calibration', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_calibration', 'symlink_install': False, 'test_result_base': None}
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'cmake_target' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'cmake_clean_cache' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'cmake_clean_first' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'cmake_force_configure' from command line to 'False'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'ament_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'catkin_cmake_args' from command line to 'None'
+[0.501s] Level 5:colcon.colcon_core.verb:set package 'ur' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.501s] DEBUG:colcon.colcon_core.verb:Building package 'ur' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/com9/uet_ws/build/ur', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/com9/uet_ws/install/ur', 'merge_install': False, 'path': '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur', 'symlink_install': False, 'test_result_base': None}
+[0.502s] INFO:colcon.colcon_core.executor:Executing jobs using 'sequential' executor
+[0.502s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_control'
+[0.502s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control' with build type 'ament_python'
+[0.502s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_control', 'ament_prefix_path')
+[0.506s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.506s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/hook/ament_prefix_path.ps1'
+[0.506s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/hook/ament_prefix_path.dsv'
+[0.507s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/hook/ament_prefix_path.sh'
+[0.507s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.507s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.642s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control'
+[0.642s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.642s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.884s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: sdist, bdist_egg, compile_catalog, init_catalog, test, install_data, build, saveopts, easy_install, upload_docs, check, install, build_scripts, update_catalog, alias, bdist_dumb, install_egg_info, register, bdist, extract_messages, install_lib, bdist_rpm, rotate, develop, build_ext, upload, install_headers, clean, install_scripts, egg_info, build_clib, symlink_data, setopt, build_py, dist_info
+[0.885s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_control build --build-base /home/com9/uet_ws/build/susgrip_2f_control/build install --record /home/com9/uet_ws/build/susgrip_2f_control/install.log --install-scripts $base/lib/susgrip_2f_control --single-version-externally-managed install_data
+[1.037s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_control' returned '0': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_control build --build-base /home/com9/uet_ws/build/susgrip_2f_control/build install --record /home/com9/uet_ws/build/susgrip_2f_control/install.log --install-scripts $base/lib/susgrip_2f_control --single-version-externally-managed install_data
+[1.041s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control' for CMake module files
+[1.041s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control' for CMake config files
+[1.042s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control/lib'
+[1.042s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control/bin'
+[1.042s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control/lib/pkgconfig/susgrip_2f_control.pc'
+[1.042s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages'
+[1.042s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_control', 'pythonpath')
+[1.042s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/hook/pythonpath.ps1'
+[1.042s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/hook/pythonpath.dsv'
+[1.043s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/hook/pythonpath.sh'
+[1.043s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_control/bin'
+[1.043s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(susgrip_2f_control)
+[1.043s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/package.ps1'
+[1.044s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/package.dsv'
+[1.045s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/package.sh'
+[1.045s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/package.bash'
+[1.046s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_control/share/susgrip_2f_control/package.zsh'
+[1.046s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/susgrip_2f_control/share/colcon-core/packages/susgrip_2f_control)
+[1.046s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_control' finished with '0'
+[1.046s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_description'
+[1.046s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_description' with build type 'ament_python'
+[1.046s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_description', 'ament_prefix_path')
+[1.047s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/hook/ament_prefix_path.ps1'
+[1.047s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/hook/ament_prefix_path.dsv'
+[1.047s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/hook/ament_prefix_path.sh'
+[1.048s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.048s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.182s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_description'
+[1.182s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.182s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.368s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: sdist, bdist_egg, compile_catalog, init_catalog, test, install_data, build, saveopts, easy_install, upload_docs, check, install, build_scripts, update_catalog, alias, bdist_dumb, install_egg_info, register, bdist, extract_messages, install_lib, bdist_rpm, rotate, develop, build_ext, upload, install_headers, clean, install_scripts, egg_info, build_clib, symlink_data, setopt, build_py, dist_info
+[1.370s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_description': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_description build --build-base /home/com9/uet_ws/build/susgrip_2f_description/build install --record /home/com9/uet_ws/build/susgrip_2f_description/install.log --install-scripts $base/lib/susgrip_2f_description --single-version-externally-managed install_data
+[1.527s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description' for CMake module files
+[1.527s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_description' returned '0': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_description build --build-base /home/com9/uet_ws/build/susgrip_2f_description/build install --record /home/com9/uet_ws/build/susgrip_2f_description/install.log --install-scripts $base/lib/susgrip_2f_description --single-version-externally-managed install_data
+[1.527s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description' for CMake config files
+[1.528s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description/lib'
+[1.528s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description/bin'
+[1.528s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description/lib/pkgconfig/susgrip_2f_description.pc'
+[1.529s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages'
+[1.529s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_description', 'pythonpath')
+[1.529s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/hook/pythonpath.ps1'
+[1.529s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/hook/pythonpath.dsv'
+[1.529s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/hook/pythonpath.sh'
+[1.529s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_description/bin'
+[1.530s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(susgrip_2f_description)
+[1.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/package.ps1'
+[1.530s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/package.dsv'
+[1.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/package.sh'
+[1.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/package.bash'
+[1.531s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/package.zsh'
+[1.531s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/susgrip_2f_description/share/colcon-core/packages/susgrip_2f_description)
+[1.531s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_description' finished with '0'
+[1.531s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_hardware'
+[1.531s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_hardware' with build type 'ament_python'
+[1.531s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_hardware', 'ament_prefix_path')
+[1.531s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/hook/ament_prefix_path.ps1'
+[1.532s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/hook/ament_prefix_path.dsv'
+[1.532s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/hook/ament_prefix_path.sh'
+[1.532s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.532s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.672s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_hardware'
+[1.672s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.672s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.855s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: sdist, bdist_egg, compile_catalog, init_catalog, test, install_data, build, saveopts, easy_install, upload_docs, check, install, build_scripts, update_catalog, alias, bdist_dumb, install_egg_info, register, bdist, extract_messages, install_lib, bdist_rpm, rotate, develop, build_ext, upload, install_headers, clean, install_scripts, egg_info, build_clib, symlink_data, setopt, build_py, dist_info
+[1.857s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_hardware': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_hardware/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_hardware build --build-base /home/com9/uet_ws/build/susgrip_2f_hardware/build install --record /home/com9/uet_ws/build/susgrip_2f_hardware/install.log --install-scripts $base/lib/susgrip_2f_hardware --single-version-externally-managed install_data
+[2.012s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware' for CMake module files
+[2.012s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_hardware' returned '0': PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_hardware/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_hardware build --build-base /home/com9/uet_ws/build/susgrip_2f_hardware/build install --record /home/com9/uet_ws/build/susgrip_2f_hardware/install.log --install-scripts $base/lib/susgrip_2f_hardware --single-version-externally-managed install_data
+[2.012s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware' for CMake config files
+[2.013s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware/lib'
+[2.013s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware/bin'
+[2.013s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware/lib/pkgconfig/susgrip_2f_hardware.pc'
+[2.013s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages'
+[2.013s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_hardware', 'pythonpath')
+[2.013s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/hook/pythonpath.ps1'
+[2.013s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/hook/pythonpath.dsv'
+[2.013s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/hook/pythonpath.sh'
+[2.014s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_hardware/bin'
+[2.014s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(susgrip_2f_hardware)
+[2.014s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/package.ps1'
+[2.014s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/package.dsv'
+[2.015s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/package.sh'
+[2.015s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/package.bash'
+[2.015s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_hardware/share/susgrip_2f_hardware/package.zsh'
+[2.015s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/susgrip_2f_hardware/share/colcon-core/packages/susgrip_2f_hardware)
+[2.015s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_hardware' finished with '0'
+[2.015s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur3_moveit_control'
+[2.015s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/ur3_moveit_control' with build type 'ament_cmake'
+[2.015s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/ur3_moveit_control'
+[2.015s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.016s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.022s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control
+[2.662s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control
+[2.668s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur3_moveit_control
+[2.717s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur3_moveit_control)
+[2.717s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control' for CMake module files
+[2.717s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur3_moveit_control
+[2.718s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control' for CMake config files
+[2.718s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur3_moveit_control', 'cmake_prefix_path')
+[2.719s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/cmake_prefix_path.ps1'
+[2.719s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/cmake_prefix_path.dsv'
+[2.719s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/cmake_prefix_path.sh'
+[2.719s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/lib'
+[2.720s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur3_moveit_control', 'ld_library_path_lib')
+[2.720s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/ld_library_path_lib.ps1'
+[2.720s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/ld_library_path_lib.dsv'
+[2.720s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/ld_library_path_lib.sh'
+[2.720s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/bin'
+[2.720s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/lib/pkgconfig/ur3_moveit_control.pc'
+[2.720s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/lib/python3.10/site-packages'
+[2.721s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/bin'
+[2.721s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.ps1'
+[2.721s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.dsv'
+[2.721s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.sh'
+[2.722s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.bash'
+[2.722s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.zsh'
+[2.722s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur3_moveit_control/share/colcon-core/packages/ur3_moveit_control)
+[2.722s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur3_moveit_control)
+[2.722s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control' for CMake module files
+[2.723s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control' for CMake config files
+[2.723s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur3_moveit_control', 'cmake_prefix_path')
+[2.723s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/cmake_prefix_path.ps1'
+[2.723s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/cmake_prefix_path.dsv'
+[2.723s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/cmake_prefix_path.sh'
+[2.724s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/lib'
+[2.724s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur3_moveit_control', 'ld_library_path_lib')
+[2.724s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/ld_library_path_lib.ps1'
+[2.724s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/ld_library_path_lib.dsv'
+[2.724s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/hook/ld_library_path_lib.sh'
+[2.725s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/bin'
+[2.725s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/lib/pkgconfig/ur3_moveit_control.pc'
+[2.725s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/lib/python3.10/site-packages'
+[2.725s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur3_moveit_control/bin'
+[2.725s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.ps1'
+[2.726s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.dsv'
+[2.726s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.sh'
+[2.726s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.bash'
+[2.726s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.zsh'
+[2.726s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur3_moveit_control/share/colcon-core/packages/ur3_moveit_control)
+[2.726s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur3_moveit_control' finished with '0'
+[2.727s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_dashboard_msgs'
+[2.727s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs' with build type 'ament_cmake'
+[2.727s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_dashboard_msgs'
+[2.727s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.727s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.733s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_dashboard_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_dashboard_msgs
+[3.288s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_dashboard_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_dashboard_msgs
+[3.289s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_dashboard_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_dashboard_msgs
+[3.357s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_dashboard_msgs)
+[3.358s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs' for CMake module files
+[3.358s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_dashboard_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_dashboard_msgs
+[3.358s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs' for CMake config files
+[3.360s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_dashboard_msgs', 'cmake_prefix_path')
+[3.360s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/cmake_prefix_path.ps1'
+[3.360s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/cmake_prefix_path.dsv'
+[3.360s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/cmake_prefix_path.sh'
+[3.361s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/lib'
+[3.361s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_dashboard_msgs', 'ld_library_path_lib')
+[3.361s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/ld_library_path_lib.ps1'
+[3.361s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/ld_library_path_lib.dsv'
+[3.361s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/ld_library_path_lib.sh'
+[3.361s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/bin'
+[3.361s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/lib/pkgconfig/ur_dashboard_msgs.pc'
+[3.362s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/lib/python3.10/site-packages'
+[3.362s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/bin'
+[3.362s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.ps1'
+[3.362s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.dsv'
+[3.362s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.sh'
+[3.363s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.bash'
+[3.363s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.zsh'
+[3.363s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_dashboard_msgs/share/colcon-core/packages/ur_dashboard_msgs)
+[3.363s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_dashboard_msgs)
+[3.363s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs' for CMake module files
+[3.364s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs' for CMake config files
+[3.364s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_dashboard_msgs', 'cmake_prefix_path')
+[3.364s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/cmake_prefix_path.ps1'
+[3.365s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/cmake_prefix_path.dsv'
+[3.365s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/cmake_prefix_path.sh'
+[3.365s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/lib'
+[3.365s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_dashboard_msgs', 'ld_library_path_lib')
+[3.365s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/ld_library_path_lib.ps1'
+[3.366s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/ld_library_path_lib.dsv'
+[3.366s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/hook/ld_library_path_lib.sh'
+[3.366s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/bin'
+[3.366s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/lib/pkgconfig/ur_dashboard_msgs.pc'
+[3.366s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/lib/python3.10/site-packages'
+[3.366s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_dashboard_msgs/bin'
+[3.366s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.ps1'
+[3.367s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.dsv'
+[3.367s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.sh'
+[3.367s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.bash'
+[3.367s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_dashboard_msgs/share/ur_dashboard_msgs/package.zsh'
+[3.368s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_dashboard_msgs/share/colcon-core/packages/ur_dashboard_msgs)
+[3.368s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_dashboard_msgs' finished with '0'
+[3.368s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_moveit_config'
+[3.368s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_moveit_config' with build type 'ament_cmake'
+[3.368s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_moveit_config'
+[3.368s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.368s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.373s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_moveit_config': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_moveit_config
+[3.575s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_moveit_config' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_moveit_config
+[3.576s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_moveit_config': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_moveit_config
+[3.634s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_moveit_config)
+[3.634s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_moveit_config' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_moveit_config
+[3.635s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config' for CMake module files
+[3.635s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config' for CMake config files
+[3.636s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_moveit_config', 'cmake_prefix_path')
+[3.636s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/hook/cmake_prefix_path.ps1'
+[3.636s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/hook/cmake_prefix_path.dsv'
+[3.637s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/hook/cmake_prefix_path.sh'
+[3.637s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/bin'
+[3.637s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/lib/pkgconfig/ur_moveit_config.pc'
+[3.637s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/lib/python3.10/site-packages'
+[3.637s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/bin'
+[3.637s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.ps1'
+[3.638s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.dsv'
+[3.638s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.sh'
+[3.638s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.bash'
+[3.638s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.zsh'
+[3.638s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_moveit_config/share/colcon-core/packages/ur_moveit_config)
+[3.639s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_moveit_config)
+[3.639s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config' for CMake module files
+[3.639s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config' for CMake config files
+[3.639s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_moveit_config', 'cmake_prefix_path')
+[3.639s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/hook/cmake_prefix_path.ps1'
+[3.639s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/hook/cmake_prefix_path.dsv'
+[3.640s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/hook/cmake_prefix_path.sh'
+[3.640s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/bin'
+[3.640s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/lib/pkgconfig/ur_moveit_config.pc'
+[3.640s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/lib/python3.10/site-packages'
+[3.640s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_moveit_config/bin'
+[3.640s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.ps1'
+[3.641s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.dsv'
+[3.641s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.sh'
+[3.641s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.bash'
+[3.642s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/package.zsh'
+[3.642s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_moveit_config/share/colcon-core/packages/ur_moveit_config)
+[3.642s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_moveit_config' finished with '0'
+[3.642s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_gazebo'
+[3.642s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo' with build type 'ament_python'
+[3.642s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_gazebo', 'ament_prefix_path')
+[3.642s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/hook/ament_prefix_path.ps1'
+[3.643s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/hook/ament_prefix_path.dsv'
+[3.643s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/hook/ament_prefix_path.sh'
+[3.643s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.643s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.783s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo'
+[3.784s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.784s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.963s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: sdist, bdist_egg, compile_catalog, init_catalog, test, install_data, build, saveopts, easy_install, upload_docs, check, install, build_scripts, update_catalog, alias, bdist_dumb, install_egg_info, register, bdist, extract_messages, install_lib, bdist_rpm, rotate, develop, build_ext, upload, install_headers, clean, install_scripts, egg_info, build_clib, symlink_data, setopt, build_py, dist_info
+[3.964s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_gazebo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_gazebo build --build-base /home/com9/uet_ws/build/susgrip_2f_gazebo/build install --record /home/com9/uet_ws/build/susgrip_2f_gazebo/install.log --install-scripts $base/lib/susgrip_2f_gazebo --single-version-externally-managed install_data
+[4.117s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo' for CMake module files
+[4.117s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/src/susgrip_2f/susgrip_2f_gazebo' returned '0': AMENT_PREFIX_PATH=/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble PYTHONPATH=/home/com9/uet_ws/build/susgrip_2f_gazebo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/susgrip_2f_gazebo build --build-base /home/com9/uet_ws/build/susgrip_2f_gazebo/build install --record /home/com9/uet_ws/build/susgrip_2f_gazebo/install.log --install-scripts $base/lib/susgrip_2f_gazebo --single-version-externally-managed install_data
+[4.117s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo' for CMake config files
+[4.117s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo/lib'
+[4.118s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo/bin'
+[4.118s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/pkgconfig/susgrip_2f_gazebo.pc'
+[4.118s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages'
+[4.118s] Level 1:colcon.colcon_core.shell:create_environment_hook('susgrip_2f_gazebo', 'pythonpath')
+[4.118s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/hook/pythonpath.ps1'
+[4.118s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/hook/pythonpath.dsv'
+[4.119s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/hook/pythonpath.sh'
+[4.119s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/susgrip_2f_gazebo/bin'
+[4.119s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(susgrip_2f_gazebo)
+[4.119s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/package.ps1'
+[4.119s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/package.dsv'
+[4.120s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/package.sh'
+[4.120s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/package.bash'
+[4.120s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/susgrip_2f_gazebo/share/susgrip_2f_gazebo/package.zsh'
+[4.120s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/susgrip_2f_gazebo/share/colcon-core/packages/susgrip_2f_gazebo)
+[4.120s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'susgrip_2f_gazebo' finished with '0'
+[4.120s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_controllers'
+[4.120s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_controllers' with build type 'ament_cmake'
+[4.120s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_controllers'
+[4.120s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.120s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.129s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_controllers': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_controllers
+[4.469s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_controllers' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_controllers
+[4.471s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_controllers': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_controllers
+[4.481s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_controllers)
+[4.481s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers' for CMake module files
+[4.481s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_controllers' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_controllers
+[4.482s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers' for CMake config files
+[4.483s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_controllers', 'cmake_prefix_path')
+[4.483s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/cmake_prefix_path.ps1'
+[4.483s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/cmake_prefix_path.dsv'
+[4.483s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/cmake_prefix_path.sh'
+[4.484s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/lib'
+[4.484s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_controllers', 'ld_library_path_lib')
+[4.484s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/ld_library_path_lib.ps1'
+[4.484s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/ld_library_path_lib.dsv'
+[4.484s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/ld_library_path_lib.sh'
+[4.484s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/bin'
+[4.484s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/lib/pkgconfig/ur_controllers.pc'
+[4.485s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/lib/python3.10/site-packages'
+[4.485s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/bin'
+[4.485s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.ps1'
+[4.485s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.dsv'
+[4.485s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.sh'
+[4.486s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.bash'
+[4.486s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.zsh'
+[4.486s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_controllers/share/colcon-core/packages/ur_controllers)
+[4.486s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_controllers)
+[4.486s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers' for CMake module files
+[4.487s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers' for CMake config files
+[4.487s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_controllers', 'cmake_prefix_path')
+[4.487s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/cmake_prefix_path.ps1'
+[4.487s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/cmake_prefix_path.dsv'
+[4.487s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/cmake_prefix_path.sh'
+[4.488s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/lib'
+[4.488s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_controllers', 'ld_library_path_lib')
+[4.488s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/ld_library_path_lib.ps1'
+[4.488s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/ld_library_path_lib.dsv'
+[4.488s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/hook/ld_library_path_lib.sh'
+[4.488s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/bin'
+[4.488s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/lib/pkgconfig/ur_controllers.pc'
+[4.488s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/lib/python3.10/site-packages'
+[4.489s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_controllers/bin'
+[4.489s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.ps1'
+[4.489s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.dsv'
+[4.490s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.sh'
+[4.490s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.bash'
+[4.490s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_controllers/share/ur_controllers/package.zsh'
+[4.490s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_controllers/share/colcon-core/packages/ur_controllers)
+[4.490s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_controllers' finished with '0'
+[4.490s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_bringup'
+[4.490s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_bringup' with build type 'ament_cmake'
+[4.491s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_bringup'
+[4.491s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.491s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.499s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_bringup': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_bringup
+[4.529s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_bringup' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_bringup
+[4.531s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_bringup': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_bringup
+[4.538s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_bringup)
+[4.538s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_bringup' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_bringup
+[4.538s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup' for CMake module files
+[4.538s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup' for CMake config files
+[4.539s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_bringup', 'cmake_prefix_path')
+[4.539s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/hook/cmake_prefix_path.ps1'
+[4.539s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/hook/cmake_prefix_path.dsv'
+[4.539s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/hook/cmake_prefix_path.sh'
+[4.540s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/lib'
+[4.540s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/bin'
+[4.540s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/lib/pkgconfig/ur_bringup.pc'
+[4.540s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/lib/python3.10/site-packages'
+[4.540s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/bin'
+[4.540s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.ps1'
+[4.541s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.dsv'
+[4.541s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.sh'
+[4.541s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.bash'
+[4.541s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.zsh'
+[4.541s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_bringup/share/colcon-core/packages/ur_bringup)
+[4.542s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_bringup)
+[4.542s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup' for CMake module files
+[4.542s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup' for CMake config files
+[4.542s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_bringup', 'cmake_prefix_path')
+[4.542s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/hook/cmake_prefix_path.ps1'
+[4.542s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/hook/cmake_prefix_path.dsv'
+[4.543s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/hook/cmake_prefix_path.sh'
+[4.543s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/lib'
+[4.543s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/bin'
+[4.543s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/lib/pkgconfig/ur_bringup.pc'
+[4.543s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/lib/python3.10/site-packages'
+[4.543s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_bringup/bin'
+[4.543s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.ps1'
+[4.544s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.dsv'
+[4.544s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.sh'
+[4.544s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.bash'
+[4.544s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_bringup/share/ur_bringup/package.zsh'
+[4.544s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_bringup/share/colcon-core/packages/ur_bringup)
+[4.545s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_bringup' finished with '0'
+[4.545s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_robot_driver'
+[4.545s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_robot_driver' with build type 'ament_cmake'
+[4.545s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_robot_driver'
+[4.545s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.545s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.554s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_robot_driver': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_robot_driver
+[4.911s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_robot_driver' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_robot_driver
+[4.913s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_robot_driver': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_robot_driver
+[4.953s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_robot_driver)
+[4.953s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver' for CMake module files
+[4.954s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_robot_driver' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_robot_driver
+[4.954s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver' for CMake config files
+[4.955s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'cmake_prefix_path')
+[4.955s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/cmake_prefix_path.ps1'
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/cmake_prefix_path.dsv'
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/cmake_prefix_path.sh'
+[4.956s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/lib'
+[4.956s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'ld_library_path_lib')
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/ld_library_path_lib.ps1'
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/ld_library_path_lib.dsv'
+[4.957s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/ld_library_path_lib.sh'
+[4.957s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/bin'
+[4.957s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'path')
+[4.957s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/path.ps1'
+[4.957s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/path.dsv'
+[4.957s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/path.sh'
+[4.957s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/lib/pkgconfig/ur_robot_driver.pc'
+[4.958s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/lib/python3.10/site-packages'
+[4.958s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/bin'
+[4.958s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'pythonscriptspath')
+[4.958s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/pythonscriptspath.ps1'
+[4.958s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/pythonscriptspath.dsv'
+[4.958s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/pythonscriptspath.sh'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.ps1'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.dsv'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.sh'
+[4.960s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.bash'
+[4.960s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.zsh'
+[4.960s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_robot_driver/share/colcon-core/packages/ur_robot_driver)
+[4.960s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_robot_driver)
+[4.960s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver' for CMake module files
+[4.961s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver' for CMake config files
+[4.961s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'cmake_prefix_path')
+[4.961s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/cmake_prefix_path.ps1'
+[4.961s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/cmake_prefix_path.dsv'
+[4.961s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/cmake_prefix_path.sh'
+[4.962s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/lib'
+[4.962s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'ld_library_path_lib')
+[4.962s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/ld_library_path_lib.ps1'
+[4.962s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/ld_library_path_lib.dsv'
+[4.962s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/ld_library_path_lib.sh'
+[4.963s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/bin'
+[4.963s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'path')
+[4.963s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/path.ps1'
+[4.963s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/path.dsv'
+[4.963s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/path.sh'
+[4.963s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/lib/pkgconfig/ur_robot_driver.pc'
+[4.963s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/lib/python3.10/site-packages'
+[4.964s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_robot_driver/bin'
+[4.964s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_robot_driver', 'pythonscriptspath')
+[4.964s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/pythonscriptspath.ps1'
+[4.964s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/pythonscriptspath.dsv'
+[4.964s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/hook/pythonscriptspath.sh'
+[4.964s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.ps1'
+[4.965s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.dsv'
+[4.965s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.sh'
+[4.965s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.bash'
+[4.966s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_robot_driver/share/ur_robot_driver/package.zsh'
+[4.966s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_robot_driver/share/colcon-core/packages/ur_robot_driver)
+[4.966s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_robot_driver' finished with '0'
+[4.966s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_simulation_gz'
+[4.966s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/ur_simulation_gz' with build type 'ament_cmake'
+[4.966s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/ur_simulation_gz'
+[4.966s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.966s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.976s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_simulation_gz': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_simulation_gz
+[5.003s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_simulation_gz' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/com9/uet_ws/build/ur_simulation_gz
+[5.004s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_simulation_gz': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_simulation_gz
+[5.012s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_simulation_gz)
+[5.012s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz' for CMake module files
+[5.012s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_simulation_gz' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble LD_LIBRARY_PATH=/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/com9/uet_ws/build/ur_simulation_gz
+[5.013s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz' for CMake config files
+[5.013s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_simulation_gz', 'cmake_prefix_path')
+[5.013s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/hook/cmake_prefix_path.ps1'
+[5.013s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/hook/cmake_prefix_path.dsv'
+[5.014s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/hook/cmake_prefix_path.sh'
+[5.014s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/lib'
+[5.014s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/bin'
+[5.014s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/lib/pkgconfig/ur_simulation_gz.pc'
+[5.014s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/lib/python3.10/site-packages'
+[5.014s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/bin'
+[5.014s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.ps1'
+[5.015s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.dsv'
+[5.015s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.sh'
+[5.015s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.bash'
+[5.015s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.zsh'
+[5.016s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_simulation_gz/share/colcon-core/packages/ur_simulation_gz)
+[5.016s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_simulation_gz)
+[5.016s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz' for CMake module files
+[5.016s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz' for CMake config files
+[5.016s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_simulation_gz', 'cmake_prefix_path')
+[5.016s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/hook/cmake_prefix_path.ps1'
+[5.017s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/hook/cmake_prefix_path.dsv'
+[5.017s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/hook/cmake_prefix_path.sh'
+[5.017s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/lib'
+[5.017s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/bin'
+[5.017s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/lib/pkgconfig/ur_simulation_gz.pc'
+[5.017s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/lib/python3.10/site-packages'
+[5.017s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_simulation_gz/bin'
+[5.018s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.ps1'
+[5.018s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.dsv'
+[5.018s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.sh'
+[5.018s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.bash'
+[5.018s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.zsh'
+[5.019s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_simulation_gz/share/colcon-core/packages/ur_simulation_gz)
+[5.019s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_simulation_gz' finished with '0'
+[5.019s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_calibration'
+[5.019s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_calibration' with build type 'ament_cmake'
+[5.019s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur_calibration'
+[5.019s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[5.019s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[5.030s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_calibration': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_calibration
+[5.161s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_calibration' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_calibration
+[5.163s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur_calibration': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_calibration
+[5.173s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_calibration)
+[5.173s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur_calibration' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_calibration
+[5.173s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration' for CMake module files
+[5.173s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration' for CMake config files
+[5.173s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_calibration', 'cmake_prefix_path')
+[5.174s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/hook/cmake_prefix_path.ps1'
+[5.174s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/hook/cmake_prefix_path.dsv'
+[5.174s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/hook/cmake_prefix_path.sh'
+[5.175s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/lib'
+[5.175s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/bin'
+[5.175s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/lib/pkgconfig/ur_calibration.pc'
+[5.175s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/lib/python3.10/site-packages'
+[5.175s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/bin'
+[5.175s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.ps1'
+[5.176s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.dsv'
+[5.176s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.sh'
+[5.176s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.bash'
+[5.176s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.zsh'
+[5.177s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_calibration/share/colcon-core/packages/ur_calibration)
+[5.177s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur_calibration)
+[5.177s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration' for CMake module files
+[5.177s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration' for CMake config files
+[5.177s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur_calibration', 'cmake_prefix_path')
+[5.177s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/hook/cmake_prefix_path.ps1'
+[5.178s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/hook/cmake_prefix_path.dsv'
+[5.178s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/hook/cmake_prefix_path.sh'
+[5.178s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/lib'
+[5.178s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/bin'
+[5.178s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/lib/pkgconfig/ur_calibration.pc'
+[5.178s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/lib/python3.10/site-packages'
+[5.179s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur_calibration/bin'
+[5.179s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.ps1'
+[5.179s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.dsv'
+[5.179s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.sh'
+[5.179s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.bash'
+[5.180s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur_calibration/share/ur_calibration/package.zsh'
+[5.180s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur_calibration/share/colcon-core/packages/ur_calibration)
+[5.180s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur_calibration' finished with '0'
+[5.180s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur'
+[5.180s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur' with build type 'ament_cmake'
+[5.180s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/com9/uet_ws/src/Universal_Robots_ROS2_Driver/ur'
+[5.180s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[5.180s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[5.192s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur
+[5.220s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur
+[5.222s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/com9/uet_ws/build/ur': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur
+[5.230s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur)
+[5.231s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur' for CMake module files
+[5.231s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/com9/uet_ws/build/ur' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur
+[5.231s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur' for CMake config files
+[5.231s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur', 'cmake_prefix_path')
+[5.231s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur/share/ur/hook/cmake_prefix_path.ps1'
+[5.232s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur/share/ur/hook/cmake_prefix_path.dsv'
+[5.232s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur/share/ur/hook/cmake_prefix_path.sh'
+[5.232s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/bin'
+[5.232s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/lib/pkgconfig/ur.pc'
+[5.232s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/lib/python3.10/site-packages'
+[5.232s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/bin'
+[5.233s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.ps1'
+[5.233s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur/share/ur/package.dsv'
+[5.233s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.sh'
+[5.233s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.bash'
+[5.233s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.zsh'
+[5.234s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur/share/colcon-core/packages/ur)
+[5.234s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ur)
+[5.234s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur' for CMake module files
+[5.234s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur' for CMake config files
+[5.234s] Level 1:colcon.colcon_core.shell:create_environment_hook('ur', 'cmake_prefix_path')
+[5.234s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur/share/ur/hook/cmake_prefix_path.ps1'
+[5.235s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/com9/uet_ws/install/ur/share/ur/hook/cmake_prefix_path.dsv'
+[5.235s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/com9/uet_ws/install/ur/share/ur/hook/cmake_prefix_path.sh'
+[5.235s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/bin'
+[5.235s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/lib/pkgconfig/ur.pc'
+[5.235s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/lib/python3.10/site-packages'
+[5.235s] Level 1:colcon.colcon_core.environment:checking '/home/com9/uet_ws/install/ur/bin'
+[5.236s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.ps1'
+[5.236s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/com9/uet_ws/install/ur/share/ur/package.dsv'
+[5.236s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.sh'
+[5.236s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.bash'
+[5.236s] INFO:colcon.colcon_core.shell:Creating package script '/home/com9/uet_ws/install/ur/share/ur/package.zsh'
+[5.237s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/com9/uet_ws/install/ur/share/colcon-core/packages/ur)
+[5.237s] DEBUG:colcon.colcon_core.executor.sequential:run_until_complete 'ur' finished with '0'
+[5.237s] DEBUG:colcon.colcon_core.executor.sequential:closing loop
+[5.237s] DEBUG:colcon.colcon_core.executor.sequential:loop closed
+[5.237s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[5.245s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[5.245s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[5.245s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[5.252s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[5.252s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/com9/uet_ws/install/local_setup.ps1'
+[5.253s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/com9/uet_ws/install/_local_setup_util_ps1.py'
+[5.254s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/com9/uet_ws/install/setup.ps1'
+[5.255s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/com9/uet_ws/install/local_setup.sh'
+[5.256s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/com9/uet_ws/install/_local_setup_util_sh.py'
+[5.256s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/com9/uet_ws/install/setup.sh'
+[5.257s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/com9/uet_ws/install/local_setup.bash'
+[5.257s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/com9/uet_ws/install/setup.bash'
+[5.258s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/com9/uet_ws/install/local_setup.zsh'
+[5.258s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/com9/uet_ws/install/setup.zsh'

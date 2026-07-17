@@ -425,6 +425,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/com9/uet_ws/src/ur3_moveit_control/urdf"
     "/home/com9/uet_ws/src/ur3_moveit_control/srdf"
     "/home/com9/uet_ws/src/ur3_moveit_control/rviz"
+    "/home/com9/uet_ws/src/ur3_moveit_control/models"
     )
 endif()
 
