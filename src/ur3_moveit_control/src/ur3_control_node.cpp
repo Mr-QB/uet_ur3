@@ -34,6 +34,7 @@ public:
       std::bind(&UR3ControlNode::handle_accepted, this, std::placeholders::_1));
 
     ur3_motion_->addTableObstacle();
+    ur3_motion_->addPickBoxObstacle();
 
     depth_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
       "/camera/camera/depth/image_rect_raw",
@@ -134,6 +135,16 @@ private:
       success = ur3_motion_->moveToJointGoal(goal->joint_goal.position);
     } else if (goal->command_type == UR3Control::Goal::MOVE_POSE) {
       success = ur3_motion_->moveToPoseGoal(goal->pose_goal.pose);
+    } else if (goal->command_type == UR3Control::Goal::ATTACH_AND_LIFT) {
+      feedback->state = "Attaching pick_box to gripper_tcp";
+      goal_handle->publish_feedback(feedback);
+
+      const bool attached = ur3_motion_->attachPickBox();
+      if (attached) {
+        feedback->state = "Executing Cartesian lift";
+        goal_handle->publish_feedback(feedback);
+        success = ur3_motion_->moveCartesianZ(goal->cartesian_z_offset);
+      }
     } else {
       RCLCPP_ERROR(this->get_logger(), "Invalid command type!");
     }

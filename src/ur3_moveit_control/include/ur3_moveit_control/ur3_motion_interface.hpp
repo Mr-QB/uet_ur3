@@ -28,9 +28,15 @@ public:
 
   bool moveHome();
 
+  bool attachPickBox();
+
+  bool moveCartesianZ(double z_offset);
+
   void stop();
 
   void addTableObstacle();
+
+  void addPickBoxObstacle();
 
   void calibObjectHeightEyeInHand(double depth_m, double camera_z_mount_offset);
 

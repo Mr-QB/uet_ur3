@@ -1,0 +1,195 @@
+[0.005s] Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control
+[0.114s] [  2%] Built target ur3_moveit_control__rs
+[0.137s] [ 11%] Built target ur3_moveit_control__rosidl_generator_c
+[0.157s] [ 19%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_c
+[0.171s] [ 22%] Built target ur3_moveit_control__cpp
+[0.189s] [ 30%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_cpp
+[0.205s] [ 38%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c
+[0.220s] [ 47%] Built target ur3_moveit_control__rosidl_typesupport_c
+[0.238s] [ 55%] Built target ur3_moveit_control__rosidl_typesupport_introspection_cpp
+[0.256s] [ 63%] Built target ur3_moveit_control__rosidl_typesupport_cpp
+[0.271s] [ 63%] Built target ur3_moveit_control
+[0.292s] [ 63%] Built target ament_cmake_python_copy_ur3_moveit_control
+[0.421s] running egg_info
+[0.422s] writing ur3_moveit_control.egg-info/PKG-INFO
+[0.422s] writing dependency_links to ur3_moveit_control.egg-info/dependency_links.txt
+[0.422s] writing top-level names to ur3_moveit_control.egg-info/top_level.txt
+[0.423s] reading manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'
+[0.423s] writing manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'
+[0.439s] [ 63%] Built target ament_cmake_python_build_ur3_moveit_control_egg
+[0.454s] [ 66%] Built target ur3_moveit_control__py
+[0.474s] [ 72%] Built target ur3_moveit_control__rosidl_generator_py
+[0.488s] [ 77%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext
+[0.504s] [ 83%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c__pyext
+[0.519s] [ 88%] Built target ur3_moveit_control__rosidl_typesupport_c__pyext
+[0.568s] [ 91%] [32mBuilding CXX object CMakeFiles/ur3_motion_interface.dir/src/ur3_motion_interface.cpp.o[0m
+[4.601s] [ 94%] [32m[1mLinking CXX shared library libur3_motion_interface.so[0m
+[4.786s] [ 94%] Built target ur3_motion_interface
+[4.813s] [ 97%] [32mBuilding CXX object CMakeFiles/ur3_control_node.dir/src/ur3_control_node.cpp.o[0m
+[11.474s] [100%] [32m[1mLinking CXX executable ur3_control_node[0m
+[11.888s] [100%] Built target ur3_control_node
+[11.895s] Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control
+[11.901s] Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur3_moveit_control
+[11.908s] -- Install configuration: ""
+[11.908s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/rosidl_interfaces/ur3_moveit_control
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_generator_c__visibility_control.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/ur3_control.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__struct.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__type_support.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__functions.c
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__functions.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/library_path.sh
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/library_path.dsv
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_generator_c.so
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_fastrtps_c.h
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_fastrtps_c.so
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg
+[11.909s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_generator_cpp__visibility_control.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/ur3_control.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__type_support.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__traits.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__builder.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__struct.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/dds_fastrtps
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_fastrtps_cpp.hpp
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_fastrtps_cpp.so
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_introspection_c.h
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__type_support.c
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_introspection_c.so
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_c.so
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action
+[11.910s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_introspection_cpp.hpp
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__type_support.cpp
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_introspection_cpp.so
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_cpp.so
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/pythonpath.sh
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/pythonpath.dsv
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info
+[11.911s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/dependency_links.txt
+[11.911s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/top_level.txt
+[11.911s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/SOURCES.txt
+[11.911s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/PKG-INFO
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_c.c
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/libur3_moveit_control__rosidl_generator_py.so
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/__init__.py
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_introspection_c.c
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_fastrtps_c.c
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/__init__.py
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/_ur3_control_s.c
+[11.911s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/_ur3_control.py
+[11.933s] Listing '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control'...
+[11.933s] Listing '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action'...
+[11.935s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_generator_py.so
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/rust_packages/ur3_moveit_control
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/Cargo.toml
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/lib.rs
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/action.rs
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/action
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/action/rmw.rs
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/build.rs
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/action/UR3Control.idl
+[11.936s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/action/UR3Control.action
+[11.936s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_motion_interface.so
+[11.937s] -- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_motion_interface.so" to ""
+[11.937s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/ur3_moveit_control/ur3_control_node
+[11.939s] -- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/ur3_moveit_control/ur3_control_node" to ""
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control
+[11.939s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/moveit_controllers.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/planning_scene_monitor.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/ur3_susgrip_gazebo_controllers.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/planning_pipelines.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/ompl_planning.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/moveit_custom_config.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/joint_limits.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/kinematics.yaml
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/ur3_susgrip_sim.launch.py
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/ur3_demo_gripper.launch.py
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/eye_in_hand_calib.launch.py
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/ur3_demo.launch.py
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf/ur3_with_susgrip_gazebo.urdf.xacro
+[11.939s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf/ur3_with_susgrip.urdf.xacro
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/srdf
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rviz
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rviz/view_robot.rviz
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models/box.sdf
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models/table.sdf
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/package_run_dependencies/ur3_moveit_control
+[11.939s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/parent_prefix_path/ur3_moveit_control
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/ament_prefix_path.sh
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/ament_prefix_path.dsv
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/path.sh
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/path.dsv
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.bash
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.sh
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.zsh
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.dsv
+[11.940s] -- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.dsv
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/packages/ur3_moveit_control
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_cExport.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_cExport-noconfig.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cExport.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_cppExport.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cppExport.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cExport.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cExport.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cExport-noconfig.cmake
+[11.940s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cppExport.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cppExport.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cppExport-noconfig.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_pyExport.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_pyExport-noconfig.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/rosidl_cmake-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_dependencies-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_include_directories-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_libraries-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_targets-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_controlConfig.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_controlConfig-version.cmake
+[11.941s] -- Up-to-date: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.xml
+[11.943s] Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur3_moveit_control

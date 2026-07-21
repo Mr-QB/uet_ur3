@@ -7,6 +7,8 @@
 
 import builtins  # noqa: E402, I100
 
+import math  # noqa: E402, I100
+
 import rosidl_parser.definition  # noqa: E402, I100
 
 
@@ -23,6 +25,7 @@ class Metaclass_UR3Control_Goal(type):
         'MOVE_HOME': 0,
         'MOVE_JOINT': 1,
         'MOVE_POSE': 2,
+        'ATTACH_AND_LIFT': 3,
     }
 
     @classmethod
@@ -62,6 +65,7 @@ class Metaclass_UR3Control_Goal(type):
             'MOVE_HOME': cls.__constants['MOVE_HOME'],
             'MOVE_JOINT': cls.__constants['MOVE_JOINT'],
             'MOVE_POSE': cls.__constants['MOVE_POSE'],
+            'ATTACH_AND_LIFT': cls.__constants['ATTACH_AND_LIFT'],
         }
 
     @property
@@ -79,6 +83,11 @@ class Metaclass_UR3Control_Goal(type):
         """Message constant 'MOVE_POSE'."""
         return Metaclass_UR3Control_Goal.__constants['MOVE_POSE']
 
+    @property
+    def ATTACH_AND_LIFT(self):
+        """Message constant 'ATTACH_AND_LIFT'."""
+        return Metaclass_UR3Control_Goal.__constants['ATTACH_AND_LIFT']
+
 
 class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
     """
@@ -88,24 +97,28 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
       MOVE_HOME
       MOVE_JOINT
       MOVE_POSE
+      ATTACH_AND_LIFT
     """
 
     __slots__ = [
         '_command_type',
         '_joint_goal',
         '_pose_goal',
+        '_cartesian_z_offset',
     ]
 
     _fields_and_field_types = {
         'command_type': 'uint8',
         'joint_goal': 'sensor_msgs/JointState',
         'pose_goal': 'geometry_msgs/PoseStamped',
+        'cartesian_z_offset': 'double',
     }
 
     SLOT_TYPES = (
         rosidl_parser.definition.BasicType('uint8'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['sensor_msgs', 'msg'], 'JointState'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['geometry_msgs', 'msg'], 'PoseStamped'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
@@ -117,6 +130,7 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
         self.joint_goal = kwargs.get('joint_goal', JointState())
         from geometry_msgs.msg import PoseStamped
         self.pose_goal = kwargs.get('pose_goal', PoseStamped())
+        self.cartesian_z_offset = kwargs.get('cartesian_z_offset', float())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -152,6 +166,8 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
         if self.joint_goal != other.joint_goal:
             return False
         if self.pose_goal != other.pose_goal:
+            return False
+        if self.cartesian_z_offset != other.cartesian_z_offset:
             return False
         return True
 
@@ -202,6 +218,21 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
                 isinstance(value, PoseStamped), \
                 "The 'pose_goal' field must be a sub message of type 'PoseStamped'"
         self._pose_goal = value
+
+    @builtins.property
+    def cartesian_z_offset(self):
+        """Message field 'cartesian_z_offset'."""
+        return self._cartesian_z_offset
+
+    @cartesian_z_offset.setter
+    def cartesian_z_offset(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'cartesian_z_offset' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'cartesian_z_offset' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._cartesian_z_offset = value
 
 
 # Import statements for member types

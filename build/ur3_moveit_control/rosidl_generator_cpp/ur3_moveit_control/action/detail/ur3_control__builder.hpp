@@ -21,16 +21,32 @@ namespace action
 namespace builder
 {
 
+class Init_UR3Control_Goal_cartesian_z_offset
+{
+public:
+  explicit Init_UR3Control_Goal_cartesian_z_offset(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  ::ur3_moveit_control::action::UR3Control_Goal cartesian_z_offset(::ur3_moveit_control::action::UR3Control_Goal::_cartesian_z_offset_type arg)
+  {
+    msg_.cartesian_z_offset = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
 class Init_UR3Control_Goal_pose_goal
 {
 public:
   explicit Init_UR3Control_Goal_pose_goal(::ur3_moveit_control::action::UR3Control_Goal & msg)
   : msg_(msg)
   {}
-  ::ur3_moveit_control::action::UR3Control_Goal pose_goal(::ur3_moveit_control::action::UR3Control_Goal::_pose_goal_type arg)
+  Init_UR3Control_Goal_cartesian_z_offset pose_goal(::ur3_moveit_control::action::UR3Control_Goal::_pose_goal_type arg)
   {
     msg_.pose_goal = std::move(arg);
-    return std::move(msg_);
+    return Init_UR3Control_Goal_cartesian_z_offset(msg_);
   }
 
 private:

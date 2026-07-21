@@ -42,6 +42,11 @@ pub struct UR3Control_Goal {
     #[allow(missing_docs)]
     pub pose_goal: geometry_msgs::msg::rmw::PoseStamped,
 
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub cartesian_z_offset: f64,
+
 }
 
 impl UR3Control_Goal {
@@ -59,6 +64,11 @@ impl UR3Control_Goal {
     // This constant is not documented.
     #[allow(missing_docs)]
     pub const MOVE_POSE: u8 = 2;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const ATTACH_AND_LIFT: u8 = 3;
 
 }
 

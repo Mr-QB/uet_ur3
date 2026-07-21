@@ -50,6 +50,24 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def launch_setup(context, *args, **kwargs):
+    # Gazebo layout (metres, expressed in the Gazebo world frame).
+    # The table top is centred at z=0.75 and is 0.05 m thick, therefore its
+    # upper surface is at z=0.775.  The robot is mounted at the middle of the
+    # table's -X edge.  The 0.1 m cube is placed 0.35 m in front of the robot.
+    table_x = 0.5
+    table_y = 0.0
+    table_z = 0.0
+    table_surface_z = 0.775
+
+    robot_x = 0.0
+    robot_y = 0.0
+    robot_z = table_surface_z
+
+    box_size_z = 0.1
+    box_x = 0.35
+    box_y = 0.0
+    box_z = table_surface_z + box_size_z / 2.0
+
     # Initialize Arguments
     ur_type = LaunchConfiguration("ur_type")
     safety_limits = LaunchConfiguration("safety_limits")
@@ -205,9 +223,9 @@ def launch_setup(context, *args, **kwargs):
         "-string", robot_description_content,
         "-name", "ur",
         "-allow_renaming", "true",
-        "-x", "0.3",
-        "-y", "0.0",
-        "-z", "0.775",
+        "-x", str(robot_x),
+        "-y", str(robot_y),
+        "-z", str(robot_z),
     ],
 )
     gz_spawn_table = Node(
@@ -220,11 +238,11 @@ def launch_setup(context, *args, **kwargs):
         "-name",
         "table",
         "-x",
-        "0.6",
+        str(table_x),
         "-y",
-        "0.0",
+        str(table_y),
         "-z",
-        "0.0",
+        str(table_z),
     ],
 )
     gz_launch_description_with_gui = IncludeLaunchDescription(
@@ -253,11 +271,11 @@ def launch_setup(context, *args, **kwargs):
         "-name",
         "pick_box",
         "-x",
-        "0.6",
+        str(box_x),
         "-y",
-        "0.0",
+        str(box_y),
         "-z",
-        "0.83",
+        str(box_z),
     ],
 )
 

@@ -16,6 +16,15 @@
         <origin xyz="0 0 0.015" rpy="0 0 0" />
     </xacro:susgrip_2f_gazebo>
 
+    <!-- TCP at the center of the gripper opening. -->
+    <!-- gripper_body is 0.015 m from tool0; finger origins are at z=0.112 m. -->
+    <link name="gripper_tcp"/>
+    <joint name="gripper_tcp_joint" type="fixed">
+        <parent link="gripper_body"/>
+        <child link="gripper_tcp"/>
+        <origin xyz="0 0 0.112" rpy="0 0 0"/>
+    </joint>
+
     <!-- 1. Eye-in-Hand Camera TF (from Calibration) -->
     <link name="camera_link"/>
     <joint name="camera_fixed_joint" type="fixed">

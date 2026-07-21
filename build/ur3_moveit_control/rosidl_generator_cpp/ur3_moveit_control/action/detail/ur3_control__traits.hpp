@@ -49,6 +49,13 @@ inline void to_flow_style_yaml(
   {
     out << "pose_goal: ";
     to_flow_style_yaml(msg.pose_goal, out);
+    out << ", ";
+  }
+
+  // member: cartesian_z_offset
+  {
+    out << "cartesian_z_offset: ";
+    rosidl_generator_traits::value_to_yaml(msg.cartesian_z_offset, out);
   }
   out << "}";
 }  // NOLINT(readability/fn_size)
@@ -83,6 +90,16 @@ inline void to_block_style_yaml(
     }
     out << "pose_goal:\n";
     to_block_style_yaml(msg.pose_goal, out, indentation + 2);
+  }
+
+  // member: cartesian_z_offset
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "cartesian_z_offset: ";
+    rosidl_generator_traits::value_to_yaml(msg.cartesian_z_offset, out);
+    out << "\n";
   }
 }  // NOLINT(readability/fn_size)
 

@@ -1,5 +1,9 @@
 #include "ur3_moveit_control/ur3_motion_interface.hpp"
+#include <chrono>
+#include <cmath>
 #include <moveit_msgs/msg/collision_object.hpp>
+#include <moveit/robot_trajectory/robot_trajectory.h>
+#include <moveit/trajectory_processing/iterative_time_parameterization.h>
 #include <shape_msgs/msg/solid_primitive.hpp>
 
 namespace ur3_moveit_control
@@ -13,6 +17,21 @@ namespace ur3_moveit_control
   {
     move_group_.setPlanningTime(5.0);
     move_group_.setNumPlanningAttempts(10);
+
+    // Use the gripper grasp center as the Cartesian pose target whenever the
+    // gripper model is present. Keep tool0 as the fallback for the arm-only
+    // robot description.
+    if (move_group_.getRobotModel()->getLinkModel("gripper_tcp") != nullptr)
+    {
+      const bool tcp_set = move_group_.setEndEffectorLink("gripper_tcp");
+      if (!tcp_set)
+      {
+        RCLCPP_WARN(
+          node_->get_logger(),
+          "gripper_tcp exists but could not be selected; using %s instead.",
+          move_group_.getEndEffectorLink().c_str());
+      }
+    }
 
     double max_velocity_scaling = node_->get_parameter("max_velocity_scaling_factor").as_double();
     double max_acceleration_scaling = node_->get_parameter("max_acceleration_scaling_factor").as_double();
@@ -175,6 +194,112 @@ namespace ur3_moveit_control
     return true;
   }
 
+  bool UR3MotionInterface::attachPickBox()
+  {
+    const std::string object_id = "pick_box";
+    const std::string attach_link = "gripper_tcp";
+    const std::vector<std::string> touch_links = {
+      "gripper_tcp",
+      "gripper_body",
+      "finger_left",
+      "finger_right"
+    };
+
+    if (!move_group_.attachObject(object_id, attach_link, touch_links))
+    {
+      RCLCPP_ERROR(
+        node_->get_logger(),
+        "Failed to attach %s to %s.",
+        object_id.c_str(), attach_link.c_str());
+      return false;
+    }
+
+    RCLCPP_INFO(
+      node_->get_logger(),
+      "Attached %s to %s.",
+      object_id.c_str(), attach_link.c_str());
+
+    // Give the planning scene monitor time to receive the attached-object update.
+    rclcpp::sleep_for(std::chrono::milliseconds(200));
+    return true;
+  }
+
+  bool UR3MotionInterface::moveCartesianZ(double z_offset)
+  {
+    if (std::abs(z_offset) < 1e-6)
+    {
+      RCLCPP_ERROR(node_->get_logger(), "Cartesian Z offset must be non-zero.");
+      return false;
+    }
+
+    const std::string end_effector_link = "gripper_tcp";
+    const auto current_pose = move_group_.getCurrentPose(end_effector_link);
+    geometry_msgs::msg::Pose target_pose = current_pose.pose;
+    target_pose.position.z += z_offset;
+
+    std::vector<geometry_msgs::msg::Pose> waypoints{target_pose};
+    moveit_msgs::msg::RobotTrajectory trajectory_msg;
+
+    constexpr double eef_step = 0.005;
+    constexpr double jump_threshold = 0.0;
+    constexpr double required_fraction = 0.99;
+
+    const double fraction = move_group_.computeCartesianPath(
+      waypoints,
+      eef_step,
+      jump_threshold,
+      trajectory_msg,
+      true);
+
+    if (fraction < required_fraction)
+    {
+      RCLCPP_ERROR(
+        node_->get_logger(),
+        "Cartesian lift planning incomplete: %.1f%% (required %.1f%%).",
+        fraction * 100.0, required_fraction * 100.0);
+      return false;
+    }
+
+    const auto current_state = move_group_.getCurrentState(2.0);
+    if (!current_state)
+    {
+      RCLCPP_ERROR(node_->get_logger(), "Could not read current robot state for trajectory timing.");
+      return false;
+    }
+
+    robot_trajectory::RobotTrajectory timed_trajectory(
+      move_group_.getRobotModel(), move_group_.getName());
+    timed_trajectory.setRobotTrajectoryMsg(*current_state, trajectory_msg);
+
+    trajectory_processing::IterativeParabolicTimeParameterization time_parameterization;
+    constexpr double lift_velocity_scaling = 0.05;
+    constexpr double lift_acceleration_scaling = 0.05;
+
+    if (!time_parameterization.computeTimeStamps(
+          timed_trajectory, lift_velocity_scaling, lift_acceleration_scaling))
+    {
+      RCLCPP_ERROR(node_->get_logger(), "Failed to time-parameterize Cartesian lift.");
+      return false;
+    }
+
+    timed_trajectory.getRobotTrajectoryMsg(trajectory_msg);
+
+    RCLCPP_INFO(
+      node_->get_logger(),
+      "Executing Cartesian Z move: %.3f m -> %.3f m (offset %+.3f m).",
+      current_pose.pose.position.z, target_pose.position.z, z_offset);
+
+    const auto execution_result = move_group_.execute(trajectory_msg);
+    if (execution_result != moveit::core::MoveItErrorCode::SUCCESS)
+    {
+      RCLCPP_ERROR(node_->get_logger(), "Cartesian lift execution failed.");
+      return false;
+    }
+
+    RCLCPP_INFO(node_->get_logger(), "Cartesian lift succeeded.");
+    return true;
+  }
+
   void UR3MotionInterface::stop()
   {
     move_group_.stop();
@@ -281,6 +406,35 @@ namespace ur3_moveit_control
 
     RCLCPP_INFO(node_->get_logger(), "Adding table and walls into the world...");
     planning_scene_interface_.applyCollisionObjects(collision_objects);
+  }
+
+  void UR3MotionInterface::addPickBoxObstacle()
+  {
+    moveit_msgs::msg::CollisionObject pick_box;
+    // Coordinates below are relative to the robot mounting frame.
+    pick_box.header.frame_id = "base_link";
+    pick_box.id = "pick_box";
+
+    shape_msgs::msg::SolidPrimitive box_primitive;
+    box_primitive.type = shape_msgs::msg::SolidPrimitive::BOX;
+    box_primitive.dimensions = {0.1, 0.1, 0.1};
+
+    // Gazebo spawns the box at world (0.35, 0.0, 0.825). The robot base is
+    // at world z=0.775, so the box center is at z=0.05 in base_link.
+    geometry_msgs::msg::Pose box_pose;
+    box_pose.orientation.w = 1.0;
+    box_pose.position.x = 0.35;
+    box_pose.position.y = 0.0;
+    box_pose.position.z = 0.05;
+
+    pick_box.primitives.push_back(box_primitive);
+    pick_box.primitive_poses.push_back(box_pose);
+    pick_box.operation = moveit_msgs::msg::CollisionObject::ADD;
+
+    RCLCPP_INFO(
+      node_->get_logger(),
+      "Adding pick_box collision object at (0.350, 0.000, 0.050)...");
+    planning_scene_interface_.applyCollisionObject(pick_box);
   }
 
   void UR3MotionInterface::calibObjectHeightEyeInHand(double depth_m, double camera_z_mount_offset)

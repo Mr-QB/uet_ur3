@@ -35,6 +35,12 @@ enum
   ur3_moveit_control__action__UR3Control_Goal__MOVE_POSE = 2
 };
 
+/// Constant 'ATTACH_AND_LIFT'.
+enum
+{
+  ur3_moveit_control__action__UR3Control_Goal__ATTACH_AND_LIFT = 3
+};
+
 // Include directives for member types
 // Member 'joint_goal'
 #include "sensor_msgs/msg/detail/joint_state__struct.h"
@@ -47,6 +53,7 @@ typedef struct ur3_moveit_control__action__UR3Control_Goal
   uint8_t command_type;
   sensor_msgs__msg__JointState joint_goal;
   geometry_msgs__msg__PoseStamped pose_goal;
+  double cartesian_z_offset;
 } ur3_moveit_control__action__UR3Control_Goal;
 
 // Struct for a sequence of ur3_moveit_control__action__UR3Control_Goal.

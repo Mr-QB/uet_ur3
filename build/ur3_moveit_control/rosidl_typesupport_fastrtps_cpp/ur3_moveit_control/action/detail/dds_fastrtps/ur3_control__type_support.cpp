@@ -90,6 +90,8 @@ cdr_serialize(
   geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
     ros_message.pose_goal,
     cdr);
+  // Member: cartesian_z_offset
+  cdr << ros_message.cartesian_z_offset;
   return true;
 }
 
@@ -109,6 +111,9 @@ cdr_deserialize(
   // Member: pose_goal
   geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
     cdr, ros_message.pose_goal);
+
+  // Member: cartesian_z_offset
+  cdr >> ros_message.cartesian_z_offset;
 
   return true;
 }  // NOLINT(readability/fn_size)
@@ -142,6 +147,12 @@ get_serialized_size(
   current_alignment +=
     geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
     ros_message.pose_goal, current_alignment);
+  // Member: cartesian_z_offset
+  {
+    size_t item_size = sizeof(ros_message.cartesian_z_offset);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
 
   return current_alignment - initial_alignment;
 }
@@ -212,6 +223,15 @@ max_serialized_size_UR3Control_Goal(
     }
   }
 
+  // Member: cartesian_z_offset
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
     // All members are plain, and type is not empty.
@@ -220,7 +240,7 @@ max_serialized_size_UR3Control_Goal(
     using DataType = ur3_moveit_control::action::UR3Control_Goal;
     is_plain =
       (
-      offsetof(DataType, pose_goal) +
+      offsetof(DataType, cartesian_z_offset) +
       last_member_size
       ) == ret_val;
   }

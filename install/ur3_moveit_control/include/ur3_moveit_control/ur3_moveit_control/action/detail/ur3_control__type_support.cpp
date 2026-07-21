@@ -37,7 +37,7 @@ void UR3Control_Goal_fini_function(void * message_memory)
   typed_message->~UR3Control_Goal();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember UR3Control_Goal_message_member_array[3] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember UR3Control_Goal_message_member_array[4] = {
   {
     "command_type",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_UINT8,  // type
@@ -88,13 +88,30 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember UR3Control_Go
     nullptr,  // fetch(index, &value) function pointer
     nullptr,  // assign(index, value) function pointer
     nullptr  // resize(index) function pointer
+  },
+  {
+    "cartesian_z_offset",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_DOUBLE,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(ur3_moveit_control::action::UR3Control_Goal, cartesian_z_offset),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
   }
 };
 
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers UR3Control_Goal_message_members = {
   "ur3_moveit_control::action",  // message namespace
   "UR3Control_Goal",  // message name
-  3,  // number of fields
+  4,  // number of fields
   sizeof(ur3_moveit_control::action::UR3Control_Goal),
   UR3Control_Goal_message_member_array,  // message members
   UR3Control_Goal_init_function,  // function to initialize message memory (memory has to be allocated)

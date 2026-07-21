@@ -48,6 +48,7 @@ struct UR3Control_Goal_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->command_type = 0;
+      this->cartesian_z_offset = 0.0;
     }
   }
 
@@ -59,6 +60,7 @@ struct UR3Control_Goal_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->command_type = 0;
+      this->cartesian_z_offset = 0.0;
     }
   }
 
@@ -72,6 +74,9 @@ struct UR3Control_Goal_
   using _pose_goal_type =
     geometry_msgs::msg::PoseStamped_<ContainerAllocator>;
   _pose_goal_type pose_goal;
+  using _cartesian_z_offset_type =
+    double;
+  _cartesian_z_offset_type cartesian_z_offset;
 
   // setters for named parameter idiom
   Type & set__command_type(
@@ -92,6 +97,12 @@ struct UR3Control_Goal_
     this->pose_goal = _arg;
     return *this;
   }
+  Type & set__cartesian_z_offset(
+    const double & _arg)
+  {
+    this->cartesian_z_offset = _arg;
+    return *this;
+  }
 
   // constant declarations
   static constexpr uint8_t MOVE_HOME =
@@ -100,6 +111,8 @@ struct UR3Control_Goal_
     1u;
   static constexpr uint8_t MOVE_POSE =
     2u;
+  static constexpr uint8_t ATTACH_AND_LIFT =
+    3u;
 
   // pointer types
   using RawPtr =
@@ -150,6 +163,9 @@ struct UR3Control_Goal_
     if (this->pose_goal != other.pose_goal) {
       return false;
     }
+    if (this->cartesian_z_offset != other.cartesian_z_offset) {
+      return false;
+    }
     return true;
   }
   bool operator!=(const UR3Control_Goal_ & other) const
@@ -177,6 +193,11 @@ constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::MOVE_JOINT;
 // static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
 template<typename ContainerAllocator>
 constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::MOVE_POSE;
+#endif  // __cplusplus < 201703L
+#if __cplusplus < 201703L
+// static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
+template<typename ContainerAllocator>
+constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::ATTACH_AND_LIFT;
 #endif  // __cplusplus < 201703L
 
 }  // namespace action

@@ -11,6 +11,7 @@ module ur3_moveit_control {
       const uint8 MOVE_HOME = 0;
       const uint8 MOVE_JOINT = 1;
       const uint8 MOVE_POSE = 2;
+      const uint8 ATTACH_AND_LIFT = 3;
     };
     @verbatim (language="comment", text=
       "Request")
@@ -20,6 +21,8 @@ module ur3_moveit_control {
       sensor_msgs::msg::JointState joint_goal;
 
       geometry_msgs::msg::PoseStamped pose_goal;
+
+      double cartesian_z_offset;
     };
     @verbatim (language="comment", text=
       "Result")

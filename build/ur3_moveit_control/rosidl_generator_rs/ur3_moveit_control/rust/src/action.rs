@@ -28,6 +28,11 @@ pub struct UR3Control_Goal {
     #[allow(missing_docs)]
     pub pose_goal: geometry_msgs::msg::PoseStamped,
 
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub cartesian_z_offset: f64,
+
 }
 
 impl UR3Control_Goal {
@@ -45,6 +50,11 @@ impl UR3Control_Goal {
     // This constant is not documented.
     #[allow(missing_docs)]
     pub const MOVE_POSE: u8 = 2;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const ATTACH_AND_LIFT: u8 = 3;
 
 }
 
@@ -64,11 +74,13 @@ impl rosidl_runtime_rs::Message for UR3Control_Goal {
         command_type: msg.command_type,
         joint_goal: sensor_msgs::msg::JointState::into_rmw_message(std::borrow::Cow::Owned(msg.joint_goal)).into_owned(),
         pose_goal: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Owned(msg.pose_goal)).into_owned(),
+        cartesian_z_offset: msg.cartesian_z_offset,
       }),
       std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
       command_type: msg.command_type,
         joint_goal: sensor_msgs::msg::JointState::into_rmw_message(std::borrow::Cow::Borrowed(&msg.joint_goal)).into_owned(),
         pose_goal: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Borrowed(&msg.pose_goal)).into_owned(),
+      cartesian_z_offset: msg.cartesian_z_offset,
       })
     }
   }
@@ -78,6 +90,7 @@ impl rosidl_runtime_rs::Message for UR3Control_Goal {
       command_type: msg.command_type,
       joint_goal: sensor_msgs::msg::JointState::from_rmw_message(msg.joint_goal),
       pose_goal: geometry_msgs::msg::PoseStamped::from_rmw_message(msg.pose_goal),
+      cartesian_z_offset: msg.cartesian_z_offset,
     }
   }
 }

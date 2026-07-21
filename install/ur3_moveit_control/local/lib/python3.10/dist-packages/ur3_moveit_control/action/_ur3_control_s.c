@@ -89,6 +89,15 @@ bool ur3_moveit_control__action__ur3_control__goal__convert_from_py(PyObject * _
     }
     Py_DECREF(field);
   }
+  {  // cartesian_z_offset
+    PyObject * field = PyObject_GetAttrString(_pymsg, "cartesian_z_offset");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->cartesian_z_offset = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
 
   return true;
 }
@@ -144,6 +153,17 @@ PyObject * ur3_moveit_control__action__ur3_control__goal__convert_to_py(void * r
     }
     {
       int rc = PyObject_SetAttrString(_pymessage, "pose_goal", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // cartesian_z_offset
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->cartesian_z_offset);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "cartesian_z_offset", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

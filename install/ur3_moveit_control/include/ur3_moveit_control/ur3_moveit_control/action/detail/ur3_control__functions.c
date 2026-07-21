@@ -34,6 +34,7 @@ ur3_moveit_control__action__UR3Control_Goal__init(ur3_moveit_control__action__UR
     ur3_moveit_control__action__UR3Control_Goal__fini(msg);
     return false;
   }
+  // cartesian_z_offset
   return true;
 }
 
@@ -48,6 +49,7 @@ ur3_moveit_control__action__UR3Control_Goal__fini(ur3_moveit_control__action__UR
   sensor_msgs__msg__JointState__fini(&msg->joint_goal);
   // pose_goal
   geometry_msgs__msg__PoseStamped__fini(&msg->pose_goal);
+  // cartesian_z_offset
 }
 
 bool
@@ -70,6 +72,10 @@ ur3_moveit_control__action__UR3Control_Goal__are_equal(const ur3_moveit_control_
   if (!geometry_msgs__msg__PoseStamped__are_equal(
       &(lhs->pose_goal), &(rhs->pose_goal)))
   {
+    return false;
+  }
+  // cartesian_z_offset
+  if (lhs->cartesian_z_offset != rhs->cartesian_z_offset) {
     return false;
   }
   return true;
@@ -97,6 +103,8 @@ ur3_moveit_control__action__UR3Control_Goal__copy(
   {
     return false;
   }
+  // cartesian_z_offset
+  output->cartesian_z_offset = input->cartesian_z_offset;
   return true;
 }
 

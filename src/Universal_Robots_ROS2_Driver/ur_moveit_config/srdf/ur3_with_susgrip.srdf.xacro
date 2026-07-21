@@ -8,7 +8,7 @@
 
   <xacro:include filename="$(find ur_moveit_config)/srdf/ur_macro.srdf.xacro"/>
 
-  <xacro:ur_srdf name="$(arg name)" prefix="$(arg prefix)"/>
+  <xacro:ur_srdf name="$(arg name)" prefix="$(arg prefix)" tip_link="gripper_tcp"/>
 
   <!-- Gripper planning group -->
   <group name="gripper">

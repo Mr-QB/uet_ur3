@@ -35,9 +35,11 @@ ros2 launch ur_simulation_gz ur_sim_control.launch.py ur_type:=ur3e
 Tiến trình này sẽ tích hợp khởi động MoveIt Planning Server, giao diện trực quan hóa RViz 2, và thực thi tuần tự quỹ đạo di chuyển đã lập trình sẵn sau thời gian trễ 5 giây:
 ```bash
 source ~/ros_ws/install/setup.bash
-ros2 launch ur3_moveit_control ur3_demo.launch.py \
-  ur_type:=ur3e \
-  use_sim_time:=true
+ ros2 launch ur3_moveit_control ur3_demo_gripper.launch.py \
+    ur_type:=ur3e \
+    use_sim_time:=true
+
+
 ```
 
 ---

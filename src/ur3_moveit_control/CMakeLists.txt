@@ -9,6 +9,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
+find_package(moveit_core REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
@@ -28,6 +29,7 @@ add_library(ur3_motion_interface
 ament_target_dependencies(ur3_motion_interface
   rclcpp
   moveit_ros_planning_interface
+  moveit_core
   geometry_msgs
 )
 

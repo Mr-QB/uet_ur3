@@ -134,6 +134,34 @@ class UR3ActionClient(Node):
             self.arm_goal_response_callback
         )
 
+    def attach_and_lift(self, z_offset):
+        """Attach pick_box to the gripper, then lift it along base_link Z."""
+
+        goal_msg = UR3Control.Goal()
+        goal_msg.command_type = UR3Control.Goal.ATTACH_AND_LIFT
+        goal_msg.cartesian_z_offset = float(z_offset)
+
+        if not self._arm_action_client.wait_for_server(
+            timeout_sec=5.0
+        ):
+            self.get_logger().error(
+                'The UR3 action server is not available'
+            )
+            return
+
+        self.get_logger().info(
+            f'Attaching pick_box and requesting Cartesian lift: '
+            f'dz={z_offset:+.3f} m'
+        )
+
+        future = self._arm_action_client.send_goal_async(
+            goal_msg
+        )
+
+        future.add_done_callback(
+            self.arm_goal_response_callback
+        )
+
     def arm_goal_response_callback(self, future):
         """Process the response after sending an arm goal."""
 
@@ -320,16 +348,19 @@ def main(args=None):
     # action_client.send_home_goal()
 
     # Send a Cartesian pose goal
-    action_client.send_pose_goal(0.35,0.0,0.35,0.0,0.0,0.0,1.0)
+    # action_client.send_pose_goal(0.35,0.0,0.127,1.0,0.0,0.0,0.0)
 
     # Send a joint position goal
     # action_client.send_joint_goal(-1.57,-1.57,1.57,-1.57,-1.57,0.0)
 
     # Open the gripper
-    action_client.open_gripper(0.03,30.0)
+    # action_client.open_gripper(0.07,30.0)
 
     # Close the gripper
     # action_client.close_gripper(0.0,3.0)
+
+    # Attach the grasped box and lift it vertically by 15 cm
+    action_client.attach_and_lift(0.15)
 
     # Send a custom gripper command
     # action_client.send_gripper_goal(0.02,5.0)

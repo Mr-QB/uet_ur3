@@ -41,7 +41,7 @@ void ur3_moveit_control__action__UR3Control_Goal__rosidl_typesupport_introspecti
   ur3_moveit_control__action__UR3Control_Goal__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember ur3_moveit_control__action__UR3Control_Goal__rosidl_typesupport_introspection_c__UR3Control_Goal_message_member_array[3] = {
+static rosidl_typesupport_introspection_c__MessageMember ur3_moveit_control__action__UR3Control_Goal__rosidl_typesupport_introspection_c__UR3Control_Goal_message_member_array[4] = {
   {
     "command_type",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_UINT8,  // type
@@ -92,13 +92,30 @@ static rosidl_typesupport_introspection_c__MessageMember ur3_moveit_control__act
     NULL,  // fetch(index, &value) function pointer
     NULL,  // assign(index, value) function pointer
     NULL  // resize(index) function pointer
+  },
+  {
+    "cartesian_z_offset",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_DOUBLE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(ur3_moveit_control__action__UR3Control_Goal, cartesian_z_offset),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers ur3_moveit_control__action__UR3Control_Goal__rosidl_typesupport_introspection_c__UR3Control_Goal_message_members = {
   "ur3_moveit_control__action",  // message namespace
   "UR3Control_Goal",  // message name
-  3,  // number of fields
+  4,  // number of fields
   sizeof(ur3_moveit_control__action__UR3Control_Goal),
   ur3_moveit_control__action__UR3Control_Goal__rosidl_typesupport_introspection_c__UR3Control_Goal_message_member_array,  // message members
   ur3_moveit_control__action__UR3Control_Goal__rosidl_typesupport_introspection_c__UR3Control_Goal_init_function,  // function to initialize message memory (memory has to be allocated)
