@@ -4,10 +4,13 @@ uint8 MOVE_JOINT=1
 uint8 MOVE_POSE=2
 uint8 ATTACH_AND_LIFT=3
 uint8 DETACH_OBJECT=4
+uint8 MOVE_CARTESIAN=5
 
 uint8 command_type
 sensor_msgs/JointState joint_goal
 geometry_msgs/PoseStamped pose_goal
+float64 cartesian_x_offset
+float64 cartesian_y_offset
 float64 cartesian_z_offset
 ---
 # Result

@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 500  # Hz
+    update_rate: 100  # Hz; sufficient for simulation and lighter on physics
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -26,6 +26,9 @@ controller_manager:
     gripper_controller:
       type: position_controllers/GripperActionController
 
+    gripper_mimic_controller:
+      type: position_controllers/JointGroupPositionController
+
 gripper_controller:
   ros__parameters:
     joint: gripper_joint
@@ -33,6 +36,11 @@ gripper_controller:
     goal_tolerance: 0.01
     max_effort: 100.0
     allow_stalled: true
+
+gripper_mimic_controller:
+  ros__parameters:
+    joints:
+      - gripper_joint_mimic
 
 speed_scaling_state_broadcaster:
   ros__parameters:

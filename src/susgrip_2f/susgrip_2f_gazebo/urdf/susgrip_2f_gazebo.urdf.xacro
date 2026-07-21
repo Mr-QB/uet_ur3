@@ -9,7 +9,12 @@
         <xacro:property name="joint_friction" value="0.0" />
         <xacro:property name="joint_effort" value="100.0" />
         <xacro:property name="joint_velocity" value="0.05" />
-        <xacro:property name="joint_limit_upper" value="0.065" />
+        <!--
+          The controller commands at most 0.065 m.  Leave 5 mm of physical
+          travel beyond that command limit so Gazebo never wedges the finger
+          exactly against the prismatic joint's hard stop.
+        -->
+        <xacro:property name="joint_limit_upper" value="0.070" />
 
         <material name="${prefix}color_base">
             <color rgba="0.423529 0.494118 0.882353 1.0" />
@@ -35,9 +40,10 @@
                 <material name="${prefix}color_base" />
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <!-- Simple collision geometry keeps Gazebo physics fast. -->
+                <origin xyz="0 0 0.0615" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://susgrip_2f_description/meshes/susgrip_2f_simple/2F_MainBody.STL" />
+                    <cylinder radius="0.055" length="0.123" />
                 </geometry>
             </collision>
             <inertial>
@@ -68,9 +74,9 @@
                 <material name="${prefix}color_finger" />
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0.04" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://susgrip_2f_description/meshes/susgrip_2f_simple/FingerTip.STL" />
+                    <box size="0.016 0.020 0.080" />
                 </geometry>
             </collision>
             <inertial>
@@ -84,8 +90,8 @@
             <self_collide>false</self_collide>
             <mu1>2.0</mu1>
             <mu2>2.0</mu2>
-            <kp>1000000.0</kp>
-            <kd>100.0</kd>
+            <kp>100000.0</kp>
+            <kd>10.0</kd>
             <minDepth>0.002</minDepth>
             <maxVel>0.0</maxVel>
             <material>Gazebo/Blue</material>
@@ -101,9 +107,9 @@
                 <material name="${prefix}color_finger" />
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0.04" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://susgrip_2f_description/meshes/susgrip_2f_simple/FingerTip.STL" />
+                    <box size="0.016 0.020 0.080" />
                 </geometry>
             </collision>
             <inertial>
@@ -117,8 +123,8 @@
             <self_collide>false</self_collide>
             <mu1>2.0</mu1>
             <mu2>2.0</mu2>
-            <kp>1000000.0</kp>
-            <kd>100.0</kd>
+            <kp>100000.0</kp>
+            <kd>10.0</kd>
             <minDepth>0.002</minDepth>
             <maxVel>0.0</maxVel>
             <material>Gazebo/Blue</material>

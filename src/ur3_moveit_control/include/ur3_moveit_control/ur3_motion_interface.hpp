@@ -33,13 +33,14 @@ public:
 
   bool detachPickBox();
 
-  bool moveCartesianZ(double z_offset);
+  bool moveCartesian(double x_offset, double y_offset, double z_offset);
 
   void stop();
 
   void addTableObstacle();
 
-  void addPickBoxObstacle();
+  void addPickBoxObstacle(
+    double x = 0.35, double y = 0.0, double z = 0.05);
 
   void calibObjectHeightEyeInHand(double depth_m, double camera_z_mount_offset);
 

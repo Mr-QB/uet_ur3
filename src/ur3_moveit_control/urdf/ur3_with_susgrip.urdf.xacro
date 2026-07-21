@@ -74,6 +74,20 @@
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
             </joint>
+            <!--
+              Ignition ros2_control does not infer the simulated mimic joint
+              from the URDF <mimic> tag alone. Register the passive finger in
+              ros2_control so it follows the commanded gripper_joint.
+            -->
+            <joint name="gripper_joint_mimic">
+                <command_interface name="position">
+                    <param name="min">0.0</param>
+                    <param name="max">0.065</param>
+                </command_interface>
+                <state_interface name="position"/>
+                <state_interface name="velocity"/>
+                <state_interface name="effort"/>
+            </joint>
         </ros2_control>
 
         <!--

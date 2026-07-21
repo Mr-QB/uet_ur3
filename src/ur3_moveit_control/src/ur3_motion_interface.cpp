@@ -210,6 +210,13 @@ namespace ur3_moveit_control
       "finger_right"
     };
 
+    // Keep the box out of the world collision scene during approach so the
+    // fingers are allowed to move around it. Add it immediately before
+    // attaching, then MoveIt transfers it from the world to the robot as a
+    // carried payload with the touch links allowed below.
+    addPickBoxObstacle();
+    rclcpp::sleep_for(std::chrono::milliseconds(200));
+
     // First create the physical fixed joint in Gazebo.  Give the ROS-Gazebo
     // bridge and the DetachableJoint system a few simulation iterations to
     // consume the request before the arm starts moving.
@@ -241,32 +248,76 @@ namespace ur3_moveit_control
   {
     const std::string object_id = "pick_box";
 
-    // Remove the object from MoveIt's AttachedCollisionObject list first so
-    // subsequent plans treat it as a world obstacle again.
-    if (!move_group_.detachObject(object_id))
-    {
-      RCLCPP_ERROR(node_->get_logger(), "Failed to detach %s in MoveIt.", object_id.c_str());
-      return false;
-    }
+    // Save the release X/Y before changing the planning-scene attachment.
+    // MoveIt has no gravity simulation, so after detach the scene object is
+    // explicitly placed back on the known table surface.
+    const auto release_pose = move_group_.getCurrentPose("gripper_tcp");
 
+    // Always release the physical Gazebo joint. Previously a MoveIt scene
+    // mismatch returned early and prevented this message from being sent.
     gazebo_detach_pub_->publish(std_msgs::msg::Empty{});
     rclcpp::sleep_for(std::chrono::milliseconds(300));
-    RCLCPP_INFO(node_->get_logger(), "Detached %s in MoveIt and Gazebo.", object_id.c_str());
+
+    // Mirror the released state in MoveIt. A missing attached collision
+    // object must not prevent the already-requested physical release.
+    const bool moveit_detached = move_group_.detachObject(object_id);
+    if (!moveit_detached)
+    {
+      RCLCPP_WARN(
+        node_->get_logger(),
+        "%s was not attached in MoveIt; Gazebo detach was still requested.",
+        object_id.c_str());
+    }
+
+    planning_scene_interface_.removeCollisionObjects({object_id});
+    rclcpp::sleep_for(std::chrono::milliseconds(100));
+    addPickBoxObstacle(
+      release_pose.pose.position.x,
+      release_pose.pose.position.y,
+      0.05);
+
+    RCLCPP_INFO(
+      node_->get_logger(),
+      "Detached %s and placed its MoveIt scene object on the table.",
+      object_id.c_str());
     return true;
   }
 
-  bool UR3MotionInterface::moveCartesianZ(double z_offset)
+  bool UR3MotionInterface::moveCartesian(
+    double x_offset, double y_offset, double z_offset)
   {
-    if (std::abs(z_offset) < 1e-6)
+    if (std::abs(x_offset) < 1e-6 &&
+        std::abs(y_offset) < 1e-6 &&
+        std::abs(z_offset) < 1e-6)
     {
-      RCLCPP_ERROR(node_->get_logger(), "Cartesian Z offset must be non-zero.");
+      RCLCPP_ERROR(node_->get_logger(), "At least one Cartesian offset must be non-zero.");
       return false;
     }
 
     const std::string end_effector_link = "gripper_tcp";
     const auto current_pose = move_group_.getCurrentPose(end_effector_link);
     geometry_msgs::msg::Pose target_pose = current_pose.pose;
+    target_pose.position.x += x_offset;
+    target_pose.position.y += y_offset;
     target_pose.position.z += z_offset;
+
+    const int active_axes =
+      (std::abs(x_offset) >= 1e-6 ? 1 : 0) +
+      (std::abs(y_offset) >= 1e-6 ? 1 : 0) +
+      (std::abs(z_offset) >= 1e-6 ? 1 : 0);
+
+    // Multi-axis requests describe an endpoint rather than a requirement for
+    // an exact straight line. Use the sampling-based pose planner directly so
+    // it can change the joint configuration and avoid singularities or
+    // obstacles while reaching the requested diagonal XYZ target.
+    if (active_axes >= 2)
+    {
+      RCLCPP_INFO(
+        node_->get_logger(),
+        "Planning multi-axis Cartesian target: dx=%+.3f, dy=%+.3f, dz=%+.3f m.",
+        x_offset, y_offset, z_offset);
+      return moveToPoseGoal(target_pose, end_effector_link);
+    }
 
     std::vector<geometry_msgs::msg::Pose> waypoints{target_pose};
     moveit_msgs::msg::RobotTrajectory trajectory_msg;
@@ -284,11 +335,16 @@ namespace ur3_moveit_control
 
     if (fraction < required_fraction)
     {
-      RCLCPP_ERROR(
+      RCLCPP_WARN(
         node_->get_logger(),
-        "Cartesian lift planning incomplete: %.1f%% (required %.1f%%).",
+        "Straight Cartesian path is only %.1f%% (required %.1f%%); "
+        "falling back to pose planning.",
         fraction * 100.0, required_fraction * 100.0);
-      return false;
+
+      // A strict straight line can fail near a singularity, a joint limit or
+      // an obstacle. Let the configured MoveIt planner find a non-straight
+      // collision-free route to the same XYZ target instead.
+      return moveToPoseGoal(target_pose, end_effector_link);
     }
 
     const auto current_state = move_group_.getCurrentState(2.0);
@@ -317,17 +373,17 @@ namespace ur3_moveit_control
 
     RCLCPP_INFO(
       node_->get_logger(),
-      "Executing Cartesian Z move: %.3f m -> %.3f m (offset %+.3f m).",
-      current_pose.pose.position.z, target_pose.position.z, z_offset);
+      "Executing Cartesian move: dx=%+.3f, dy=%+.3f, dz=%+.3f m.",
+      x_offset, y_offset, z_offset);
 
     const auto execution_result = move_group_.execute(trajectory_msg);
     if (execution_result != moveit::core::MoveItErrorCode::SUCCESS)
     {
-      RCLCPP_ERROR(node_->get_logger(), "Cartesian lift execution failed.");
+      RCLCPP_ERROR(node_->get_logger(), "Cartesian motion execution failed.");
       return false;
     }
 
-    RCLCPP_INFO(node_->get_logger(), "Cartesian lift succeeded.");
+    RCLCPP_INFO(node_->get_logger(), "Cartesian motion succeeded.");
     return true;
   }
 
@@ -439,7 +495,7 @@ namespace ur3_moveit_control
     planning_scene_interface_.applyCollisionObjects(collision_objects);
   }
 
-  void UR3MotionInterface::addPickBoxObstacle()
+  void UR3MotionInterface::addPickBoxObstacle(double x, double y, double z)
   {
     moveit_msgs::msg::CollisionObject pick_box;
     // Coordinates below are relative to the robot mounting frame.
@@ -454,9 +510,9 @@ namespace ur3_moveit_control
     // at world z=0.775, so the box center is at z=0.05 in base_link.
     geometry_msgs::msg::Pose box_pose;
     box_pose.orientation.w = 1.0;
-    box_pose.position.x = 0.35;
-    box_pose.position.y = 0.0;
-    box_pose.position.z = 0.05;
+    box_pose.position.x = x;
+    box_pose.position.y = y;
+    box_pose.position.z = z;
 
     pick_box.primitives.push_back(box_primitive);
     pick_box.primitive_poses.push_back(box_pose);
@@ -464,7 +520,8 @@ namespace ur3_moveit_control
 
     RCLCPP_INFO(
       node_->get_logger(),
-      "Adding pick_box collision object at (0.350, 0.000, 0.050)...");
+      "Adding pick_box collision object at (%.3f, %.3f, %.3f)...",
+      x, y, z);
     planning_scene_interface_.applyCollisionObject(pick_box);
   }
 

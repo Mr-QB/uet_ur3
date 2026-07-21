@@ -17,7 +17,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="moveit_controllers.yaml",
+            default_value="ur3_susgrip_gazebo_controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
@@ -56,17 +56,26 @@ def generate_launch_description():
         }.items()
     )
 
-    # Include spawner for gripper_controller
-    from launch_ros.actions import Node
-    gripper_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["gripper_controller", "-c", "/controller_manager"],
-        parameters=[{"use_sim_time": True}],
+    # Start the custom action server once, without launching a second MoveIt
+    # instance. This lets this top-level launch provide the complete system.
+    control_node_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("ur3_moveit_control"),
+                "launch",
+                "ur3_demo_gripper.launch.py",
+            ])
+        ]),
+        launch_arguments={
+            "ur_type": ur_type,
+            "use_sim_time": "true",
+            "launch_rviz": "false",
+            "launch_moveit": "false",
+        }.items(),
     )
 
     return LaunchDescription(declared_arguments + [
         gz_sim_launch,
         moveit_launch,
-        gripper_controller_spawner
+        control_node_launch,
     ])

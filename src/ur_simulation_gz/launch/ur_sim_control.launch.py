@@ -187,6 +187,18 @@ def launch_setup(context, *args, **kwargs):
     ],
     output="screen",
     )
+    gripper_mimic_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "gripper_mimic_controller",
+            "--controller-manager",
+            "/controller_manager",
+            "--controller-manager-timeout",
+            "60",
+        ],
+        output="screen",
+    )
     # There may be other controllers of the joints, but this is the initially-started one
     initial_joint_controller_spawner_started = Node(
         package="controller_manager",
@@ -279,6 +291,17 @@ def launch_setup(context, *args, **kwargs):
     ],
 )
 
+    # DetachableJoint is configured when the robot model is inserted. Its
+    # child model must already exist at that moment, otherwise the plugin
+    # cannot resolve pick_box::box_link and will not retry later. Spawn the
+    # robot only after the pick_box creation process has completed.
+    spawn_robot_after_box = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=gz_spawn_box,
+            on_exit=[gz_spawn_entity],
+        )
+    )
+
     # Make the /clock topic available in ROS
     gz_sim_bridge = Node(
         package="ros_gz_bridge",
@@ -288,6 +311,8 @@ def launch_setup(context, *args, **kwargs):
             # ROS publishes Empty; Gazebo's DetachableJoint subscribes to it.
             "/pick_box/attach@std_msgs/msg/Empty]ignition.msgs.Empty",
             "/pick_box/detach@std_msgs/msg/Empty]ignition.msgs.Empty",
+            # Gazebo publishes the joint state; expose it in ROS for diagnosis.
+            "/pick_box/attachment_state@std_msgs/msg/Bool[ignition.msgs.Boolean",
         ],
         output="screen",
     )
@@ -300,13 +325,14 @@ def launch_setup(context, *args, **kwargs):
         initial_joint_controller_spawner_started,
         forward_position_controller_spawner,
         forward_velocity_controller_spawner,
-        gz_spawn_entity,
         gz_launch_description_with_gui,
         gz_launch_description_without_gui,
         gz_sim_bridge,
         gripper_controller_spawner,
+        gripper_mimic_controller_spawner,
         gz_spawn_table,
         gz_spawn_box,
+        spawn_robot_after_box,
     ]
 
     return nodes_to_start
