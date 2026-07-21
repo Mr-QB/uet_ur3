@@ -13,6 +13,7 @@ find_package(moveit_core REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -31,6 +32,7 @@ ament_target_dependencies(ur3_motion_interface
   moveit_ros_planning_interface
   moveit_core
   geometry_msgs
+  std_msgs
 )
 
 add_executable(ur3_control_node
@@ -50,6 +52,7 @@ ament_target_dependencies(ur3_control_node
   moveit_ros_planning_interface
   geometry_msgs
   sensor_msgs
+  std_msgs
 )
 
 install(

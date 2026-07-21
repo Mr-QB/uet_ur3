@@ -285,6 +285,9 @@ def launch_setup(context, *args, **kwargs):
         executable="parameter_bridge",
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
+            # ROS publishes Empty; Gazebo's DetachableJoint subscribes to it.
+            "/pick_box/attach@std_msgs/msg/Empty]ignition.msgs.Empty",
+            "/pick_box/detach@std_msgs/msg/Empty]ignition.msgs.Empty",
         ],
         output="screen",
     )

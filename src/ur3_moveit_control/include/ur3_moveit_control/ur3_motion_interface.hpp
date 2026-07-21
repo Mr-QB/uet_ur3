@@ -9,6 +9,7 @@
 #include <geometry_msgs/msg/pose.hpp>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
+#include <std_msgs/msg/empty.hpp>
 
 namespace ur3_moveit_control
 {
@@ -30,6 +31,8 @@ public:
 
   bool attachPickBox();
 
+  bool detachPickBox();
+
   bool moveCartesianZ(double z_offset);
 
   void stop();
@@ -44,6 +47,8 @@ private:
   rclcpp::Node::SharedPtr node_;
   moveit::planning_interface::MoveGroupInterface move_group_;
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface_;
+  rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr gazebo_attach_pub_;
+  rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr gazebo_detach_pub_;
 };
 
 }  // namespace ur3_moveit_control

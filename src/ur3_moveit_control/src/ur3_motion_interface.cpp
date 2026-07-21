@@ -15,6 +15,11 @@ namespace ur3_moveit_control
       : node_(node),
         move_group_(node_, planning_group)
   {
+    gazebo_attach_pub_ = node_->create_publisher<std_msgs::msg::Empty>(
+      "/pick_box/attach", rclcpp::QoS(1).reliable());
+    gazebo_detach_pub_ = node_->create_publisher<std_msgs::msg::Empty>(
+      "/pick_box/detach", rclcpp::QoS(1).reliable());
+
     move_group_.setPlanningTime(5.0);
     move_group_.setNumPlanningAttempts(10);
 
@@ -205,6 +210,14 @@ namespace ur3_moveit_control
       "finger_right"
     };
 
+    // First create the physical fixed joint in Gazebo.  Give the ROS-Gazebo
+    // bridge and the DetachableJoint system a few simulation iterations to
+    // consume the request before the arm starts moving.
+    gazebo_attach_pub_->publish(std_msgs::msg::Empty{});
+    rclcpp::sleep_for(std::chrono::milliseconds(300));
+
+    // Then mirror that state in MoveIt so collision checking treats the box
+    // as carried payload and permits contact with the gripper touch links.
     if (!move_group_.attachObject(object_id, attach_link, touch_links))
     {
       RCLCPP_ERROR(
@@ -221,6 +234,24 @@ namespace ur3_moveit_control
 
     // Give the planning scene monitor time to receive the attached-object update.
     rclcpp::sleep_for(std::chrono::milliseconds(200));
+    return true;
+  }
+
+  bool UR3MotionInterface::detachPickBox()
+  {
+    const std::string object_id = "pick_box";
+
+    // Remove the object from MoveIt's AttachedCollisionObject list first so
+    // subsequent plans treat it as a world obstacle again.
+    if (!move_group_.detachObject(object_id))
+    {
+      RCLCPP_ERROR(node_->get_logger(), "Failed to detach %s in MoveIt.", object_id.c_str());
+      return false;
+    }
+
+    gazebo_detach_pub_->publish(std_msgs::msg::Empty{});
+    rclcpp::sleep_for(std::chrono::milliseconds(300));
+    RCLCPP_INFO(node_->get_logger(), "Detached %s in MoveIt and Gazebo.", object_id.c_str());
     return true;
   }
 

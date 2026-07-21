@@ -145,6 +145,10 @@ private:
         goal_handle->publish_feedback(feedback);
         success = ur3_motion_->moveCartesianZ(goal->cartesian_z_offset);
       }
+    } else if (goal->command_type == UR3Control::Goal::DETACH_OBJECT) {
+      feedback->state = "Detaching pick_box from gripper_tcp";
+      goal_handle->publish_feedback(feedback);
+      success = ur3_motion_->detachPickBox();
     } else {
       RCLCPP_ERROR(this->get_logger(), "Invalid command type!");
     }

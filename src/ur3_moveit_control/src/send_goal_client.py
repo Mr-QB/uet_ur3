@@ -26,6 +26,7 @@ class UR3ActionClient(Node):
             GripperCommand,
             '/gripper_controller/gripper_cmd'
         )
+        self._pending_lift_offset = None
 
     # =========================================================
     # ARM COMMANDS
@@ -162,6 +163,20 @@ class UR3ActionClient(Node):
             self.arm_goal_response_callback
         )
 
+    def detach_object(self):
+        """Release pick_box in both MoveIt and Gazebo after placing it."""
+
+        goal_msg = UR3Control.Goal()
+        goal_msg.command_type = UR3Control.Goal.DETACH_OBJECT
+
+        if not self._arm_action_client.wait_for_server(timeout_sec=5.0):
+            self.get_logger().error('The UR3 action server is not available')
+            return
+
+        self.get_logger().info('Requesting pick_box detach...')
+        future = self._arm_action_client.send_goal_async(goal_msg)
+        future.add_done_callback(self.arm_goal_response_callback)
+
     def arm_goal_response_callback(self, future):
         """Process the response after sending an arm goal."""
 
@@ -272,6 +287,12 @@ class UR3ActionClient(Node):
             max_effort=max_effort
         )
 
+    def grasp_and_lift(self, close_position, max_effort, z_offset):
+        """Close the fingers, then physically attach and lift the box."""
+
+        self._pending_lift_offset = float(z_offset)
+        self.close_gripper(close_position, max_effort)
+
     def gripper_goal_response_callback(self, future):
         """Process the response after sending a gripper goal."""
 
@@ -334,6 +355,15 @@ class UR3ActionClient(Node):
             f'status={status}'
         )
 
+        if self._pending_lift_offset is not None:
+            z_offset = self._pending_lift_offset
+            self._pending_lift_offset = None
+            self.get_logger().info(
+                'Gripper closed; requesting Gazebo attach and Cartesian lift'
+            )
+            self.attach_and_lift(z_offset)
+            return
+
         rclpy.shutdown()
 
 
@@ -359,11 +389,14 @@ def main(args=None):
     # Close the gripper
     # action_client.close_gripper(0.0,3.0)
 
-    # Attach the grasped box and lift it vertically by 15 cm
-    action_client.attach_and_lift(0.15)
+    # Close the gripper, attach the box in Gazebo + MoveIt, then lift 15 cm.
+    # Run this only after the gripper TCP has been moved around the box.
+    action_client.grasp_and_lift(0.0, 10.0, 0.15)
 
-    # Send a custom gripper command
-    # action_client.send_gripper_goal(0.02,5.0)
+    # After moving the attached object to its destination, select this command
+    # instead of attach_and_lift() to release it:
+    # action_client.detach_object()
+
 
     try:
         rclpy.spin(action_client)

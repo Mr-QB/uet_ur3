@@ -75,6 +75,23 @@
                 <state_interface name="effort"/>
             </joint>
         </ros2_control>
+
+        <!--
+          Gazebo owns the simulated physics, so MoveIt's attachObject() alone
+          cannot make pick_box follow the gripper.  This system creates/removes
+          a real fixed joint when Empty messages arrive on the topics below.
+        -->
+        <gazebo>
+            <plugin filename="ignition-gazebo-detachable-joint-system"
+                    name="ignition::gazebo::systems::DetachableJoint">
+                <parent_link>gripper_tcp</parent_link>
+                <child_model>pick_box</child_model>
+                <child_link>box_link</child_link>
+                <attach_topic>/pick_box/attach</attach_topic>
+                <detach_topic>/pick_box/detach</detach_topic>
+                <output_topic>/pick_box/attachment_state</output_topic>
+            </plugin>
+        </gazebo>
     </xacro:if>
 
 </robot>
