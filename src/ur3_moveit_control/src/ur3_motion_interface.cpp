@@ -199,7 +199,8 @@ namespace ur3_moveit_control
     return true;
   }
 
-  bool UR3MotionInterface::attachPickBox()
+  bool UR3MotionInterface::attachPickBox(
+    double object_x, double object_y, double object_z)
   {
     const std::string object_id = "pick_box";
     const std::string attach_link = "gripper_tcp";
@@ -214,7 +215,7 @@ namespace ur3_moveit_control
     // fingers are allowed to move around it. Add it immediately before
     // attaching, then MoveIt transfers it from the world to the robot as a
     // carried payload with the touch links allowed below.
-    addPickBoxObstacle();
+    addPickBoxObstacle(object_x, object_y, object_z);
     rclcpp::sleep_for(std::chrono::milliseconds(200));
 
     // First create the physical fixed joint in Gazebo.  Give the ROS-Gazebo
@@ -301,24 +302,6 @@ namespace ur3_moveit_control
     target_pose.position.y += y_offset;
     target_pose.position.z += z_offset;
 
-    const int active_axes =
-      (std::abs(x_offset) >= 1e-6 ? 1 : 0) +
-      (std::abs(y_offset) >= 1e-6 ? 1 : 0) +
-      (std::abs(z_offset) >= 1e-6 ? 1 : 0);
-
-    // Multi-axis requests describe an endpoint rather than a requirement for
-    // an exact straight line. Use the sampling-based pose planner directly so
-    // it can change the joint configuration and avoid singularities or
-    // obstacles while reaching the requested diagonal XYZ target.
-    if (active_axes >= 2)
-    {
-      RCLCPP_INFO(
-        node_->get_logger(),
-        "Planning multi-axis Cartesian target: dx=%+.3f, dy=%+.3f, dz=%+.3f m.",
-        x_offset, y_offset, z_offset);
-      return moveToPoseGoal(target_pose, end_effector_link);
-    }
-
     std::vector<geometry_msgs::msg::Pose> waypoints{target_pose};
     moveit_msgs::msg::RobotTrajectory trajectory_msg;
 
@@ -385,6 +368,36 @@ namespace ur3_moveit_control
 
     RCLCPP_INFO(node_->get_logger(), "Cartesian motion succeeded.");
     return true;
+  }
+
+  bool UR3MotionInterface::moveToXY(double target_x, double target_y)
+  {
+    const std::string end_effector_link = "gripper_tcp";
+    const auto current_pose = move_group_.getCurrentPose(end_effector_link);
+    geometry_msgs::msg::Pose target_pose = current_pose.pose;
+
+    // X and Y are absolute coordinates in base_link. Keep the lifted height
+    // and tool orientation exactly as reported by the current TCP pose.
+    target_pose.position.x = target_x;
+    target_pose.position.y = target_y;
+
+    RCLCPP_INFO(
+      node_->get_logger(),
+      "Planning absolute XY move: (%.3f, %.3f, %.3f) -> "
+      "(%.3f, %.3f, %.3f), keeping current Z.",
+      current_pose.pose.position.x,
+      current_pose.pose.position.y,
+      current_pose.pose.position.z,
+      target_pose.position.x,
+      target_pose.position.y,
+      target_pose.position.z);
+
+    // Prefer a straight horizontal transport path. moveCartesian() will fall
+    // back to the pose planner only if the straight path is not feasible.
+    return moveCartesian(
+      target_pose.position.x - current_pose.pose.position.x,
+      target_pose.position.y - current_pose.pose.position.y,
+      0.0);
   }
 
   void UR3MotionInterface::stop()

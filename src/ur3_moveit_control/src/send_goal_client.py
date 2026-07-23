@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
-import time
-
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
 
-from control_msgs.action import GripperCommand
+from builtin_interfaces.msg import Duration
+from control_msgs.action import FollowJointTrajectory
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Float64MultiArray
+from trajectory_msgs.msg import JointTrajectoryPoint
 from ur3_moveit_control.action import UR3Control
 
 
@@ -31,16 +30,12 @@ class UR3ActionClient(Node):
         # Action client for controlling the gripper
         self._gripper_action_client = ActionClient(
             self,
-            GripperCommand,
-            '/gripper_controller/gripper_cmd'
-        )
-        self._gripper_mimic_publisher = self.create_publisher(
-            Float64MultiArray,
-            '/gripper_mimic_controller/commands',
-            10
+            FollowJointTrajectory,
+            '/gripper_controller/follow_joint_trajectory'
         )
         self._pending_lift_offset = None
         self._gripper_completion_timer = None
+        self._pick_sequence = None
         self._latest_gripper_effort = None
         self._peak_gripper_effort = 0.0
         self._joint_state_subscription = self.create_subscription(
@@ -175,12 +170,16 @@ class UR3ActionClient(Node):
             self.arm_goal_response_callback
         )
 
-    def attach_and_lift(self, z_offset):
+    def attach_and_lift(
+            self, z_offset, object_x=0.35, object_y=0.0, object_z=0.05):
         """Attach pick_box to the gripper, then lift it along base_link Z."""
 
         goal_msg = UR3Control.Goal()
         goal_msg.command_type = UR3Control.Goal.ATTACH_AND_LIFT
         goal_msg.cartesian_z_offset = float(z_offset)
+        goal_msg.object_x = float(object_x)
+        goal_msg.object_y = float(object_y)
+        goal_msg.object_z = float(object_z)
 
         if not self._arm_action_client.wait_for_server(
             timeout_sec=5.0
@@ -192,6 +191,7 @@ class UR3ActionClient(Node):
 
         self.get_logger().info(
             f'Attaching pick_box and requesting Cartesian lift: '
+            f'object=({object_x:.3f}, {object_y:.3f}, {object_z:.3f}), '
             f'dz={z_offset:+.3f} m'
         )
 
@@ -202,6 +202,52 @@ class UR3ActionClient(Node):
         future.add_done_callback(
             self.arm_goal_response_callback
         )
+
+    def pick_and_move(
+            self,
+            object_x,
+            object_y,
+            object_z,
+            target_x,
+            target_y,
+            approach_clearance=0.07,
+            tcp_grasp_offset=0.08,
+            lift_offset=0.15,
+            open_position=0.06,
+            close_position=0.04,
+            max_effort=100.0):
+        """Pick a known box and carry it to absolute X/Y at the lifted Z."""
+
+        grasp_z = float(object_z) + float(tcp_grasp_offset)
+        approach_z = grasp_z + float(approach_clearance)
+        self._pick_sequence = {
+            'stage': 'opening',
+            'object_x': float(object_x),
+            'object_y': float(object_y),
+            'object_z': float(object_z),
+            'target_x': float(target_x),
+            'target_y': float(target_y),
+            'approach_z': approach_z,
+            'descent': float(approach_clearance),
+            'lift_offset': float(lift_offset),
+            'open_position': float(open_position),
+            'close_position': float(close_position),
+            'max_effort': float(max_effort),
+        }
+
+        self.get_logger().info(
+            'Starting pick-and-move sequence: '
+            f'object=({object_x:.3f}, {object_y:.3f}, {object_z:.3f}), '
+            f'target_xy=({target_x:.3f}, {target_y:.3f})'
+        )
+        self.open_gripper(open_position, max_effort)
+
+    def abort_pick_sequence(self, reason):
+        """Stop the combined sequence after a failed stage."""
+
+        self.get_logger().error(f'Pick-and-move aborted: {reason}')
+        self._pick_sequence = None
+        rclpy.shutdown()
 
     def move_cartesian(self, x_offset, y_offset, z_offset):
         """Move gripper_tcp by an XYZ offset in the base_link frame."""
@@ -227,6 +273,25 @@ class UR3ActionClient(Node):
             f'Requesting Cartesian motion from current gripper pose: '
             f'dx={x_offset:+.3f}, dy={y_offset:+.3f}, '
             f'dz={z_offset:+.3f} m'
+        )
+        future = self._arm_action_client.send_goal_async(goal_msg)
+        future.add_done_callback(self.arm_goal_response_callback)
+
+    def move_to_xy(self, target_x, target_y):
+        """Move to absolute base_link X/Y while keeping current Z and orientation."""
+
+        goal_msg = UR3Control.Goal()
+        goal_msg.command_type = UR3Control.Goal.MOVE_TO_XY
+        goal_msg.target_x = float(target_x)
+        goal_msg.target_y = float(target_y)
+
+        if not self._arm_action_client.wait_for_server(timeout_sec=5.0):
+            self.get_logger().error('The UR3 action server is not available')
+            return
+
+        self.get_logger().info(
+            f'Requesting absolute XY target in base_link: '
+            f'x={target_x:+.3f}, y={target_y:+.3f}; keeping current Z'
         )
         future = self._arm_action_client.send_goal_async(goal_msg)
         future.add_done_callback(self.arm_goal_response_callback)
@@ -291,6 +356,11 @@ class UR3ActionClient(Node):
             f'Detach action completed: success={result.success}, '
             f'message="{result.message}"'
         )
+        if (
+            self._pick_sequence is not None
+            and self._pick_sequence['stage'] == 'detaching'
+        ):
+            self._pick_sequence['stage'] = 'releasing'
         self.get_logger().info(
             'Detach action finished; opening the gripper automatically'
         )
@@ -341,6 +411,53 @@ class UR3ActionClient(Node):
             f'message="{result.message}"'
         )
 
+        if self._pick_sequence is not None:
+            if not result.success:
+                self.abort_pick_sequence(
+                    f'arm stage {self._pick_sequence["stage"]} failed'
+                )
+                return
+
+            stage = self._pick_sequence['stage']
+            if stage == 'approach':
+                self._pick_sequence['stage'] = 'descending'
+                self.get_logger().info(
+                    'Pick stage 2/6: descending vertically to the box'
+                )
+                self.move_cartesian(
+                    0.0, 0.0, -self._pick_sequence['descent'])
+                return
+
+            if stage == 'descending':
+                self._pick_sequence['stage'] = 'closing'
+                self.get_logger().info(
+                    'Pick stage 3/6: closing both gripper fingers'
+                )
+                self.close_gripper(
+                    self._pick_sequence['close_position'],
+                    self._pick_sequence['max_effort'])
+                return
+
+            if stage == 'lifting':
+                self._pick_sequence['stage'] = 'transporting'
+                self.get_logger().info(
+                    'Pick stage 5/6: moving to target X/Y at current lifted Z'
+                )
+                self.move_to_xy(
+                    self._pick_sequence['target_x'],
+                    self._pick_sequence['target_y'])
+                return
+
+            if stage == 'transporting':
+                self._pick_sequence['stage'] = 'detaching'
+                self.get_logger().info(
+                    'Pick stage 6/6: detaching the object and opening gripper'
+                )
+                self.detach_object(
+                    self._pick_sequence['open_position'],
+                    self._pick_sequence['max_effort'])
+                return
+
         rclpy.shutdown()
 
     # =========================================================
@@ -381,40 +498,20 @@ class UR3ActionClient(Node):
                 f'to safe range value {safe_position:.4f}'
             )
 
-        goal_msg = GripperCommand.Goal()
-        goal_msg.command.position = safe_position
-        goal_msg.command.max_effort = float(max_effort)
-
-        # Fortress does not reliably enforce URDF mimic joints through
-        # ign_ros2_control. Command the second finger explicitly with the same
-        # joint displacement; its rotated joint frame makes it move opposite
-        # to the first finger in physical space.
-        discovery_deadline = time.monotonic() + 2.0
-        while (
-            self._gripper_mimic_publisher.get_subscription_count() == 0
-            and time.monotonic() < discovery_deadline
-        ):
-            time.sleep(0.05)
-
-        if self._gripper_mimic_publisher.get_subscription_count() == 0:
-            self.get_logger().error(
-                'gripper_mimic_controller is not active; refusing to move '
-                'only one finger'
-            )
-            return
-
-        mimic_command = Float64MultiArray()
-        mimic_command.data = [safe_position]
-        # Publish more than once to make startup behavior deterministic even
-        # when DDS endpoint discovery has only just completed.
-        for _ in range(3):
-            self._gripper_mimic_publisher.publish(mimic_command)
-            time.sleep(0.02)
+        goal_msg = FollowJointTrajectory.Goal()
+        goal_msg.trajectory.joint_names = [
+            'gripper_joint',
+            'gripper_joint_mimic'
+        ]
+        point = JointTrajectoryPoint()
+        point.positions = [safe_position, safe_position]
+        point.time_from_start = Duration(sec=2, nanosec=0)
+        goal_msg.trajectory.points = [point]
 
         self.get_logger().info(
             f'Sending gripper goal: '
-            f'position={safe_position:.4f}, '
-            f'max_effort={max_effort:.2f}'
+            f'left={safe_position:.4f}, right={safe_position:.4f}, '
+            f'requested_max_effort={max_effort:.2f}'
         )
 
         future = self._gripper_action_client.send_goal_async(
@@ -473,12 +570,11 @@ class UR3ActionClient(Node):
             'The gripper goal was accepted'
         )
 
-        # Some simulated GripperActionController versions keep the goal active
-        # after the fingers have physically stopped. Do not let that prevent
-        # the grasp sequence from reaching the Gazebo attach step.
+        # Keep a fallback for a simulated trajectory controller that does not
+        # return after the commanded two-second finger trajectory.
         if self._pending_lift_offset is not None:
             self._gripper_completion_timer = self.create_timer(
-                2.0,
+                3.0,
                 self.gripper_completion_timeout_callback
             )
 
@@ -510,7 +606,7 @@ class UR3ActionClient(Node):
         """Continue a simulated grasp if the gripper action never finishes."""
 
         self.get_logger().warning(
-            'Gripper action did not return a result within 2 seconds'
+            'Gripper action did not return a result within 3 seconds'
         )
         self.request_pending_lift('Gripper close timeout reached')
 
@@ -518,15 +614,15 @@ class UR3ActionClient(Node):
         """Receive feedback while the gripper is moving."""
 
         feedback = feedback_msg.feedback
+        actual_positions = list(feedback.actual.positions)
+        desired_positions = list(feedback.desired.positions)
 
         self.get_logger().info(
             f'Gripper feedback: '
-            f'position={feedback.position:.6f}, '
-            f'action_effort={feedback.effort:.2f}, '
+            f'desired_positions={desired_positions}, '
+            f'actual_positions={actual_positions}, '
             f'measured_effort={self._latest_gripper_effort}, '
-            f'peak_measured_effort={self._peak_gripper_effort:.2f}, '
-            f'stalled={feedback.stalled}, '
-            f'reached_goal={feedback.reached_goal}'
+            f'peak_measured_effort={self._peak_gripper_effort:.2f}'
         )
 
     def gripper_result_callback(self, future):
@@ -544,14 +640,54 @@ class UR3ActionClient(Node):
 
         self.get_logger().info(
             f'Gripper action completed: '
-            f'position={result.position:.6f}, '
-            f'action_effort={result.effort:.2f}, '
+            f'error_code={result.error_code}, '
+            f'error_string="{result.error_string}", '
             f'measured_effort={self._latest_gripper_effort}, '
             f'peak_measured_effort={self._peak_gripper_effort:.2f}, '
-            f'stalled={result.stalled}, '
-            f'reached_goal={result.reached_goal}, '
             f'status={status}'
         )
+
+        if self._pick_sequence is not None:
+            if result.error_code != 0:
+                self.abort_pick_sequence(
+                    f'gripper stage {self._pick_sequence["stage"]} failed: '
+                    f'{result.error_string}'
+                )
+                return
+
+            stage = self._pick_sequence['stage']
+            if stage == 'opening':
+                self._pick_sequence['stage'] = 'approach'
+                self.get_logger().info(
+                    'Pick stage 1/6: moving above the known box position'
+                )
+                self.send_pose_goal(
+                    self._pick_sequence['object_x'],
+                    self._pick_sequence['object_y'],
+                    self._pick_sequence['approach_z'],
+                    1.0, 0.0, 0.0, 0.0)
+                return
+
+            if stage == 'closing':
+                self._pick_sequence['stage'] = 'lifting'
+                self.get_logger().info(
+                    'Pick stage 4/6: attaching and lifting the box'
+                )
+                self.attach_and_lift(
+                    self._pick_sequence['lift_offset'],
+                    self._pick_sequence['object_x'],
+                    self._pick_sequence['object_y'],
+                    self._pick_sequence['object_z'])
+                return
+
+            if stage == 'releasing':
+                self.get_logger().info(
+                    'Pick-and-move sequence completed successfully; '
+                    'the object was released at the target'
+                )
+                self._pick_sequence = None
+                rclpy.shutdown()
+                return
 
         if self._pending_lift_offset is not None:
             self.request_pending_lift('Gripper action completed')
@@ -565,34 +701,17 @@ def main(args=None):
 
     action_client = UR3ActionClient()
 
-    # Select only one command for each test.
-
-    # Move the robot to the home configuration
-    # action_client.send_home_goal()
-
-    # Send a Cartesian pose goal
-    # action_client.send_pose_goal(0.34,0.0,0.22,1.0,0.0,0.0,0.0)
-
-    # Move an attached object in base_link coordinates (x, y, z):
-    # action_client.move_cartesian(0.1,0.1,0.0)
-
-    # Send a joint position goal
-    # action_client.send_joint_goal(-1.57,-1.57,1.57,-1.57,-1.57,0.0)
-
-    # Open the gripper
-    # action_client.open_gripper(0.06,10.0)
-
-    # Close the gripper
-    # action_client.close_gripper(0.0,100.0)
-
-    # Close the gripper, attach the box in Gazebo + MoveIt, then lift 15 cm.
-    # Run this only after the gripper TCP has been moved around the box.
-    # action_client.grasp_and_lift(0.04, 100.0, 0.1)
-
-    # After moving the attached object to its destination, select this command
-    # instead of attach_and_lift() to release it:
-    action_client.detach_object()
-
+    # Complete pick-and-move sequence. All coordinates use base_link.
+    action_client.pick_and_move(
+        object_x=0.35,
+        object_y=0.0,
+        object_z=0.05,
+        target_x=0.20,
+        target_y=0.20,
+        approach_clearance=0.07,
+        tcp_grasp_offset=0.08,
+        lift_offset=0.15,
+    )
 
     try:
         rclpy.spin(action_client)

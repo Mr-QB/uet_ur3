@@ -18,8 +18,9 @@ moveit_simple_controller_manager:
       - wrist_3_joint
 
   gripper_controller:
-    action_ns: gripper_cmd
-    type: GripperCommand
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
     default: true
     joints:
       - gripper_joint
+      - gripper_joint_mimic

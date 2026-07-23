@@ -29,11 +29,16 @@ public:
 
   bool moveHome();
 
-  bool attachPickBox();
+  bool attachPickBox(
+    double object_x = 0.35,
+    double object_y = 0.0,
+    double object_z = 0.05);
 
   bool detachPickBox();
 
   bool moveCartesian(double x_offset, double y_offset, double z_offset);
+
+  bool moveToXY(double target_x, double target_y);
 
   void stop();
 

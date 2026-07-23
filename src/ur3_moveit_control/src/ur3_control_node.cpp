@@ -138,7 +138,10 @@ private:
       feedback->state = "Attaching pick_box to gripper_tcp";
       goal_handle->publish_feedback(feedback);
 
-      const bool attached = ur3_motion_->attachPickBox();
+      const bool attached = ur3_motion_->attachPickBox(
+        goal->object_x,
+        goal->object_y,
+        goal->object_z);
       if (attached) {
         feedback->state = "Executing Cartesian lift";
         goal_handle->publish_feedback(feedback);
@@ -155,6 +158,10 @@ private:
         goal->cartesian_x_offset,
         goal->cartesian_y_offset,
         goal->cartesian_z_offset);
+    } else if (goal->command_type == UR3Control::Goal::MOVE_TO_XY) {
+      feedback->state = "Moving to absolute XY while keeping current Z";
+      goal_handle->publish_feedback(feedback);
+      success = ur3_motion_->moveToXY(goal->target_x, goal->target_y);
     } else {
       RCLCPP_ERROR(this->get_logger(), "Invalid command type!");
     }

@@ -187,18 +187,6 @@ def launch_setup(context, *args, **kwargs):
     ],
     output="screen",
     )
-    gripper_mimic_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "gripper_mimic_controller",
-            "--controller-manager",
-            "/controller_manager",
-            "--controller-manager-timeout",
-            "60",
-        ],
-        output="screen",
-    )
     # There may be other controllers of the joints, but this is the initially-started one
     initial_joint_controller_spawner_started = Node(
         package="controller_manager",
@@ -329,7 +317,6 @@ def launch_setup(context, *args, **kwargs):
         gz_launch_description_without_gui,
         gz_sim_bridge,
         gripper_controller_spawner,
-        gripper_mimic_controller_spawner,
         gz_spawn_table,
         gz_spawn_box,
         spawn_robot_after_box,
