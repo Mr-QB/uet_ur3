@@ -7,15 +7,15 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     return LaunchDescription([
-        # 1. Khởi chạy nhận diện ArUco Marker
+        # 1. Launch ArUco Marker detection
         Node(
             package='aruco_ros',
             executable='single',
             name='aruco_single',
             parameters=[{
                 'image_is_rectified': True,
-                'marker_size': 0.1,  # Đổi lại kích thước thật (mét) ở đây! Ví dụ 0.1m = 10cm
-                'marker_id': 26,     # Đổi ID của Marker ở đây
+                'marker_size': 0.1,  # Set actual marker size (meters) here! e.g. 0.1m = 10cm
+                'marker_id': 26,     # Set Marker ID here
                 'reference_frame': 'camera_color_optical_frame',
                 'camera_frame': 'camera_color_optical_frame',
                 'marker_frame': 'aruco_marker_frame'

@@ -8,6 +8,7 @@ from scipy.spatial.transform import Rotation as R
 import threading
 import sys
 import os
+import time
 from datetime import datetime
 
 class HandEyeCalibrator(Node):
@@ -22,17 +23,21 @@ class HandEyeCalibrator(Node):
         self.R_target2cam_list = []
         self.t_target2cam_list = []
         
+        self.get_logger().info('Waiting for TF system initialization (approx. 2-3 seconds)...')
+        # Wait briefly for TF buffer to collect static frames
+        time.sleep(2.0)
+        
         self.get_logger().info('=============================================')
         self.get_logger().info('  HAND-EYE CALIBRATION SCRIPT (MULTI-METHOD) ')
         self.get_logger().info('=============================================')
-        self.get_logger().info('USAGE GUIDE:')
-        self.get_logger().info('1. Move the robot arm to a pose where the marker is clearly visible.')
-        self.get_logger().info('2. Press [Enter] to take a sample (at least 5 samples at different poses are recommended).')
-        self.get_logger().info('3. Type "c" and press [Enter] to calculate the calibration offset.')
-        self.get_logger().info('4. Type "q" and press [Enter] to quit.')
+        self.get_logger().info('USER INSTRUCTIONS:')
+        self.get_logger().info('1. Move the robot arm to a posture where the marker is clearly visible.')
+        self.get_logger().info('2. Press [Enter] to take a sample (at least 5 samples at different angles recommended).')
+        self.get_logger().info('3. Type "c" and press [Enter] to calculate calibration offset.')
+        self.get_logger().info('4. Type "q" and press [Enter] to exit.')
         self.get_logger().info('=============================================')
         
-        # Start background thread for key readings
+        # Run background keyboard reader thread
         self.input_thread = threading.Thread(target=self.input_loop)
         self.input_thread.daemon = True
         self.input_thread.start()

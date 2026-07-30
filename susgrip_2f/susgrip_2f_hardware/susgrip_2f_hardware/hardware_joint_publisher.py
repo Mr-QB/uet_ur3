@@ -33,7 +33,7 @@ class SusGripKinematicsPublisher(Node):
             self.publisher_real_hardware.publish(out_msg)
 
     def test_joint_state_callback(self, msg):
-        # Fake Hardware publish thẳng vào /joint_states, nên phải bật check_loop
+        # Fake Hardware publishes directly to /joint_states, so check_loop must be enabled
         out_msg = self.joint_calculate(msg, check_loop=True)
         if out_msg is not None:
             self.publisher_fake_hardware.publish(out_msg)
@@ -65,7 +65,7 @@ class SusGripKinematicsPublisher(Node):
         out_msg.header.stamp = msg.header.stamp 
         
         out_msg.name = [
-            "susgrip_distance_joint", # Bắt buộc phải có khớp chính để forward
+            "susgrip_distance_joint", # Primary joint required for forwarding
             "base_slider_l_joint",
             "slider_outer_l_joint",
             "finger_outer_l_joint",
@@ -80,7 +80,7 @@ class SusGripKinematicsPublisher(Node):
             "passive_pad_inner_r_joint"
         ]
         out_msg.position = [0.0]*13
-        out_msg.position[0] = gripper_dis / 1000.0 # Bắt buộc forward khớp chính
+        out_msg.position[0] = gripper_dis / 1000.0 # Primary joint position forward
         out_msg.position[1] = slider     # base_slider_l_joint
         out_msg.position[2] = -buff      # slider_outer_l_joint
         out_msg.position[3] = buff       # finger_outer_l_joint

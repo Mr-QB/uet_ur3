@@ -243,7 +243,7 @@ namespace ur3_moveit_control
     back_wall.primitive_poses.push_back(back_wall_pose);
     back_wall.operation = back_wall.ADD;
 
-    // Thêm tường bên trái
+    // Add left wall
     moveit_msgs::msg::CollisionObject left_wall;
     left_wall.header.frame_id = move_group_.getPlanningFrame();
     left_wall.id = "left_wall";
@@ -258,7 +258,7 @@ namespace ur3_moveit_control
     left_wall.primitive_poses.push_back(left_wall_pose);
     left_wall.operation = left_wall.ADD;
 
-    // Thêm tường bên phải
+    // Add right wall
     moveit_msgs::msg::CollisionObject right_wall;
     right_wall.header.frame_id = move_group_.getPlanningFrame();
     right_wall.id = "right_wall";

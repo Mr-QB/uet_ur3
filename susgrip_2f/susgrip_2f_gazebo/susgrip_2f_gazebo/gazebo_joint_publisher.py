@@ -93,7 +93,7 @@ def main(args=None):
         pass
     finally:
         node.destroy_node()
-        if rclpy.ok(): # Thêm dòng này để kiểm tra xem ROS 2 đã tắt chưa
+        if rclpy.ok(): # Check if ROS 2 is still running before shutting down
             rclpy.shutdown()
 
 if __name__ == '__main__':

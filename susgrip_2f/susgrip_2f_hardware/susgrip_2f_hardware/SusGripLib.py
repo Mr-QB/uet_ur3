@@ -178,9 +178,9 @@ class SusGrip2F:
             if registers is not None and not registers.isError():
                 status = registers.registers[0]
                 if (status>>7)&0x01:
-                    return 1 # Đã Dừng
+                    return 1 # Stopped
                 else:
-                    return 0 # Đang Di chuyển
+                    return 0 # Moving
         return 1      
     
     def check_object(self):

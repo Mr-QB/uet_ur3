@@ -1,16 +1,12 @@
-ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur3e launch_rviz:=true
-
-
-
 # UR3e MoveIt Control (uet_ur3)
 
-Package này cung cấp node điều khiển và cấu hình quỹ đạo chuyển động cho cánh tay robot UR3e sử dụng thư viện MoveIt 2 trên nền tảng ROS 2 Humble. Hệ thống hỗ trợ linh hoạt cả hai chế độ: Mô phỏng vật lý (Simulation) trong Gazebo và Điều khiển Robot vật lý (Real Robot).
+This package provides control nodes and trajectory motion configurations for the UR3e robot arm using MoveIt 2 on ROS 2 Humble. The system supports both physical simulation (Gazebo) and real robot control.
 
 ---
 
-## Cài đặt và Biên dịch
+## Installation & Building
 
-Yêu cầu thực hiện biên dịch package trong không gian làm việc (workspace) trước khi vận hành:
+Build the package inside your workspace before running:
 
 ```bash
 cd ~/ros_ws
@@ -20,19 +16,19 @@ source install/setup.bash
 
 ---
 
-## 1. Vận hành trong môi trường Mô phỏng (Simulation)
+## 1. Operating in Simulation Environment (Gazebo)
 
-Chế độ này sử dụng môi trường mô phỏng Gazebo (Ignition) phối hợp với cơ chế đồng bộ thời gian mô phỏng (`use_sim_time:=true`).
+This mode uses the Gazebo simulation environment along with simulated time synchronization (`use_sim_time:=true`).
 
-### Terminal 1: Khởi chạy môi trường Gazebo
-Khởi tạo mô phỏng vật lý của robot UR3e trên Gazebo:
+### Terminal 1: Launch Gazebo Environment
+Initialize the UR3e physics simulation in Gazebo:
 ```bash
 source ~/ros_ws/install/setup.bash
 ros2 launch ur_simulation_gz ur_sim_control.launch.py ur_type:=ur3e
 ```
 
-### Terminal 2: Khởi chạy MoveIt Server và Node điều khiển
-Tiến trình này sẽ tích hợp khởi động MoveIt Planning Server, giao diện trực quan hóa RViz 2, và thực thi tuần tự quỹ đạo di chuyển đã lập trình sẵn sau thời gian trễ 5 giây:
+### Terminal 2: Launch MoveIt Server and Control Node
+This launches the MoveIt Planning Server, RViz 2 visualization interface, and executes the predefined trajectory:
 ```bash
 source ~/ros_ws/install/setup.bash
 ros2 launch ur3_moveit_control ur3_demo.launch.py \
@@ -42,11 +38,11 @@ ros2 launch ur3_moveit_control ur3_demo.launch.py \
 
 ---
 
-## 2. Vận hành với Robot vật lý (Real Robot)
+## 2. Operating with Real Robot Hardware
 
-Chế độ này thực thi các lệnh điều khiển trực tiếp tới phần cứng robot UR3e thông qua kết nối Ethernet (`use_sim_time:=false`).
+This mode sends control commands directly to UR3e robot hardware via Ethernet connection (`use_sim_time:=false`).
 
-### Terminal 1: Khởi chạy trình điều khiển phần cứng (Driver)
+### Terminal 1: Launch Robot Hardware Driver
 ```bash
 source ~/ros_ws/install/setup.bash
 ros2 launch ur_robot_driver ur_control.launch.py \
@@ -56,14 +52,14 @@ ros2 launch ur_robot_driver ur_control.launch.py \
 ```
 
 > [!IMPORTANT]
-> **Quy trình bắt buộc trên thiết bị Teach Pendant của Robot:**
-> 1. Thiết lập trạng thái robot sang chế độ Remote Control (Điều khiển từ xa).
-> 2. Mở chương trình điều khiển có chứa node External Control (đảm bảo cấu hình đúng địa chỉ IP của máy tính gửi lệnh).
-> 3. Nhấn nút Play trên Teach Pendant để bắt đầu thực thi chương trình kết nối.
-> 4. Xác nhận kết nối thành công tại Terminal Driver thông qua log:
+> **Mandatory Procedure on Robot Teach Pendant:**
+> 1. Set the robot state to Remote Control mode.
+> 2. Open the control program containing the External Control node (ensure the PC IP address is configured correctly).
+> 3. Press the Play button on the Teach Pendant to start the connection program.
+> 4. Verify successful connection in the Driver terminal log:
 >    `[UR_Client_Library:]: Robot connected to reverse interface. Ready to receive control commands.`
 
-### Terminal 2: Khởi chạy MoveIt Server và Node điều khiển
+### Terminal 2: Launch MoveIt Server and Control Node
 ```bash
 source ~/ros_ws/install/setup.bash
 ros2 launch ur3_moveit_control ur3_demo.launch.py \
@@ -73,57 +69,11 @@ ros2 launch ur3_moveit_control ur3_demo.launch.py \
 
 ---
 
-## Các tham số cấu hình trong `ur3_demo.launch.py`
+## 3. Concurrent Operation of UR3e Arm and SusGrip Hardware
 
-Người dùng có thể tùy biến hành vi hệ thống thông qua việc truyền các đối số (arguments) khi thực thi file launch:
+To control both the robot arm and physical SusGrip gripper simultaneously (with real-time state visualization in RViz):
 
-| Tham số | Giá trị mặc định | Mô tả chi tiết |
-| :--- | :--- | :--- |
-| `ur_type` | `ur3e` | Dòng robot Universal Robots tương ứng (e.g. `ur3`, `ur3e`, `ur5`, `ur5e`). |
-| `use_sim_time` | `true` | Xác định nguồn thời gian sử dụng (đặt `false` đối với robot vật lý). |
-| `launch_rviz` | `true` | Tùy chọn hiển thị công cụ trực quan hóa RViz 2. |
-| `launch_moveit` | `true` | Tùy chọn tự động gọi MoveIt Planning Server (`ur_moveit.launch.py`). |
-
-*Ví dụ cấu hình vận hành thực tế không sử dụng giao diện đồ họa RViz 2:*
-```bash
-ros2 launch ur3_moveit_control ur3_demo.launch.py ur_type:=ur3e use_sim_time:=false launch_rviz:=false
-```
-
----
-
-## Xử lý lỗi hệ thống (Troubleshooting)
-
-### 1. Lỗi từ chối nhận lệnh điều khiển: `Can't accept new action goals. Controller is not running.`
-* **Nguyên nhân:** Bộ điều khiển `scaled_joint_trajectory_controller` trên driver phần cứng chưa được kích hoạt. Lỗi này thường do kết nối giữa máy tính điều khiển và UR Controller Box bị gián đoạn (chương trình External Control trên Teach Pendant chưa được chạy).
-* **Khắc phục:** Thực hiện kiểm tra danh sách bộ điều khiển đang hoạt động bằng lệnh `ros2 control list_controllers`. Đảm bảo chương trình External Control đã chạy và hiển thị trạng thái `active`.
-
-### 2. Tiến trình bị treo khi nhận tín hiệu kết thúc (Ctrl+C)
-* **Khắc phục:** Node điều khiển `ur3_demo_node` đã được tái cấu trúc luồng xử lý. Tác vụ di chuyển và lập kế hoạch quỹ đạo được đẩy xuống chạy bất đồng bộ ở luồng phụ (background thread), trong khi luồng chính đảm nhiệm việc lắng nghe sự kiện spin của ROS 2. Khi nhận tín hiệu SIGINT (`Ctrl+C`), toàn bộ hệ thống sẽ thoát lập tức mà không gặp hiện tượng treo tiến trình chờ giải phóng tài nguyên.
-
----
-
-## 3. Hiệu chuẩn Camera Eye-in-Hand (Hand-Eye Calibration)
-
-Tính năng này tự động tính toán **ma trận chuyển vị 4×4** (Homogeneous Transformation Matrix) từ end-effector (`tool0`) tới camera (`camera_link`) bằng thuật toán Hand-Eye Calibration của OpenCV. Script hỗ trợ chạy đồng thời **5 thuật toán** (Tsai, Park, Horaud, Andreff, Daniilidis) và tự động chọn kết quả tốt nhất.
-
-### Yêu cầu trước khi chạy
-
-- Camera RealSense đã cắm và hoạt động
-- ArUco Marker đã in và đặt cố định trên mặt bàn (ID mặc định: `26`, kích thước: `0.1m`)
-- Robot UR3e đã kết nối và TF `base_link` → `tool0` đang publish
-- Package `aruco_ros` đã cài đặt
-
-### Terminal 1: Khởi chạy Camera RealSense
-```bash
-source ~/ros_ws/install/setup.bash
-ros2 launch realsense2_camera rs_launch.py align_depth.enable:=true
-```
-*Đợi đến khi log báo `RealSense Node Is Up!`*
-
-> [!CAUTION]
-> **KHÔNG bật PointCloud2 color** khi calibrate. PointCloud2 tiêu tốn rất nhiều tài nguyên (~9 triệu điểm 3D/giây) và có thể gây **freeze toàn bộ hệ thống**. Chỉ cần image RGB là đủ cho ArUco detection.
-
-### Terminal 2: Khởi chạy Robot Driver + MoveIt
+### Terminal 1: Launch UR3e Driver
 ```bash
 source ~/ros_ws/install/setup.bash
 ros2 launch ur_robot_driver ur_control.launch.py \
@@ -131,70 +81,137 @@ ros2 launch ur_robot_driver ur_control.launch.py \
   robot_ip:=192.168.1.10 \
   launch_rviz:=false
 ```
-*(Nhớ bật External Control trên Teach Pendant)*
+*(Remember to activate External Control on the Teach Pendant).*
 
-### Terminal 3: Khởi chạy ArUco Marker Detection
+### Terminal 2: Launch MoveIt Server and RViz
+```bash
+source ~/ros_ws/install/setup.bash
+ros2 launch ur3_moveit_control ur3_demo.launch.py \
+  ur_type:=ur3e \
+  use_sim_time:=false
+```
+
+### Terminal 3: Connect SusGrip Hardware & Sync RViz
+Ensure the USB-to-RS485 cable is connected to your computer. Grant USB access permission:
+```bash
+sudo chmod 666 /dev/ttyUSB0
+```
+Run the gripper driver with topic remapping to allow proper feedback for repeated operations:
+```bash
+source ~/ros_ws/install/setup.bash
+ros2 run susgrip_2f_hardware hardware_interface --ros-args -p serial_port:=/dev/ttyUSB0 -r /susgrip/joint_states:=/joint_states
+```
+
+> [!TIP]
+> **Controlling Gripper in RViz:**
+> 1. In **MotionPlanning**, under **Planning Group**, select **`gripper`**.
+> 2. Switch to **Joints** tab, drag the slider to adjust open/close posture.
+> 3. Go back to **Planning** tab, click **Plan** then **Execute**. The physical gripper will execute identical motion to RViz.
+
+---
+
+## Configuration Arguments in `ur3_demo.launch.py`
+
+Customize system behavior by passing arguments to the launch file:
+
+| Argument | Default Value | Description |
+| :--- | :--- | :--- |
+| `ur_type` | `ur3e` | Universal Robots model series (e.g., `ur3`, `ur3e`, `ur5`, `ur5e`). |
+| `use_sim_time` | `true` | Time source selection (`false` for real hardware). |
+| `launch_rviz` | `true` | Option to launch RViz 2 visualization tool. |
+| `launch_moveit` | `true` | Option to automatically start MoveIt Planning Server (`ur_moveit.launch.py`). |
+
+*Example command without RViz GUI:*
+```bash
+ros2 launch ur3_moveit_control ur3_demo.launch.py ur_type:=ur3e use_sim_time:=false launch_rviz:=false
+```
+
+---
+
+## Troubleshooting
+
+### 1. Action Goal Rejection: `Can't accept new action goals. Controller is not running.`
+* **Cause:** `scaled_joint_trajectory_controller` on hardware driver is not active. Usually caused by interrupted connection or inactive External Control program on Teach Pendant.
+* **Fix:** Check controller status using `ros2 control list_controllers`. Ensure External Control program is running and showing `active`.
+
+### 2. Process Hangs on SIGINT (Ctrl+C)
+* **Fix:** `ur3_demo_node` uses async thread execution for motion planning while main thread handles ROS 2 spin loop. On SIGINT, the node cleanly shuts down without hanging.
+
+---
+
+## 4. Eye-in-Hand Camera Calibration
+
+This feature automatically computes the 4x4 Homogeneous Transformation Matrix from end-effector (`tool0`) to camera (`camera_link`) using OpenCV Hand-Eye Calibration algorithms (Tsai, Park, Horaud, Andreff, Daniilidis).
+
+### Prerequisites
+
+- RealSense camera connected (USB 3.0 Type-C recommended to prevent frame timeouts).
+- Printed ArUco Marker placed on the table (Default ID: `26`, size: `0.1m`). **Do not move marker** during calibration.
+- UR3e connected and TF `base_link` → `tool0` active.
+- Package `aruco_ros` installed (`sudo apt-get install ros-humble-aruco-ros`).
+
+### Terminal 1: Launch RealSense Camera
+```bash
+source ~/ros_ws/install/setup.bash
+ros2 launch realsense2_camera rs_launch.py align_depth.enable:=true initial_reset:=true
+```
+
+> [!CAUTION]
+> **DO NOT enable PointCloud2 color** during calibration. PointCloud2 consumes high CPU resources and can lock up the system. Standard RGB image stream is sufficient for ArUco detection.
+
+### Terminal 2: Launch Robot Driver + MoveIt
+```bash
+source ~/ros_ws/install/setup.bash
+ros2 launch ur_robot_driver ur_control.launch.py \
+  ur_type:=ur3e \
+  robot_ip:=192.168.1.10 \
+  launch_rviz:=false
+```
+
+### Terminal 3: Launch ArUco Marker Detection
 ```bash
 source ~/ros_ws/install/setup.bash
 ros2 launch ur3_moveit_control eye_in_hand_calib.launch.py
 ```
 
-### Terminal 4: Chạy Script Calibration
+### Terminal 4: Run Calibration Script
 ```bash
 source ~/ros_ws/install/setup.bash
 python3 ~/ros_ws/src/uet_ur3/ur3_moveit_control/scripts/realsense_calib_eye_in_hand.py
 ```
 
-### Quy trình thao tác
+### Operational Keys
 
-| Phím | Chức năng |
+| Key | Function |
 | :--- | :--- |
-| `Enter` | Lấy 1 mẫu calibration (TF robot + pose marker) |
-| `c` + `Enter` | Tính toán calibration và in kết quả |
-| `q` + `Enter` | Thoát chương trình |
+| `Enter` | Take 1 calibration sample (robot TF + marker pose) |
+| `c` + `Enter` | Calculate calibration and print report |
+| `q` + `Enter` | Exit program |
 
 > [!IMPORTANT]
-> **Quy trình lấy mẫu chuẩn xác:**
-> 1. Cần **ít nhất 5 mẫu** ở các tư thế (pose) tay máy **khác nhau rõ rệt** — thay đổi cả vị trí lẫn góc xoay.
-> 2. Tại mỗi tư thế, đảm bảo camera **nhìn thấy rõ toàn bộ ArUco Marker** trước khi nhấn Enter.
-> 3. Tránh các tư thế quá gần nhau hoặc chỉ thay đổi 1 trục — điều này gây ra kết quả không chính xác.
-> 4. Sau khi lấy đủ mẫu, gõ `c` để tính toán. Script sẽ in ra:
->    - **Bảng so sánh** kết quả 5 thuật toán (X, Y, Z, Roll, Pitch, Yaw)
->    - **Ma trận chuyển vị 4×4** của thuật toán tốt nhất
->    - **Lệnh `static_transform_publisher`** sẵn sàng copy-paste (cả Quaternion và Euler)
+> **Sampling Procedure:**
+> 1. Collect **at least 5 samples** at distinctly different robot arm postures.
+> 2. Ensure camera clearly detects the ArUco Marker before pressing Enter.
+> 3. After gathering sufficient samples, press `c` to compute. The script prints:
+>    - Comparison table across 5 algorithms (X, Y, Z, Roll, Pitch, Yaw)
+>    - 4x4 Transformation Matrix of the best method
+>    - `static_transform_publisher` command ready to copy-paste.
 
-### Output mẫu
+### Sample Output
 
 ```
 ═══════════════════════════════════════════════════
-  🏆 KẾT QUẢ TỐT NHẤT: PARK
+  🏆 BEST METHOD RESULT: PARK
 ═══════════════════════════════════════════════════
---- MA TRẬN CHUYỂN VỊ 4×4 (tool0 → camera_link) ---
-  [ +0.999123  -0.012345  +0.034567  +0.045678 ]
-  [ +0.011234  +0.998765  +0.023456  -0.023456 ]
-  [ -0.035678  -0.022345  +0.999234  +0.067890 ]
+--- HOMOGENEOUS TRANSFORMATION MATRIX 4x4 (tool0 → camera_link) ---
+  [ -0.012950  -0.999833  -0.012911  -0.043398 ]
+  [ +0.032546  +0.012483  -0.999392  -0.107180 ]
+  [ +0.999386  -0.013363  +0.032379  +0.041341 ]
   [ +0.000000  +0.000000  +0.000000  +1.000000 ]
 ```
 
-### Lưu và tái sử dụng kết quả
+### Saving Results
 
-Hệ thống sẽ tự động lưu lại **2 file** cho mỗi lần calib tại thư mục `~/ros_ws/calib_results/`:
-1. **File `.txt` (Báo cáo tổng hợp):** Chứa kết quả ma trận, nhận xét, và lệnh publish TF có thể đọc và copy trực tiếp (phù hợp để làm báo cáo).
-2. **File `.npz` (Dữ liệu gốc):** Chứa toàn bộ ma trận và dữ liệu mẫu. Để load lại bằng code:
-```python
-import numpy as np
-data = np.load('~/ros_ws/calib_results/hand_eye_calib_20260625_170000.npz', allow_pickle=True)
-T_best = data['HORAUD_T']  # Ma trận 4x4 của thuật toán HORAUD
-print(T_best)
-```
-
-### Áp dụng kết quả vào hệ thống
-
-Sau khi calibration xong, copy lệnh `static_transform_publisher` từ output và thêm vào launch file hoặc chạy trực tiếp:
-```bash
-# Ví dụ (thay số thực tế từ output):
-ros2 run tf2_ros static_transform_publisher \
-  --x 0.045678 --y -0.023456 --z 0.067890 \
-  --qx 0.012345 --qy -0.017890 --qz 0.005678 --qw 0.999750 \
-  --frame-id tool0 --child-frame-id camera_link
-```
+Calibration saves files automatically into `~/ros_ws/calib_results/`:
+1. **`.txt` Report File:** Summary table, transformation matrix, and static TF command.
+2. **`.npz` Raw Data File:** Numpy binary containing matrix data and raw pose samples.

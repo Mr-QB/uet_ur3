@@ -116,30 +116,30 @@ def launch_setup(context,*arg,**kwarg):
         output='screen'
     )
 
-    # 1. Định nghĩa Spawner cho Joint State Broadcaster
+    # 1. Define Spawner for Joint State Broadcaster
     load_joint_state_broadcaster = Node(
         package='controller_manager',
         executable='spawner',
         arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager']
     )
 
-    # Đợi spawn xong + plugin gazebo_ros2_control khởi tạo controller_manager
-    # Dùng TimerAction delay 5 giây sau khi toàn bộ launch khởi động
+    # Wait for spawn completion + gazebo_ros2_control plugin initializing controller_manager
+    # Use TimerAction to delay 5 seconds after launch startup
     delay_joint_state_broadcaster = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=spawn_entity,
             on_exit=[
                 TimerAction(
-                    period=5.0,  # Đợi 5 giây cho gazebo_ros2_control khởi động
+                    period=5.0,  # Wait 5 seconds for gazebo_ros2_control startup
                     actions=[load_joint_state_broadcaster]
                 )
             ],
         )
     )
 
-    # Đợi joint_state_broadcaster nạp xong thành công mới chạy Gripper Controller
+    # Wait for joint_state_broadcaster to load successfully before running Gripper Controller
 
-    # 2. Định nghĩa Spawner cho Gripper Controller
+    # 2. Define Spawner for Gripper Controller
     load_gripper_controller = Node(
         package='controller_manager',
         executable='spawner',
@@ -161,15 +161,15 @@ def launch_setup(context,*arg,**kwarg):
         output='screen',
     )
 
-    # Thay thế các node spawner cũ bằng các node delay đã được thiết lập sự kiện tuần tự
+    # Replace old spawner nodes with delayed event-triggered nodes
     node_to_start = [
         node_robot_state_publisher,
         node_robot_state_publisher_gazebo,
         node_rviz,
         gazebo,
         spawn_entity,
-        delay_joint_state_broadcaster,  # Thay đổi ở đây
-        delay_gripper_controller,      # Thay đổi ở đây
+        delay_joint_state_broadcaster,  # Modified here
+        delay_gripper_controller,      # Modified here
         gazebo_publisher
     ]
     return node_to_start

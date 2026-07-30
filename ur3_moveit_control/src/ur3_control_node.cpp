@@ -47,7 +47,7 @@ private:
   std::shared_ptr<ur3_moveit_control::UR3MotionInterface> ur3_motion_;
   rclcpp_action::Server<UR3Control>::SharedPtr action_server_;
   rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr depth_sub_;
-  double camera_z_mount_offset_ = 0.05; // Offset Z từ tay gắp tới camera (m)
+  double camera_z_mount_offset_ = 0.05; // Z-offset from gripper to camera (m)
   
   std::shared_ptr<GoalHandleUR3Control> active_goal_;
   std::mutex mutex_;
@@ -56,7 +56,7 @@ private:
   void depth_callback(const sensor_msgs::msg::Image::SharedPtr msg)
   {
     if (msg->encoding != "16UC1") {
-      RCLCPP_WARN_ONCE(this->get_logger(), "Camera encoding không phải 16UC1. Không thể đọc!");
+      RCLCPP_WARN_ONCE(this->get_logger(), "Camera encoding is not 16UC1. Cannot read!");
       return;
     }
 
@@ -75,7 +75,7 @@ private:
       try {
         ur3_motion_->calibObjectHeightEyeInHand(depth_m, camera_z_mount_offset_);
       } catch (const std::exception &e) {
-        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 2000, "Đang đợi TF tay máy để tính toán chiều cao...");
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 2000, "Waiting for robot TF to calculate height...");
       }
     }
   }

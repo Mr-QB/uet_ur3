@@ -11,15 +11,15 @@ gripper_controller:
     joint: gripper_joint
     goal_tolerance: 0.001
     max_effort: 100.0
-    allow_stalling: true    # Đổi thành TRUE để báo SUCCEEDED khi gắp trúng vật!
+    allow_stalling: true    # Set to TRUE to report SUCCEEDED when grasping an object!
     stall_velocity_threshold: 0.001
     stall_timeout: 1.0
     
-    # MANG BỘ PID VỀ NHÀ CỦA GRIPPER_CONTROLLER:
+    # PID GAINS FOR GRIPPER CONTROLLER:
     gains:
       gripper_joint:
         p: 100.0
         i: 5.0
         d: 10.0
 
-# Xóa (hoặc comment) toàn bộ phần gazebo_ros2_control cũ đi vì giờ không cần nó tính PID nữa.
+# Legacy gazebo_ros2_control PID section removed as it is no longer required.
