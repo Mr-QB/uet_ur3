@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/com9/uet_ws/build/ur3_moveit_control/libur3_motion_interface.so" "/home/com9/uet_ws/build/ur3_moveit_control/ur3_control_node" "TARGETS" "ur3_motion_interface" "ur3_control_node" "ARCHIVE_DESTINATION" "lib" "LIBRARY_DESTINATION" "lib" "RUNTIME_DESTINATION" "lib/ur3_moveit_control")

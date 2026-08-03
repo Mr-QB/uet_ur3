@@ -1,4 +1,0 @@
-Invoking command in '/home/com9/uet_ws/build/ur_moveit_config': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_moveit_config
-Invoked command in '/home/com9/uet_ws/build/ur_moveit_config' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur_moveit_config
-Invoking command in '/home/com9/uet_ws/build/ur_moveit_config': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_moveit_config
-Invoked command in '/home/com9/uet_ws/build/ur_moveit_config' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur_moveit_config

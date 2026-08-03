@@ -1,1 +1,0 @@
-/home/com9/uet_ws/src/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp

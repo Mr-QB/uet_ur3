@@ -1,9 +1,0 @@
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/uninstall.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/ur_bringup_uninstall.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/test.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/edit_cache.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/rebuild_cache.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/list_install_components.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/install.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/install/local.dir
-/home/com9/uet_ws/build/ur_bringup/CMakeFiles/install/strip.dir

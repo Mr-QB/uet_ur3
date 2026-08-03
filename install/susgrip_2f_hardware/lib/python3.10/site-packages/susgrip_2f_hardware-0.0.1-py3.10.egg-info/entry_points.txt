@@ -1,4 +1,0 @@
-[console_scripts]
-hardware_interface = susgrip_2f_hardware.hardware_interface:main
-hardware_joint_publisher = susgrip_2f_hardware.hardware_joint_publisher:main
-

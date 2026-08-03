@@ -1,1 +1,0 @@
-/home/com9/uet_ws/src/ur3_moveit_control/src/random_pick_test.py

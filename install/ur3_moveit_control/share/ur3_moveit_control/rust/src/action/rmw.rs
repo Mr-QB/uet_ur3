@@ -1,1 +1,0 @@
-/home/com9/uet_ws/build/ur3_moveit_control/rosidl_generator_rs/ur3_moveit_control/rust/src/action/rmw.rs

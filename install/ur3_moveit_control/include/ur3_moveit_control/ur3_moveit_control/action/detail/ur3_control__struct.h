@@ -1,1 +1,0 @@
-/home/com9/uet_ws/build/ur3_moveit_control/rosidl_generator_c/ur3_moveit_control/action/detail/ur3_control__struct.h

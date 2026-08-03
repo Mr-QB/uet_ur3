@@ -1,4 +1,0 @@
-
-bool success
-string answer
-string generated_file_name

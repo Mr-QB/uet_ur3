@@ -1,3 +1,0 @@
-[console_scripts]
-susgrip_2f_visualize = susgrip_2f_description.susgrip_2f_visualize:main
-

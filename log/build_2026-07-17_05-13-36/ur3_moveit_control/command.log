@@ -1,6 +1,0 @@
-Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/com9/uet_ws/src/ur3_moveit_control -DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur3_moveit_control
-Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/com9/uet_ws/src/ur3_moveit_control -DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur3_moveit_control
-Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control
-Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control
-Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur3_moveit_control
-Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/com9/uet_ws/build/ur3_moveit_control

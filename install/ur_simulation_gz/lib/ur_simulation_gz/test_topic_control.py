@@ -1,1 +1,0 @@
-/home/com9/uet_ws/src/ur_simulation_gz/scripts/test_topic_control.py

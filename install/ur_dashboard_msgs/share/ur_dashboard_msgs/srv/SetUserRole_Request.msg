@@ -1,3 +1,0 @@
-
-
-UserRole user_role

@@ -1,1 +1,0 @@
-/home/com9/uet_ws/build/ur3_moveit_control/rosidl_generator_py/ur3_moveit_control/action/_ur3_control_s.c

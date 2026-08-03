@@ -1,1 +1,0 @@
-/home/com9/uet_ws/src/ur3_moveit_control/launch/eye_in_hand_calib.launch.py

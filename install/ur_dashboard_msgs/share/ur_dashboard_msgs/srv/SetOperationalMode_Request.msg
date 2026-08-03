@@ -1,1 +1,0 @@
-OperationalMode operational_mode
