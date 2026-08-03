@@ -12,6 +12,11 @@ module ur3_moveit_control {
       const uint8 MOVE_JOINT = 1;
       const uint8 MOVE_POSE = 2;
       const uint8 ATTACH_AND_LIFT = 3;
+      const uint8 DETACH_OBJECT = 4;
+      const uint8 MOVE_CARTESIAN = 5;
+      const uint8 MOVE_TO_XY = 6;
+      const uint8 PREPARE_NEXT_TRIAL = 7;
+      const uint8 MOVE_CARTESIAN_STRICT = 8;
     };
     @verbatim (language="comment", text=
       "Request")
@@ -22,7 +27,21 @@ module ur3_moveit_control {
 
       geometry_msgs::msg::PoseStamped pose_goal;
 
+      double cartesian_x_offset;
+
+      double cartesian_y_offset;
+
       double cartesian_z_offset;
+
+      double target_x;
+
+      double target_y;
+
+      double object_x;
+
+      double object_y;
+
+      double object_z;
     };
     @verbatim (language="comment", text=
       "Result")

@@ -1,0 +1,51 @@
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found rclcpp_action: 16.0.19 (/opt/ros/humble/share/rclcpp_action/cmake)
+-- Found moveit_ros_planning_interface: 2.5.9 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found parameter_traits: 0.7.4 (/opt/ros/humble/share/parameter_traits/cmake)
+-- Found rclcpp_lifecycle: 16.0.19 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+-- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread 
+-- Found rosidl_default_generators: 1.2.1 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/com9/uet_ws/build/ur3_moveit_control
+[35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_generator_c[0m
+[35m[1mConsolidate compiler generated dependencies of target ur3_motion_interface[0m
+[  2%] Built target ur3_moveit_control__cpp
+[ 11%] Built target ur3_moveit_control__rosidl_generator_c
+failed to create symbolic link '/home/com9/uet_ws/build/ur3_moveit_control/ament_cmake_python/ur3_moveit_control/ur3_moveit_control' because existing path cannot be removed: Is a directory
+[ 13%] Built target ur3_moveit_control__rs
+gmake[2]: *** [CMakeFiles/ament_cmake_python_symlink_ur3_moveit_control.dir/build.make:70: CMakeFiles/ament_cmake_python_symlink_ur3_moveit_control] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:444: CMakeFiles/ament_cmake_python_symlink_ur3_moveit_control.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_c[0m
+[35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_introspection_c[0m
+[35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_fastrtps_cpp[0m
+[ 16%] [32m[1mLinking CXX shared library libur3_motion_interface.so[0m
+[ 25%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c
+[ 33%] Built target ur3_moveit_control__rosidl_typesupport_c
+[ 41%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_cpp
+[ 44%] Built target ur3_motion_interface
+gmake: *** [Makefile:146: all] Error 2

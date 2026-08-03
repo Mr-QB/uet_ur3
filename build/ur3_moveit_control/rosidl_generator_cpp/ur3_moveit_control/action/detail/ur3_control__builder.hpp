@@ -21,16 +21,128 @@ namespace action
 namespace builder
 {
 
+class Init_UR3Control_Goal_object_z
+{
+public:
+  explicit Init_UR3Control_Goal_object_z(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  ::ur3_moveit_control::action::UR3Control_Goal object_z(::ur3_moveit_control::action::UR3Control_Goal::_object_z_type arg)
+  {
+    msg_.object_z = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
+class Init_UR3Control_Goal_object_y
+{
+public:
+  explicit Init_UR3Control_Goal_object_y(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  Init_UR3Control_Goal_object_z object_y(::ur3_moveit_control::action::UR3Control_Goal::_object_y_type arg)
+  {
+    msg_.object_y = std::move(arg);
+    return Init_UR3Control_Goal_object_z(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
+class Init_UR3Control_Goal_object_x
+{
+public:
+  explicit Init_UR3Control_Goal_object_x(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  Init_UR3Control_Goal_object_y object_x(::ur3_moveit_control::action::UR3Control_Goal::_object_x_type arg)
+  {
+    msg_.object_x = std::move(arg);
+    return Init_UR3Control_Goal_object_y(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
+class Init_UR3Control_Goal_target_y
+{
+public:
+  explicit Init_UR3Control_Goal_target_y(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  Init_UR3Control_Goal_object_x target_y(::ur3_moveit_control::action::UR3Control_Goal::_target_y_type arg)
+  {
+    msg_.target_y = std::move(arg);
+    return Init_UR3Control_Goal_object_x(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
+class Init_UR3Control_Goal_target_x
+{
+public:
+  explicit Init_UR3Control_Goal_target_x(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  Init_UR3Control_Goal_target_y target_x(::ur3_moveit_control::action::UR3Control_Goal::_target_x_type arg)
+  {
+    msg_.target_x = std::move(arg);
+    return Init_UR3Control_Goal_target_y(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
 class Init_UR3Control_Goal_cartesian_z_offset
 {
 public:
   explicit Init_UR3Control_Goal_cartesian_z_offset(::ur3_moveit_control::action::UR3Control_Goal & msg)
   : msg_(msg)
   {}
-  ::ur3_moveit_control::action::UR3Control_Goal cartesian_z_offset(::ur3_moveit_control::action::UR3Control_Goal::_cartesian_z_offset_type arg)
+  Init_UR3Control_Goal_target_x cartesian_z_offset(::ur3_moveit_control::action::UR3Control_Goal::_cartesian_z_offset_type arg)
   {
     msg_.cartesian_z_offset = std::move(arg);
-    return std::move(msg_);
+    return Init_UR3Control_Goal_target_x(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
+class Init_UR3Control_Goal_cartesian_y_offset
+{
+public:
+  explicit Init_UR3Control_Goal_cartesian_y_offset(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  Init_UR3Control_Goal_cartesian_z_offset cartesian_y_offset(::ur3_moveit_control::action::UR3Control_Goal::_cartesian_y_offset_type arg)
+  {
+    msg_.cartesian_y_offset = std::move(arg);
+    return Init_UR3Control_Goal_cartesian_z_offset(msg_);
+  }
+
+private:
+  ::ur3_moveit_control::action::UR3Control_Goal msg_;
+};
+
+class Init_UR3Control_Goal_cartesian_x_offset
+{
+public:
+  explicit Init_UR3Control_Goal_cartesian_x_offset(::ur3_moveit_control::action::UR3Control_Goal & msg)
+  : msg_(msg)
+  {}
+  Init_UR3Control_Goal_cartesian_y_offset cartesian_x_offset(::ur3_moveit_control::action::UR3Control_Goal::_cartesian_x_offset_type arg)
+  {
+    msg_.cartesian_x_offset = std::move(arg);
+    return Init_UR3Control_Goal_cartesian_y_offset(msg_);
   }
 
 private:
@@ -43,10 +155,10 @@ public:
   explicit Init_UR3Control_Goal_pose_goal(::ur3_moveit_control::action::UR3Control_Goal & msg)
   : msg_(msg)
   {}
-  Init_UR3Control_Goal_cartesian_z_offset pose_goal(::ur3_moveit_control::action::UR3Control_Goal::_pose_goal_type arg)
+  Init_UR3Control_Goal_cartesian_x_offset pose_goal(::ur3_moveit_control::action::UR3Control_Goal::_pose_goal_type arg)
   {
     msg_.pose_goal = std::move(arg);
-    return Init_UR3Control_Goal_cartesian_z_offset(msg_);
+    return Init_UR3Control_Goal_cartesian_x_offset(msg_);
   }
 
 private:

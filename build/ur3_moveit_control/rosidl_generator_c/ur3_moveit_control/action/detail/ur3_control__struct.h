@@ -41,6 +41,36 @@ enum
   ur3_moveit_control__action__UR3Control_Goal__ATTACH_AND_LIFT = 3
 };
 
+/// Constant 'DETACH_OBJECT'.
+enum
+{
+  ur3_moveit_control__action__UR3Control_Goal__DETACH_OBJECT = 4
+};
+
+/// Constant 'MOVE_CARTESIAN'.
+enum
+{
+  ur3_moveit_control__action__UR3Control_Goal__MOVE_CARTESIAN = 5
+};
+
+/// Constant 'MOVE_TO_XY'.
+enum
+{
+  ur3_moveit_control__action__UR3Control_Goal__MOVE_TO_XY = 6
+};
+
+/// Constant 'PREPARE_NEXT_TRIAL'.
+enum
+{
+  ur3_moveit_control__action__UR3Control_Goal__PREPARE_NEXT_TRIAL = 7
+};
+
+/// Constant 'MOVE_CARTESIAN_STRICT'.
+enum
+{
+  ur3_moveit_control__action__UR3Control_Goal__MOVE_CARTESIAN_STRICT = 8
+};
+
 // Include directives for member types
 // Member 'joint_goal'
 #include "sensor_msgs/msg/detail/joint_state__struct.h"
@@ -53,7 +83,14 @@ typedef struct ur3_moveit_control__action__UR3Control_Goal
   uint8_t command_type;
   sensor_msgs__msg__JointState joint_goal;
   geometry_msgs__msg__PoseStamped pose_goal;
+  double cartesian_x_offset;
+  double cartesian_y_offset;
   double cartesian_z_offset;
+  double target_x;
+  double target_y;
+  double object_x;
+  double object_y;
+  double object_z;
 } ur3_moveit_control__action__UR3Control_Goal;
 
 // Struct for a sequence of ur3_moveit_control__action__UR3Control_Goal.

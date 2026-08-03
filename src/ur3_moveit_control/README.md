@@ -13,10 +13,19 @@ Package này cung cấp node điều khiển và cấu hình quỹ đạo chuy�
 Yêu cầu thực hiện biên dịch package trong không gian làm việc (workspace) trước khi vận hành:
 
 ```bash
-cd ~/ros_ws
+cd ~/uet_ws
 colcon build --packages-select ur3_moveit_control
-source install/setup.bash
+source src/ur3_moveit_control/scripts/activate_uet_ros.bash
 ```
+
+Phải source `activate_uet_ros.bash` trong **mọi terminal** chạy Gazebo, MoveIt,
+`send_goal_client.py` hoặc `random_pick_test.py`. Script đặt cùng một môi trường
+ROS discovery (`ROS_DOMAIN_ID=10`, `ROS_LOCALHOST_ONLY=0`, Fast DDS local peer
+discovery) rồi source workspace. Script chủ động unset `ROS_DISCOVERY_SERVER`
+và `CYCLONEDDS_URI` để mô phỏng trên máy này không phụ thuộc một Fast DDS
+Discovery Server chạy qua Tailscale. Nếu các terminal dùng domain hoặc discovery
+mode khác nhau, process vẫn có thể đang chạy nhưng service/controller/action sẽ
+không nhìn thấy nhau.
 
 ---
 
@@ -27,14 +36,14 @@ Chế độ này sử dụng môi trường mô phỏng Gazebo (Ignition) phối
 ### Terminal 1: Khởi chạy môi trường Gazebo
 Khởi tạo mô phỏng vật lý của robot UR3e trên Gazebo:
 ```bash
-source ~/ros_ws/install/setup.bash
+source ~/uet_ws/src/ur3_moveit_control/scripts/activate_uet_ros.bash
 ros2 launch ur_simulation_gz ur_sim_control.launch.py ur_type:=ur3e
 ```
 
 ### Terminal 2: Khởi chạy MoveIt Server và Node điều khiển
 Tiến trình này sẽ tích hợp khởi động MoveIt Planning Server, giao diện trực quan hóa RViz 2, và thực thi tuần tự quỹ đạo di chuyển đã lập trình sẵn sau thời gian trễ 5 giây:
 ```bash
-source ~/ros_ws/install/setup.bash
+source ~/uet_ws/src/ur3_moveit_control/scripts/activate_uet_ros.bash
  ros2 launch ur3_moveit_control ur3_demo_gripper.launch.py \
     ur_type:=ur3e \
     use_sim_time:=true
@@ -121,15 +130,27 @@ không tham gia collision checking và không chặn đường Cartesian đi và
    gripper và chạy đủ chuỗi pick-and-place.
 5. Sau khi attach và lift, mang chai sang trái hoặc phải bằng strict Cartesian
    với `dy = ±0.06 .. ±0.10 m`, đồng thời cho phép `dx = -0.02 .. 0.02 m`.
-6. Detach, mở gripper và ghi kết quả ra CSV.
+6. Giữ chai attached và đóng gripper, sau đó lập kế hoạch chỉ xoay
+   `wrist_3_joint` mặc định `+100°` để tạo tư thế rót.
+7. Random test không có bước mở càng hay thả chai xuống bàn. Sau tư
+   thế rót, chương trình detach nội bộ, chuyển ngay entity tới vị trí
+   parking và xóa collision object cũ để trial sau dùng lại chai.
+
+`send_goal_client.py` dừng khi chai vẫn attached ở tư thế rót. Tham số
+`--pour-angle-deg` đổi độ nghiêng; dùng giá trị âm, ví dụ `-100`, nếu
+cần rót theo hướng ngược lại. Chuyển động này dùng joint-space
+planning có collision checking; các cấu hình PRM, IK và Cartesian cũ không
+thay đổi.
 
 Chuỗi gắp dùng kiểu **radial side grasp** giống ảnh tham chiếu. Với mỗi tọa độ
 chai, hướng tiếp cận được tính bằng `yaw = atan2(object_y, object_x)`, vì vậy TCP
 luôn quay mặt từ robot về phía chai thay vì dùng một quaternion cố định cho cả
 vùng làm việc. TCP mặc định gắp tại tâm chiều cao chai với
 `tcp_grasp_offset = 0.06 m`; `gripper_tcp` cũng được đặt tại giữa chiều dài hai
-ngón kẹp. Pre-grasp cách grasp pose `0.12 m` theo chính hướng radial này để
-thân gripper có đủ khoảng hở với chai trước khi tiến Cartesian.
+ngón kẹp. Cả test chai cố định và random test dùng pre-grasp cách
+grasp pose `0.12 m` theo hướng radial. Khoảng này vẫn tạo đủ khe hở
+ngoài bán kính chai `0.05 m`, nhưng không kéo dài đoạn Cartesian
+thẳng để tránh tăng nguy cơ gặp joint limit hoặc singularity.
 
 Bước tiến cuối dùng `MOVE_CARTESIAN_STRICT`: nếu MoveIt không tạo được ít nhất
 99% đường thẳng thì trial dừng, không fallback sang PRM và không cho wrist quay
@@ -148,7 +169,7 @@ server đang chạy, sau đó mở terminal mới:
 
 ```bash
 cd ~/uet_ws
-source install/setup.bash
+source src/ur3_moveit_control/scripts/activate_uet_ros.bash
 ros2 run ur3_moveit_control random_pick_test.py \
   --trials 20 \
   --seed 23 \
@@ -187,6 +208,56 @@ Khi chạy riêng `send_goal_client.py`, sáu joint tại pre-grasp được ch�
 trong RAM. Chỉ sau khi advance, đóng càng, attach/lift và Cartesian transport
 đều thành công, waypoint mới được thêm vào `successful_grasp_waypoints.csv` tại
 thư mục đang chạy lệnh. Trial thất bại không được ghi vào file này.
+
+Khi planning tới pre-grasp, action server đọc lại hai file waypoint thành công,
+chọn các hàng có pose gần mục tiêu làm seed cho KDL IK, chuẩn hóa các góc tương
+đương về nhánh gần trạng thái hiện tại và xếp hạng nhiều nghiệm. Ba wrist joint
+được phạt cao hơn shoulder/elbow; tối đa ba plan thành công được so sánh theo
+độ dài chuyển động khớp trước khi execute. Cartesian path bật cả phát hiện
+relative jump và giới hạn tuyệt đối `0.20 rad` giữa hai mẫu. Trước khi lift,
+server còn kiểm tra vị trí TCP, trạng thái đóng/lực của gripper và chờ chuỗi
+`/pick_box/attachment_state="attached"` từ Gazebo 6.
+
+`send_goal_client.py` và `random_pick_test.py` dùng chung toàn bộ thông số và
+công thức side-grasp trong `src/grasp_profile.py`. Random test chỉ teleport một
+entity `pick_box` duy nhất giữa các trial; không được xóa rồi spawn lại chai vì
+Gazebo `DetachableJoint` giữ ID của entity được tạo lúc robot khởi động. Nếu
+chai bị mất, hãy restart launch Gazebo để chai được tạo trước plugin robot.
+Mỗi lần gắp, action server thử tối đa ba request attach trong tổng thời gian
+`3 s`; giữa các lần thử nó gửi detach để buộc Gazebo tạo một chuyển trạng thái
+`"attached"` mới thay vì chờ mãi một confirmation đã bị mất.
+
+`send_goal_client.py` nhận tọa độ vật động trong frame `base_link`. Ví dụ:
+
+```bash
+ros2 run ur3_moveit_control send_goal_client.py \
+  --object-x 0.60 --object-y 0.04 --object-z 0.05 \
+  --pour-angle-deg 100
+```
+
+Có thể đặt cả vị trí dịch sau lift bằng `--transport-dx` và `--transport-dy`.
+Nếu camera trả pose trong `camera_link`, phải TF-transform pose đó sang
+`base_link`; không truyền trực tiếp tọa độ camera vào ba tham số trên.
+
+Trước khi tới pre-grasp, one-shot client chạy cùng bước khởi tạo ổn
+định như random test: xóa attachment cũ bằng `PREPARE_NEXT_TRIAL`, đưa
+tay về `home`, rồi mới mở gripper. Như vậy trajectory tới pre-grasp
+được lập và thực thi từ một trạng thái khớp xác định, giảm lỗi
+controller path tolerance sau những lần chạy trước.
+
+Trong model mô phỏng hiện tại, `object_z` là cao độ mốc model/đáy chai
+so với `base_link`; TCP thực tế sẽ nhắm tới
+`grasp_z = object_z + tcp_grasp_offset`. Nếu thuật toán camera đã trả về
+thẳng **tâm điểm cần kẹp**, hãy truyền thêm
+`--tcp-grasp-offset 0.0`; nếu camera trả về mốc đáy chai thì giữ giá trị
+mặc định `0.06 m`.
+
+Simulation mặc định dùng `ur_simulation_gz/worlds/fast_empty.sdf`: physics step
+`0.002 s`, RTF mục tiêu `2.0`. Đây là giá trị mục tiêu; RTF thực vẫn có thể thấp
+hơn hoặc dao động nếu CPU/GPU không xử lý kịp. Có thể quay về world chuẩn bằng
+launch argument `world_file:=empty.sdf`. Gazebo chạy ở verbosity `2` thay vì
+debug `4`, và random test chờ `0.25 s` wall-clock sau mỗi lần teleport (xấp xỉ
+`0.5 s` simulation tại RTF 2).
 
 ---
 

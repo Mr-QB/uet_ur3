@@ -31,9 +31,11 @@
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
+    ExecuteProcess,
     IncludeLaunchDescription,
     OpaqueFunction,
     RegisterEventHandler,
+    TimerAction,
 )
 from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
@@ -248,20 +250,26 @@ def launch_setup(context, *args, **kwargs):
         str(table_z),
     ],
 )
-    gz_launch_description_with_gui = IncludeLaunchDescription(
+    # Always run the simulation server on its own. Starting server and GUI in
+    # the same ign process occasionally leaves MinimalScene connected before
+    # the world scene service is ready, producing a white window even though
+    # physics and ros2_control are healthy.
+    gz_server_launch_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
-        launch_arguments={"gz_args": [" -r -v 4 ", world_file]}.items(),
+        launch_arguments={"gz_args": [" -s -r -v 2 ", world_file]}.items(),
+    )
+
+    gz_gui_process = ExecuteProcess(
+        cmd=["ign", "gazebo", "-g", "-v", "2"],
+        output="screen",
         condition=IfCondition(gazebo_gui),
     )
 
-    gz_launch_description_without_gui = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
-        ),
-        launch_arguments={"gz_args": [" -s -r -v 4 ", world_file]}.items(),
-        condition=UnlessCondition(gazebo_gui),
+    start_gz_gui_after_server = TimerAction(
+        period=2.0,
+        actions=[gz_gui_process],
     )
 
     gz_spawn_box = Node(
@@ -282,14 +290,81 @@ def launch_setup(context, *args, **kwargs):
     ],
 )
 
+    # Insert world entities one at a time. The create service acknowledges a
+    # queued request before Gazebo's update loop has necessarily applied it;
+    # firing table and bottle requests concurrently made startup intermittent.
+    spawn_box_after_table = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=gz_spawn_table,
+            on_exit=[TimerAction(period=1.5, actions=[gz_spawn_box])],
+        )
+    )
+
     # DetachableJoint is configured when the robot model is inserted. Its
     # child model must already exist at that moment, otherwise the plugin
-    # cannot resolve pick_box::box_link and will not retry later. Spawn the
-    # robot only after the pick_box creation process has completed.
+    # cannot resolve pick_box::box_link and will not retry later. Give Gazebo
+    # one update interval after the bottle create process before inserting UR.
     spawn_robot_after_box = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=gz_spawn_box,
-            on_exit=[gz_spawn_entity],
+            on_exit=[TimerAction(period=2.0, actions=[gz_spawn_entity])],
+        )
+    )
+
+    # ign_ros2_control creates /controller_manager only after the robot entity
+    # and its Gazebo system plugin have finished loading. Start only the joint
+    # state broadcaster after that point, then chain the remaining controller
+    # spawners. Calling five controller-manager services concurrently can starve
+    # the Gazebo update thread on a slow startup and make every spawner time out.
+    spawn_controllers_after_robot = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=gz_spawn_entity,
+            on_exit=[
+                TimerAction(
+                    period=3.0,
+                    actions=[joint_state_broadcaster_spawner],
+                )
+            ],
+        )
+    )
+
+    spawn_joint_controller_after_joint_state = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[
+                initial_joint_controller_spawner_stopped,
+                initial_joint_controller_spawner_started,
+            ],
+        )
+    )
+
+    spawn_gripper_after_started_joint_controller = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=initial_joint_controller_spawner_started,
+            on_exit=[gripper_controller_spawner],
+        ),
+        condition=IfCondition(start_joint_controller),
+    )
+
+    spawn_gripper_after_stopped_joint_controller = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=initial_joint_controller_spawner_stopped,
+            on_exit=[gripper_controller_spawner],
+        ),
+        condition=UnlessCondition(start_joint_controller),
+    )
+
+    spawn_forward_position_after_gripper = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=gripper_controller_spawner,
+            on_exit=[forward_position_controller_spawner],
+        )
+    )
+
+    spawn_forward_velocity_after_forward_position = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=forward_position_controller_spawner,
+            on_exit=[forward_velocity_controller_spawner],
         )
     )
 
@@ -302,27 +377,30 @@ def launch_setup(context, *args, **kwargs):
             # ROS publishes Empty; Gazebo's DetachableJoint subscribes to it.
             "/pick_box/attach@std_msgs/msg/Empty]ignition.msgs.Empty",
             "/pick_box/detach@std_msgs/msg/Empty]ignition.msgs.Empty",
-            # Gazebo publishes the joint state; expose it in ROS for diagnosis.
-            "/pick_box/attachment_state@std_msgs/msg/Bool[ignition.msgs.Boolean",
+            # Ignition Gazebo 6 publishes the words "attached" / "detached"
+            # from DetachableJoint.  Keep the transport type exact; bridging
+            # this as Boolean silently prevents the control node from ever
+            # receiving attachment confirmation.
+            "/pick_box/attachment_state@std_msgs/msg/String[ignition.msgs.StringMsg",
         ],
         output="screen",
     )
 
     nodes_to_start = [
         robot_state_publisher_node,
-        joint_state_broadcaster_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
-        initial_joint_controller_spawner_stopped,
-        initial_joint_controller_spawner_started,
-        forward_position_controller_spawner,
-        forward_velocity_controller_spawner,
-        gz_launch_description_with_gui,
-        gz_launch_description_without_gui,
+        gz_server_launch_description,
+        start_gz_gui_after_server,
         gz_sim_bridge,
-        gripper_controller_spawner,
         gz_spawn_table,
-        gz_spawn_box,
+        spawn_box_after_table,
         spawn_robot_after_box,
+        spawn_controllers_after_robot,
+        spawn_joint_controller_after_joint_state,
+        spawn_gripper_after_started_joint_controller,
+        spawn_gripper_after_stopped_joint_controller,
+        spawn_forward_position_after_gripper,
+        spawn_forward_velocity_after_forward_position,
     ]
 
     return nodes_to_start
@@ -440,8 +518,13 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "world_file",
-            default_value="empty.sdf",
-            description="Gazebo world file (absolute path or filename from the gazebosim worlds collection) containing a custom world.",
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("ur_simulation_gz"), "worlds", "fast_empty.sdf"]
+            ),
+            description=(
+                "Gazebo world file. The default uses a 2 ms physics step and "
+                "targets RTF 2.0; pass empty.sdf to restore the stock RTF 1 world."
+            ),
         )
     )
 

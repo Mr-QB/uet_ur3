@@ -1,0 +1,138 @@
+[0.008s] Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake /home/com9/uet_ws/src/ur3_moveit_control -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur3_moveit_control
+[0.022s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.113s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.124s] -- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+[0.148s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.150s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.155s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.163s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.173s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.199s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.201s] -- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.277s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.316s] -- Found rclcpp_action: 16.0.19 (/opt/ros/humble/share/rclcpp_action/cmake)
+[0.340s] -- Found moveit_ros_planning_interface: 2.5.9 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)
+[0.348s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread 
+[0.447s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+[0.464s] -- Found parameter_traits: 0.7.4 (/opt/ros/humble/share/parameter_traits/cmake)
+[0.470s] -- Found rclcpp_lifecycle: 16.0.19 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+[0.509s] -- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+[0.535s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.607s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono 
+[0.625s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options 
+[0.638s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread 
+[0.655s] -- Found rosidl_default_generators: 1.2.1 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.862s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.173s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.298s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.314s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.333s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.333s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.333s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.449s] -- Configuring done
+[1.493s] -- Generating done
+[1.508s] -- Build files have been written to: /home/com9/uet_ws/build/ur3_moveit_control
+[1.519s] Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '0': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake /home/com9/uet_ws/src/ur3_moveit_control -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur3_moveit_control
+[1.520s] Invoking command in '/home/com9/uet_ws/build/ur3_moveit_control': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control -- -j16 -l16
+[1.548s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_generator_c[0m
+[1.548s] [35m[1mConsolidate compiler generated dependencies of target ur3_motion_interface[0m
+[1.553s] [  2%] Built target ur3_moveit_control__rs
+[1.554s] [  5%] Built target ur3_moveit_control__cpp
+[1.556s] [ 13%] Built target ur3_moveit_control__rosidl_generator_c
+[1.557s] [ 13%] Built target ament_cmake_python_symlink_ur3_moveit_control
+[1.560s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_cpp[0m
+[1.560s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_introspection_cpp[0m
+[1.560s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_fastrtps_cpp[0m
+[1.563s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_c[0m
+[1.563s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_introspection_c[0m
+[1.564s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_fastrtps_c[0m
+[1.566s] [ 16%] [32mBuilding CXX object CMakeFiles/ur3_motion_interface.dir/src/ur3_motion_interface.cpp.o[0m
+[1.569s] [ 38%] Built target ur3_moveit_control__rosidl_typesupport_cpp
+[1.570s] [ 38%] Built target ur3_moveit_control__rosidl_typesupport_introspection_cpp
+[1.570s] [ 41%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_cpp
+[1.570s] [ 50%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c
+[1.571s] [ 58%] Built target ur3_moveit_control__rosidl_typesupport_c
+[1.573s] [ 66%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_c
+[1.587s] [ 66%] Built target ur3_moveit_control
+[1.601s] [ 69%] Built target ur3_moveit_control__py
+[1.608s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_generator_py[0m
+[1.616s] [ 75%] Built target ur3_moveit_control__rosidl_generator_py
+[1.622s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_introspection_c__pyext[0m
+[1.622s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_c__pyext[0m
+[1.624s] [35m[1mConsolidate compiler generated dependencies of target ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext[0m
+[1.632s] [ 80%] Built target ur3_moveit_control__rosidl_typesupport_c__pyext
+[1.634s] [ 86%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c__pyext
+[1.635s] [ 91%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext
+[1.703s] running egg_info
+[1.703s] writing ur3_moveit_control.egg-info/PKG-INFO
+[1.703s] writing dependency_links to ur3_moveit_control.egg-info/dependency_links.txt
+[1.703s] writing top-level names to ur3_moveit_control.egg-info/top_level.txt
+[1.705s] reading manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'
+[1.705s] writing manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'
+[1.723s] [ 91%] Built target ament_cmake_python_build_ur3_moveit_control_egg
+[4.320s] [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:[m[K In constructor ‘[01m[Kur3_moveit_control::UR3MotionInterface::UR3MotionInterface(const SharedPtr&, const string&)[m[K’:
+[4.320s] [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:342:40:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kmax(int, long int)[m[K’
+[4.320s]   342 |     attach_request_attempts_ = [01;31m[Kstd::max(1, parameter("attach_request_attempts", 3))[m[K;
+[4.320s]       |                                [01;31m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.320s] In file included from [01m[K/usr/include/c++/11/bits/char_traits.h:39[m[K,
+[4.320s]                  from [01m[K/usr/include/c++/11/string:40[m[K,
+[4.320s]                  from [01m[K/usr/include/c++/11/stdexcept:39[m[K,
+[4.320s]                  from [01m[K/usr/include/c++/11/system_error:41[m[K,
+[4.320s]                  from [01m[K/usr/include/c++/11/bits/std_mutex.h:39[m[K,
+[4.320s]                  from [01m[K/usr/include/c++/11/condition_variable:40[m[K,
+[4.320s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp:4[m[K,
+[4.320s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:1[m[K:
+[4.320s] [01m[K/usr/include/c++/11/bits/stl_algobase.h:254:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr const _Tp& std::max(const _Tp&, const _Tp&)[m[K’
+[4.320s]   254 |     [01;36m[Kmax[m[K(const _Tp& __a, const _Tp& __b)
+[4.320s]       |     [01;36m[K^~~[m[K
+[4.320s] [01m[K/usr/include/c++/11/bits/stl_algobase.h:254:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.321s] [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:342:40:[m[K [01;36m[Knote: [m[K  deduced conflicting types for parameter ‘[01m[Kconst _Tp[m[K’ (‘[01m[Kint[m[K’ and ‘[01m[Klong int[m[K’)
+[4.321s]   342 |     attach_request_attempts_ = [01;36m[Kstd::max(1, parameter("attach_request_attempts", 3))[m[K;
+[4.321s]       |                                [01;36m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.321s] In file included from [01m[K/usr/include/c++/11/bits/char_traits.h:39[m[K,
+[4.321s]                  from [01m[K/usr/include/c++/11/string:40[m[K,
+[4.321s]                  from [01m[K/usr/include/c++/11/stdexcept:39[m[K,
+[4.321s]                  from [01m[K/usr/include/c++/11/system_error:41[m[K,
+[4.321s]                  from [01m[K/usr/include/c++/11/bits/std_mutex.h:39[m[K,
+[4.321s]                  from [01m[K/usr/include/c++/11/condition_variable:40[m[K,
+[4.321s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp:4[m[K,
+[4.321s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:1[m[K:
+[4.321s] [01m[K/usr/include/c++/11/bits/stl_algobase.h:300:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Compare> constexpr const _Tp& std::max(const _Tp&, const _Tp&, _Compare)[m[K’
+[4.321s]   300 |     [01;36m[Kmax[m[K(const _Tp& __a, const _Tp& __b, _Compare __comp)
+[4.321s]       |     [01;36m[K^~~[m[K
+[4.321s] [01m[K/usr/include/c++/11/bits/stl_algobase.h:300:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.321s] [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:342:40:[m[K [01;36m[Knote: [m[K  deduced conflicting types for parameter ‘[01m[Kconst _Tp[m[K’ (‘[01m[Kint[m[K’ and ‘[01m[Klong int[m[K’)
+[4.321s]   342 |     attach_request_attempts_ = [01;36m[Kstd::max(1, parameter("attach_request_attempts", 3))[m[K;
+[4.321s]       |                                [01;36m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.321s] In file included from [01m[K/usr/include/c++/11/algorithm:62[m[K,
+[4.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18[m[K,
+[4.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[4.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[4.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.321s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp:10[m[K,
+[4.321s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:1[m[K:
+[4.321s] [01m[K/usr/include/c++/11/bits/stl_algo.h:3461:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr _Tp std::max(std::initializer_list<_Tp>)[m[K’
+[4.321s]  3461 |     [01;36m[Kmax[m[K(initializer_list<_Tp> __l)
+[4.321s]       |     [01;36m[K^~~[m[K
+[4.321s] [01m[K/usr/include/c++/11/bits/stl_algo.h:3461:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.321s] [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:342:40:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::initializer_list<_Tp>[m[K’ and ‘[01m[Kint[m[K’
+[4.321s]   342 |     attach_request_attempts_ = [01;36m[Kstd::max(1, parameter("attach_request_attempts", 3))[m[K;
+[4.321s]       |                                [01;36m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.321s] In file included from [01m[K/usr/include/c++/11/algorithm:62[m[K,
+[4.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18[m[K,
+[4.322s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[4.322s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[4.322s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.322s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp:10[m[K,
+[4.322s]                  from [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:1[m[K:
+[4.322s] [01m[K/usr/include/c++/11/bits/stl_algo.h:3467:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Compare> constexpr _Tp std::max(std::initializer_list<_Tp>, _Compare)[m[K’
+[4.322s]  3467 |     [01;36m[Kmax[m[K(initializer_list<_Tp> __l, _Compare __comp)
+[4.322s]       |     [01;36m[K^~~[m[K
+[4.322s] [01m[K/usr/include/c++/11/bits/stl_algo.h:3467:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.322s] [01m[K/home/com9/uet_ws/src/ur3_moveit_control/src/ur3_motion_interface.cpp:342:40:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::initializer_list<_Tp>[m[K’ and ‘[01m[Kint[m[K’
+[4.322s]   342 |     attach_request_attempts_ = [01;36m[Kstd::max(1, parameter("attach_request_attempts", 3))[m[K;
+[4.322s]       |                                [01;36m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.300s] gmake[2]: *** [CMakeFiles/ur3_motion_interface.dir/build.make:76: CMakeFiles/ur3_motion_interface.dir/src/ur3_motion_interface.cpp.o] Error 1
+[7.300s] gmake[1]: *** [CMakeFiles/Makefile2:613: CMakeFiles/ur3_motion_interface.dir/all] Error 2
+[7.300s] gmake: *** [Makefile:146: all] Error 2
+[7.302s] Invoked command in '/home/com9/uet_ws/build/ur3_moveit_control' returned '2': CMAKE_PREFIX_PATH=/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble /usr/bin/cmake --build /home/com9/uet_ws/build/ur3_moveit_control -- -j16 -l16

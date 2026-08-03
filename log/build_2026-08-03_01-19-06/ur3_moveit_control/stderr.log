@@ -1,0 +1,5 @@
+failed to create symbolic link '/home/com9/uet_ws/build/ur3_moveit_control/ament_cmake_python/ur3_moveit_control/ur3_moveit_control' because existing path cannot be removed: Is a directory
+gmake[2]: *** [CMakeFiles/ament_cmake_python_symlink_ur3_moveit_control.dir/build.make:70: CMakeFiles/ament_cmake_python_symlink_ur3_moveit_control] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:444: CMakeFiles/ament_cmake_python_symlink_ur3_moveit_control.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+gmake: *** [Makefile:146: all] Error 2

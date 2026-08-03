@@ -72,6 +72,8 @@ def launch_setup(context, *args, **kwargs):
             "description_package": "ur3_moveit_control",
             "description_file": "ur3_with_susgrip.urdf.xacro",
             "moveit_config_file": "ur3_with_susgrip.srdf.xacro",
+            "planning_config_package": "ur3_moveit_control",
+            "moveit_joint_limits_file": "joint_limits.yaml",
         }.items(),
         condition=IfCondition(launch_moveit)
     )

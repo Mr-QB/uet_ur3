@@ -89,6 +89,24 @@ bool ur3_moveit_control__action__ur3_control__goal__convert_from_py(PyObject * _
     }
     Py_DECREF(field);
   }
+  {  // cartesian_x_offset
+    PyObject * field = PyObject_GetAttrString(_pymsg, "cartesian_x_offset");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->cartesian_x_offset = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // cartesian_y_offset
+    PyObject * field = PyObject_GetAttrString(_pymsg, "cartesian_y_offset");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->cartesian_y_offset = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
   {  // cartesian_z_offset
     PyObject * field = PyObject_GetAttrString(_pymsg, "cartesian_z_offset");
     if (!field) {
@@ -96,6 +114,51 @@ bool ur3_moveit_control__action__ur3_control__goal__convert_from_py(PyObject * _
     }
     assert(PyFloat_Check(field));
     ros_message->cartesian_z_offset = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // target_x
+    PyObject * field = PyObject_GetAttrString(_pymsg, "target_x");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->target_x = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // target_y
+    PyObject * field = PyObject_GetAttrString(_pymsg, "target_y");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->target_y = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // object_x
+    PyObject * field = PyObject_GetAttrString(_pymsg, "object_x");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->object_x = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // object_y
+    PyObject * field = PyObject_GetAttrString(_pymsg, "object_y");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->object_y = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
+  {  // object_z
+    PyObject * field = PyObject_GetAttrString(_pymsg, "object_z");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->object_z = PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
 
@@ -159,11 +222,88 @@ PyObject * ur3_moveit_control__action__ur3_control__goal__convert_to_py(void * r
       }
     }
   }
+  {  // cartesian_x_offset
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->cartesian_x_offset);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "cartesian_x_offset", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // cartesian_y_offset
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->cartesian_y_offset);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "cartesian_y_offset", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
   {  // cartesian_z_offset
     PyObject * field = NULL;
     field = PyFloat_FromDouble(ros_message->cartesian_z_offset);
     {
       int rc = PyObject_SetAttrString(_pymessage, "cartesian_z_offset", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // target_x
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->target_x);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "target_x", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // target_y
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->target_y);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "target_y", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // object_x
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->object_x);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "object_x", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // object_y
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->object_y);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "object_y", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // object_z
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->object_z);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "object_z", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

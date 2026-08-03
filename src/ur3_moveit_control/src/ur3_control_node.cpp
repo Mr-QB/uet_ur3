@@ -274,7 +274,12 @@ private:
       RCLCPP_INFO(this->get_logger(), "Goal succeeded");
     } else {
       result->success = false;
-      result->message = "Goal failed or was preempted";
+      if (goal->command_type == UR3Control::Goal::MOVE_POSE &&
+          !ur3_motion_->lastPoseErrorMessage().empty()) {
+        result->message = ur3_motion_->lastPoseErrorMessage();
+      } else {
+        result->message = "Goal failed or was preempted";
+      }
       goal_handle->abort(result);
       RCLCPP_INFO(this->get_logger(), "Goal failed");
     }

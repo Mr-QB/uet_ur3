@@ -4,6 +4,7 @@
 /home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/config/controllers.yaml
 /home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/config/kinematics.yaml
 /home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/launch/ur_moveit.launch.py
+/home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/launch/__pycache__/ur_moveit.launch.cpython-310.pyc
 /home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/rviz/view_robot.rviz
 /home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/srdf/ur3_with_susgrip.srdf.xacro
 /home/com9/uet_ws/install/ur_moveit_config/share/ur_moveit_config/srdf/ur.srdf.xacro

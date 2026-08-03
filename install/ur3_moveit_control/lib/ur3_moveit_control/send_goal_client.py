@@ -1,0 +1,1 @@
+/home/com9/uet_ws/src/ur3_moveit_control/src/send_goal_client.py

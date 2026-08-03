@@ -31,7 +31,42 @@ pub struct UR3Control_Goal {
 
     // This member is not documented.
     #[allow(missing_docs)]
+    pub cartesian_x_offset: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub cartesian_y_offset: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
     pub cartesian_z_offset: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub target_x: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub target_y: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub object_x: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub object_y: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub object_z: f64,
 
 }
 
@@ -56,6 +91,31 @@ impl UR3Control_Goal {
     #[allow(missing_docs)]
     pub const ATTACH_AND_LIFT: u8 = 3;
 
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const DETACH_OBJECT: u8 = 4;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MOVE_CARTESIAN: u8 = 5;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MOVE_TO_XY: u8 = 6;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const PREPARE_NEXT_TRIAL: u8 = 7;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MOVE_CARTESIAN_STRICT: u8 = 8;
+
 }
 
 
@@ -74,13 +134,27 @@ impl rosidl_runtime_rs::Message for UR3Control_Goal {
         command_type: msg.command_type,
         joint_goal: sensor_msgs::msg::JointState::into_rmw_message(std::borrow::Cow::Owned(msg.joint_goal)).into_owned(),
         pose_goal: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Owned(msg.pose_goal)).into_owned(),
+        cartesian_x_offset: msg.cartesian_x_offset,
+        cartesian_y_offset: msg.cartesian_y_offset,
         cartesian_z_offset: msg.cartesian_z_offset,
+        target_x: msg.target_x,
+        target_y: msg.target_y,
+        object_x: msg.object_x,
+        object_y: msg.object_y,
+        object_z: msg.object_z,
       }),
       std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
       command_type: msg.command_type,
         joint_goal: sensor_msgs::msg::JointState::into_rmw_message(std::borrow::Cow::Borrowed(&msg.joint_goal)).into_owned(),
         pose_goal: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Borrowed(&msg.pose_goal)).into_owned(),
+      cartesian_x_offset: msg.cartesian_x_offset,
+      cartesian_y_offset: msg.cartesian_y_offset,
       cartesian_z_offset: msg.cartesian_z_offset,
+      target_x: msg.target_x,
+      target_y: msg.target_y,
+      object_x: msg.object_x,
+      object_y: msg.object_y,
+      object_z: msg.object_z,
       })
     }
   }
@@ -90,7 +164,14 @@ impl rosidl_runtime_rs::Message for UR3Control_Goal {
       command_type: msg.command_type,
       joint_goal: sensor_msgs::msg::JointState::from_rmw_message(msg.joint_goal),
       pose_goal: geometry_msgs::msg::PoseStamped::from_rmw_message(msg.pose_goal),
+      cartesian_x_offset: msg.cartesian_x_offset,
+      cartesian_y_offset: msg.cartesian_y_offset,
       cartesian_z_offset: msg.cartesian_z_offset,
+      target_x: msg.target_x,
+      target_y: msg.target_y,
+      object_x: msg.object_x,
+      object_y: msg.object_y,
+      object_z: msg.object_z,
     }
   }
 }

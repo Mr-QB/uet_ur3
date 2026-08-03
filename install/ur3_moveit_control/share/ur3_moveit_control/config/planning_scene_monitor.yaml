@@ -1,10 +1,1 @@
-publish_planning_scene: true
-publish_geometry_updates: true
-publish_state_updates: true
-publish_transforms_updates: true
-
-planning_scene_monitor:
-  publish_planning_scene: true
-  publish_geometry_updates: true
-  publish_state_updates: true
-  publish_transforms_updates: true
+/home/com9/uet_ws/src/ur3_moveit_control/config/planning_scene_monitor.yaml

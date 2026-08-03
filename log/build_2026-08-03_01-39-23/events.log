@@ -1,0 +1,530 @@
+[0.000000] (-) TimerEvent: {}
+[0.000661] (-) JobUnselected: {'identifier': 'susgrip_2f_control'}
+[0.000704] (-) JobUnselected: {'identifier': 'susgrip_2f_description'}
+[0.000725] (-) JobUnselected: {'identifier': 'susgrip_2f_gazebo'}
+[0.000742] (-) JobUnselected: {'identifier': 'susgrip_2f_hardware'}
+[0.000758] (-) JobUnselected: {'identifier': 'ur'}
+[0.000774] (-) JobUnselected: {'identifier': 'ur_bringup'}
+[0.000790] (-) JobUnselected: {'identifier': 'ur_calibration'}
+[0.000805] (-) JobUnselected: {'identifier': 'ur_controllers'}
+[0.000821] (-) JobUnselected: {'identifier': 'ur_dashboard_msgs'}
+[0.000836] (-) JobUnselected: {'identifier': 'ur_moveit_config'}
+[0.000852] (-) JobUnselected: {'identifier': 'ur_robot_driver'}
+[0.000870] (ur3_moveit_control) JobQueued: {'identifier': 'ur3_moveit_control', 'dependencies': OrderedDict([('ur_moveit_config', '/home/com9/uet_ws/install/ur_moveit_config')])}
+[0.000892] (ur_simulation_gz) JobQueued: {'identifier': 'ur_simulation_gz', 'dependencies': OrderedDict([('ur_dashboard_msgs', '/home/com9/uet_ws/install/ur_dashboard_msgs'), ('ur_moveit_config', '/home/com9/uet_ws/install/ur_moveit_config'), ('ur_controllers', '/home/com9/uet_ws/install/ur_controllers')])}
+[0.000913] (ur3_moveit_control) JobStarted: {'identifier': 'ur3_moveit_control'}
+[0.005879] (ur_simulation_gz) JobStarted: {'identifier': 'ur_simulation_gz'}
+[0.008884] (ur3_moveit_control) JobProgress: {'identifier': 'ur3_moveit_control', 'progress': 'cmake'}
+[0.009107] (ur3_moveit_control) Command: {'cmd': ['/usr/bin/cmake', '/home/com9/uet_ws/src/ur3_moveit_control', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/com9/uet_ws/install/ur3_moveit_control'], 'cwd': '/home/com9/uet_ws/build/ur3_moveit_control', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'com9'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/com9'), ('CONDA_SHLVL', '0'), ('CYCLONEDDS_URI', '<CycloneDDS><Domain><General><DontRoute>true</></></></>'), ('OLDPWD', '/home/com9/uet_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '12494'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_CE_M', ''), ('_CONDA_ROOT', '/home/com9/miniconda3'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/com9/uet_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'com9'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'com9'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('_CE_CONDA', ''), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/com9/uet_ws/install/ur_robot_driver/bin:/opt/ros/humble/bin:/home/com9/.local/bin:/home/com9/miniconda3/condabin:/home/com9/.local/bin:/home/com9/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/com9:@/tmp/.ICE-unix/1111,unix/com9:/tmp/.ICE-unix/1111'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/79b603f4_23a7_4caf_8fa2_cf60a243f04a'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.B4JTT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.154'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '42'), ('AMENT_PREFIX_PATH', '/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble'), ('CONDA_PYTHON_EXE', '/home/com9/miniconda3/bin/python'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('_CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/com9/uet_ws/build/ur3_moveit_control'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble')]), 'shell': False}
+[0.013526] (ur_simulation_gz) JobProgress: {'identifier': 'ur_simulation_gz', 'progress': 'cmake'}
+[0.017285] (ur_simulation_gz) JobProgress: {'identifier': 'ur_simulation_gz', 'progress': 'build'}
+[0.017793] (ur_simulation_gz) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/com9/uet_ws/build/ur_simulation_gz', '--', '-j16', '-l16'], 'cwd': '/home/com9/uet_ws/build/ur_simulation_gz', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'com9'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/com9'), ('CONDA_SHLVL', '0'), ('CYCLONEDDS_URI', '<CycloneDDS><Domain><General><DontRoute>true</></></></>'), ('OLDPWD', '/home/com9/uet_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '12494'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_CE_M', ''), ('_CONDA_ROOT', '/home/com9/miniconda3'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/com9/uet_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'com9'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'com9'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('_CE_CONDA', ''), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/com9/uet_ws/install/ur_robot_driver/bin:/opt/ros/humble/bin:/home/com9/.local/bin:/home/com9/miniconda3/condabin:/home/com9/.local/bin:/home/com9/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/com9:@/tmp/.ICE-unix/1111,unix/com9:/tmp/.ICE-unix/1111'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/79b603f4_23a7_4caf_8fa2_cf60a243f04a'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.B4JTT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.154'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '42'), ('AMENT_PREFIX_PATH', '/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble'), ('CONDA_PYTHON_EXE', '/home/com9/miniconda3/bin/python'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('_CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/com9/uet_ws/build/ur_simulation_gz'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble')]), 'shell': False}
+[0.051421] (ur_simulation_gz) CommandEnded: {'returncode': 0}
+[0.057552] (ur_simulation_gz) JobProgress: {'identifier': 'ur_simulation_gz', 'progress': 'install'}
+[0.062378] (ur_simulation_gz) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/com9/uet_ws/build/ur_simulation_gz'], 'cwd': '/home/com9/uet_ws/build/ur_simulation_gz', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'com9'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/com9'), ('CONDA_SHLVL', '0'), ('CYCLONEDDS_URI', '<CycloneDDS><Domain><General><DontRoute>true</></></></>'), ('OLDPWD', '/home/com9/uet_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '12494'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_CE_M', ''), ('_CONDA_ROOT', '/home/com9/miniconda3'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/com9/uet_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'com9'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'com9'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('_CE_CONDA', ''), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/com9/uet_ws/install/ur_robot_driver/bin:/opt/ros/humble/bin:/home/com9/.local/bin:/home/com9/miniconda3/condabin:/home/com9/.local/bin:/home/com9/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/com9:@/tmp/.ICE-unix/1111,unix/com9:/tmp/.ICE-unix/1111'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/79b603f4_23a7_4caf_8fa2_cf60a243f04a'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.B4JTT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.154'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '42'), ('AMENT_PREFIX_PATH', '/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble'), ('CONDA_PYTHON_EXE', '/home/com9/miniconda3/bin/python'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('_CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/com9/uet_ws/build/ur_simulation_gz'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble')]), 'shell': False}
+[0.067568] (ur_simulation_gz) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.067939] (ur_simulation_gz) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[0.068105] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/config/ur_controllers.yaml\n'}
+[0.068342] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/launch/__pycache__/ur_sim_control.launch.cpython-310.pyc\n'}
+[0.068451] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/launch/ur_sim_control.launch.py\n'}
+[0.068535] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/launch/ur_sim_moveit.launch.py\n'}
+[0.068612] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/lib/ur_simulation_gz/test_topic_control.py\n'}
+[0.068688] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ament_index/resource_index/package_run_dependencies/ur_simulation_gz\n'}
+[0.068765] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ament_index/resource_index/parent_prefix_path/ur_simulation_gz\n'}
+[0.068850] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/environment/ament_prefix_path.sh\n'}
+[0.068922] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/environment/ament_prefix_path.dsv\n'}
+[0.069006] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/environment/path.sh\n'}
+[0.069080] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/environment/path.dsv\n'}
+[0.069153] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/local_setup.bash\n'}
+[0.069239] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/local_setup.sh\n'}
+[0.069299] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/local_setup.zsh\n'}
+[0.069374] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/local_setup.dsv\n'}
+[0.069436] (ur_simulation_gz) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.dsv\n'}
+[0.074639] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ament_index/resource_index/packages/ur_simulation_gz\n'}
+[0.074812] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/cmake/ur_simulation_gzConfig.cmake\n'}
+[0.074892] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/cmake/ur_simulation_gzConfig-version.cmake\n'}
+[0.074971] (ur_simulation_gz) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur_simulation_gz/share/ur_simulation_gz/package.xml\n'}
+[0.075899] (ur_simulation_gz) CommandEnded: {'returncode': 0}
+[0.085661] (ur3_moveit_control) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.090574] (ur_simulation_gz) JobEnded: {'identifier': 'ur_simulation_gz', 'rc': 0}
+[0.099835] (-) TimerEvent: {}
+[0.160439] (ur3_moveit_control) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.170302] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.199951] (-) TimerEvent: {}
+[0.225239] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.229886] (ur3_moveit_control) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.230372] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.230769] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.233482] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.292177] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.296898] (ur3_moveit_control) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.297046] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.297372] (ur3_moveit_control) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.300040] (-) TimerEvent: {}
+[0.301212] (ur3_moveit_control) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.400144] (-) TimerEvent: {}
+[0.420384] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.469628] (ur3_moveit_control) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.500263] (-) TimerEvent: {}
+[0.502632] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.547149] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.551993] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.560020] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.570799] (ur3_moveit_control) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.585365] (ur3_moveit_control) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.600459] (-) TimerEvent: {}
+[0.630383] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.633284] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.700478] (-) TimerEvent: {}
+[0.701003] (ur3_moveit_control) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[0.721824] (ur3_moveit_control) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[0.751475] (ur3_moveit_control) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.762141] (ur3_moveit_control) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.800611] (-) TimerEvent: {}
+[0.817555] (ur3_moveit_control) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.817806] (ur3_moveit_control) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.867416] (ur3_moveit_control) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.868178] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.900746] (-) TimerEvent: {}
+[0.911121] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rclcpp_action: 16.0.19 (/opt/ros/humble/share/rclcpp_action/cmake)\n'}
+[0.941586] (ur3_moveit_control) StdoutLine: {'line': b'-- Found moveit_ros_planning_interface: 2.5.9 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)\n'}
+[0.963241] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread \n'}
+[1.000838] (-) TimerEvent: {}
+[1.087160] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread \n'}
+[1.100927] (-) TimerEvent: {}
+[1.127903] (ur3_moveit_control) StdoutLine: {'line': b'-- Found parameter_traits: 0.7.4 (/opt/ros/humble/share/parameter_traits/cmake)\n'}
+[1.143189] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rclcpp_lifecycle: 16.0.19 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)\n'}
+[1.201106] (-) TimerEvent: {}
+[1.239651] (ur3_moveit_control) StdoutLine: {'line': b'-- library: /usr/lib/x86_64-linux-gnu/libcurl.so\n'}
+[1.266624] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[1.266817] (ur3_moveit_control) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[1.301265] (-) TimerEvent: {}
+[1.373430] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono \n'}
+[1.394222] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options \n'}
+[1.401418] (-) TimerEvent: {}
+[1.417136] (ur3_moveit_control) StdoutLine: {'line': b'-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread \n'}
+[1.438780] (ur3_moveit_control) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.1 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[1.501485] (-) TimerEvent: {}
+[1.601766] (-) TimerEvent: {}
+[1.651191] (ur3_moveit_control) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[1.701858] (-) TimerEvent: {}
+[1.802176] (-) TimerEvent: {}
+[1.902387] (-) TimerEvent: {}
+[1.977630] (ur3_moveit_control) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.002424] (-) TimerEvent: {}
+[2.095965] (ur3_moveit_control) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.102503] (-) TimerEvent: {}
+[2.112164] (ur3_moveit_control) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[2.114085] (ur3_moveit_control) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[2.131041] (ur3_moveit_control) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[2.131227] (ur3_moveit_control) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[2.131293] (ur3_moveit_control) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[2.131473] (ur3_moveit_control) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[2.149640] (ur3_moveit_control) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[2.202604] (-) TimerEvent: {}
+[2.278811] (ur3_moveit_control) StdoutLine: {'line': b'-- Configuring done\n'}
+[2.302707] (-) TimerEvent: {}
+[2.322941] (ur3_moveit_control) StdoutLine: {'line': b'-- Generating done\n'}
+[2.336750] (ur3_moveit_control) StdoutLine: {'line': b'-- Build files have been written to: /home/com9/uet_ws/build/ur3_moveit_control\n'}
+[2.349670] (ur3_moveit_control) CommandEnded: {'returncode': 0}
+[2.350261] (ur3_moveit_control) JobProgress: {'identifier': 'ur3_moveit_control', 'progress': 'build'}
+[2.350279] (ur3_moveit_control) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/com9/uet_ws/build/ur3_moveit_control', '--', '-j16', '-l16'], 'cwd': '/home/com9/uet_ws/build/ur3_moveit_control', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'com9'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/com9'), ('CONDA_SHLVL', '0'), ('CYCLONEDDS_URI', '<CycloneDDS><Domain><General><DontRoute>true</></></></>'), ('OLDPWD', '/home/com9/uet_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '12494'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_CE_M', ''), ('_CONDA_ROOT', '/home/com9/miniconda3'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/com9/uet_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'com9'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'com9'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('_CE_CONDA', ''), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/com9/uet_ws/install/ur_robot_driver/bin:/opt/ros/humble/bin:/home/com9/.local/bin:/home/com9/miniconda3/condabin:/home/com9/.local/bin:/home/com9/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/com9:@/tmp/.ICE-unix/1111,unix/com9:/tmp/.ICE-unix/1111'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/79b603f4_23a7_4caf_8fa2_cf60a243f04a'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.B4JTT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.154'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '42'), ('AMENT_PREFIX_PATH', '/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble'), ('CONDA_PYTHON_EXE', '/home/com9/miniconda3/bin/python'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('_CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/com9/uet_ws/build/ur3_moveit_control'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble')]), 'shell': False}
+[2.377255] (ur3_moveit_control) StdoutLine: {'line': b'[  2%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[2.383503] (ur3_moveit_control) StdoutLine: {'line': b'[  5%] \x1b[34m\x1b[1mGenerating Rust code for ROS interfaces\x1b[0m\n'}
+[2.383795] (ur3_moveit_control) StdoutLine: {'line': b'[ 11%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[2.383916] (ur3_moveit_control) StdoutLine: {'line': b'[ 11%] \x1b[32mBuilding CXX object CMakeFiles/ur3_motion_interface.dir/src/ur3_motion_interface.cpp.o\x1b[0m\n'}
+[2.386430] (ur3_moveit_control) StdoutLine: {'line': b'[ 11%] Built target ament_cmake_python_symlink_ur3_moveit_control\n'}
+[2.402805] (-) TimerEvent: {}
+[2.503063] (-) TimerEvent: {}
+[2.527749] (ur3_moveit_control) StdoutLine: {'line': b'running egg_info\n'}
+[2.528120] (ur3_moveit_control) StdoutLine: {'line': b'creating ur3_moveit_control.egg-info\n'}
+[2.528252] (ur3_moveit_control) StdoutLine: {'line': b'writing ur3_moveit_control.egg-info/PKG-INFO\n'}
+[2.528416] (ur3_moveit_control) StdoutLine: {'line': b'writing dependency_links to ur3_moveit_control.egg-info/dependency_links.txt\n'}
+[2.528530] (ur3_moveit_control) StdoutLine: {'line': b'writing top-level names to ur3_moveit_control.egg-info/top_level.txt\n'}
+[2.528601] (ur3_moveit_control) StdoutLine: {'line': b"writing manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'\n"}
+[2.530071] (ur3_moveit_control) StdoutLine: {'line': b"reading manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'\n"}
+[2.530372] (ur3_moveit_control) StdoutLine: {'line': b"writing manifest file 'ur3_moveit_control.egg-info/SOURCES.txt'\n"}
+[2.550051] (ur3_moveit_control) StdoutLine: {'line': b'[ 11%] Built target ament_cmake_python_build_ur3_moveit_control_egg\n'}
+[2.592410] (ur3_moveit_control) StdoutLine: {'line': b'[ 11%] Built target ur3_moveit_control__rs\n'}
+[2.603155] (-) TimerEvent: {}
+[2.681856] (ur3_moveit_control) StdoutLine: {'line': b'[ 11%] Built target ur3_moveit_control__cpp\n'}
+[2.686988] (ur3_moveit_control) StdoutLine: {'line': b'[ 13%] \x1b[32mBuilding C object CMakeFiles/ur3_moveit_control__rosidl_generator_c.dir/rosidl_generator_c/ur3_moveit_control/action/detail/ur3_control__functions.c.o\x1b[0m\n'}
+[2.687721] (ur3_moveit_control) StdoutLine: {'line': b'[ 16%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[2.687879] (ur3_moveit_control) StdoutLine: {'line': b'[ 19%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[2.687959] (ur3_moveit_control) StdoutLine: {'line': b'[ 22%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[2.703274] (-) TimerEvent: {}
+[2.797425] (ur3_moveit_control) StdoutLine: {'line': b'[ 25%] \x1b[32m\x1b[1mLinking C shared library libur3_moveit_control__rosidl_generator_c.so\x1b[0m\n'}
+[2.803364] (-) TimerEvent: {}
+[2.828464] (ur3_moveit_control) StdoutLine: {'line': b'[ 25%] Built target ur3_moveit_control__rosidl_generator_c\n'}
+[2.835500] (ur3_moveit_control) StdoutLine: {'line': b'[ 30%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[2.835738] (ur3_moveit_control) StdoutLine: {'line': b'[ 30%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[2.837108] (ur3_moveit_control) StdoutLine: {'line': b'[ 33%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[2.903472] (-) TimerEvent: {}
+[2.906535] (ur3_moveit_control) StdoutLine: {'line': b'[ 36%] \x1b[32mBuilding CXX object CMakeFiles/ur3_moveit_control__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ur3_moveit_control/action/ur3_control__type_support.cpp.o\x1b[0m\n'}
+[2.931801] (ur3_moveit_control) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding CXX object CMakeFiles/ur3_moveit_control__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ur3_moveit_control/action/detail/ur3_control__type_support.cpp.o\x1b[0m\n'}
+[2.963845] (ur3_moveit_control) StdoutLine: {'line': b'[ 41%] \x1b[32mBuilding CXX object CMakeFiles/ur3_moveit_control__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ur3_moveit_control/action/detail/dds_fastrtps/ur3_control__type_support.cpp.o\x1b[0m\n'}
+[3.003574] (-) TimerEvent: {}
+[3.047126] (ur3_moveit_control) StdoutLine: {'line': b'[ 44%] \x1b[32mBuilding CXX object CMakeFiles/ur3_moveit_control__rosidl_typesupport_c.dir/rosidl_typesupport_c/ur3_moveit_control/action/ur3_control__type_support.cpp.o\x1b[0m\n'}
+[3.080020] (ur3_moveit_control) StdoutLine: {'line': b'[ 47%] \x1b[32m\x1b[1mLinking CXX shared library libur3_moveit_control__rosidl_typesupport_c.so\x1b[0m\n'}
+[3.097459] (ur3_moveit_control) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding C object CMakeFiles/ur3_moveit_control__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ur3_moveit_control/action/detail/ur3_control__type_support.c.o\x1b[0m\n'}
+[3.103692] (-) TimerEvent: {}
+[3.108606] (ur3_moveit_control) StdoutLine: {'line': b'[ 50%] Built target ur3_moveit_control__rosidl_typesupport_c\n'}
+[3.120922] (ur3_moveit_control) StdoutLine: {'line': b'[ 52%] \x1b[32mBuilding CXX object CMakeFiles/ur3_moveit_control__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ur3_moveit_control/action/detail/ur3_control__type_support_c.cpp.o\x1b[0m\n'}
+[3.134008] (ur3_moveit_control) StdoutLine: {'line': b'[ 55%] \x1b[32m\x1b[1mLinking C shared library libur3_moveit_control__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[3.160111] (ur3_moveit_control) StdoutLine: {'line': b'[ 55%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c\n'}
+[3.173139] (ur3_moveit_control) StdoutLine: {'line': b'[ 58%] \x1b[32m\x1b[1mLinking CXX shared library libur3_moveit_control__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[3.203802] (-) TimerEvent: {}
+[3.204484] (ur3_moveit_control) StdoutLine: {'line': b'[ 58%] Built target ur3_moveit_control__rosidl_typesupport_cpp\n'}
+[3.303947] (-) TimerEvent: {}
+[3.323624] (ur3_moveit_control) StdoutLine: {'line': b'[ 61%] \x1b[32m\x1b[1mLinking CXX shared library libur3_moveit_control__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[3.343224] (ur3_moveit_control) StdoutLine: {'line': b'[ 63%] \x1b[32m\x1b[1mLinking CXX shared library libur3_moveit_control__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[3.354049] (ur3_moveit_control) StdoutLine: {'line': b'[ 66%] \x1b[32m\x1b[1mLinking CXX shared library libur3_moveit_control__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[3.377233] (ur3_moveit_control) StdoutLine: {'line': b'[ 66%] Built target ur3_moveit_control__rosidl_typesupport_introspection_cpp\n'}
+[3.397075] (ur3_moveit_control) StdoutLine: {'line': b'[ 66%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_c\n'}
+[3.404044] (-) TimerEvent: {}
+[3.405679] (ur3_moveit_control) StdoutLine: {'line': b'[ 66%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_cpp\n'}
+[3.421491] (ur3_moveit_control) StdoutLine: {'line': b'[ 66%] Built target ur3_moveit_control\n'}
+[3.435406] (ur3_moveit_control) StdoutLine: {'line': b'[ 69%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[3.504142] (-) TimerEvent: {}
+[3.604416] (-) TimerEvent: {}
+[3.704708] (-) TimerEvent: {}
+[3.804970] (-) TimerEvent: {}
+[3.868189] (ur3_moveit_control) StdoutLine: {'line': b'[ 69%] Built target ur3_moveit_control__py\n'}
+[3.880375] (ur3_moveit_control) StdoutLine: {'line': b'[ 72%] \x1b[32mBuilding C object CMakeFiles/ur3_moveit_control__rosidl_generator_py.dir/rosidl_generator_py/ur3_moveit_control/action/_ur3_control_s.c.o\x1b[0m\n'}
+[3.905072] (-) TimerEvent: {}
+[3.986665] (ur3_moveit_control) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ur3_moveit_control/libur3_moveit_control__rosidl_generator_py.so\x1b[0m\n'}
+[4.005176] (-) TimerEvent: {}
+[4.018896] (ur3_moveit_control) StdoutLine: {'line': b'[ 75%] Built target ur3_moveit_control__rosidl_generator_py\n'}
+[4.031015] (ur3_moveit_control) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding C object CMakeFiles/ur3_moveit_control__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[4.033414] (ur3_moveit_control) StdoutLine: {'line': b'[ 80%] \x1b[32mBuilding C object CMakeFiles/ur3_moveit_control__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[4.035637] (ur3_moveit_control) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding C object CMakeFiles/ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[4.103257] (ur3_moveit_control) StdoutLine: {'line': b'[ 86%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[4.105260] (-) TimerEvent: {}
+[4.106170] (ur3_moveit_control) StdoutLine: {'line': b'[ 88%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[4.108896] (ur3_moveit_control) StdoutLine: {'line': b'[ 91%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[4.136000] (ur3_moveit_control) StdoutLine: {'line': b'[ 91%] Built target ur3_moveit_control__rosidl_typesupport_c__pyext\n'}
+[4.136846] (ur3_moveit_control) StdoutLine: {'line': b'[ 91%] Built target ur3_moveit_control__rosidl_typesupport_fastrtps_c__pyext\n'}
+[4.137562] (ur3_moveit_control) StdoutLine: {'line': b'[ 91%] Built target ur3_moveit_control__rosidl_typesupport_introspection_c__pyext\n'}
+[4.205369] (-) TimerEvent: {}
+[4.305689] (-) TimerEvent: {}
+[4.406019] (-) TimerEvent: {}
+[4.506301] (-) TimerEvent: {}
+[4.606594] (-) TimerEvent: {}
+[4.706915] (-) TimerEvent: {}
+[4.807243] (-) TimerEvent: {}
+[4.907569] (-) TimerEvent: {}
+[5.007827] (-) TimerEvent: {}
+[5.108122] (-) TimerEvent: {}
+[5.208458] (-) TimerEvent: {}
+[5.308814] (-) TimerEvent: {}
+[5.409132] (-) TimerEvent: {}
+[5.509429] (-) TimerEvent: {}
+[5.609752] (-) TimerEvent: {}
+[5.710065] (-) TimerEvent: {}
+[5.810427] (-) TimerEvent: {}
+[5.910755] (-) TimerEvent: {}
+[6.011045] (-) TimerEvent: {}
+[6.111300] (-) TimerEvent: {}
+[6.211540] (-) TimerEvent: {}
+[6.311793] (-) TimerEvent: {}
+[6.412103] (-) TimerEvent: {}
+[6.512481] (-) TimerEvent: {}
+[6.612873] (-) TimerEvent: {}
+[6.713266] (-) TimerEvent: {}
+[6.813663] (-) TimerEvent: {}
+[6.914051] (-) TimerEvent: {}
+[7.014445] (-) TimerEvent: {}
+[7.114832] (-) TimerEvent: {}
+[7.215220] (-) TimerEvent: {}
+[7.315626] (-) TimerEvent: {}
+[7.416010] (-) TimerEvent: {}
+[7.516406] (-) TimerEvent: {}
+[7.616797] (-) TimerEvent: {}
+[7.717188] (-) TimerEvent: {}
+[7.817594] (-) TimerEvent: {}
+[7.917988] (-) TimerEvent: {}
+[8.018386] (-) TimerEvent: {}
+[8.118778] (-) TimerEvent: {}
+[8.219170] (-) TimerEvent: {}
+[8.319548] (-) TimerEvent: {}
+[8.419959] (-) TimerEvent: {}
+[8.520363] (-) TimerEvent: {}
+[8.620737] (-) TimerEvent: {}
+[8.721111] (-) TimerEvent: {}
+[8.821496] (-) TimerEvent: {}
+[8.921873] (-) TimerEvent: {}
+[9.022255] (-) TimerEvent: {}
+[9.122542] (-) TimerEvent: {}
+[9.222818] (-) TimerEvent: {}
+[9.323073] (-) TimerEvent: {}
+[9.423337] (-) TimerEvent: {}
+[9.523679] (-) TimerEvent: {}
+[9.623978] (-) TimerEvent: {}
+[9.724271] (-) TimerEvent: {}
+[9.824492] (-) TimerEvent: {}
+[9.924713] (-) TimerEvent: {}
+[10.024972] (-) TimerEvent: {}
+[10.125201] (-) TimerEvent: {}
+[10.225437] (-) TimerEvent: {}
+[10.325756] (-) TimerEvent: {}
+[10.426035] (-) TimerEvent: {}
+[10.526308] (-) TimerEvent: {}
+[10.626541] (-) TimerEvent: {}
+[10.726822] (-) TimerEvent: {}
+[10.827097] (-) TimerEvent: {}
+[10.927345] (-) TimerEvent: {}
+[11.027636] (-) TimerEvent: {}
+[11.127911] (-) TimerEvent: {}
+[11.228221] (-) TimerEvent: {}
+[11.328503] (-) TimerEvent: {}
+[11.428780] (-) TimerEvent: {}
+[11.529068] (-) TimerEvent: {}
+[11.629359] (-) TimerEvent: {}
+[11.729663] (-) TimerEvent: {}
+[11.830001] (-) TimerEvent: {}
+[11.930315] (-) TimerEvent: {}
+[12.030719] (-) TimerEvent: {}
+[12.131037] (-) TimerEvent: {}
+[12.200366] (ur3_moveit_control) StdoutLine: {'line': b'[ 94%] \x1b[32m\x1b[1mLinking CXX shared library libur3_motion_interface.so\x1b[0m\n'}
+[12.231145] (-) TimerEvent: {}
+[12.331371] (-) TimerEvent: {}
+[12.431625] (-) TimerEvent: {}
+[12.531874] (-) TimerEvent: {}
+[12.632122] (-) TimerEvent: {}
+[12.732397] (-) TimerEvent: {}
+[12.803338] (ur3_moveit_control) StdoutLine: {'line': b'[ 94%] Built target ur3_motion_interface\n'}
+[12.817511] (ur3_moveit_control) StdoutLine: {'line': b'[ 97%] \x1b[32mBuilding CXX object CMakeFiles/ur3_control_node.dir/src/ur3_control_node.cpp.o\x1b[0m\n'}
+[12.832463] (-) TimerEvent: {}
+[12.932688] (-) TimerEvent: {}
+[13.032922] (-) TimerEvent: {}
+[13.133231] (-) TimerEvent: {}
+[13.233477] (-) TimerEvent: {}
+[13.333793] (-) TimerEvent: {}
+[13.434105] (-) TimerEvent: {}
+[13.534350] (-) TimerEvent: {}
+[13.634666] (-) TimerEvent: {}
+[13.734930] (-) TimerEvent: {}
+[13.835160] (-) TimerEvent: {}
+[13.935504] (-) TimerEvent: {}
+[14.035735] (-) TimerEvent: {}
+[14.136002] (-) TimerEvent: {}
+[14.236294] (-) TimerEvent: {}
+[14.336571] (-) TimerEvent: {}
+[14.436845] (-) TimerEvent: {}
+[14.537167] (-) TimerEvent: {}
+[14.637457] (-) TimerEvent: {}
+[14.737689] (-) TimerEvent: {}
+[14.837944] (-) TimerEvent: {}
+[14.938267] (-) TimerEvent: {}
+[15.038513] (-) TimerEvent: {}
+[15.138775] (-) TimerEvent: {}
+[15.239102] (-) TimerEvent: {}
+[15.339426] (-) TimerEvent: {}
+[15.439673] (-) TimerEvent: {}
+[15.539904] (-) TimerEvent: {}
+[15.640244] (-) TimerEvent: {}
+[15.740547] (-) TimerEvent: {}
+[15.840896] (-) TimerEvent: {}
+[15.941186] (-) TimerEvent: {}
+[16.041498] (-) TimerEvent: {}
+[16.141755] (-) TimerEvent: {}
+[16.242019] (-) TimerEvent: {}
+[16.342267] (-) TimerEvent: {}
+[16.442501] (-) TimerEvent: {}
+[16.542753] (-) TimerEvent: {}
+[16.643001] (-) TimerEvent: {}
+[16.743246] (-) TimerEvent: {}
+[16.843473] (-) TimerEvent: {}
+[16.943721] (-) TimerEvent: {}
+[17.043967] (-) TimerEvent: {}
+[17.144213] (-) TimerEvent: {}
+[17.244440] (-) TimerEvent: {}
+[17.344682] (-) TimerEvent: {}
+[17.444938] (-) TimerEvent: {}
+[17.545173] (-) TimerEvent: {}
+[17.645410] (-) TimerEvent: {}
+[17.745631] (-) TimerEvent: {}
+[17.845886] (-) TimerEvent: {}
+[17.946133] (-) TimerEvent: {}
+[18.046387] (-) TimerEvent: {}
+[18.146620] (-) TimerEvent: {}
+[18.246906] (-) TimerEvent: {}
+[18.347179] (-) TimerEvent: {}
+[18.447484] (-) TimerEvent: {}
+[18.547787] (-) TimerEvent: {}
+[18.648145] (-) TimerEvent: {}
+[18.748328] (-) TimerEvent: {}
+[18.848496] (-) TimerEvent: {}
+[18.948793] (-) TimerEvent: {}
+[19.049089] (-) TimerEvent: {}
+[19.149329] (-) TimerEvent: {}
+[19.249543] (-) TimerEvent: {}
+[19.349777] (-) TimerEvent: {}
+[19.450014] (-) TimerEvent: {}
+[19.550248] (-) TimerEvent: {}
+[19.650505] (-) TimerEvent: {}
+[19.750839] (-) TimerEvent: {}
+[19.851205] (-) TimerEvent: {}
+[19.951483] (-) TimerEvent: {}
+[20.051699] (-) TimerEvent: {}
+[20.151924] (-) TimerEvent: {}
+[20.252184] (-) TimerEvent: {}
+[20.352434] (-) TimerEvent: {}
+[20.452749] (-) TimerEvent: {}
+[20.516645] (ur3_moveit_control) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable ur3_control_node\x1b[0m\n'}
+[20.552853] (-) TimerEvent: {}
+[20.653157] (-) TimerEvent: {}
+[20.753408] (-) TimerEvent: {}
+[20.853763] (-) TimerEvent: {}
+[20.954072] (-) TimerEvent: {}
+[21.054424] (-) TimerEvent: {}
+[21.154751] (-) TimerEvent: {}
+[21.255071] (-) TimerEvent: {}
+[21.355409] (-) TimerEvent: {}
+[21.359437] (ur3_moveit_control) StdoutLine: {'line': b'[100%] Built target ur3_control_node\n'}
+[21.368344] (ur3_moveit_control) CommandEnded: {'returncode': 0}
+[21.368959] (ur3_moveit_control) JobProgress: {'identifier': 'ur3_moveit_control', 'progress': 'install'}
+[21.369232] (ur3_moveit_control) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/com9/uet_ws/build/ur3_moveit_control'], 'cwd': '/home/com9/uet_ws/build/ur3_moveit_control', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'com9'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/com9/uet_ws/install/ur_robot_driver/lib:/home/com9/uet_ws/install/ur3_moveit_control/lib:/home/com9/uet_ws/install/ur_controllers/lib:/home/com9/uet_ws/install/ur_dashboard_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/com9'), ('CONDA_SHLVL', '0'), ('CYCLONEDDS_URI', '<CycloneDDS><Domain><General><DontRoute>true</></></></>'), ('OLDPWD', '/home/com9/uet_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '12494'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_CE_M', ''), ('_CONDA_ROOT', '/home/com9/miniconda3'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/com9/uet_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'com9'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'com9'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('_CE_CONDA', ''), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/com9/uet_ws/install/ur_robot_driver/bin:/opt/ros/humble/bin:/home/com9/.local/bin:/home/com9/miniconda3/condabin:/home/com9/.local/bin:/home/com9/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/com9:@/tmp/.ICE-unix/1111,unix/com9:/tmp/.ICE-unix/1111'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/79b603f4_23a7_4caf_8fa2_cf60a243f04a'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.B4JTT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.154'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '42'), ('AMENT_PREFIX_PATH', '/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble'), ('CONDA_PYTHON_EXE', '/home/com9/miniconda3/bin/python'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('_CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/com9/uet_ws/build/ur3_moveit_control'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('CONDA_EXE', '/home/com9/miniconda3/bin/conda'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/com9/uet_ws/install/ur_robot_driver/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_moveit_config/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/ur_dashboard_msgs/local/lib/python3.10/dist-packages:/home/com9/uet_ws/install/susgrip_2f_hardware/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_gazebo/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages:/home/com9/uet_ws/install/susgrip_2f_control/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/com9/uet_ws/install/ur_moveit_config:/home/com9/uet_ws/install/ur_simulation_gz:/home/com9/uet_ws/install/ur:/home/com9/uet_ws/install/ur_calibration:/home/com9/uet_ws/install/ur_robot_driver:/home/com9/uet_ws/install/ur3_moveit_control:/home/com9/uet_ws/install/ur_bringup:/home/com9/uet_ws/install/ur_controllers:/home/com9/uet_ws/install/ur_dashboard_msgs:/home/com9/uet_ws/install/susgrip_2f_hardware:/home/com9/uet_ws/install/susgrip_2f_gazebo:/home/com9/uet_ws/install/susgrip_2f_description:/home/com9/uet_ws/install/susgrip_2f_control:/opt/ros/humble')]), 'shell': False}
+[21.376442] (ur3_moveit_control) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[21.376777] (ur3_moveit_control) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[21.376940] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/rosidl_interfaces/ur3_moveit_control\n'}
+[21.387596] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__functions.h\n'}
+[21.395143] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__struct.h\n'}
+[21.402711] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__type_support.h\n'}
+[21.410395] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/ur3_control.h\n'}
+[21.415745] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_generator_c__visibility_control.h\n'}
+[21.422668] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/library_path.sh\n'}
+[21.428946] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/library_path.dsv\n'}
+[21.435390] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_fastrtps_c.h\n'}
+[21.441232] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[21.447825] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__builder.hpp\n'}
+[21.454209] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__struct.hpp\n'}
+[21.455473] (-) TimerEvent: {}
+[21.459718] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__traits.hpp\n'}
+[21.465370] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__type_support.hpp\n'}
+[21.471247] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/ur3_control.hpp\n'}
+[21.476808] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_generator_cpp__visibility_control.hpp\n'}
+[21.484103] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[21.490802] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[21.498051] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_introspection_c.h\n'}
+[21.505076] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[21.513124] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_moveit_control/action/detail/ur3_control__rosidl_typesupport_introspection_cpp.hpp\n'}
+[21.519107] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/pythonpath.sh\n'}
+[21.526832] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/pythonpath.dsv\n'}
+[21.533339] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[21.541634] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[21.548088] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[21.554981] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[21.555546] (-) TimerEvent: {}
+[21.561171] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/__init__.py\n'}
+[21.568715] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_c.c\n'}
+[21.573971] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[21.579804] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/_ur3_moveit_control_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[21.585112] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/__init__.py\n'}
+[21.591582] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/_ur3_control.py\n'}
+[21.597707] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/_ur3_control_s.c\n'}
+[21.604257] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/libur3_moveit_control__rosidl_generator_py.so\n'}
+[21.611604] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[21.618509] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[21.625717] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[21.631706] (ur3_moveit_control) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[21.631933] (ur3_moveit_control) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[21.632118] (ur3_moveit_control) StdoutLine: {'line': b'-- Up-to-date symlink: /home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[21.632357] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/rust_packages/ur3_moveit_control\n'}
+[21.639615] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/Cargo.toml\n'}
+[21.646706] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/build.rs\n'}
+[21.652638] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/action.rs\n'}
+[21.655638] (-) TimerEvent: {}
+[21.658343] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/action/rmw.rs\n'}
+[21.664747] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rust/src/lib.rs\n'}
+[21.670636] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/action/UR3Control.idl\n'}
+[21.677094] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/action/UR3Control.action\n'}
+[21.683746] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_motion_interface.so\n'}
+[21.691978] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/lib/ur3_moveit_control/ur3_control_node\n'}
+[21.699077] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/lib/ur3_moveit_control/send_goal_client.py\n'}
+[21.704727] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/lib/ur3_moveit_control/random_pick_test.py\n'}
+[21.710403] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/include/ur3_moveit_control/ur3_motion_interface.hpp\n'}
+[21.718092] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/joint_limits.yaml\n'}
+[21.726179] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/kinematics.yaml\n'}
+[21.734054] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/moveit_controllers.yaml\n'}
+[21.739749] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/moveit_custom_config.yaml\n'}
+[21.745812] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/ompl_planning.yaml\n'}
+[21.754582] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/planning_pipelines.yaml\n'}
+[21.755723] (-) TimerEvent: {}
+[21.763313] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/planning_scene_monitor.yaml\n'}
+[21.768870] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/config/ur3_susgrip_gazebo_controllers.yaml\n'}
+[21.776431] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/__pycache__/ur3_demo_gripper.launch.cpython-310.pyc\n'}
+[21.784827] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/eye_in_hand_calib.launch.py\n'}
+[21.793434] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/ur3_demo.launch.py\n'}
+[21.799456] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/ur3_demo_gripper.launch.py\n'}
+[21.807976] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/launch/ur3_susgrip_sim.launch.py\n'}
+[21.814075] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf/ur3_with_susgrip.urdf.xacro\n'}
+[21.821011] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/urdf/ur3_with_susgrip_gazebo.urdf.xacro\n'}
+[21.828481] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/rviz/view_robot.rviz\n'}
+[21.835044] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models/bottle.sdf\n'}
+[21.840760] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/models/table.sdf\n'}
+[21.847552] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/package_run_dependencies/ur3_moveit_control\n'}
+[21.854548] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/parent_prefix_path/ur3_moveit_control\n'}
+[21.855810] (-) TimerEvent: {}
+[21.860508] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/ament_prefix_path.sh\n'}
+[21.866959] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/ament_prefix_path.dsv\n'}
+[21.872565] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/path.sh\n'}
+[21.880061] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/environment/path.dsv\n'}
+[21.888698] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.bash\n'}
+[21.895715] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.sh\n'}
+[21.901302] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.zsh\n'}
+[21.907568] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/local_setup.dsv\n'}
+[21.914315] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.dsv\n'}
+[21.921950] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ament_index/resource_index/packages/ur3_moveit_control\n'}
+[21.928618] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/rosidl_cmake-extras.cmake\n'}
+[21.935769] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[21.943119] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[21.948031] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[21.955217] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[21.955897] (-) TimerEvent: {}
+[21.962348] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[21.969533] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[21.976847] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_controlConfig.cmake\n'}
+[21.982100] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_controlConfig-version.cmake\n'}
+[21.990339] (ur3_moveit_control) StdoutLine: {'line': b'-- Symlinking: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/package.xml\n'}
+[21.996469] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_generator_c.so\n'}
+[21.996621] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_generator_c.so" to ""\n'}
+[21.996688] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_fastrtps_c.so\n'}
+[21.996808] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[21.996860] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_fastrtps_cpp.so\n'}
+[21.996980] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[21.997032] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_introspection_c.so\n'}
+[21.997131] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_introspection_c.so" to ""\n'}
+[21.997177] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_c.so\n'}
+[21.997275] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_c.so" to ""\n'}
+[21.997318] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_introspection_cpp.so\n'}
+[21.997462] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[21.997508] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_cpp.so\n'}
+[21.997614] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_typesupport_cpp.so" to ""\n'}
+[22.033522] (ur3_moveit_control) StdoutLine: {'line': b"Listing '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control'...\n"}
+[22.033716] (ur3_moveit_control) StdoutLine: {'line': b"Compiling '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/__init__.py'...\n"}
+[22.033781] (ur3_moveit_control) StdoutLine: {'line': b"Listing '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action'...\n"}
+[22.033841] (ur3_moveit_control) StdoutLine: {'line': b"Compiling '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/__init__.py'...\n"}
+[22.033900] (ur3_moveit_control) StdoutLine: {'line': b"Compiling '/home/com9/uet_ws/install/ur3_moveit_control/local/lib/python3.10/dist-packages/ur3_moveit_control/action/_ur3_control.py'...\n"}
+[22.036869] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_generator_py.so\n'}
+[22.037090] (ur3_moveit_control) StdoutLine: {'line': b'-- Set runtime path of "/home/com9/uet_ws/install/ur3_moveit_control/lib/libur3_moveit_control__rosidl_generator_py.so" to ""\n'}
+[22.037182] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_cExport.cmake\n'}
+[22.037254] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_cExport-noconfig.cmake\n'}
+[22.037442] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[22.037591] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[22.037732] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_cppExport.cmake\n'}
+[22.037855] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[22.037946] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[22.038015] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cExport.cmake\n'}
+[22.038105] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[22.038180] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cExport.cmake\n'}
+[22.038245] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[22.038308] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[22.038395] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[22.038456] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cppExport.cmake\n'}
+[22.038515] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/ur3_moveit_control__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[22.038573] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_pyExport.cmake\n'}
+[22.038630] (ur3_moveit_control) StdoutLine: {'line': b'-- Installing: /home/com9/uet_ws/install/ur3_moveit_control/share/ur3_moveit_control/cmake/export_ur3_moveit_control__rosidl_generator_pyExport-noconfig.cmake\n'}
+[22.039882] (ur3_moveit_control) CommandEnded: {'returncode': 0}
+[22.049822] (ur3_moveit_control) JobEnded: {'identifier': 'ur3_moveit_control', 'rc': 0}
+[22.050396] (-) EventReactorShutdown: {}

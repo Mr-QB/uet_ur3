@@ -34,7 +34,14 @@ ur3_moveit_control__action__UR3Control_Goal__init(ur3_moveit_control__action__UR
     ur3_moveit_control__action__UR3Control_Goal__fini(msg);
     return false;
   }
+  // cartesian_x_offset
+  // cartesian_y_offset
   // cartesian_z_offset
+  // target_x
+  // target_y
+  // object_x
+  // object_y
+  // object_z
   return true;
 }
 
@@ -49,7 +56,14 @@ ur3_moveit_control__action__UR3Control_Goal__fini(ur3_moveit_control__action__UR
   sensor_msgs__msg__JointState__fini(&msg->joint_goal);
   // pose_goal
   geometry_msgs__msg__PoseStamped__fini(&msg->pose_goal);
+  // cartesian_x_offset
+  // cartesian_y_offset
   // cartesian_z_offset
+  // target_x
+  // target_y
+  // object_x
+  // object_y
+  // object_z
 }
 
 bool
@@ -74,8 +88,36 @@ ur3_moveit_control__action__UR3Control_Goal__are_equal(const ur3_moveit_control_
   {
     return false;
   }
+  // cartesian_x_offset
+  if (lhs->cartesian_x_offset != rhs->cartesian_x_offset) {
+    return false;
+  }
+  // cartesian_y_offset
+  if (lhs->cartesian_y_offset != rhs->cartesian_y_offset) {
+    return false;
+  }
   // cartesian_z_offset
   if (lhs->cartesian_z_offset != rhs->cartesian_z_offset) {
+    return false;
+  }
+  // target_x
+  if (lhs->target_x != rhs->target_x) {
+    return false;
+  }
+  // target_y
+  if (lhs->target_y != rhs->target_y) {
+    return false;
+  }
+  // object_x
+  if (lhs->object_x != rhs->object_x) {
+    return false;
+  }
+  // object_y
+  if (lhs->object_y != rhs->object_y) {
+    return false;
+  }
+  // object_z
+  if (lhs->object_z != rhs->object_z) {
     return false;
   }
   return true;
@@ -103,8 +145,22 @@ ur3_moveit_control__action__UR3Control_Goal__copy(
   {
     return false;
   }
+  // cartesian_x_offset
+  output->cartesian_x_offset = input->cartesian_x_offset;
+  // cartesian_y_offset
+  output->cartesian_y_offset = input->cartesian_y_offset;
   // cartesian_z_offset
   output->cartesian_z_offset = input->cartesian_z_offset;
+  // target_x
+  output->target_x = input->target_x;
+  // target_y
+  output->target_y = input->target_y;
+  // object_x
+  output->object_x = input->object_x;
+  // object_y
+  output->object_y = input->object_y;
+  // object_z
+  output->object_z = input->object_z;
   return true;
 }
 

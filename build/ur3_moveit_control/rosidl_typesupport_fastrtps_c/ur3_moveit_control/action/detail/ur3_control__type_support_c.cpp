@@ -112,9 +112,44 @@ static bool _UR3Control_Goal__cdr_serialize(
     }
   }
 
+  // Field name: cartesian_x_offset
+  {
+    cdr << ros_message->cartesian_x_offset;
+  }
+
+  // Field name: cartesian_y_offset
+  {
+    cdr << ros_message->cartesian_y_offset;
+  }
+
   // Field name: cartesian_z_offset
   {
     cdr << ros_message->cartesian_z_offset;
+  }
+
+  // Field name: target_x
+  {
+    cdr << ros_message->target_x;
+  }
+
+  // Field name: target_y
+  {
+    cdr << ros_message->target_y;
+  }
+
+  // Field name: object_x
+  {
+    cdr << ros_message->object_x;
+  }
+
+  // Field name: object_y
+  {
+    cdr << ros_message->object_y;
+  }
+
+  // Field name: object_z
+  {
+    cdr << ros_message->object_z;
   }
 
   return true;
@@ -162,9 +197,44 @@ static bool _UR3Control_Goal__cdr_deserialize(
     }
   }
 
+  // Field name: cartesian_x_offset
+  {
+    cdr >> ros_message->cartesian_x_offset;
+  }
+
+  // Field name: cartesian_y_offset
+  {
+    cdr >> ros_message->cartesian_y_offset;
+  }
+
   // Field name: cartesian_z_offset
   {
     cdr >> ros_message->cartesian_z_offset;
+  }
+
+  // Field name: target_x
+  {
+    cdr >> ros_message->target_x;
+  }
+
+  // Field name: target_y
+  {
+    cdr >> ros_message->target_y;
+  }
+
+  // Field name: object_x
+  {
+    cdr >> ros_message->object_x;
+  }
+
+  // Field name: object_y
+  {
+    cdr >> ros_message->object_y;
+  }
+
+  // Field name: object_z
+  {
+    cdr >> ros_message->object_z;
   }
 
   return true;
@@ -198,9 +268,51 @@ size_t get_serialized_size_ur3_moveit_control__action__UR3Control_Goal(
 
   current_alignment += get_serialized_size_geometry_msgs__msg__PoseStamped(
     &(ros_message->pose_goal), current_alignment);
+  // field.name cartesian_x_offset
+  {
+    size_t item_size = sizeof(ros_message->cartesian_x_offset);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name cartesian_y_offset
+  {
+    size_t item_size = sizeof(ros_message->cartesian_y_offset);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
   // field.name cartesian_z_offset
   {
     size_t item_size = sizeof(ros_message->cartesian_z_offset);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name target_x
+  {
+    size_t item_size = sizeof(ros_message->target_x);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name target_y
+  {
+    size_t item_size = sizeof(ros_message->target_y);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name object_x
+  {
+    size_t item_size = sizeof(ros_message->object_x);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name object_y
+  {
+    size_t item_size = sizeof(ros_message->object_y);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name object_z
+  {
+    size_t item_size = sizeof(ros_message->object_z);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -278,7 +390,63 @@ size_t max_serialized_size_ur3_moveit_control__action__UR3Control_Goal(
       is_plain &= inner_is_plain;
     }
   }
+  // member: cartesian_x_offset
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+  // member: cartesian_y_offset
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
   // member: cartesian_z_offset
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+  // member: target_x
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+  // member: target_y
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+  // member: object_x
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+  // member: object_y
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
+  // member: object_z
   {
     size_t array_size = 1;
 
@@ -295,7 +463,7 @@ size_t max_serialized_size_ur3_moveit_control__action__UR3Control_Goal(
     using DataType = ur3_moveit_control__action__UR3Control_Goal;
     is_plain =
       (
-      offsetof(DataType, cartesian_z_offset) +
+      offsetof(DataType, object_z) +
       last_member_size
       ) == ret_val;
   }

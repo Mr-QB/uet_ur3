@@ -45,7 +45,42 @@ pub struct UR3Control_Goal {
 
     // This member is not documented.
     #[allow(missing_docs)]
+    pub cartesian_x_offset: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub cartesian_y_offset: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
     pub cartesian_z_offset: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub target_x: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub target_y: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub object_x: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub object_y: f64,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub object_z: f64,
 
 }
 
@@ -69,6 +104,31 @@ impl UR3Control_Goal {
     // This constant is not documented.
     #[allow(missing_docs)]
     pub const ATTACH_AND_LIFT: u8 = 3;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const DETACH_OBJECT: u8 = 4;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MOVE_CARTESIAN: u8 = 5;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MOVE_TO_XY: u8 = 6;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const PREPARE_NEXT_TRIAL: u8 = 7;
+
+
+    // This constant is not documented.
+    #[allow(missing_docs)]
+    pub const MOVE_CARTESIAN_STRICT: u8 = 8;
 
 }
 

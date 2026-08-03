@@ -59,6 +59,7 @@ def launch_setup(context, *args, **kwargs):
     description_file = LaunchConfiguration("description_file")
     _publish_robot_description_semantic = LaunchConfiguration("publish_robot_description_semantic")
     moveit_config_package = LaunchConfiguration("moveit_config_package")
+    planning_config_package = LaunchConfiguration("planning_config_package")
     moveit_joint_limits_file = LaunchConfiguration("moveit_joint_limits_file")
     moveit_config_file = LaunchConfiguration("moveit_config_file")
     warehouse_sqlite_path = LaunchConfiguration("warehouse_sqlite_path")
@@ -155,13 +156,26 @@ def launch_setup(context, *args, **kwargs):
         "publish_robot_description_semantic": _publish_robot_description_semantic
     }
 
-    robot_description_kinematics = PathJoinSubstitution(
-        [FindPackageShare(moveit_config_package), "config", "kinematics.yaml"]
+    # Load kinematics as a dictionary instead of passing the YAML path directly
+    # to rclcpp. Project-local MoveIt YAML is intentionally not a standalone
+    # ROS 2 parameter file and therefore does not contain ros__parameters.
+    kinematics_yaml = load_yaml(
+        str(planning_config_package.perform(context)),
+        "config/kinematics.yaml",
     )
+    # Keep compatibility with the upstream file, which is already wrapped as
+    # a ROS 2 wildcard parameter file.
+    if "/**" in kinematics_yaml:
+        kinematics_yaml = kinematics_yaml["/**"]["ros__parameters"][
+            "robot_description_kinematics"
+        ]
+    robot_description_kinematics = {
+        "robot_description_kinematics": kinematics_yaml
+    }
 
     robot_description_planning = {
         "robot_description_planning": load_yaml(
-            str(moveit_config_package.perform(context)),
+            str(planning_config_package.perform(context)),
             os.path.join("config", str(moveit_joint_limits_file.perform(context))),
         )
     }
@@ -174,7 +188,10 @@ def launch_setup(context, *args, **kwargs):
             "start_state_max_bounds_error": 0.1,
         }
     }
-    ompl_planning_yaml = load_yaml("ur_moveit_config", "config/ompl_planning.yaml")
+    ompl_planning_yaml = load_yaml(
+        str(planning_config_package.perform(context)),
+        "config/ompl_planning.yaml",
+    )
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Configuration
@@ -266,6 +283,7 @@ def launch_setup(context, *args, **kwargs):
             servo_params,
             robot_description,
             robot_description_semantic,
+            robot_description_kinematics,
         ],
         output="screen",
     )
@@ -351,6 +369,14 @@ def generate_launch_description():
             default_value="ur_moveit_config",
             description="MoveIt config package with robot SRDF/XACRO files. Usually the argument "
             "is not set, it enables use of a custom moveit config.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "planning_config_package",
+            default_value="ur_moveit_config",
+            description="Package providing kinematics, joint limits, and OMPL settings. "
+            "It may differ from the package providing the SRDF.",
         )
     )
     declared_arguments.append(

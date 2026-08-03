@@ -1,6 +1,37 @@
-max_velocity_scaling_factor: 0.2
-max_acceleration_scaling_factor: 0.2
+# Keep pose trajectories slow enough for the Gazebo position controller to
+# track wrist motion without tripping its path-tolerance monitor.
+max_velocity_scaling_factor: 0.15
+max_acceleration_scaling_factor: 0.15
 goal_position_tolerance: 0.01
 goal_orientation_tolerance: 0.10
 goal_joint_tolerance: 0.01
 planner_id: "PRMkConfigDefault"
+
+# Smooth IK branch selection. The last three weights penalize excessive wrist
+# rotation more heavily than shoulder / elbow motion.
+ik_joint_weights: [1.2, 1.0, 1.0, 3.0, 2.5, 2.0]
+ik_random_seed_attempts: 12
+ik_max_planning_candidates: 8
+ik_max_successful_plans: 3
+
+# Successful CSV rows are used as IK seeds for nearby pre-grasp poses.
+successful_waypoint_files:
+  - successful_grasp_waypoints.csv
+  - successful_random_waypoints.csv
+waypoint_seed_max_position_distance: 0.20
+waypoint_seed_max_orientation_distance: 0.35
+
+# Relative jump detection plus an absolute per-sample safety gate.
+cartesian_jump_threshold: 1.5
+cartesian_max_joint_step: 0.20
+
+# A lift is allowed only after the gripper is closed near the bottle and the
+# Gazebo detachable-joint plugin confirms attachment_state="attached".
+attach_confirmation_timeout: 3.0
+attach_request_attempts: 3
+maximum_attach_tcp_distance: 0.06
+maximum_attach_tcp_z_error: 0.04
+# Contact commonly stops the simulated fingers around 0.049-0.050 m. Keep a
+# 1 mm numerical margin so a value such as 0.05002 is not treated as open.
+maximum_gripper_position_for_attach: 0.051
+minimum_gripper_effort_for_attach: 0.0001

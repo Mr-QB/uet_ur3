@@ -1,6 +1,1 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
-    <xacro:arg name="name" default="ur"/>
-    <xacro:arg name="sim_gazebo" default="true"/>
-    <xacro:include filename="$(find ur3_moveit_control)/urdf/ur3_with_susgrip.urdf.xacro"/>
-</robot>
+/home/com9/uet_ws/src/ur3_moveit_control/urdf/ur3_with_susgrip_gazebo.urdf.xacro

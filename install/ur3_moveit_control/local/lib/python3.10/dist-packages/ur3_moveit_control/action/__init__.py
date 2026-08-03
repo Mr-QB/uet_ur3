@@ -1,1 +1,1 @@
-from ur3_moveit_control.action._ur3_control import UR3Control  # noqa: F401
+/home/com9/uet_ws/build/ur3_moveit_control/rosidl_generator_py/ur3_moveit_control/action/__init__.py

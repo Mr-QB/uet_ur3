@@ -1,13 +1,24 @@
-planning_plugins:
-  - ompl_interface/OMPLPlanner
+planner_configs:
+  RRTConnectkConfigDefault:
+    type: geometric::RRTConnect
+    range: 0.05
 
-request_adapters:
-  - default_planning_request_adapters/AddTimeOptimalParameterization
-  - default_planning_request_adapters/ResolveConstraintFrames
-  - default_planning_request_adapters/FixWorkspaceBounds
-  - default_planning_request_adapters/FixStartBoundsAsValid
-  - default_planning_request_adapters/FixStartStateCollision
-  - default_planning_request_adapters/FixStartStatePathConstraints
+  RRTstarkConfigDefault:
+    type: geometric::RRTstar
+    range: 0.05
+    goal_bias: 0.1
+    delay_collision_checking: 1
+
+  PRMkConfigDefault:
+    type: geometric::PRM
+    # A denser roadmap improves connectivity in the narrow region around the
+    # bottle. IK / trajectory scoring in the client handles path smoothness.
+    max_nearest_neighbors: 25
+
+  KPIECEkConfigDefault:
+    type: geometric::KPIECE
+    range: 0.05
+    goal_bias: 0.05
 
 ur_manipulator:
   planner_configs:
@@ -15,22 +26,7 @@ ur_manipulator:
     - RRTstarkConfigDefault
     - PRMkConfigDefault
     - KPIECEkConfigDefault
-  
-  RRTConnectkConfigDefault:
-    type: geometric::RRTConnect
-    range: 0.05
-  
-  RRTstarkConfigDefault:
-    type: geometric::RRTstar
-    range: 0.05
-    goal_bias: 0.1
-    delay_collision_checking: 1
-    
-  PRMkConfigDefault:
-    type: geometric::PRM
-    max_nearest_neighbors: 18
-    
-  KPIECEkConfigDefault:
-    type: geometric::KPIECE
-    range: 0.05
-    goal_bias: 0.05
+
+  # Check collision more densely than the upstream 0.01 default. This does
+  # not move any wall; it only samples the planned path more carefully.
+  longest_valid_segment_fraction: 0.005

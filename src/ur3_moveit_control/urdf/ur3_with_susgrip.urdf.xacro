@@ -95,11 +95,16 @@
           Gazebo owns the simulated physics, so MoveIt's attachObject() alone
           cannot make pick_box follow the gripper.  This system creates/removes
           a real fixed joint when Empty messages arrive on the topics below.
+
+          gripper_tcp and gripper_body are connected through fixed joints.
+          Gazebo collapses both frames into wrist_3_link while converting the
+          URDF to SDF; the two movable finger links are re-parented to it.
+          DetachableJoint must therefore use the surviving physical link name.
         -->
         <gazebo>
             <plugin filename="ignition-gazebo-detachable-joint-system"
                     name="ignition::gazebo::systems::DetachableJoint">
-                <parent_link>gripper_tcp</parent_link>
+                <parent_link>wrist_3_link</parent_link>
                 <child_model>pick_box</child_model>
                 <child_link>box_link</child_link>
                 <attach_topic>/pick_box/attach</attach_topic>

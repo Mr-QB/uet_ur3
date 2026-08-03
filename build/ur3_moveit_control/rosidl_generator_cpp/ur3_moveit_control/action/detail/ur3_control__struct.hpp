@@ -48,7 +48,14 @@ struct UR3Control_Goal_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->command_type = 0;
+      this->cartesian_x_offset = 0.0;
+      this->cartesian_y_offset = 0.0;
       this->cartesian_z_offset = 0.0;
+      this->target_x = 0.0;
+      this->target_y = 0.0;
+      this->object_x = 0.0;
+      this->object_y = 0.0;
+      this->object_z = 0.0;
     }
   }
 
@@ -60,7 +67,14 @@ struct UR3Control_Goal_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->command_type = 0;
+      this->cartesian_x_offset = 0.0;
+      this->cartesian_y_offset = 0.0;
       this->cartesian_z_offset = 0.0;
+      this->target_x = 0.0;
+      this->target_y = 0.0;
+      this->object_x = 0.0;
+      this->object_y = 0.0;
+      this->object_z = 0.0;
     }
   }
 
@@ -74,9 +88,30 @@ struct UR3Control_Goal_
   using _pose_goal_type =
     geometry_msgs::msg::PoseStamped_<ContainerAllocator>;
   _pose_goal_type pose_goal;
+  using _cartesian_x_offset_type =
+    double;
+  _cartesian_x_offset_type cartesian_x_offset;
+  using _cartesian_y_offset_type =
+    double;
+  _cartesian_y_offset_type cartesian_y_offset;
   using _cartesian_z_offset_type =
     double;
   _cartesian_z_offset_type cartesian_z_offset;
+  using _target_x_type =
+    double;
+  _target_x_type target_x;
+  using _target_y_type =
+    double;
+  _target_y_type target_y;
+  using _object_x_type =
+    double;
+  _object_x_type object_x;
+  using _object_y_type =
+    double;
+  _object_y_type object_y;
+  using _object_z_type =
+    double;
+  _object_z_type object_z;
 
   // setters for named parameter idiom
   Type & set__command_type(
@@ -97,10 +132,52 @@ struct UR3Control_Goal_
     this->pose_goal = _arg;
     return *this;
   }
+  Type & set__cartesian_x_offset(
+    const double & _arg)
+  {
+    this->cartesian_x_offset = _arg;
+    return *this;
+  }
+  Type & set__cartesian_y_offset(
+    const double & _arg)
+  {
+    this->cartesian_y_offset = _arg;
+    return *this;
+  }
   Type & set__cartesian_z_offset(
     const double & _arg)
   {
     this->cartesian_z_offset = _arg;
+    return *this;
+  }
+  Type & set__target_x(
+    const double & _arg)
+  {
+    this->target_x = _arg;
+    return *this;
+  }
+  Type & set__target_y(
+    const double & _arg)
+  {
+    this->target_y = _arg;
+    return *this;
+  }
+  Type & set__object_x(
+    const double & _arg)
+  {
+    this->object_x = _arg;
+    return *this;
+  }
+  Type & set__object_y(
+    const double & _arg)
+  {
+    this->object_y = _arg;
+    return *this;
+  }
+  Type & set__object_z(
+    const double & _arg)
+  {
+    this->object_z = _arg;
     return *this;
   }
 
@@ -113,6 +190,16 @@ struct UR3Control_Goal_
     2u;
   static constexpr uint8_t ATTACH_AND_LIFT =
     3u;
+  static constexpr uint8_t DETACH_OBJECT =
+    4u;
+  static constexpr uint8_t MOVE_CARTESIAN =
+    5u;
+  static constexpr uint8_t MOVE_TO_XY =
+    6u;
+  static constexpr uint8_t PREPARE_NEXT_TRIAL =
+    7u;
+  static constexpr uint8_t MOVE_CARTESIAN_STRICT =
+    8u;
 
   // pointer types
   using RawPtr =
@@ -163,7 +250,28 @@ struct UR3Control_Goal_
     if (this->pose_goal != other.pose_goal) {
       return false;
     }
+    if (this->cartesian_x_offset != other.cartesian_x_offset) {
+      return false;
+    }
+    if (this->cartesian_y_offset != other.cartesian_y_offset) {
+      return false;
+    }
     if (this->cartesian_z_offset != other.cartesian_z_offset) {
+      return false;
+    }
+    if (this->target_x != other.target_x) {
+      return false;
+    }
+    if (this->target_y != other.target_y) {
+      return false;
+    }
+    if (this->object_x != other.object_x) {
+      return false;
+    }
+    if (this->object_y != other.object_y) {
+      return false;
+    }
+    if (this->object_z != other.object_z) {
       return false;
     }
     return true;
@@ -198,6 +306,31 @@ constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::MOVE_POSE;
 // static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
 template<typename ContainerAllocator>
 constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::ATTACH_AND_LIFT;
+#endif  // __cplusplus < 201703L
+#if __cplusplus < 201703L
+// static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
+template<typename ContainerAllocator>
+constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::DETACH_OBJECT;
+#endif  // __cplusplus < 201703L
+#if __cplusplus < 201703L
+// static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
+template<typename ContainerAllocator>
+constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::MOVE_CARTESIAN;
+#endif  // __cplusplus < 201703L
+#if __cplusplus < 201703L
+// static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
+template<typename ContainerAllocator>
+constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::MOVE_TO_XY;
+#endif  // __cplusplus < 201703L
+#if __cplusplus < 201703L
+// static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
+template<typename ContainerAllocator>
+constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::PREPARE_NEXT_TRIAL;
+#endif  // __cplusplus < 201703L
+#if __cplusplus < 201703L
+// static constexpr member variable definitions are only needed in C++14 and below, deprecated in C++17
+template<typename ContainerAllocator>
+constexpr uint8_t UR3Control_Goal_<ContainerAllocator>::MOVE_CARTESIAN_STRICT;
 #endif  // __cplusplus < 201703L
 
 }  // namespace action

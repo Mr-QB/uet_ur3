@@ -20,50 +20,34 @@ from control_msgs.action import FollowJointTrajectory
 from sensor_msgs.msg import JointState
 from trajectory_msgs.msg import JointTrajectoryPoint
 from ur3_moveit_control.action import UR3Control
+from grasp_profile import (
+    APPROACH_CLEARANCE,
+    CLOSE_POSITION,
+    GRASP_DEPTH_OFFSET,
+    LIFT_OFFSET,
+    OPEN_POSITION,
+    POUR_WRIST_ANGLE_DEG,
+    TCP_GRASP_OFFSET,
+    TRANSPORT_X_MAX,
+    TRANSPORT_Y_MAX,
+    TRANSPORT_Y_MIN,
+    pouring_joint_goal,
+    radial_side_grasp_geometry,
+)
 
 
-def radial_side_grasp_geometry(
-        object_x,
-        object_y,
-        approach_clearance,
-        grasp_depth_offset):
-    """Return a horizontal grasp aligned with the object azimuth."""
-
-    radius = math.hypot(object_x, object_y)
-    if radius < 1e-6:
-        raise ValueError('Object cannot be placed at the base_link origin')
-
-    direction_x = object_x / radius
-    direction_y = object_y / radius
-    grasp_x = object_x - grasp_depth_offset * direction_x
-    grasp_y = object_y - grasp_depth_offset * direction_y
-    approach_x = grasp_x - approach_clearance * direction_x
-    approach_y = grasp_y - approach_clearance * direction_y
-
-    yaw = math.atan2(object_y, object_x)
-    cosine = math.cos(0.5 * yaw)
-    sine = math.sin(0.5 * yaw)
-    quaternion = (
-        0.5 * (cosine - sine),
-        0.5 * (cosine + sine),
-        0.5 * (cosine + sine),
-        0.5 * (cosine - sine),
-    )
-
-    return {
-        'approach_x': approach_x,
-        'approach_y': approach_y,
-        'advance_x': approach_clearance * direction_x,
-        'advance_y': approach_clearance * direction_y,
-        'grasp_x': grasp_x,
-        'grasp_y': grasp_y,
-        'quaternion': quaternion,
-        'yaw': yaw,
-    }
+ARM_JOINT_NAMES = [
+    'shoulder_pan_joint',
+    'shoulder_lift_joint',
+    'elbow_joint',
+    'wrist_1_joint',
+    'wrist_2_joint',
+    'wrist_3_joint',
+]
 
 
 class RandomPickTester(Node):
-    """Run repeatable pick-and-place trials with one reusable Gazebo box."""
+    """Run repeatable pick-pour trials with one reusable Gazebo bottle."""
 
     def __init__(self, args):
         super().__init__('ur3_random_pick_test')
@@ -90,15 +74,10 @@ class RandomPickTester(Node):
         self._latest_joint_positions = dict(zip(msg.name, msg.position))
 
     def capture_pregrasp_joints(self):
-        names = [
-            'shoulder_pan_joint',
-            'shoulder_lift_joint',
-            'elbow_joint',
-            'wrist_1_joint',
-            'wrist_2_joint',
-            'wrist_3_joint',
-        ]
-        if any(name not in self._latest_joint_positions for name in names):
+        if any(
+            name not in self._latest_joint_positions
+            for name in ARM_JOINT_NAMES
+        ):
             self._captured_pregrasp_joints = None
             self.get_logger().warning(
                 'Pre-grasp succeeded, but the six arm joint states were not '
@@ -106,7 +85,7 @@ class RandomPickTester(Node):
             )
             return
         self._captured_pregrasp_joints = [
-            self._latest_joint_positions[name] for name in names
+            self._latest_joint_positions[name] for name in ARM_JOINT_NAMES
         ]
         self.get_logger().info(
             'Captured random-trial pre-grasp joints: ['
@@ -254,7 +233,109 @@ class RandomPickTester(Node):
         goal.command_type = UR3Control.Goal.DETACH_OBJECT
         return self.send_arm_goal(goal, 'detach')
 
+    def rotate_gripper_for_pour(self):
+        """Plan a wrist-only tilt while keeping the carried bottle attached."""
+
+        missing = [
+            name for name in ARM_JOINT_NAMES
+            if name not in self._latest_joint_positions
+        ]
+        if missing:
+            return False, (
+                'pour_wrist: missing current joint states: '
+                + ', '.join(missing)
+            )
+
+        current_joints = [
+            self._latest_joint_positions[name] for name in ARM_JOINT_NAMES
+        ]
+        try:
+            target_joints, applied_delta = pouring_joint_goal(
+                current_joints,
+                self.args.pour_angle_deg,
+            )
+        except ValueError as error:
+            return False, f'pour_wrist: {error}'
+
+        self.get_logger().info(
+            'Planning bottle-pouring tilt using wrist_3_joint only: '
+            f'requested={self.args.pour_angle_deg:+.1f} deg, '
+            f'applied={math.degrees(applied_delta):+.1f} deg, '
+            f'target={target_joints[5]:+.3f} rad'
+        )
+        goal = UR3Control.Goal()
+        goal.command_type = UR3Control.Goal.MOVE_JOINT
+        goal.joint_goal.name = list(ARM_JOINT_NAMES)
+        goal.joint_goal.position = target_joints
+        return self.send_arm_goal(goal, 'pour_wrist')
+
+    def hide_carried_bottle(self):
+        """Detach internally, park the bottle, and clear its MoveIt object."""
+
+        detached, message = self.detach()
+        if not detached:
+            return False, f'hide_bottle detach failed: {message}'
+
+        parked, message = self.park_gazebo_box()
+        if not parked:
+            return False, f'hide_bottle parking failed: {message}'
+
+        prepared, message = self.prepare_next_trial()
+        if not prepared:
+            return False, f'hide_bottle scene cleanup failed: {message}'
+
+        return True, (
+            'Bottle detached internally and moved directly to parking; '
+            'the gripper remained closed'
+        )
+
+    def gazebo_box_exists(self):
+        """Confirm that Gazebo currently contains pick_box::box_link."""
+
+        command = [
+            self._transport_cli,
+            'model',
+            '-m',
+            'pick_box',
+            '-l',
+            'box_link',
+        ]
+        diagnostics = ''
+        for attempt in range(1, 4):
+            try:
+                completed = subprocess.run(
+                    command,
+                    capture_output=True,
+                    check=False,
+                    text=True,
+                    timeout=self.args.gazebo_timeout + 2.0,
+                )
+                diagnostics = (
+                    f'{completed.stdout}\n{completed.stderr}'
+                ).strip()
+                if (
+                    completed.returncode == 0
+                    and 'Name: box_link' in diagnostics
+                ):
+                    return True, diagnostics
+            except (OSError, subprocess.TimeoutExpired) as error:
+                diagnostics = str(error)
+
+            if attempt < 3:
+                time.sleep(0.2)
+
+        return False, diagnostics or 'pick_box::box_link was not found'
+
     def set_gazebo_box_world_pose(self, world_x, world_y, world_z, label):
+        exists, diagnostics = self.gazebo_box_exists()
+        if not exists:
+            return False, (
+                'pick_box::box_link is missing. Random testing deliberately '
+                'does not respawn it because DetachableJoint is bound to the '
+                'original Gazebo entity ID. Restart the Gazebo launch so the '
+                f'bottle is created before the robot plugin. Details: {diagnostics}'
+            )
+
         service = f'/world/{self.args.world}/set_pose'
 
         using_ign = Path(self._transport_cli).name == 'ign'
@@ -303,6 +384,16 @@ class RandomPickTester(Node):
             )
         if 'data: false' in output.lower():
             return False, f'Gazebo rejected set_pose: {output}'
+
+        # UserCommands acknowledges a queued set_pose with data=true even when
+        # the named entity does not exist. Check the entity graph explicitly
+        # so the trial cannot continue to close/attach around an absent bottle.
+        exists, diagnostics = self.gazebo_box_exists()
+        if not exists:
+            return False, (
+                'Gazebo acknowledged set_pose, but pick_box::box_link is '
+                f'absent: {diagnostics}'
+            )
 
         self.get_logger().info(
             f'Teleported pick_box to {label}: '
@@ -453,14 +544,8 @@ class RandomPickTester(Node):
                     strict=True,
                 ),
             ),
-            ('detach', self.detach),
-            (
-                'open_after_detach',
-                lambda: self.send_gripper_goal(
-                    self.args.open_position,
-                    'open_after_detach',
-                ),
-            ),
+            ('pour_wrist', self.rotate_gripper_for_pour),
+            ('hide_carried_bottle', self.hide_carried_bottle),
         ]
 
         for stage, operation in steps:
@@ -481,7 +566,7 @@ class RandomPickTester(Node):
             transport_dx,
             transport_dy,
         )
-        return True, 'completed', 'Pick-and-place completed'
+        return True, 'completed', 'Pick, transport, pour, and cleanup completed'
 
     def append_result(self, result):
         result_path = Path(self.args.results_file).expanduser().resolve()
@@ -603,7 +688,7 @@ class RandomPickTester(Node):
 
 def parse_args(argv):
     parser = argparse.ArgumentParser(
-        description='Repeated random pick-and-place test using one pick_box.',
+        description='Repeated random pick-pour test using one pick_box.',
     )
     parser.add_argument('--trials', type=int, default=10)
     parser.add_argument('--seed', type=int, default=23)
@@ -618,9 +703,12 @@ def parse_args(argv):
     parser.add_argument('--pick-x-max', type=float, default=0.64)
     parser.add_argument('--pick-y-min', type=float, default=-0.06)
     parser.add_argument('--pick-y-max', type=float, default=0.06)
-    parser.add_argument('--transport-x-max', type=float, default=0.02)
-    parser.add_argument('--transport-y-min', type=float, default=0.06)
-    parser.add_argument('--transport-y-max', type=float, default=0.10)
+    parser.add_argument(
+        '--transport-x-max', type=float, default=TRANSPORT_X_MAX)
+    parser.add_argument(
+        '--transport-y-min', type=float, default=TRANSPORT_Y_MIN)
+    parser.add_argument(
+        '--transport-y-max', type=float, default=TRANSPORT_Y_MAX)
 
     parser.add_argument('--base-world-x', type=float, default=0.0)
     parser.add_argument('--base-world-y', type=float, default=0.0)
@@ -630,16 +718,28 @@ def parse_args(argv):
     parser.add_argument('--parking-world-y', type=float, default=1.50)
     parser.add_argument('--parking-world-z', type=float, default=0.10)
 
-    parser.add_argument('--approach-clearance', type=float, default=0.12)
-    parser.add_argument('--tcp-grasp-offset', type=float, default=0.06)
-    parser.add_argument('--grasp-depth-offset', type=float, default=0.015)
-    parser.add_argument('--lift-offset', type=float, default=0.15)
-    parser.add_argument('--open-position', type=float, default=0.06)
-    parser.add_argument('--close-position', type=float, default=0.042)
+    # Defaults come from the exact same profile as send_goal_client.py.
+    parser.add_argument(
+        '--approach-clearance', type=float, default=APPROACH_CLEARANCE)
+    parser.add_argument(
+        '--tcp-grasp-offset', type=float, default=TCP_GRASP_OFFSET)
+    parser.add_argument(
+        '--grasp-depth-offset', type=float, default=GRASP_DEPTH_OFFSET)
+    parser.add_argument('--lift-offset', type=float, default=LIFT_OFFSET)
+    parser.add_argument('--open-position', type=float, default=OPEN_POSITION)
+    parser.add_argument('--close-position', type=float, default=CLOSE_POSITION)
+    parser.add_argument(
+        '--pour-angle-deg', type=float, default=POUR_WRIST_ANGLE_DEG,
+        help=(
+            'Signed wrist_3 rotation after transport; change the sign to '
+            'reverse the pouring direction.'
+        ))
 
     parser.add_argument('--action-timeout', type=float, default=120.0)
     parser.add_argument('--gazebo-timeout', type=float, default=3.0)
-    parser.add_argument('--physics-settle-time', type=float, default=0.5)
+    # With the default RTF 2 world, 0.25 wall seconds provides roughly the
+    # same 0.5 simulation seconds of settling as the previous RTF 1 setup.
+    parser.add_argument('--physics-settle-time', type=float, default=0.25)
 
     args = parser.parse_args(remove_ros_args(args=argv)[1:])
     if args.trials < 1:
@@ -658,6 +758,8 @@ def parse_args(argv):
         )
     if args.grasp_depth_offset < 0.0:
         parser.error('--grasp-depth-offset must be non-negative')
+    if not 1.0 <= abs(args.pour_angle_deg) <= 150.0:
+        parser.error('--pour-angle-deg magnitude must be between 1 and 150')
     return args
 
 

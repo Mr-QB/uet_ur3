@@ -1,40 +1,43 @@
 #!/usr/bin/env python3
 
+import argparse
 import csv
 import math
+import os
 import random
 from pathlib import Path
+import sys
 
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
+from rclpy.utilities import remove_ros_args
 
 from builtin_interfaces.msg import Duration
 from control_msgs.action import FollowJointTrajectory
 from sensor_msgs.msg import JointState
 from trajectory_msgs.msg import JointTrajectoryPoint
 from ur3_moveit_control.action import UR3Control
+from grasp_profile import (
+    APPROACH_CLEARANCE as FIXED_APPROACH_CLEARANCE,
+    BOTTLE_X as FIXED_BOTTLE_X,
+    BOTTLE_Y as FIXED_BOTTLE_Y,
+    BOTTLE_Z as FIXED_BOTTLE_Z,
+    CLOSE_POSITION as FIXED_CLOSE_POSITION,
+    GRASP_DEPTH_OFFSET as FIXED_GRASP_DEPTH_OFFSET,
+    LIFT_OFFSET as FIXED_LIFT_OFFSET,
+    MAX_EFFORT as FIXED_MAX_EFFORT,
+    OPEN_POSITION as FIXED_OPEN_POSITION,
+    POUR_WRIST_ANGLE_DEG as FIXED_POUR_WRIST_ANGLE_DEG,
+    TCP_GRASP_OFFSET as FIXED_TCP_GRASP_OFFSET,
+    TRANSPORT_X_MAX as FIXED_TRANSPORT_X_MAX,
+    TRANSPORT_Y_MAX as FIXED_TRANSPORT_Y_MAX,
+    TRANSPORT_Y_MIN as FIXED_TRANSPORT_Y_MIN,
+    pouring_joint_goal,
+    radial_side_grasp_geometry,
+)
 
 
-# Fixed bottle pose in base_link. The Gazebo launch file spawns pick_box at
-# this same position, so the grasp test is repeatable from one run to the next.
-FIXED_BOTTLE_X = 0.62
-FIXED_BOTTLE_Y = 0.0
-FIXED_BOTTLE_Z = 0.05
-
-# Side-grasp tuning for the 0.10 m diameter, 0.26 m tall bottle.
-FIXED_APPROACH_CLEARANCE = 0.12
-FIXED_TCP_GRASP_OFFSET = 0.06
-FIXED_GRASP_DEPTH_OFFSET = 0.015
-FIXED_LIFT_OFFSET = 0.15
-FIXED_OPEN_POSITION = 0.06
-# This asks both fingers to close slightly through the nominal bottle diameter
-# so Gazebo establishes contact instead of leaving a visible gap.
-FIXED_CLOSE_POSITION = 0.042
-FIXED_MAX_EFFORT = 100.0
-FIXED_TRANSPORT_Y_MIN = 0.06
-FIXED_TRANSPORT_Y_MAX = 0.10
-FIXED_TRANSPORT_X_MAX = 0.02
 SUCCESSFUL_WAYPOINTS_FILE = Path('successful_grasp_waypoints.csv')
 
 ARM_JOINT_NAMES = [
@@ -45,48 +48,6 @@ ARM_JOINT_NAMES = [
     'wrist_2_joint',
     'wrist_3_joint',
 ]
-
-
-def radial_side_grasp_geometry(
-        object_x,
-        object_y,
-        approach_clearance,
-        grasp_depth_offset):
-    """Calculate a horizontal approach directed radially toward the bottle."""
-
-    radius = math.hypot(object_x, object_y)
-    if radius < 1e-6:
-        raise ValueError('Object cannot be placed at the base_link origin')
-
-    direction_x = object_x / radius
-    direction_y = object_y / radius
-    grasp_x = object_x - grasp_depth_offset * direction_x
-    grasp_y = object_y - grasp_depth_offset * direction_y
-    approach_x = grasp_x - approach_clearance * direction_x
-    approach_y = grasp_y - approach_clearance * direction_y
-
-    # q=(0.5, 0.5, 0.5, 0.5) points TCP +Z along base_link +X. Apply a
-    # base-link Z yaw so the gripper points radially toward the object.
-    yaw = math.atan2(object_y, object_x)
-    cosine = math.cos(0.5 * yaw)
-    sine = math.sin(0.5 * yaw)
-    quaternion = (
-        0.5 * (cosine - sine),
-        0.5 * (cosine + sine),
-        0.5 * (cosine + sine),
-        0.5 * (cosine - sine),
-    )
-
-    return {
-        'approach_x': approach_x,
-        'approach_y': approach_y,
-        'advance_x': approach_clearance * direction_x,
-        'advance_y': approach_clearance * direction_y,
-        'grasp_x': grasp_x,
-        'grasp_y': grasp_y,
-        'quaternion': quaternion,
-        'yaw': yaw,
-    }
 
 
 class UR3ActionClient(Node):
@@ -279,6 +240,26 @@ class UR3ActionClient(Node):
             self.arm_goal_response_callback
         )
 
+    def prepare_next_trial(self):
+        """Clear stale Gazebo and MoveIt attachment state before grasping."""
+
+        goal_msg = UR3Control.Goal()
+        goal_msg.command_type = UR3Control.Goal.PREPARE_NEXT_TRIAL
+
+        if not self._arm_action_client.wait_for_server(
+            timeout_sec=5.0
+        ):
+            self.get_logger().error(
+                'The UR3 action server is not available'
+            )
+            return
+
+        self.get_logger().info(
+            'Preparing reusable pick_box state before the grasp sequence...'
+        )
+        future = self._arm_action_client.send_goal_async(goal_msg)
+        future.add_done_callback(self.arm_goal_response_callback)
+
     def send_joint_goal(self, j1, j2, j3, j4, j5, j6):
         """Send a six-joint position goal to the UR3 arm."""
 
@@ -348,20 +329,36 @@ class UR3ActionClient(Node):
             self.arm_goal_response_callback
         )
 
-    def grasp_fixed_bottle(
+    def grasp_bottle_at(
             self,
+            object_x,
+            object_y,
+            object_z,
             approach_clearance=FIXED_APPROACH_CLEARANCE,
             tcp_grasp_offset=FIXED_TCP_GRASP_OFFSET,
             grasp_depth_offset=FIXED_GRASP_DEPTH_OFFSET,
             lift_offset=FIXED_LIFT_OFFSET,
             open_position=FIXED_OPEN_POSITION,
             close_position=FIXED_CLOSE_POSITION,
-            max_effort=FIXED_MAX_EFFORT):
-        """Side-grasp the fixed bottle and stop after lifting it."""
+            max_effort=FIXED_MAX_EFFORT,
+            pour_angle_deg=FIXED_POUR_WRIST_ANGLE_DEG,
+            transport_dx=None,
+            transport_dy=None):
+        """Run the shared side-grasp flow for an object pose in base_link."""
 
-        object_x = FIXED_BOTTLE_X
-        object_y = FIXED_BOTTLE_Y
-        object_z = FIXED_BOTTLE_Z
+        # Check connectivity before creating the asynchronous state machine.
+        # Without this preflight, a missing server left the process spinning
+        # forever even though no goal had been sent.
+        if not self._arm_action_client.wait_for_server(timeout_sec=5.0):
+            self.get_logger().error(
+                'The UR3 action server is not available. '
+                f'Client ROS_DOMAIN_ID={os.environ.get("ROS_DOMAIN_ID", "0")}, '
+                'ROS_LOCALHOST_ONLY='
+                f'{os.environ.get("ROS_LOCALHOST_ONLY", "0")}. '
+                'Gazebo, MoveIt, ur3_control_node, and this client must use '
+                'the same ROS discovery environment.'
+            )
+            return False
 
         grasp_z = float(object_z) + float(tcp_grasp_offset)
         geometry = radial_side_grasp_geometry(
@@ -370,17 +367,19 @@ class UR3ActionClient(Node):
             float(approach_clearance),
             float(grasp_depth_offset),
         )
-        transport_side = random.choice((-1.0, 1.0))
-        transport_dx = random.uniform(
-            -FIXED_TRANSPORT_X_MAX,
-            FIXED_TRANSPORT_X_MAX,
-        )
-        transport_dy = transport_side * random.uniform(
-            FIXED_TRANSPORT_Y_MIN,
-            FIXED_TRANSPORT_Y_MAX,
-        )
+        if transport_dx is None:
+            transport_dx = random.uniform(
+                -FIXED_TRANSPORT_X_MAX,
+                FIXED_TRANSPORT_X_MAX,
+            )
+        if transport_dy is None:
+            transport_side = random.choice((-1.0, 1.0))
+            transport_dy = transport_side * random.uniform(
+                FIXED_TRANSPORT_Y_MIN,
+                FIXED_TRANSPORT_Y_MAX,
+            )
         self._pick_sequence = {
-            'stage': 'opening',
+            'stage': 'preparing',
             'object_x': float(object_x),
             'object_y': float(object_y),
             'object_z': float(object_z),
@@ -398,10 +397,11 @@ class UR3ActionClient(Node):
             'open_position': float(open_position),
             'close_position': float(close_position),
             'max_effort': float(max_effort),
+            'pour_angle_deg': float(pour_angle_deg),
         }
 
         self.get_logger().info(
-            'Starting fixed-bottle side-grasp: '
+            'Starting parameterized bottle side-grasp in base_link: '
             f'object=({object_x:.3f}, {object_y:.3f}, {object_z:.3f}), '
             f'pre_grasp=({geometry["approach_x"]:.3f}, '
             f'{geometry["approach_y"]:.3f}, {grasp_z:.3f}), '
@@ -411,12 +411,76 @@ class UR3ActionClient(Node):
             f'post_lift_cartesian=(dx={transport_dx:+.3f}, '
             f'dy={transport_dy:+.3f}, dz=+0.000)'
         )
-        self.open_gripper(open_position, max_effort)
+        self.get_logger().info(
+            'Bottle grasp setup 1/2: clearing stale attachment state'
+        )
+        self.prepare_next_trial()
+        return True
+
+    def grasp_fixed_bottle(
+            self,
+            approach_clearance=FIXED_APPROACH_CLEARANCE,
+            tcp_grasp_offset=FIXED_TCP_GRASP_OFFSET,
+            grasp_depth_offset=FIXED_GRASP_DEPTH_OFFSET,
+            lift_offset=FIXED_LIFT_OFFSET,
+            open_position=FIXED_OPEN_POSITION,
+            close_position=FIXED_CLOSE_POSITION,
+            max_effort=FIXED_MAX_EFFORT,
+            pour_angle_deg=FIXED_POUR_WRIST_ANGLE_DEG):
+        """Backward-compatible wrapper for the launch file's fixed bottle."""
+
+        return self.grasp_bottle_at(
+            FIXED_BOTTLE_X,
+            FIXED_BOTTLE_Y,
+            FIXED_BOTTLE_Z,
+            approach_clearance=approach_clearance,
+            tcp_grasp_offset=tcp_grasp_offset,
+            grasp_depth_offset=grasp_depth_offset,
+            lift_offset=lift_offset,
+            open_position=open_position,
+            close_position=close_position,
+            max_effort=max_effort,
+            pour_angle_deg=pour_angle_deg,
+        )
+
+    def rotate_gripper_for_pour(self):
+        """Plan a wrist-only pouring tilt with the bottle still attached."""
+
+        missing = [
+            name for name in ARM_JOINT_NAMES
+            if name not in self._latest_joint_positions
+        ]
+        if missing:
+            self.abort_pick_sequence(
+                'pour_wrist missing current joint states: '
+                + ', '.join(missing)
+            )
+            return
+
+        current_joints = [
+            self._latest_joint_positions[name] for name in ARM_JOINT_NAMES
+        ]
+        try:
+            target_joints, applied_delta = pouring_joint_goal(
+                current_joints,
+                self._pick_sequence['pour_angle_deg'],
+            )
+        except ValueError as error:
+            self.abort_pick_sequence(f'pour_wrist failed: {error}')
+            return
+
+        self.get_logger().info(
+            'Planning bottle-pouring tilt using wrist_3_joint only: '
+            f'requested={self._pick_sequence["pour_angle_deg"]:+.1f} deg, '
+            f'applied={math.degrees(applied_delta):+.1f} deg, '
+            f'target={target_joints[5]:+.3f} rad'
+        )
+        self.send_joint_goal(*target_joints)
 
     def abort_pick_sequence(self, reason):
         """Stop the combined sequence after a failed stage."""
 
-        self.get_logger().error(f'Fixed-bottle grasp aborted: {reason}')
+        self.get_logger().error(f'Bottle grasp aborted: {reason}')
         self._pick_sequence = None
         rclpy.shutdown()
 
@@ -589,16 +653,37 @@ class UR3ActionClient(Node):
         if self._pick_sequence is not None:
             if not result.success:
                 self.abort_pick_sequence(
-                    f'arm stage {self._pick_sequence["stage"]} failed'
+                    f'arm stage {self._pick_sequence["stage"]} failed: '
+                    f'{result.message}'
                 )
                 return
 
             stage = self._pick_sequence['stage']
+            if stage == 'preparing':
+                self._pick_sequence['stage'] = 'homing'
+                self.get_logger().info(
+                    'Bottle grasp setup 2/2: moving to the stable home '
+                    'configuration before pre-grasp planning'
+                )
+                self.send_home_goal()
+                return
+
+            if stage == 'homing':
+                self._pick_sequence['stage'] = 'opening'
+                self.get_logger().info(
+                    'Home completed; opening the gripper before planning '
+                    'to pre-grasp'
+                )
+                self.open_gripper(
+                    self._pick_sequence['open_position'],
+                    self._pick_sequence['max_effort'])
+                return
+
             if stage == 'pregrasp':
                 self.capture_pregrasp_joints()
                 self._pick_sequence['stage'] = 'advancing'
                 self.get_logger().info(
-                    'Fixed grasp stage 2/5: advancing horizontally to the bottle'
+                    'Bottle grasp stage 2/6: advancing horizontally to the bottle'
                 )
                 self.move_cartesian(
                     self._pick_sequence['advance_x'],
@@ -610,7 +695,7 @@ class UR3ActionClient(Node):
             if stage == 'advancing':
                 self._pick_sequence['stage'] = 'closing'
                 self.get_logger().info(
-                    'Fixed grasp stage 3/5: closing both gripper fingers'
+                    'Bottle grasp stage 3/6: closing both gripper fingers'
                 )
                 self.close_gripper(
                     self._pick_sequence['close_position'],
@@ -620,7 +705,7 @@ class UR3ActionClient(Node):
             if stage == 'lifting':
                 self._pick_sequence['stage'] = 'transporting'
                 self.get_logger().info(
-                    'Fixed grasp stage 5/5: moving the lifted bottle sideways '
+                    'Bottle grasp stage 5/6: moving the lifted bottle sideways '
                     'with a strict Cartesian path'
                 )
                 self.move_cartesian(
@@ -631,9 +716,20 @@ class UR3ActionClient(Node):
                 return
 
             if stage == 'transporting':
+                self._pick_sequence['stage'] = 'pouring'
                 self.get_logger().info(
-                    'Fixed-bottle side-grasp and Cartesian transport '
-                    'completed successfully'
+                    'Bottle grasp stage 6/6: transport completed; rotating '
+                    'the gripper into '
+                    'the pouring pose while keeping the bottle attached'
+                )
+                self.rotate_gripper_for_pour()
+                return
+
+            if stage == 'pouring':
+                self.get_logger().info(
+                    'Bottle side-grasp, transport, and pouring rotation '
+                    'completed successfully; bottle remains attached and '
+                    'the gripper remains closed'
                 )
                 self.save_successful_waypoint()
                 self._pick_sequence = None
@@ -841,7 +937,7 @@ class UR3ActionClient(Node):
             if stage == 'opening':
                 self._pick_sequence['stage'] = 'pregrasp'
                 self.get_logger().info(
-                    'Fixed grasp stage 1/5: automatically planning to the '
+                    'Bottle grasp stage 1/6: automatically planning to the '
                     'side pre-grasp pose'
                 )
                 qx, qy, qz, qw = self._pick_sequence['grasp_quaternion']
@@ -855,7 +951,7 @@ class UR3ActionClient(Node):
             if stage == 'closing':
                 self._pick_sequence['stage'] = 'lifting'
                 self.get_logger().info(
-                    'Fixed grasp stage 4/5: attaching and lifting the bottle'
+                    'Bottle grasp stage 4/6: attaching and lifting the bottle'
                 )
                 self.attach_and_lift(
                     self._pick_sequence['lift_offset'],
@@ -880,14 +976,107 @@ class UR3ActionClient(Node):
         rclpy.shutdown()
 
 
+def parse_args(argv):
+    parser = argparse.ArgumentParser(
+        description=(
+            'Side-grasp a bottle at an XYZ position expressed in base_link.'
+        ),
+    )
+    parser.add_argument(
+        '--object-x', type=float, default=FIXED_BOTTLE_X,
+        help='Object reference X in base_link (metres).')
+    parser.add_argument(
+        '--object-y', type=float, default=FIXED_BOTTLE_Y,
+        help='Object reference Y in base_link (metres).')
+    parser.add_argument(
+        '--object-z', type=float, default=FIXED_BOTTLE_Z,
+        help=(
+            'Object reference Z in base_link (metres); the simulated bottle '
+            'uses its model origin near the bottom.'
+        ))
+    parser.add_argument(
+        '--approach-clearance', type=float, default=FIXED_APPROACH_CLEARANCE)
+    parser.add_argument(
+        '--tcp-grasp-offset', type=float, default=FIXED_TCP_GRASP_OFFSET,
+        help=(
+            'Vertical offset from object Z to the desired TCP grasp height; '
+            'use 0 if object Z already denotes the grasp centre.'
+        ))
+    parser.add_argument(
+        '--grasp-depth-offset', type=float, default=FIXED_GRASP_DEPTH_OFFSET)
+    parser.add_argument('--lift-offset', type=float, default=FIXED_LIFT_OFFSET)
+    parser.add_argument('--open-position', type=float, default=FIXED_OPEN_POSITION)
+    parser.add_argument('--close-position', type=float, default=FIXED_CLOSE_POSITION)
+    parser.add_argument('--max-effort', type=float, default=FIXED_MAX_EFFORT)
+    parser.add_argument(
+        '--pour-angle-deg', type=float, default=FIXED_POUR_WRIST_ANGLE_DEG,
+        help=(
+            'Signed wrist_3 rotation after transport; change the sign to '
+            'reverse the pouring direction.'
+        ))
+    parser.add_argument(
+        '--transport-dx', type=float, default=None,
+        help='Post-lift base_link X offset; default chooses a small safe value.')
+    parser.add_argument(
+        '--transport-dy', type=float, default=None,
+        help='Post-lift base_link Y offset; default chooses a small safe value.')
+
+    parsed = parser.parse_args(remove_ros_args(args=argv)[1:])
+    if math.hypot(parsed.object_x, parsed.object_y) < 1e-6:
+        parser.error('object X/Y cannot both be zero in base_link')
+    if parsed.object_z < 0.0:
+        parser.error('--object-z must be non-negative')
+    if parsed.approach_clearance <= 0.0:
+        parser.error('--approach-clearance must be positive')
+    if parsed.tcp_grasp_offset < 0.0:
+        parser.error('--tcp-grasp-offset must be non-negative')
+    if parsed.grasp_depth_offset < 0.0:
+        parser.error('--grasp-depth-offset must be non-negative')
+    if parsed.lift_offset <= 0.0:
+        parser.error('--lift-offset must be positive')
+    if not 1.0 <= abs(parsed.pour_angle_deg) <= 150.0:
+        parser.error('--pour-angle-deg magnitude must be between 1 and 150')
+    if not 0.0 <= parsed.close_position <= parsed.open_position <= 0.06:
+        parser.error(
+            'gripper positions must satisfy '
+            '0 <= close-position <= open-position <= 0.06')
+    if (
+        parsed.transport_dx is not None
+        and parsed.transport_dy is not None
+        and max(abs(parsed.transport_dx), abs(parsed.transport_dy)) < 1e-6
+    ):
+        parser.error('transport DX/DY cannot both be zero')
+    return parsed
+
+
 def main(args=None):
-    rclpy.init(args=args)
+    argv = sys.argv if args is None else args
+    cli_args = parse_args(argv)
+    rclpy.init(args=argv)
 
     action_client = UR3ActionClient()
 
-    # Repeatable side-grasp test. All fixed coordinates use base_link, and the
-    # program stops after lifting so the final grasp can be inspected.
-    action_client.grasp_fixed_bottle()
+    sequence_started = action_client.grasp_bottle_at(
+        cli_args.object_x,
+        cli_args.object_y,
+        cli_args.object_z,
+        approach_clearance=cli_args.approach_clearance,
+        tcp_grasp_offset=cli_args.tcp_grasp_offset,
+        grasp_depth_offset=cli_args.grasp_depth_offset,
+        lift_offset=cli_args.lift_offset,
+        open_position=cli_args.open_position,
+        close_position=cli_args.close_position,
+        max_effort=cli_args.max_effort,
+        pour_angle_deg=cli_args.pour_angle_deg,
+        transport_dx=cli_args.transport_dx,
+        transport_dy=cli_args.transport_dy,
+    )
+
+    if not sequence_started:
+        action_client.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+        return 1
 
     try:
         rclpy.spin(action_client)
@@ -903,6 +1092,8 @@ def main(args=None):
         if rclpy.ok():
             rclpy.shutdown()
 
+    return 0
+
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

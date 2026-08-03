@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/com9/uet_ws/build/ur3_moveit_control/rosidl_generator_py/ur3_moveit_control/ur3_moveit_control_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" "TARGETS" "ur3_moveit_control__rosidl_typesupport_c__pyext" "DESTINATION" "local/lib/python3.10/dist-packages/ur3_moveit_control")

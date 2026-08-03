@@ -69,6 +69,8 @@ def launch_setup(context, *args, **kwargs):
             "ur_type": ur_type,
             "use_sim_time": use_sim_time,
             "launch_rviz": launch_rviz,
+            "planning_config_package": "ur3_moveit_control",
+            "moveit_joint_limits_file": "joint_limits.yaml",
         }.items(),
         condition=IfCondition(launch_moveit)
     )

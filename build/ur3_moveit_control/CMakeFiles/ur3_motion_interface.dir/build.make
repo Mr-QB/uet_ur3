@@ -206,10 +206,10 @@ libur3_motion_interface.so: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesuppo
 libur3_motion_interface.so: /opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_cpp.so
 libur3_motion_interface.so: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so
 libur3_motion_interface.so: /opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_py.so
-libur3_motion_interface.so: /opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_c.so
-libur3_motion_interface.so: /opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_c.so
 libur3_motion_interface.so: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py.so
+libur3_motion_interface.so: /opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_c.so
 libur3_motion_interface.so: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so
+libur3_motion_interface.so: /opt/ros/humble/lib/libvisualization_msgs__rosidl_generator_c.so
 libur3_motion_interface.so: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so
 libur3_motion_interface.so: /usr/lib/x86_64-linux-gnu/libfcl.so.0.7.0
 libur3_motion_interface.so: /usr/lib/x86_64-linux-gnu/libccd.so

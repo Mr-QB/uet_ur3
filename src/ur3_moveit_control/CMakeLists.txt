@@ -33,6 +33,7 @@ ament_target_dependencies(ur3_motion_interface
   moveit_ros_planning_interface
   moveit_core
   geometry_msgs
+  sensor_msgs
   std_msgs
 )
 
@@ -73,13 +74,23 @@ install(
   DESTINATION lib/${PROJECT_NAME}
 )
 
+# Shared by both installed Python executables. Keeping the grasp profile in one
+# file prevents the fixed and random test paths from drifting apart.
+install(
+  FILES src/grasp_profile.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(
   DIRECTORY include/
   DESTINATION include
 )
 
 install(
-  DIRECTORY config launch urdf srdf rviz models
+  # The semantic robot description belongs to ur_moveit_config and is loaded
+  # from that package by the launch files. ur3_moveit_control has no srdf/
+  # directory, so listing it here makes the install phase fail.
+  DIRECTORY config launch urdf rviz models
   DESTINATION share/${PROJECT_NAME}
 )
 

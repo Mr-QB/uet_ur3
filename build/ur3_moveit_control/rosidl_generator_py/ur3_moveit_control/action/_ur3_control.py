@@ -26,6 +26,11 @@ class Metaclass_UR3Control_Goal(type):
         'MOVE_JOINT': 1,
         'MOVE_POSE': 2,
         'ATTACH_AND_LIFT': 3,
+        'DETACH_OBJECT': 4,
+        'MOVE_CARTESIAN': 5,
+        'MOVE_TO_XY': 6,
+        'PREPARE_NEXT_TRIAL': 7,
+        'MOVE_CARTESIAN_STRICT': 8,
     }
 
     @classmethod
@@ -66,6 +71,11 @@ class Metaclass_UR3Control_Goal(type):
             'MOVE_JOINT': cls.__constants['MOVE_JOINT'],
             'MOVE_POSE': cls.__constants['MOVE_POSE'],
             'ATTACH_AND_LIFT': cls.__constants['ATTACH_AND_LIFT'],
+            'DETACH_OBJECT': cls.__constants['DETACH_OBJECT'],
+            'MOVE_CARTESIAN': cls.__constants['MOVE_CARTESIAN'],
+            'MOVE_TO_XY': cls.__constants['MOVE_TO_XY'],
+            'PREPARE_NEXT_TRIAL': cls.__constants['PREPARE_NEXT_TRIAL'],
+            'MOVE_CARTESIAN_STRICT': cls.__constants['MOVE_CARTESIAN_STRICT'],
         }
 
     @property
@@ -88,6 +98,31 @@ class Metaclass_UR3Control_Goal(type):
         """Message constant 'ATTACH_AND_LIFT'."""
         return Metaclass_UR3Control_Goal.__constants['ATTACH_AND_LIFT']
 
+    @property
+    def DETACH_OBJECT(self):
+        """Message constant 'DETACH_OBJECT'."""
+        return Metaclass_UR3Control_Goal.__constants['DETACH_OBJECT']
+
+    @property
+    def MOVE_CARTESIAN(self):
+        """Message constant 'MOVE_CARTESIAN'."""
+        return Metaclass_UR3Control_Goal.__constants['MOVE_CARTESIAN']
+
+    @property
+    def MOVE_TO_XY(self):
+        """Message constant 'MOVE_TO_XY'."""
+        return Metaclass_UR3Control_Goal.__constants['MOVE_TO_XY']
+
+    @property
+    def PREPARE_NEXT_TRIAL(self):
+        """Message constant 'PREPARE_NEXT_TRIAL'."""
+        return Metaclass_UR3Control_Goal.__constants['PREPARE_NEXT_TRIAL']
+
+    @property
+    def MOVE_CARTESIAN_STRICT(self):
+        """Message constant 'MOVE_CARTESIAN_STRICT'."""
+        return Metaclass_UR3Control_Goal.__constants['MOVE_CARTESIAN_STRICT']
+
 
 class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
     """
@@ -98,26 +133,52 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
       MOVE_JOINT
       MOVE_POSE
       ATTACH_AND_LIFT
+      DETACH_OBJECT
+      MOVE_CARTESIAN
+      MOVE_TO_XY
+      PREPARE_NEXT_TRIAL
+      MOVE_CARTESIAN_STRICT
     """
 
     __slots__ = [
         '_command_type',
         '_joint_goal',
         '_pose_goal',
+        '_cartesian_x_offset',
+        '_cartesian_y_offset',
         '_cartesian_z_offset',
+        '_target_x',
+        '_target_y',
+        '_object_x',
+        '_object_y',
+        '_object_z',
     ]
 
     _fields_and_field_types = {
         'command_type': 'uint8',
         'joint_goal': 'sensor_msgs/JointState',
         'pose_goal': 'geometry_msgs/PoseStamped',
+        'cartesian_x_offset': 'double',
+        'cartesian_y_offset': 'double',
         'cartesian_z_offset': 'double',
+        'target_x': 'double',
+        'target_y': 'double',
+        'object_x': 'double',
+        'object_y': 'double',
+        'object_z': 'double',
     }
 
     SLOT_TYPES = (
         rosidl_parser.definition.BasicType('uint8'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['sensor_msgs', 'msg'], 'JointState'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['geometry_msgs', 'msg'], 'PoseStamped'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
     )
 
@@ -130,7 +191,14 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
         self.joint_goal = kwargs.get('joint_goal', JointState())
         from geometry_msgs.msg import PoseStamped
         self.pose_goal = kwargs.get('pose_goal', PoseStamped())
+        self.cartesian_x_offset = kwargs.get('cartesian_x_offset', float())
+        self.cartesian_y_offset = kwargs.get('cartesian_y_offset', float())
         self.cartesian_z_offset = kwargs.get('cartesian_z_offset', float())
+        self.target_x = kwargs.get('target_x', float())
+        self.target_y = kwargs.get('target_y', float())
+        self.object_x = kwargs.get('object_x', float())
+        self.object_y = kwargs.get('object_y', float())
+        self.object_z = kwargs.get('object_z', float())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -167,7 +235,21 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
             return False
         if self.pose_goal != other.pose_goal:
             return False
+        if self.cartesian_x_offset != other.cartesian_x_offset:
+            return False
+        if self.cartesian_y_offset != other.cartesian_y_offset:
+            return False
         if self.cartesian_z_offset != other.cartesian_z_offset:
+            return False
+        if self.target_x != other.target_x:
+            return False
+        if self.target_y != other.target_y:
+            return False
+        if self.object_x != other.object_x:
+            return False
+        if self.object_y != other.object_y:
+            return False
+        if self.object_z != other.object_z:
             return False
         return True
 
@@ -220,6 +302,36 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
         self._pose_goal = value
 
     @builtins.property
+    def cartesian_x_offset(self):
+        """Message field 'cartesian_x_offset'."""
+        return self._cartesian_x_offset
+
+    @cartesian_x_offset.setter
+    def cartesian_x_offset(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'cartesian_x_offset' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'cartesian_x_offset' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._cartesian_x_offset = value
+
+    @builtins.property
+    def cartesian_y_offset(self):
+        """Message field 'cartesian_y_offset'."""
+        return self._cartesian_y_offset
+
+    @cartesian_y_offset.setter
+    def cartesian_y_offset(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'cartesian_y_offset' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'cartesian_y_offset' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._cartesian_y_offset = value
+
+    @builtins.property
     def cartesian_z_offset(self):
         """Message field 'cartesian_z_offset'."""
         return self._cartesian_z_offset
@@ -233,6 +345,81 @@ class UR3Control_Goal(metaclass=Metaclass_UR3Control_Goal):
             assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
                 "The 'cartesian_z_offset' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
         self._cartesian_z_offset = value
+
+    @builtins.property
+    def target_x(self):
+        """Message field 'target_x'."""
+        return self._target_x
+
+    @target_x.setter
+    def target_x(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'target_x' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'target_x' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._target_x = value
+
+    @builtins.property
+    def target_y(self):
+        """Message field 'target_y'."""
+        return self._target_y
+
+    @target_y.setter
+    def target_y(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'target_y' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'target_y' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._target_y = value
+
+    @builtins.property
+    def object_x(self):
+        """Message field 'object_x'."""
+        return self._object_x
+
+    @object_x.setter
+    def object_x(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'object_x' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'object_x' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._object_x = value
+
+    @builtins.property
+    def object_y(self):
+        """Message field 'object_y'."""
+        return self._object_y
+
+    @object_y.setter
+    def object_y(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'object_y' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'object_y' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._object_y = value
+
+    @builtins.property
+    def object_z(self):
+        """Message field 'object_z'."""
+        return self._object_z
+
+    @object_z.setter
+    def object_z(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'object_z' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'object_z' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._object_z = value
 
 
 # Import statements for member types

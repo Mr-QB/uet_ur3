@@ -1,0 +1,19 @@
+running egg_info
+writing ../../../build/susgrip_2f_description/susgrip_2f_description.egg-info/PKG-INFO
+writing dependency_links to ../../../build/susgrip_2f_description/susgrip_2f_description.egg-info/dependency_links.txt
+writing entry points to ../../../build/susgrip_2f_description/susgrip_2f_description.egg-info/entry_points.txt
+writing top-level names to ../../../build/susgrip_2f_description/susgrip_2f_description.egg-info/top_level.txt
+reading manifest file '../../../build/susgrip_2f_description/susgrip_2f_description.egg-info/SOURCES.txt'
+writing manifest file '../../../build/susgrip_2f_description/susgrip_2f_description.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+creating /home/com9/uet_ws/install/susgrip_2f_description/share/susgrip_2f_description/scripts
+running install_egg_info
+removing '/home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages/susgrip_2f_description-0.0.1-py3.10.egg-info' (and everything under it)
+Copying ../../../build/susgrip_2f_description/susgrip_2f_description.egg-info to /home/com9/uet_ws/install/susgrip_2f_description/lib/python3.10/site-packages/susgrip_2f_description-0.0.1-py3.10.egg-info
+running install_scripts
+Installing susgrip_2f_visualize script to /home/com9/uet_ws/install/susgrip_2f_description/lib/susgrip_2f_description
+writing list of installed files to '/home/com9/uet_ws/build/susgrip_2f_description/install.log'
