@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <!--
+    The entity keeps the historical pick_box / box_link names because the
+    DetachableJoint plugin refers to them. Geometry is a roughly 0.26 m tall
+    bottle with a 0.10 m body so the two-finger grasp is easier to tune.
+    The model origin is 0.05 m above its bottom, matching the old box origin.
+  -->
+  <model name="pick_box">
+    <static>false</static>
+
+    <link name="box_link">
+      <inertial>
+        <pose>0 0 0.02 0 0 0</pose>
+        <mass>0.25</mass>
+        <inertia>
+          <ixx>0.00100</ixx>
+          <iyy>0.00100</iyy>
+          <izz>0.00035</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <!-- Main body: bottom=-0.05 m, top=+0.11 m. -->
+      <collision name="body_collision">
+        <pose>0 0 0.030 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.050</radius>
+            <length>0.160</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- The upper half of this sphere creates a rounded shoulder. -->
+      <collision name="shoulder_collision">
+        <pose>0 0 0.110 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.050</radius>
+          </sphere>
+        </geometry>
+      </collision>
+
+      <collision name="neck_collision">
+        <pose>0 0 0.175 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.022</radius>
+            <length>0.040</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <collision name="lip_collision">
+        <pose>0 0 0.2025 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.030</radius>
+            <length>0.015</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="body_visual">
+        <pose>0 0 0.030 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.050</radius>
+            <length>0.160</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.85 0.42 0.04 1</ambient>
+          <diffuse>1.00 0.52 0.06 1</diffuse>
+          <specular>0.20 0.15 0.05 1</specular>
+        </material>
+      </visual>
+
+      <visual name="shoulder_visual">
+        <pose>0 0 0.110 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.050</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.85 0.42 0.04 1</ambient>
+          <diffuse>1.00 0.52 0.06 1</diffuse>
+          <specular>0.20 0.15 0.05 1</specular>
+        </material>
+      </visual>
+
+      <visual name="neck_visual">
+        <pose>0 0 0.175 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.022</radius>
+            <length>0.040</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.85 0.42 0.04 1</ambient>
+          <diffuse>1.00 0.52 0.06 1</diffuse>
+          <specular>0.20 0.15 0.05 1</specular>
+        </material>
+      </visual>
+
+      <visual name="lip_visual">
+        <pose>0 0 0.2025 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.030</radius>
+            <length>0.015</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.55 0.55 0.55 1</ambient>
+          <diffuse>0.72 0.72 0.72 1</diffuse>
+          <specular>0.95 0.95 0.95 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

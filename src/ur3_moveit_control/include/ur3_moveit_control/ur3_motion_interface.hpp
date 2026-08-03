@@ -36,7 +36,13 @@ public:
 
   bool detachPickBox();
 
-  bool moveCartesian(double x_offset, double y_offset, double z_offset);
+  bool prepareNextTrial();
+
+  bool moveCartesian(
+    double x_offset,
+    double y_offset,
+    double z_offset,
+    bool allow_pose_fallback = true);
 
   bool moveToXY(double target_x, double target_y);
 

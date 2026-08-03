@@ -53,7 +53,10 @@ def launch_setup(context, *args, **kwargs):
     # Gazebo layout (metres, expressed in the Gazebo world frame).
     # The table top is centred at z=0.75 and is 0.05 m thick, therefore its
     # upper surface is at z=0.775.  The robot is mounted at the middle of the
-    # table's -X edge.  The 0.1 m cube is placed 0.35 m in front of the robot.
+    # table's -X edge. The bottle is placed at world X=0.62 m: far enough for
+    # a clean horizontal side grasp while retaining reach and IK margin. Its
+    # model origin stays 0.05 m above the bottom for compatibility with the
+    # existing pick coordinates.
     table_x = 0.5
     table_y = 0.0
     table_z = 0.0
@@ -63,10 +66,10 @@ def launch_setup(context, *args, **kwargs):
     robot_y = 0.0
     robot_z = table_surface_z
 
-    box_size_z = 0.1
-    box_x = 0.35
-    box_y = 0.0
-    box_z = table_surface_z + box_size_z / 2.0
+    bottle_origin_height = 0.05
+    bottle_x = 0.62
+    bottle_y = 0.0
+    bottle_z = table_surface_z + bottle_origin_height
 
     # Initialize Arguments
     ur_type = LaunchConfiguration("ur_type")
@@ -133,11 +136,11 @@ def launch_setup(context, *args, **kwargs):
     ]
 )
 
-    box_file = PathJoinSubstitution(
+    bottle_file = PathJoinSubstitution(
     [
         FindPackageShare("ur3_moveit_control"),
         "models",
-        "box.sdf",
+        "bottle.sdf",
     ]
 )
     robot_description = {
@@ -267,15 +270,15 @@ def launch_setup(context, *args, **kwargs):
     output="screen",
     arguments=[
         "-file",
-        box_file,
+        bottle_file,
         "-name",
         "pick_box",
         "-x",
-        str(box_x),
+        str(bottle_x),
         "-y",
-        str(box_y),
+        str(bottle_y),
         "-z",
-        str(box_z),
+        str(bottle_z),
     ],
 )
 

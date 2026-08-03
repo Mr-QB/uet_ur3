@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+import csv
+import math
+import random
+from pathlib import Path
+
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
@@ -9,6 +14,79 @@ from control_msgs.action import FollowJointTrajectory
 from sensor_msgs.msg import JointState
 from trajectory_msgs.msg import JointTrajectoryPoint
 from ur3_moveit_control.action import UR3Control
+
+
+# Fixed bottle pose in base_link. The Gazebo launch file spawns pick_box at
+# this same position, so the grasp test is repeatable from one run to the next.
+FIXED_BOTTLE_X = 0.62
+FIXED_BOTTLE_Y = 0.0
+FIXED_BOTTLE_Z = 0.05
+
+# Side-grasp tuning for the 0.10 m diameter, 0.26 m tall bottle.
+FIXED_APPROACH_CLEARANCE = 0.12
+FIXED_TCP_GRASP_OFFSET = 0.06
+FIXED_GRASP_DEPTH_OFFSET = 0.015
+FIXED_LIFT_OFFSET = 0.15
+FIXED_OPEN_POSITION = 0.06
+# This asks both fingers to close slightly through the nominal bottle diameter
+# so Gazebo establishes contact instead of leaving a visible gap.
+FIXED_CLOSE_POSITION = 0.042
+FIXED_MAX_EFFORT = 100.0
+FIXED_TRANSPORT_Y_MIN = 0.06
+FIXED_TRANSPORT_Y_MAX = 0.10
+FIXED_TRANSPORT_X_MAX = 0.02
+SUCCESSFUL_WAYPOINTS_FILE = Path('successful_grasp_waypoints.csv')
+
+ARM_JOINT_NAMES = [
+    'shoulder_pan_joint',
+    'shoulder_lift_joint',
+    'elbow_joint',
+    'wrist_1_joint',
+    'wrist_2_joint',
+    'wrist_3_joint',
+]
+
+
+def radial_side_grasp_geometry(
+        object_x,
+        object_y,
+        approach_clearance,
+        grasp_depth_offset):
+    """Calculate a horizontal approach directed radially toward the bottle."""
+
+    radius = math.hypot(object_x, object_y)
+    if radius < 1e-6:
+        raise ValueError('Object cannot be placed at the base_link origin')
+
+    direction_x = object_x / radius
+    direction_y = object_y / radius
+    grasp_x = object_x - grasp_depth_offset * direction_x
+    grasp_y = object_y - grasp_depth_offset * direction_y
+    approach_x = grasp_x - approach_clearance * direction_x
+    approach_y = grasp_y - approach_clearance * direction_y
+
+    # q=(0.5, 0.5, 0.5, 0.5) points TCP +Z along base_link +X. Apply a
+    # base-link Z yaw so the gripper points radially toward the object.
+    yaw = math.atan2(object_y, object_x)
+    cosine = math.cos(0.5 * yaw)
+    sine = math.sin(0.5 * yaw)
+    quaternion = (
+        0.5 * (cosine - sine),
+        0.5 * (cosine + sine),
+        0.5 * (cosine + sine),
+        0.5 * (cosine - sine),
+    )
+
+    return {
+        'approach_x': approach_x,
+        'approach_y': approach_y,
+        'advance_x': approach_clearance * direction_x,
+        'advance_y': approach_clearance * direction_y,
+        'grasp_x': grasp_x,
+        'grasp_y': grasp_y,
+        'quaternion': quaternion,
+        'yaw': yaw,
+    }
 
 
 class UR3ActionClient(Node):
@@ -38,6 +116,7 @@ class UR3ActionClient(Node):
         self._pick_sequence = None
         self._latest_gripper_effort = None
         self._peak_gripper_effort = 0.0
+        self._latest_joint_positions = {}
         self._joint_state_subscription = self.create_subscription(
             JointState,
             '/joint_states',
@@ -47,6 +126,8 @@ class UR3ActionClient(Node):
 
     def joint_state_callback(self, msg):
         """Track measured gripper effort reported by ros2_control."""
+
+        self._latest_joint_positions = dict(zip(msg.name, msg.position))
 
         try:
             joint_index = msg.name.index('gripper_joint')
@@ -61,6 +142,70 @@ class UR3ActionClient(Node):
         self._peak_gripper_effort = max(
             self._peak_gripper_effort,
             abs(measured_effort)
+        )
+
+    def capture_pregrasp_joints(self):
+        """Keep the current six arm joints in memory until the trial passes."""
+
+        missing = [
+            name for name in ARM_JOINT_NAMES
+            if name not in self._latest_joint_positions
+        ]
+        if missing:
+            self.get_logger().warning(
+                'Cannot capture pre-grasp waypoint; missing joint states: '
+                + ', '.join(missing)
+            )
+            return
+
+        joints = [
+            self._latest_joint_positions[name]
+            for name in ARM_JOINT_NAMES
+        ]
+        self._pick_sequence['captured_pregrasp_joints'] = joints
+        self.get_logger().info(
+            'Captured pre-grasp joints in memory: '
+            + '[' + ', '.join(f'{value:.9f}' for value in joints) + ']'
+        )
+
+    def save_successful_waypoint(self):
+        """Append the captured pre-grasp waypoint after full trial success."""
+
+        joints = self._pick_sequence.get('captured_pregrasp_joints')
+        if joints is None:
+            self.get_logger().warning(
+                'Trial succeeded, but no pre-grasp joint snapshot was captured'
+            )
+            return
+
+        qx, qy, qz, qw = self._pick_sequence['grasp_quaternion']
+        row = {
+            'ros_time_ns': self.get_clock().now().nanoseconds,
+            'object_x': self._pick_sequence['object_x'],
+            'object_y': self._pick_sequence['object_y'],
+            'object_z': self._pick_sequence['object_z'],
+            'pregrasp_x': self._pick_sequence['approach_x'],
+            'pregrasp_y': self._pick_sequence['approach_y'],
+            'pregrasp_z': self._pick_sequence['grasp_z'],
+            'qx': qx,
+            'qy': qy,
+            'qz': qz,
+            'qw': qw,
+            **dict(zip(ARM_JOINT_NAMES, joints)),
+            'transport_dx': self._pick_sequence['transport_dx'],
+            'transport_dy': self._pick_sequence['transport_dy'],
+        }
+
+        path = SUCCESSFUL_WAYPOINTS_FILE.expanduser().resolve()
+        write_header = not path.exists() or path.stat().st_size == 0
+        with path.open('a', newline='', encoding='utf-8') as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=row.keys())
+            if write_header:
+                writer.writeheader()
+            writer.writerow(row)
+
+        self.get_logger().info(
+            f'Saved successful pre-grasp waypoint to {path}'
         )
 
     # =========================================================
@@ -171,7 +316,7 @@ class UR3ActionClient(Node):
         )
 
     def attach_and_lift(
-            self, z_offset, object_x=0.35, object_y=0.0, object_z=0.05):
+            self, z_offset, object_x=0.62, object_y=0.0, object_z=0.05):
         """Attach pick_box to the gripper, then lift it along base_link Z."""
 
         goal_msg = UR3Control.Goal()
@@ -203,32 +348,52 @@ class UR3ActionClient(Node):
             self.arm_goal_response_callback
         )
 
-    def pick_and_move(
+    def grasp_fixed_bottle(
             self,
-            object_x,
-            object_y,
-            object_z,
-            target_x,
-            target_y,
-            approach_clearance=0.07,
-            tcp_grasp_offset=0.08,
-            lift_offset=0.15,
-            open_position=0.06,
-            close_position=0.04,
-            max_effort=100.0):
-        """Pick a known box and carry it to absolute X/Y at the lifted Z."""
+            approach_clearance=FIXED_APPROACH_CLEARANCE,
+            tcp_grasp_offset=FIXED_TCP_GRASP_OFFSET,
+            grasp_depth_offset=FIXED_GRASP_DEPTH_OFFSET,
+            lift_offset=FIXED_LIFT_OFFSET,
+            open_position=FIXED_OPEN_POSITION,
+            close_position=FIXED_CLOSE_POSITION,
+            max_effort=FIXED_MAX_EFFORT):
+        """Side-grasp the fixed bottle and stop after lifting it."""
+
+        object_x = FIXED_BOTTLE_X
+        object_y = FIXED_BOTTLE_Y
+        object_z = FIXED_BOTTLE_Z
 
         grasp_z = float(object_z) + float(tcp_grasp_offset)
-        approach_z = grasp_z + float(approach_clearance)
+        geometry = radial_side_grasp_geometry(
+            float(object_x),
+            float(object_y),
+            float(approach_clearance),
+            float(grasp_depth_offset),
+        )
+        transport_side = random.choice((-1.0, 1.0))
+        transport_dx = random.uniform(
+            -FIXED_TRANSPORT_X_MAX,
+            FIXED_TRANSPORT_X_MAX,
+        )
+        transport_dy = transport_side * random.uniform(
+            FIXED_TRANSPORT_Y_MIN,
+            FIXED_TRANSPORT_Y_MAX,
+        )
         self._pick_sequence = {
             'stage': 'opening',
             'object_x': float(object_x),
             'object_y': float(object_y),
             'object_z': float(object_z),
-            'target_x': float(target_x),
-            'target_y': float(target_y),
-            'approach_z': approach_z,
-            'descent': float(approach_clearance),
+            'grasp_x': geometry['grasp_x'],
+            'grasp_y': geometry['grasp_y'],
+            'grasp_z': grasp_z,
+            'approach_x': geometry['approach_x'],
+            'approach_y': geometry['approach_y'],
+            'advance_x': geometry['advance_x'],
+            'advance_y': geometry['advance_y'],
+            'grasp_quaternion': geometry['quaternion'],
+            'transport_dx': transport_dx,
+            'transport_dy': transport_dy,
             'lift_offset': float(lift_offset),
             'open_position': float(open_position),
             'close_position': float(close_position),
@@ -236,20 +401,26 @@ class UR3ActionClient(Node):
         }
 
         self.get_logger().info(
-            'Starting pick-and-move sequence: '
+            'Starting fixed-bottle side-grasp: '
             f'object=({object_x:.3f}, {object_y:.3f}, {object_z:.3f}), '
-            f'target_xy=({target_x:.3f}, {target_y:.3f})'
+            f'pre_grasp=({geometry["approach_x"]:.3f}, '
+            f'{geometry["approach_y"]:.3f}, {grasp_z:.3f}), '
+            f'grasp_tcp=({geometry["grasp_x"]:.3f}, '
+            f'{geometry["grasp_y"]:.3f}, {grasp_z:.3f}), '
+            f'approach_yaw={math.degrees(geometry["yaw"]):+.1f} deg, '
+            f'post_lift_cartesian=(dx={transport_dx:+.3f}, '
+            f'dy={transport_dy:+.3f}, dz=+0.000)'
         )
         self.open_gripper(open_position, max_effort)
 
     def abort_pick_sequence(self, reason):
         """Stop the combined sequence after a failed stage."""
 
-        self.get_logger().error(f'Pick-and-move aborted: {reason}')
+        self.get_logger().error(f'Fixed-bottle grasp aborted: {reason}')
         self._pick_sequence = None
         rclpy.shutdown()
 
-    def move_cartesian(self, x_offset, y_offset, z_offset):
+    def move_cartesian(self, x_offset, y_offset, z_offset, strict=False):
         """Move gripper_tcp by an XYZ offset in the base_link frame."""
 
         x_offset = float(x_offset)
@@ -260,7 +431,10 @@ class UR3ActionClient(Node):
             return
 
         goal_msg = UR3Control.Goal()
-        goal_msg.command_type = UR3Control.Goal.MOVE_CARTESIAN
+        goal_msg.command_type = (
+            UR3Control.Goal.MOVE_CARTESIAN_STRICT
+            if strict else UR3Control.Goal.MOVE_CARTESIAN
+        )
         goal_msg.cartesian_x_offset = x_offset
         goal_msg.cartesian_y_offset = y_offset
         goal_msg.cartesian_z_offset = z_offset
@@ -269,8 +443,9 @@ class UR3ActionClient(Node):
             self.get_logger().error('The UR3 action server is not available')
             return
 
+        motion_kind = 'strict Cartesian' if strict else 'Cartesian'
         self.get_logger().info(
-            f'Requesting Cartesian motion from current gripper pose: '
+            f'Requesting {motion_kind} motion from current gripper pose: '
             f'dx={x_offset:+.3f}, dy={y_offset:+.3f}, '
             f'dz={z_offset:+.3f} m'
         )
@@ -419,19 +594,23 @@ class UR3ActionClient(Node):
                 return
 
             stage = self._pick_sequence['stage']
-            if stage == 'approach':
-                self._pick_sequence['stage'] = 'descending'
+            if stage == 'pregrasp':
+                self.capture_pregrasp_joints()
+                self._pick_sequence['stage'] = 'advancing'
                 self.get_logger().info(
-                    'Pick stage 2/6: descending vertically to the box'
+                    'Fixed grasp stage 2/5: advancing horizontally to the bottle'
                 )
                 self.move_cartesian(
-                    0.0, 0.0, -self._pick_sequence['descent'])
+                    self._pick_sequence['advance_x'],
+                    self._pick_sequence['advance_y'],
+                    0.0,
+                    strict=True)
                 return
 
-            if stage == 'descending':
+            if stage == 'advancing':
                 self._pick_sequence['stage'] = 'closing'
                 self.get_logger().info(
-                    'Pick stage 3/6: closing both gripper fingers'
+                    'Fixed grasp stage 3/5: closing both gripper fingers'
                 )
                 self.close_gripper(
                     self._pick_sequence['close_position'],
@@ -441,21 +620,24 @@ class UR3ActionClient(Node):
             if stage == 'lifting':
                 self._pick_sequence['stage'] = 'transporting'
                 self.get_logger().info(
-                    'Pick stage 5/6: moving to target X/Y at current lifted Z'
+                    'Fixed grasp stage 5/5: moving the lifted bottle sideways '
+                    'with a strict Cartesian path'
                 )
-                self.move_to_xy(
-                    self._pick_sequence['target_x'],
-                    self._pick_sequence['target_y'])
+                self.move_cartesian(
+                    self._pick_sequence['transport_dx'],
+                    self._pick_sequence['transport_dy'],
+                    0.0,
+                    strict=True)
                 return
 
             if stage == 'transporting':
-                self._pick_sequence['stage'] = 'detaching'
                 self.get_logger().info(
-                    'Pick stage 6/6: detaching the object and opening gripper'
+                    'Fixed-bottle side-grasp and Cartesian transport '
+                    'completed successfully'
                 )
-                self.detach_object(
-                    self._pick_sequence['open_position'],
-                    self._pick_sequence['max_effort'])
+                self.save_successful_waypoint()
+                self._pick_sequence = None
+                rclpy.shutdown()
                 return
 
         rclpy.shutdown()
@@ -657,21 +839,23 @@ class UR3ActionClient(Node):
 
             stage = self._pick_sequence['stage']
             if stage == 'opening':
-                self._pick_sequence['stage'] = 'approach'
+                self._pick_sequence['stage'] = 'pregrasp'
                 self.get_logger().info(
-                    'Pick stage 1/6: moving above the known box position'
+                    'Fixed grasp stage 1/5: automatically planning to the '
+                    'side pre-grasp pose'
                 )
+                qx, qy, qz, qw = self._pick_sequence['grasp_quaternion']
                 self.send_pose_goal(
-                    self._pick_sequence['object_x'],
-                    self._pick_sequence['object_y'],
-                    self._pick_sequence['approach_z'],
-                    1.0, 0.0, 0.0, 0.0)
+                    self._pick_sequence['approach_x'],
+                    self._pick_sequence['approach_y'],
+                    self._pick_sequence['grasp_z'],
+                    qx, qy, qz, qw)
                 return
 
             if stage == 'closing':
                 self._pick_sequence['stage'] = 'lifting'
                 self.get_logger().info(
-                    'Pick stage 4/6: attaching and lifting the box'
+                    'Fixed grasp stage 4/5: attaching and lifting the bottle'
                 )
                 self.attach_and_lift(
                     self._pick_sequence['lift_offset'],
@@ -701,17 +885,9 @@ def main(args=None):
 
     action_client = UR3ActionClient()
 
-    # Complete pick-and-move sequence. All coordinates use base_link.
-    action_client.pick_and_move(
-        object_x=0.35,
-        object_y=0.0,
-        object_z=0.05,
-        target_x=0.20,
-        target_y=0.20,
-        approach_clearance=0.07,
-        tcp_grasp_offset=0.08,
-        lift_offset=0.15,
-    )
+    # Repeatable side-grasp test. All fixed coordinates use base_link, and the
+    # program stops after lifting so the final grasp can be inspected.
+    action_client.grasp_fixed_bottle()
 
     try:
         rclpy.spin(action_client)

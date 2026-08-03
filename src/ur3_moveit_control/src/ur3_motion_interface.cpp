@@ -20,8 +20,8 @@ namespace ur3_moveit_control
     gazebo_detach_pub_ = node_->create_publisher<std_msgs::msg::Empty>(
       "/pick_box/detach", rclcpp::QoS(1).reliable());
 
-    move_group_.setPlanningTime(5.0);
-    move_group_.setNumPlanningAttempts(10);
+    move_group_.setPlanningTime(15.0);
+    move_group_.setNumPlanningAttempts(20);
 
     // Use the gripper grasp center as the Cartesian pose target whenever the
     // gripper model is present. Keep tool0 as the fallback for the arm-only
@@ -130,30 +130,100 @@ namespace ur3_moveit_control
       const geometry_msgs::msg::Pose &target_pose,
       const std::string &end_effector_link)
   {
+    std::string target_link = end_effector_link;
     if (!end_effector_link.empty())
     {
       move_group_.setEndEffectorLink(end_effector_link);
     }
-
-    move_group_.setPoseTarget(target_pose);
+    else
+    {
+      target_link = move_group_.getEndEffectorLink();
+    }
 
     moveit::planning_interface::MoveGroupInterface::Plan plan;
+    bool planning_success = false;
+    int ik_solutions_found = 0;
 
-    const bool planning_success =
-        static_cast<bool>(move_group_.plan(plan));
+    // Generate several explicit joint-space IK goals. A pose constraint alone
+    // was being rejected before OMPL produced a trajectory even though
+    // /compute_ik proved that a collision-free solution existed. Different
+    // random seeds expose the elbow/wrist branches of the UR arm; OMPL then
+    // collision-checks and plans to each concrete candidate in turn.
+    const auto current_state = move_group_.getCurrentState(2.0);
+    const auto *joint_model_group =
+      move_group_.getRobotModel()->getJointModelGroup(move_group_.getName());
+    constexpr int max_ik_candidates = 12;
+
+    if (current_state && joint_model_group)
+    {
+      for (int attempt = 0; attempt < max_ik_candidates; ++attempt)
+      {
+        moveit::core::RobotState ik_state(*current_state);
+        if (attempt > 0)
+        {
+          ik_state.setToRandomPositions(joint_model_group);
+        }
+
+        if (!ik_state.setFromIK(
+            joint_model_group, target_pose, target_link, 0.25))
+        {
+          continue;
+        }
+
+        ++ik_solutions_found;
+        std::vector<double> joint_values;
+        ik_state.copyJointGroupPositions(joint_model_group, joint_values);
+
+        move_group_.setStartStateToCurrentState();
+        move_group_.clearPoseTargets();
+        if (!move_group_.setJointValueTarget(joint_values))
+        {
+          continue;
+        }
+
+        RCLCPP_INFO(
+          node_->get_logger(),
+          "Planning to IK candidate %d (seed attempt %d/%d)...",
+          ik_solutions_found, attempt + 1, max_ik_candidates);
+        if (static_cast<bool>(move_group_.plan(plan)))
+        {
+          planning_success = true;
+          break;
+        }
+      }
+    }
+
+    // Final fallback lets MoveIt sample the pose constraint itself in case its
+    // planning-scene-aware goal sampler can find a branch missed above.
+    if (!planning_success)
+    {
+      RCLCPP_WARN(
+        node_->get_logger(),
+        "No plan found for %d explicit IK candidates; trying sampled pose goal.",
+        ik_solutions_found);
+      move_group_.setStartStateToCurrentState();
+      move_group_.clearPoseTargets();
+      if (move_group_.setPoseTarget(target_pose, target_link))
+      {
+        planning_success = static_cast<bool>(move_group_.plan(plan));
+      }
+    }
 
     if (!planning_success)
     {
-      RCLCPP_ERROR(node_->get_logger(), "Pose planning failed.");
-      move_group_.clearPoseTargets();
+      RCLCPP_ERROR(
+        node_->get_logger(),
+        "Pose planning failed after testing %d explicit IK candidates and "
+        "the sampled pose-goal fallback.",
+        ik_solutions_found);
       return false;
     }
+
+    move_group_.clearPoseTargets();
 
     RCLCPP_INFO(node_->get_logger(), "Pose planning succeeded. Executing...");
 
     const auto execution_result = move_group_.execute(plan);
-
-    move_group_.clearPoseTargets();
 
     if (execution_result != moveit::core::MoveItErrorCode::SUCCESS)
     {
@@ -284,8 +354,40 @@ namespace ur3_moveit_control
     return true;
   }
 
+  bool UR3MotionInterface::prepareNextTrial()
+  {
+    const std::string object_id = "pick_box";
+
+    // A failed trial may leave either Gazebo's fixed joint or MoveIt's
+    // attached object active. Always release both representations before the
+    // test runner teleports the one reusable box to its next random pose.
+    gazebo_detach_pub_->publish(std_msgs::msg::Empty{});
+    rclcpp::sleep_for(std::chrono::milliseconds(300));
+
+    const bool moveit_detached = move_group_.detachObject(object_id);
+    if (!moveit_detached)
+    {
+      RCLCPP_DEBUG(
+        node_->get_logger(),
+        "%s was not attached in MoveIt while preparing the next trial.",
+        object_id.c_str());
+    }
+
+    planning_scene_interface_.removeCollisionObjects({object_id});
+    rclcpp::sleep_for(std::chrono::milliseconds(100));
+
+    RCLCPP_INFO(
+      node_->get_logger(),
+      "Prepared the next trial: Gazebo joint released and stale MoveIt "
+      "pick_box object removed.");
+    return true;
+  }
+
   bool UR3MotionInterface::moveCartesian(
-    double x_offset, double y_offset, double z_offset)
+    double x_offset,
+    double y_offset,
+    double z_offset,
+    bool allow_pose_fallback)
   {
     if (std::abs(x_offset) < 1e-6 &&
         std::abs(y_offset) < 1e-6 &&
@@ -318,15 +420,25 @@ namespace ur3_moveit_control
 
     if (fraction < required_fraction)
     {
+      if (!allow_pose_fallback)
+      {
+        RCLCPP_ERROR(
+          node_->get_logger(),
+          "Strict Cartesian path is only %.1f%% (required %.1f%%); "
+          "rejecting the grasp advance without pose fallback.",
+          fraction * 100.0, required_fraction * 100.0);
+        return false;
+      }
+
       RCLCPP_WARN(
         node_->get_logger(),
         "Straight Cartesian path is only %.1f%% (required %.1f%%); "
         "falling back to pose planning.",
         fraction * 100.0, required_fraction * 100.0);
 
-      // A strict straight line can fail near a singularity, a joint limit or
-      // an obstacle. Let the configured MoveIt planner find a non-straight
-      // collision-free route to the same XYZ target instead.
+      // General Cartesian commands may still use a non-straight fallback.
+      // The final grasp advance disables this path because a pose planner can
+      // rotate the wrist or take a curved route around the object.
       return moveToPoseGoal(target_pose, end_effector_link);
     }
 
@@ -515,25 +627,46 @@ namespace ur3_moveit_control
     pick_box.header.frame_id = "base_link";
     pick_box.id = "pick_box";
 
-    shape_msgs::msg::SolidPrimitive box_primitive;
-    box_primitive.type = shape_msgs::msg::SolidPrimitive::BOX;
-    box_primitive.dimensions = {0.1, 0.1, 0.1};
+    const auto add_cylinder = [&pick_box, x, y, z](
+      double height, double radius, double z_offset)
+    {
+      shape_msgs::msg::SolidPrimitive primitive;
+      primitive.type = shape_msgs::msg::SolidPrimitive::CYLINDER;
+      primitive.dimensions.resize(2);
+      primitive.dimensions[shape_msgs::msg::SolidPrimitive::CYLINDER_HEIGHT] = height;
+      primitive.dimensions[shape_msgs::msg::SolidPrimitive::CYLINDER_RADIUS] = radius;
 
-    // Gazebo spawns the box at world (0.35, 0.0, 0.825). The robot base is
-    // at world z=0.775, so the box center is at z=0.05 in base_link.
-    geometry_msgs::msg::Pose box_pose;
-    box_pose.orientation.w = 1.0;
-    box_pose.position.x = x;
-    box_pose.position.y = y;
-    box_pose.position.z = z;
+      geometry_msgs::msg::Pose pose;
+      pose.orientation.w = 1.0;
+      pose.position.x = x;
+      pose.position.y = y;
+      pose.position.z = z + z_offset;
+      pick_box.primitives.push_back(primitive);
+      pick_box.primitive_poses.push_back(pose);
+    };
 
-    pick_box.primitives.push_back(box_primitive);
-    pick_box.primitive_poses.push_back(box_pose);
+    // The object reference origin remains 0.05 m above the bottle bottom,
+    // matching the old box coordinates used by the clients and test runner.
+    add_cylinder(0.160, 0.050, 0.030);  // 0.10 m main body
+
+    shape_msgs::msg::SolidPrimitive shoulder;
+    shoulder.type = shape_msgs::msg::SolidPrimitive::SPHERE;
+    shoulder.dimensions = {0.050};
+    geometry_msgs::msg::Pose shoulder_pose;
+    shoulder_pose.orientation.w = 1.0;
+    shoulder_pose.position.x = x;
+    shoulder_pose.position.y = y;
+    shoulder_pose.position.z = z + 0.110;
+    pick_box.primitives.push_back(shoulder);
+    pick_box.primitive_poses.push_back(shoulder_pose);
+
+    add_cylinder(0.040, 0.022, 0.1750);  // neck
+    add_cylinder(0.015, 0.030, 0.2025);  // metal lip
     pick_box.operation = moveit_msgs::msg::CollisionObject::ADD;
 
     RCLCPP_INFO(
       node_->get_logger(),
-      "Adding pick_box collision object at (%.3f, %.3f, %.3f)...",
+      "Adding bottle collision object pick_box at (%.3f, %.3f, %.3f)...",
       x, y, z);
     planning_scene_interface_.applyCollisionObject(pick_box);
   }

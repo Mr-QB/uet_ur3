@@ -12,6 +12,7 @@ find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_core REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
@@ -52,6 +53,7 @@ ament_target_dependencies(ur3_control_node
   moveit_ros_planning_interface
   geometry_msgs
   sensor_msgs
+  visualization_msgs
   std_msgs
 )
 
@@ -62,6 +64,13 @@ install(
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  PROGRAMS
+    src/send_goal_client.py
+    src/random_pick_test.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 install(

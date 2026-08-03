@@ -28,7 +28,7 @@ ur_manipulator:
     
   PRMkConfigDefault:
     type: geometric::PRM
-    max_nearest_neighbors: 10
+    max_nearest_neighbors: 18
     
   KPIECEkConfigDefault:
     type: geometric::KPIECE

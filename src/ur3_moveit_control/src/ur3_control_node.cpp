@@ -7,6 +7,7 @@
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
 #include <sensor_msgs/msg/image.hpp>
+#include <visualization_msgs/msg/marker_array.hpp>
 
 #include "ur3_moveit_control/action/ur3_control.hpp"
 #include "ur3_moveit_control/ur3_motion_interface.hpp"
@@ -35,6 +36,12 @@ public:
 
     ur3_motion_->addTableObstacle();
 
+    auto marker_qos = rclcpp::QoS(1).reliable().transient_local();
+    fixed_bottle_marker_pub_ =
+      this->create_publisher<visualization_msgs::msg::MarkerArray>(
+        "/fixed_bottle_marker", marker_qos);
+    publish_fixed_bottle_marker();
+
     depth_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
       "/camera/camera/depth/image_rect_raw",
       rclcpp::SensorDataQoS(),
@@ -47,11 +54,85 @@ private:
   std::shared_ptr<ur3_moveit_control::UR3MotionInterface> ur3_motion_;
   rclcpp_action::Server<UR3Control>::SharedPtr action_server_;
   rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr depth_sub_;
+  rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr
+    fixed_bottle_marker_pub_;
   double camera_z_mount_offset_ = 0.05; // Offset Z từ tay gắp tới camera (m)
   
   std::shared_ptr<GoalHandleUR3Control> active_goal_;
   std::mutex mutex_;
   std::thread execution_thread_;
+
+  void publish_fixed_bottle_marker()
+  {
+    constexpr double bottle_x = 0.62;
+    constexpr double bottle_y = 0.0;
+    constexpr double bottle_z = 0.05;
+
+    visualization_msgs::msg::MarkerArray markers;
+    const auto add_marker = [this, &markers](
+      int id,
+      int type,
+      double center_x,
+      double center_y,
+      double center_z,
+      double scale_x,
+      double scale_y,
+      double scale_z,
+      float red,
+      float green,
+      float blue)
+    {
+      visualization_msgs::msg::Marker marker;
+      marker.header.frame_id = "base_link";
+      marker.header.stamp = this->now();
+      marker.ns = "fixed_bottle";
+      marker.id = id;
+      marker.type = type;
+      marker.action = visualization_msgs::msg::Marker::ADD;
+      marker.pose.position.x = center_x;
+      marker.pose.position.y = center_y;
+      marker.pose.position.z = center_z;
+      marker.pose.orientation.w = 1.0;
+      marker.scale.x = scale_x;
+      marker.scale.y = scale_y;
+      marker.scale.z = scale_z;
+      marker.color.r = red;
+      marker.color.g = green;
+      marker.color.b = blue;
+      marker.color.a = 0.90F;
+      marker.frame_locked = true;
+      markers.markers.push_back(marker);
+    };
+
+    // These dimensions and offsets match models/bottle.sdf and the MoveIt
+    // collision geometry used when the bottle becomes attached.
+    add_marker(
+      0, visualization_msgs::msg::Marker::CYLINDER,
+      bottle_x, bottle_y, bottle_z + 0.030,
+      0.100, 0.100, 0.160,
+      1.00F, 0.52F, 0.06F);
+    add_marker(
+      1, visualization_msgs::msg::Marker::SPHERE,
+      bottle_x, bottle_y, bottle_z + 0.110,
+      0.100, 0.100, 0.100,
+      1.00F, 0.52F, 0.06F);
+    add_marker(
+      2, visualization_msgs::msg::Marker::CYLINDER,
+      bottle_x, bottle_y, bottle_z + 0.175,
+      0.044, 0.044, 0.040,
+      1.00F, 0.52F, 0.06F);
+    add_marker(
+      3, visualization_msgs::msg::Marker::CYLINDER,
+      bottle_x, bottle_y, bottle_z + 0.2025,
+      0.060, 0.060, 0.015,
+      0.72F, 0.72F, 0.72F);
+
+    fixed_bottle_marker_pub_->publish(markers);
+    RCLCPP_INFO(
+      this->get_logger(),
+      "Published fixed bottle RViz marker at base_link (%.3f, %.3f, %.3f).",
+      bottle_x, bottle_y, bottle_z);
+  }
 
   void depth_callback(const sensor_msgs::msg::Image::SharedPtr msg)
   {
@@ -151,6 +232,10 @@ private:
       feedback->state = "Detaching pick_box from gripper_tcp";
       goal_handle->publish_feedback(feedback);
       success = ur3_motion_->detachPickBox();
+    } else if (goal->command_type == UR3Control::Goal::PREPARE_NEXT_TRIAL) {
+      feedback->state = "Preparing reusable pick_box for the next trial";
+      goal_handle->publish_feedback(feedback);
+      success = ur3_motion_->prepareNextTrial();
     } else if (goal->command_type == UR3Control::Goal::MOVE_CARTESIAN) {
       feedback->state = "Executing Cartesian XYZ motion from current pose";
       goal_handle->publish_feedback(feedback);
@@ -158,6 +243,14 @@ private:
         goal->cartesian_x_offset,
         goal->cartesian_y_offset,
         goal->cartesian_z_offset);
+    } else if (goal->command_type == UR3Control::Goal::MOVE_CARTESIAN_STRICT) {
+      feedback->state = "Executing strict Cartesian grasp approach";
+      goal_handle->publish_feedback(feedback);
+      success = ur3_motion_->moveCartesian(
+        goal->cartesian_x_offset,
+        goal->cartesian_y_offset,
+        goal->cartesian_z_offset,
+        false);
     } else if (goal->command_type == UR3Control::Goal::MOVE_TO_XY) {
       feedback->state = "Moving to absolute XY while keeping current Z";
       goal_handle->publish_feedback(feedback);

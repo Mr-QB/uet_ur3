@@ -104,7 +104,93 @@ ros2 launch ur3_moveit_control ur3_demo.launch.py ur_type:=ur3e use_sim_time:=fa
 
 ---
 
-## 3. Hiệu chuẩn Camera Eye-in-Hand (Hand-Eye Calibration)
+## 3. Test planning nhiều lần với một chai ngẫu nhiên
+
+`random_pick_test.py` tái sử dụng entity `pick_box`, hiện có hình dạng chai cao
+0.26 m và đường kính thân 0.10 m. Mỗi trial sẽ:
+
+`ur3_control_node` đồng thời publish mô hình trực quan của chai cố định lên
+`/fixed_bottle_marker`. Cấu hình RViz nạp sẵn display `Fixed Bottle`, vì vậy chai
+ở `base_link (0.62, 0.00, 0.05)` xuất hiện làm mốc đặt gripper nhưng marker này
+không tham gia collision checking và không chặn đường Cartesian đi vào chai.
+
+1. Xóa fixed joint và attached collision object còn sót từ trial trước.
+2. Đưa `pick_box` ra vị trí đỗ ngoài vùng làm việc.
+3. Đưa robot về `home` khi vùng làm việc chưa có chai.
+4. Đặt `pick_box` tới một tọa độ ngẫu nhiên bằng Gazebo Transport, mở
+   gripper và chạy đủ chuỗi pick-and-place.
+5. Sau khi attach và lift, mang chai sang trái hoặc phải bằng strict Cartesian
+   với `dy = ±0.06 .. ±0.10 m`, đồng thời cho phép `dx = -0.02 .. 0.02 m`.
+6. Detach, mở gripper và ghi kết quả ra CSV.
+
+Chuỗi gắp dùng kiểu **radial side grasp** giống ảnh tham chiếu. Với mỗi tọa độ
+chai, hướng tiếp cận được tính bằng `yaw = atan2(object_y, object_x)`, vì vậy TCP
+luôn quay mặt từ robot về phía chai thay vì dùng một quaternion cố định cho cả
+vùng làm việc. TCP mặc định gắp tại tâm chiều cao chai với
+`tcp_grasp_offset = 0.06 m`; `gripper_tcp` cũng được đặt tại giữa chiều dài hai
+ngón kẹp. Pre-grasp cách grasp pose `0.12 m` theo chính hướng radial này để
+thân gripper có đủ khoảng hở với chai trước khi tiến Cartesian.
+
+Bước tiến cuối dùng `MOVE_CARTESIAN_STRICT`: nếu MoveIt không tạo được ít nhất
+99% đường thẳng thì trial dừng, không fallback sang PRM và không cho wrist quay
+đường vòng ngay trước khi đóng càng. TCP dừng trước tâm chai `0.015 m` theo hướng
+tiếp cận (`grasp_depth_offset`) để mặt trước thân gripper không chạm chai. Lệnh
+đóng mặc định cho bài test cố định là `0.042 m`, đủ để hai càng tiếp xúc với
+thân chai đường kính `0.100 m`.
+
+Thứ tự này ngăn gripper va vào chai mới trong lúc quay từ tư thế cuối của trial
+trước về `home`. Vị trí đỗ mặc định trong world là `(1.50, 1.50, 0.10) m`.
+Có thể đổi bằng `--parking-world-x`, `--parking-world-y` và
+`--parking-world-z` nếu vị trí đó không phù hợp với world đang dùng.
+
+Không cần restart Gazebo giữa các trial. Cần giữ launch mô phỏng và action
+server đang chạy, sau đó mở terminal mới:
+
+```bash
+cd ~/uet_ws
+source install/setup.bash
+ros2 run ur3_moveit_control random_pick_test.py \
+  --trials 20 \
+  --seed 23 \
+  --results-file random_pick_results.csv
+```
+
+`seed` giúp sinh lại đúng cùng một tập tọa độ và độ dịch chuyển để so sánh các
+planner công bằng. Mặc định vùng spawn chai nằm trong:
+
+```text
+x = 0.58 .. 0.64 m
+y = -0.06 .. 0.06 m
+```
+
+Ví dụ thay đổi vùng test:
+
+```bash
+ros2 run ur3_moveit_control random_pick_test.py \
+  --trials 50 \
+  --seed 23 \
+  --pick-x-min 0.58 \
+  --pick-x-max 0.64 \
+  --pick-y-min -0.06 \
+  --pick-y-max 0.06 \
+  --transport-x-max 0.02 \
+  --transport-y-min 0.06 \
+  --transport-y-max 0.10
+```
+
+File CSV lưu tọa độ pick, `transport_dx/dy`, bước bị lỗi và thời gian wall-clock của từng
+trial. Nếu world Gazebo không tên `empty`, truyền thêm `--world <tên_world>`.
+Mỗi trial random thành công cũng lưu riêng pose và sáu joint pre-grasp vào
+`successful_random_waypoints.csv`.
+
+Khi chạy riêng `send_goal_client.py`, sáu joint tại pre-grasp được chụp tạm
+trong RAM. Chỉ sau khi advance, đóng càng, attach/lift và Cartesian transport
+đều thành công, waypoint mới được thêm vào `successful_grasp_waypoints.csv` tại
+thư mục đang chạy lệnh. Trial thất bại không được ghi vào file này.
+
+---
+
+## 4. Hiệu chuẩn Camera Eye-in-Hand (Hand-Eye Calibration)
 
 Tính năng này tự động tính toán **ma trận chuyển vị 4×4** (Homogeneous Transformation Matrix) từ end-effector (`tool0`) tới camera (`camera_link`) bằng thuật toán Hand-Eye Calibration của OpenCV. Script hỗ trợ chạy đồng thời **5 thuật toán** (Tsai, Park, Horaud, Andreff, Daniilidis) và tự động chọn kết quả tốt nhất.
 
