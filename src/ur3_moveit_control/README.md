@@ -173,7 +173,7 @@ source src/ur3_moveit_control/scripts/activate_uet_ros.bash
 ros2 run ur3_moveit_control random_pick_test.py \
   --trials 20 \
   --seed 23 \
-  --results-file random_pick_results.csv
+  --results-file data/random_pick_results.csv
 ```
 
 `seed` giúp sinh lại đúng cùng một tập tọa độ và độ dịch chuyển để so sánh các
@@ -201,15 +201,16 @@ ros2 run ur3_moveit_control random_pick_test.py \
 
 File CSV lưu tọa độ pick, `transport_dx/dy`, bước bị lỗi và thời gian wall-clock của từng
 trial. Nếu world Gazebo không tên `empty`, truyền thêm `--world <tên_world>`.
-Mỗi trial random thành công cũng lưu riêng pose và sáu joint pre-grasp vào
-`successful_random_waypoints.csv`.
+Mỗi trial random thành công cũng lưu pose và sáu joint pre-grasp vào file dùng
+chung `data/successful_waypoints.csv`.
 
 Khi chạy riêng `send_goal_client.py`, sáu joint tại pre-grasp được chụp tạm
 trong RAM. Chỉ sau khi advance, đóng càng, attach/lift và Cartesian transport
-đều thành công, waypoint mới được thêm vào `successful_grasp_waypoints.csv` tại
-thư mục đang chạy lệnh. Trial thất bại không được ghi vào file này.
+đều thành công, waypoint mới được thêm vào
+`data/successful_waypoints.csv`, tính từ nơi chạy lệnh. Trial thất bại
+không được ghi vào file này.
 
-Khi planning tới pre-grasp, action server đọc lại hai file waypoint thành công,
+Khi planning tới pre-grasp, action server đọc file waypoint thành công dùng chung,
 chọn các hàng có pose gần mục tiêu làm seed cho KDL IK, chuẩn hóa các góc tương
 đương về nhánh gần trạng thái hiện tại và xếp hạng nhiều nghiệm. Ba wrist joint
 được phạt cao hơn shoulder/elbow; tối đa ba plan thành công được so sánh theo

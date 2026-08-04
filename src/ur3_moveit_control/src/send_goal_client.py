@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import csv
 import math
 import os
 import random
@@ -33,12 +32,10 @@ from grasp_profile import (
     TRANSPORT_X_MAX as FIXED_TRANSPORT_X_MAX,
     TRANSPORT_Y_MAX as FIXED_TRANSPORT_Y_MAX,
     TRANSPORT_Y_MIN as FIXED_TRANSPORT_Y_MIN,
+    append_successful_waypoint,
     pouring_joint_goal,
     radial_side_grasp_geometry,
 )
-
-
-SUCCESSFUL_WAYPOINTS_FILE = Path('successful_grasp_waypoints.csv')
 
 ARM_JOINT_NAMES = [
     'shoulder_pan_joint',
@@ -141,6 +138,7 @@ class UR3ActionClient(Node):
 
         qx, qy, qz, qw = self._pick_sequence['grasp_quaternion']
         row = {
+            'source': 'send_goal',
             'ros_time_ns': self.get_clock().now().nanoseconds,
             'object_x': self._pick_sequence['object_x'],
             'object_y': self._pick_sequence['object_y'],
@@ -157,13 +155,7 @@ class UR3ActionClient(Node):
             'transport_dy': self._pick_sequence['transport_dy'],
         }
 
-        path = SUCCESSFUL_WAYPOINTS_FILE.expanduser().resolve()
-        write_header = not path.exists() or path.stat().st_size == 0
-        with path.open('a', newline='', encoding='utf-8') as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=row.keys())
-            if write_header:
-                writer.writeheader()
-            writer.writerow(row)
+        path = append_successful_waypoint(row)
 
         self.get_logger().info(
             f'Saved successful pre-grasp waypoint to {path}'

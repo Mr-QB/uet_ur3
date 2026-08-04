@@ -5,7 +5,9 @@ change to the grasp pose cannot silently make the two test paths different.
 All coordinates are expressed in ``base_link`` unless stated otherwise.
 """
 
+import csv
 import math
+from pathlib import Path
 
 
 BOTTLE_X = 0.62
@@ -26,6 +28,52 @@ TRANSPORT_X_MAX = 0.02
 
 POUR_WRIST_ANGLE_DEG = 100.0
 WRIST_3_POSITION_LIMIT = 2.0 * math.pi
+
+SUCCESSFUL_WAYPOINTS_FILE = Path('data/successful_waypoints.csv')
+SUCCESSFUL_WAYPOINT_FIELDS = (
+    'source',
+    'ros_time_ns',
+    'trial',
+    'seed',
+    'object_x',
+    'object_y',
+    'object_z',
+    'pregrasp_x',
+    'pregrasp_y',
+    'pregrasp_z',
+    'qx',
+    'qy',
+    'qz',
+    'qw',
+    'shoulder_pan_joint',
+    'shoulder_lift_joint',
+    'elbow_joint',
+    'wrist_1_joint',
+    'wrist_2_joint',
+    'wrist_3_joint',
+    'transport_dx',
+    'transport_dy',
+)
+
+
+def append_successful_waypoint(row, path=SUCCESSFUL_WAYPOINTS_FILE):
+    """Append one proven pre-grasp waypoint using the shared CSV schema."""
+
+    output_path = Path(path).expanduser().resolve()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not output_path.exists() or output_path.stat().st_size == 0
+    normalized_row = {
+        field: row.get(field, '') for field in SUCCESSFUL_WAYPOINT_FIELDS
+    }
+    with output_path.open('a', newline='', encoding='utf-8') as csv_file:
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=SUCCESSFUL_WAYPOINT_FIELDS,
+        )
+        if write_header:
+            writer.writeheader()
+        writer.writerow(normalized_row)
+    return output_path
 
 
 def radial_side_grasp_geometry(

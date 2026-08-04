@@ -325,8 +325,7 @@ namespace ur3_moveit_control
     successful_waypoint_files_ = parameter(
       "successful_waypoint_files",
       std::vector<std::string>{
-        "successful_grasp_waypoints.csv",
-        "successful_random_waypoints.csv"});
+        "data/successful_waypoints.csv"});
     ik_joint_weights_ = parameter(
       "ik_joint_weights", std::vector<double>{1.2, 1.0, 1.0, 3.0, 2.5, 2.0});
     ik_random_seed_attempts_ = parameter("ik_random_seed_attempts", 12);

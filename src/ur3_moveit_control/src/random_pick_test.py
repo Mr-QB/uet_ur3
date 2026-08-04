@@ -31,6 +31,7 @@ from grasp_profile import (
     TRANSPORT_X_MAX,
     TRANSPORT_Y_MAX,
     TRANSPORT_Y_MIN,
+    append_successful_waypoint,
     pouring_joint_goal,
     radial_side_grasp_geometry,
 )
@@ -604,6 +605,8 @@ class RandomPickTester(Node):
         ]
         qx, qy, qz, qw = geometry['quaternion']
         row = {
+            'source': 'random_test',
+            'ros_time_ns': self.get_clock().now().nanoseconds,
             'trial': trial_number,
             'seed': self.args.seed,
             'object_x': object_x,
@@ -620,13 +623,7 @@ class RandomPickTester(Node):
             'transport_dx': transport_dx,
             'transport_dy': transport_dy,
         }
-        path = Path(self.args.waypoints_file).expanduser().resolve()
-        write_header = not path.exists() or path.stat().st_size == 0
-        with path.open('a', newline='', encoding='utf-8') as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=row.keys())
-            if write_header:
-                writer.writeheader()
-            writer.writerow(row)
+        path = append_successful_waypoint(row, self.args.waypoints_file)
         self.get_logger().info(f'Saved successful waypoint to {path}')
 
     def run(self):
@@ -693,10 +690,11 @@ def parse_args(argv):
     parser.add_argument('--trials', type=int, default=10)
     parser.add_argument('--seed', type=int, default=23)
     parser.add_argument('--world', default='empty')
-    parser.add_argument('--results-file', default='random_pick_results.csv')
+    parser.add_argument(
+        '--results-file', default='data/random_pick_results.csv')
     parser.add_argument(
         '--waypoints-file',
-        default='successful_random_waypoints.csv',
+        default='data/successful_waypoints.csv',
     )
 
     parser.add_argument('--pick-x-min', type=float, default=0.58)

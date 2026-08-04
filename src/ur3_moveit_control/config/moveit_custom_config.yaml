@@ -16,8 +16,7 @@ ik_max_successful_plans: 3
 
 # Successful CSV rows are used as IK seeds for nearby pre-grasp poses.
 successful_waypoint_files:
-  - successful_grasp_waypoints.csv
-  - successful_random_waypoints.csv
+  - data/successful_waypoints.csv
 waypoint_seed_max_position_distance: 0.20
 waypoint_seed_max_orientation_distance: 0.35
 
