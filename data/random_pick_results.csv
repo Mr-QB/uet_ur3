@@ -89,3 +89,37 @@ trial,seed,object_x,object_y,object_z,transport_dx,transport_dy,success,failed_s
 8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,False,pour_wrist,"pour_wrist: missing current joint states: shoulder_pan_joint, shoulder_lift_joint, elbow_joint, wrist_1_joint, wrist_2_joint, wrist_3_joint",18.082
 9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",20.513
 10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",21.271
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,False,advance_to_grasp,advance_to_grasp: Goal failed or was preempted,44.920
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",87.986
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,False,hide_carried_bottle,hide_bottle detach failed: detach: no action result,170.275
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,False,prepare_next_trial,prepare_next_trial: goal rejected,120.002
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,False,attach_and_lift,attach_and_lift: Goal failed or was preempted,13.100
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",20.001
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.215
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",20.173
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",22.403
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,True,,"Pick, transport, pour, and cleanup completed",22.186
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,True,,"Pick, transport, pour, and cleanup completed",20.038
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,False,close_gripper,close_gripper: Aborted due to path tolerance violation,12.840
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",21.725
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",25.433
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,True,,"Pick, transport, pour, and cleanup completed",21.609
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,False,attach_and_lift,attach_and_lift: Goal failed or was preempted,13.951
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.975
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",20.119
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",21.126
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,True,,"Pick, transport, pour, and cleanup completed",19.853
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,True,,"Pick, transport, pour, and cleanup completed",19.643
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,True,,"Pick, transport, pour, and cleanup completed",19.684
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",19.906
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",22.887
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,True,,"Pick, transport, pour, and cleanup completed",19.638
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",20.258
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,True,,"Pick, transport, pour, and cleanup completed",19.989
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",19.825
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",20.206
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,True,,"Pick, transport, pour, and cleanup completed",25.809
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,True,,"Pick, transport, pour, and cleanup completed",19.750
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,True,,"Pick, transport, pour, and cleanup completed",20.010
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",20.581
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",20.598
