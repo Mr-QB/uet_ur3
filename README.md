@@ -40,6 +40,7 @@ sudo apt update
 sudo apt install -y \
   ros-humble-desktop \
   ros-humble-moveit \
+  ros-humble-moveit-servo \
   ros-humble-ros2-control \
   ros-humble-ros2-controllers \
   ros-humble-controller-interface \
@@ -49,7 +50,9 @@ sudo apt install -y \
   ros-humble-aruco-ros \
   ros-humble-ur-msgs \
   ros-humble-ur-client-library \
-  ros-humble-ur-description
+  ros-humble-ur-description \
+  ros-humble-ros-gz \
+  ros-humble-ign-ros2-control
 ```
 
 ### Automatic Dependency Resolution via `rosdep`
@@ -230,13 +233,3 @@ Arguments available for `ur3_demo.launch.py`:
 | `launch_moveit` | `true` | Toggle automatic launch of MoveIt Planning Server. |
 
 ---
-
-## Common Troubleshooting
-
-| Issue / Error Log | Root Cause | Resolution |
-| :--- | :--- | :--- |
-| `Could not find a package configuration file provided by "ament_cmake"` | ROS 2 environment has not been sourced in the current terminal shell. | Execute `source /opt/ros/humble/setup.bash` before running `colcon build`. |
-| `Could not find a package configuration file provided by "moveit_ros_planning_interface"` | MoveIt 2 development packages are missing. | Install MoveIt 2: `sudo apt install ros-humble-moveit` |
-| `Could not find a package configuration file provided by "controller_interface"` | `ros2_control` development packages are missing. | Install control packages: `sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers` |
-| `Could not find a package configuration file provided by "ur_msgs"` | Universal Robots ROS messages package is missing. | Install UR messages package: `sudo apt install ros-humble-ur-msgs ros-humble-ur-client-library` |
-| `Can't accept new action goals. Controller is not running.` | `scaled_joint_trajectory_controller` is not active on hardware driver. | Verify External Control program is running on Teach Pendant and showing `active`. |
