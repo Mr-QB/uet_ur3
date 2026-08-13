@@ -1078,6 +1078,7 @@ namespace ur3_moveit_control
       return false;
     }
 
+    
     const std::string end_effector_link = "gripper_tcp";
     const auto current_pose = move_group_.getCurrentPose(end_effector_link);
     geometry_msgs::msg::Pose target_pose = current_pose.pose;
@@ -1088,15 +1089,118 @@ namespace ur3_moveit_control
     std::vector<geometry_msgs::msg::Pose> waypoints{target_pose};
     moveit_msgs::msg::RobotTrajectory trajectory_msg;
 
-    constexpr double eef_step = 0.005;
+    constexpr double eef_step = 0.001;
     constexpr double required_fraction = 0.99;
-
     const double fraction = move_group_.computeCartesianPath(
       waypoints,
       eef_step,
       cartesian_jump_threshold_,
       trajectory_msg,
       true);
+        // 2. --- [ĐẶT CODE CHECK SINGULARITY Ở ĐÂY - SAU KHI ĐÃ CÓ fraction & trajectory_msg] ---
+    const auto* joint_model_group = move_group_.getRobotModel()->getJointModelGroup("ur_manipulator");
+    const auto* tip_link = joint_model_group->getLinkModels().back();
+    RCLCPP_INFO(node_->get_logger(), "=== CARTESIAN PATH CHECK: fraction = %.2f%% (%zu points) ===", 
+                fraction * 100.0, trajectory_msg.joint_trajectory.points.size());
+    for (size_t i = 0; i < trajectory_msg.joint_trajectory.points.size(); ++i)
+    {
+      const auto& point = trajectory_msg.joint_trajectory.points[i];
+      moveit::core::RobotState state(move_group_.getRobotModel());
+      state.setJointGroupPositions(joint_model_group, point.positions);
+      double q3_deg = std::abs(point.positions[2] * 180.0 / M_PI);
+      double q5_deg = std::abs(point.positions[4] * 180.0 / M_PI);
+      Eigen::MatrixXd jacobian;
+      state.getJacobian(joint_model_group, tip_link, Eigen::Vector3d::Zero(), jacobian);
+      Eigen::JacobiSVD<Eigen::MatrixXd> svd(jacobian);
+      const Eigen::VectorXd& singular_values = svd.singularValues();
+      double sigma_max = singular_values(0);
+      double sigma_min = singular_values(singular_values.size() - 1);
+      double condition_number = sigma_max / (sigma_min + 1e-9);
+      if (sigma_min < 0.02 || condition_number > 50.0 || q5_deg < 5.0 || std::abs(180.0 - q5_deg) < 5.0)
+      {
+        RCLCPP_WARN(
+            node_->get_logger(),
+            "[SINGULARITY DETECTED] Point %zu/%zu | q3(elbow)=%.2f° | q5(wrist2)=%.2f° | Min Singular Value=%.5f | Cond Num=%.2f",
+            i, trajectory_msg.joint_trajectory.points.size(),
+            q3_deg, q5_deg, sigma_min, condition_number
+        );
+      }
+    }
+    // --- [KẾT THÚC CODE CHECK SINGULARITY] ---
+
+// in ra tọa độ (position,orientation) của end-effector tại các điểm trong trajectory_msg
+
+for (size_t i = 0;
+     i < trajectory_msg.joint_trajectory.points.size();
+     ++i)
+{
+    const auto& point =
+        trajectory_msg.joint_trajectory.points[i];
+
+    // Tạo RobotState từ joint configuration
+    moveit::core::RobotState state(
+        move_group_.getRobotModel()
+    );
+
+    state.setJointGroupPositions(
+        joint_model_group,
+        point.positions
+    );
+
+    // FK: lấy transform của gripper_tcp
+    const Eigen::Isometry3d& tcp_transform =
+        state.getGlobalLinkTransform("gripper_tcp");
+
+    // Position
+    const Eigen::Vector3d position =
+        tcp_transform.translation();
+
+    // Orientation
+    const Eigen::Quaterniond orientation(
+        tcp_transform.rotation()
+    );
+
+    RCLCPP_INFO(
+        node_->get_logger(),
+        "Cartesian Point %zu: "
+        "x=%.4f, y=%.4f, z=%.4f | "
+        "qx=%.4f, qy=%.4f, qz=%.4f, qw=%.4f",
+        i,
+        position.x(),
+        position.y(),
+        position.z(),
+        orientation.x(),
+        orientation.y(),
+        orientation.z(),
+        orientation.w()
+    );
+}
+// in ra current pose và target pose
+RCLCPP_INFO(
+    node_->get_logger(),
+    "Current pose: "
+    "x=%.4f y=%.4f z=%.4f | "
+    "qx=%.4f qy=%.4f qz=%.4f qw=%.4f",
+    current_pose.pose.position.x,
+    current_pose.pose.position.y,
+    current_pose.pose.position.z,
+    current_pose.pose.orientation.x,
+    current_pose.pose.orientation.y,
+    current_pose.pose.orientation.z,
+    current_pose.pose.orientation.w);
+
+RCLCPP_INFO(
+    node_->get_logger(),
+    "Target pose: "
+    "x=%.4f y=%.4f z=%.4f | "
+    "qx=%.4f qy=%.4f qz=%.4f qw=%.4f",
+    target_pose.position.x,
+    target_pose.position.y,
+    target_pose.position.z,
+    target_pose.orientation.x,
+    target_pose.orientation.y,
+    target_pose.orientation.z,
+    target_pose.orientation.w);
 
     if (fraction < required_fraction)
     {
@@ -1105,7 +1209,7 @@ namespace ur3_moveit_control
         RCLCPP_ERROR(
           node_->get_logger(),
           "Strict Cartesian path is only %.1f%% (required %.1f%%); "
-          "rejecting the grasp advance without pose fallback.",
+          "rejecting the grasp transport without pose fallback.",
           fraction * 100.0, required_fraction * 100.0);
         return false;
       }

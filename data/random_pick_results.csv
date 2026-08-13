@@ -123,3 +123,70 @@ trial,seed,object_x,object_y,object_z,transport_dx,transport_dy,success,failed_s
 8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,True,,"Pick, transport, pour, and cleanup completed",20.010
 9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",20.581
 10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",20.598
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,True,,"Pick, transport, pour, and cleanup completed",19.876
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",19.705
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.248
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",19.895
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,True,,"Pick, transport, pour, and cleanup completed",19.828
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",20.589
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",25.267
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.506
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,False,home,home: no action result,122.103
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,False,prepare_next_trial,prepare_next_trial: goal rejected,120.005
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,False,prepare_next_trial,prepare_next_trial: goal rejected,120.004
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,False,prepare_next_trial,prepare_next_trial: goal rejected,120.004
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,True,,"Pick, transport, pour, and cleanup completed",19.155
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",21.374
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.337
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",19.970
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,True,,"Pick, transport, pour, and cleanup completed",19.885
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",19.714
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",20.039
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,True,,"Pick, transport, pour, and cleanup completed",21.396
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,False,close_gripper,close_gripper: Aborted due to path tolerance violation,12.622
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,True,,"Pick, transport, pour, and cleanup completed",20.541
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",19.841
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",20.904
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,False,close_gripper,close_gripper: Aborted due to path tolerance violation,12.419
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",20.363
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,True,,"Pick, transport, pour, and cleanup completed",19.818
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",21.570
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",21.437
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,True,,"Pick, transport, pour, and cleanup completed",20.787
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,True,,"Pick, transport, pour, and cleanup completed",19.659
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,False,close_gripper,close_gripper: Aborted due to path tolerance violation,12.920
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",20.415
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.000
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,True,,"Pick, transport, pour, and cleanup completed",20.383
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",19.801
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,True,,"Pick, transport, pour, and cleanup completed",19.682
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",21.638
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",22.723
+1,23,0.635492,0.053833,0.050000,0.015697,-0.060683,False,attach_and_lift,attach_and_lift: Goal failed or was preempted,13.330
+2,23,0.598405,-0.014498,0.050000,-0.005677,-0.070695,True,,"Pick, transport, pour, and cleanup completed",20.503
+3,23,0.580845,0.014419,0.050000,0.016066,-0.063431,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.381
+4,23,0.622600,-0.009450,0.050000,0.000505,0.074360,True,,"Pick, transport, pour, and cleanup completed",20.510
+5,23,0.583453,0.033972,0.050000,0.003565,-0.084840,True,,"Pick, transport, pour, and cleanup completed",20.689
+6,23,0.638244,-0.016465,0.050000,0.010391,0.098742,True,,"Pick, transport, pour, and cleanup completed",20.008
+7,23,0.596876,0.056955,0.050000,0.002919,0.067105,True,,"Pick, transport, pour, and cleanup completed",19.643
+8,23,0.608985,0.034979,0.050000,0.007029,-0.067281,True,,"Pick, transport, pour, and cleanup completed",19.977
+9,23,0.590712,-0.021191,0.050000,0.012635,-0.083292,True,,"Pick, transport, pour, and cleanup completed",20.051
+10,23,0.584940,-0.008863,0.050000,0.002720,0.092827,True,,"Pick, transport, pour, and cleanup completed",20.621
+1,23,0.635492,0.053833,0.050000,0.156973,-0.503415,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.646
+2,23,0.598405,-0.014498,0.050000,-0.056768,-0.553476,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,16.184
+3,23,0.580845,0.014419,0.050000,0.160663,-0.517155,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,15.816
+4,23,0.622600,-0.009450,0.050000,0.005054,0.571799,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,15.576
+5,23,0.583453,0.033972,0.050000,0.035649,-0.624198,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,15.763
+6,23,0.638244,-0.016465,0.050000,0.103915,0.693712,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,15.604
+7,23,0.596876,0.056955,0.050000,0.029194,0.535526,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,16.393
+8,23,0.608985,0.034979,0.050000,0.070290,-0.536406,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,16.228
+9,23,0.590712,-0.021191,0.050000,0.126349,-0.616460,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,17.380
+10,23,0.584940,-0.008863,0.050000,0.027204,0.664133,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,16.553
+1,23,0.635492,0.053833,0.050000,0.156973,-0.401708,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,17.857
+1,23,0.635492,0.053833,0.050000,0.156973,-0.401708,False,close_gripper,close_gripper: Aborted due to path tolerance violation,12.498
+2,23,0.598405,-0.014498,0.050000,-0.056768,-0.426738,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.115
+3,23,0.580845,0.014419,0.050000,0.160663,-0.408577,False,close_gripper,close_gripper: Aborted due to path tolerance violation,13.358
+4,23,0.622600,-0.009450,0.050000,0.005054,0.435900,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,15.993
+1,23,0.635492,0.053833,0.050000,0.156973,-0.401708,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,16.024
+2,23,0.598405,-0.014498,0.050000,-0.056768,-0.426738,False,close_gripper,close_gripper: Aborted due to path tolerance violation,12.968
+3,23,0.580845,0.014419,0.050000,0.160663,-0.408577,False,transport_cartesian,transport_cartesian: Goal failed or was preempted,16.225

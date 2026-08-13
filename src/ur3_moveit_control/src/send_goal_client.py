@@ -334,8 +334,8 @@ class UR3ActionClient(Node):
             close_position=FIXED_CLOSE_POSITION,
             max_effort=FIXED_MAX_EFFORT,
             pour_angle_deg=FIXED_POUR_WRIST_ANGLE_DEG,
-            transport_dx=None,
-            transport_dy=None):
+            transport_dx=0.3,
+            transport_dy=-0.05):
         """Run the shared side-grasp flow for an object pose in base_link."""
 
         # Check connectivity before creating the asynchronous state machine.
@@ -696,16 +696,12 @@ class UR3ActionClient(Node):
 
             if stage == 'lifting':
                 self._pick_sequence['stage'] = 'transporting'
-                self.get_logger().info(
-                    'Bottle grasp stage 5/6: moving the lifted bottle sideways '
-                    'with a strict Cartesian path'
-                )
-                self.move_cartesian(
-                    self._pick_sequence['transport_dx'],
-                    self._pick_sequence['transport_dy'],
-                    0.0,
-                    strict=True)
+                self.get_logger().info('Transporting to target XY (0.564, 0.221) via Cartesian path')
+                
+                # Gọi MOVE_TO_XY đi tới điểm mục tiêu
+                self.move_to_xy(0.564, 0.3)
                 return
+
 
             if stage == 'transporting':
                 self._pick_sequence['stage'] = 'pouring'
@@ -986,6 +982,7 @@ def parse_args(argv):
             'Object reference Z in base_link (metres); the simulated bottle '
             'uses its model origin near the bottom.'
         ))
+    
     parser.add_argument(
         '--approach-clearance', type=float, default=FIXED_APPROACH_CLEARANCE)
     parser.add_argument(
